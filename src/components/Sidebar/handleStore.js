@@ -1,11 +1,11 @@
-import { mapMutations, mapGetters } from 'vuex';
-import { APP_SET_SIDEBAR_OPEN, APP_IS_SIDEBAR_OPEN } from '../../store/App/constants';
+import { mapActions, mapGetters } from 'vuex';
+import { APP_SET_SIDEBAR_OPEN, APP_IS_SIDEBAR_OPEN, APP_SIDEBAR_POS } from '../../store/App/constants';
 
 export const getters = {
-  ...mapGetters({ isSidebarOpen: APP_IS_SIDEBAR_OPEN }),
+  ...mapGetters({ isSidebarOpen: APP_IS_SIDEBAR_OPEN, sidebarPos: APP_SIDEBAR_POS }),
 };
 export const setters = {
-  ...mapMutations({
+  ...mapActions({
     setSidebarOpen: APP_SET_SIDEBAR_OPEN,
   }),
 };

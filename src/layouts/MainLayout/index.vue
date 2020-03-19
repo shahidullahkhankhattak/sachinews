@@ -1,12 +1,14 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-grey-1">
+  <q-layout view="hHh LpR fFf">
 
     <app-header />
 
     <sidebar />
 
     <q-page-container>
-      <router-view />
+      <transition name="slide-fade" mode="out-in">
+        <router-view />
+      </transition>
     </q-page-container>
 
   </q-layout>

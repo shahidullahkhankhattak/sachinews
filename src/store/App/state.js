@@ -1,8 +1,10 @@
+import { Screen } from 'quasar';
+
 export default function () {
   return {
     config: {
       locale: 'english',
-      isSidebarOpen: true,
+      isSidebarOpen: Screen.gt.lg,
     },
   };
 }

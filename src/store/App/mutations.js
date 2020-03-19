@@ -1,6 +1,3 @@
-export function setLocale({ config }, payload) {
-  config.locale = payload;
-}
 
 export function toggleSidebar({ config }) {
   config.isSidebarOpen = !config.isSidebarOpen;
@@ -8,4 +5,8 @@ export function toggleSidebar({ config }) {
 
 export function setSidebarOpen({ config }, payload) {
   config.isSidebarOpen = payload;
+}
+
+export function setLocale({ config }, payload) {
+  config.locale = payload.value;
 }

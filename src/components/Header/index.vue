@@ -11,8 +11,7 @@
         />
 
         <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
-          <img src="https://cdn.quasar.dev/img/layout-gallery/logo-google.svg">
-          <span class="q-ml-sm">Bulletin</span>
+          <span class="q-ml-sm"><font color="red">Addictive</font> Bulletin</span>
         </q-toolbar-title>
 
         <q-space />
@@ -27,35 +26,35 @@
         <q-space />
 
         <div class="q-gutter-sm row items-center no-wrap">
-          <q-select outlined v-model="locale" :options="['english', 'urdu']" :dense="true" :options-dense="true">
+          <q-select outlined v-model="locale" :options="langOptions" :dense="true" :options-dense="true">
             <template v-slot:prepend>
               <q-icon name="language" />
             </template>
           </q-select>
-          <q-btn round flat>
-            <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-            </q-avatar>
-            <q-tooltip>Account</q-tooltip>
-          </q-btn>
         </div>
       </q-toolbar>
     </q-header>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-import { APP_TOGGLE_SIDEBAR } from '../../store/App/constants';
 import { setters, getters } from './handleStore';
 
 export default {
   data: () => ({
     search: '',
+    langOptions: [
+      {
+        label: 'English',
+        value: 'english',
+      },
+      {
+        label: 'Urdu',
+        value: 'urdu',
+      },
+    ],
   }),
   methods: {
-    ...mapMutations({
-      toggleSidebar: APP_TOGGLE_SIDEBAR,
-    }),
+    toggleSidebar: setters.toggleSidebar,
   },
   computed: {
     locale: {

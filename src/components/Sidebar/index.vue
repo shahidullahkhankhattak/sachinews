@@ -1,12 +1,12 @@
 <template>
   <q-drawer
     v-model="isSidebarOpen"
-    show-if-above
     content-class="bg-white"
+    :side="sidebarPos"
     :width="280"
   >
     <q-scroll-area class="fit">
-      <q-list padding class="text-grey-8">
+      <q-list tag="nav" padding class="text-grey-8">
         <q-item
           class="GNL__drawer-item"
           v-ripple
@@ -123,6 +123,7 @@ export default {
       get: getters.isSidebarOpen,
       set: setters.setSidebarOpen,
     },
+    sidebarPos: getters.sidebarPos,
   },
 };
 </script>
