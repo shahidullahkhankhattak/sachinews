@@ -13,7 +13,6 @@
                 class="news-card"
                 flat
                 bordered
-                style="margin: 10px 5px 0 5px"
               >
                 <q-card-section horizontal>
                   <q-card-section class="q-pt-xs">
