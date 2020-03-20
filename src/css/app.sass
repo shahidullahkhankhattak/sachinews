@@ -2,3 +2,22 @@
 @import url(./transitions.sass)
 @import url(./sidebar-topbar.sass)
 @import url(./home.sass)
+
+.spinner
+  height: 100%
+  width: 100%
+  position: fixed
+  z-index: 9999
+  background: white
+
+  &.no-visible
+    transition: all .5s ease
+    opacity: 0
+
+  svg
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    margin: auto

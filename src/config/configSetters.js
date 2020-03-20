@@ -14,3 +14,14 @@ export async function setLocale(newLocale) {
   setters.setLocale.bind(this)(newLocale);
   if (isScLg) this.$root.$emit('toggleSidebar');
 }
+
+export function setLoading(value) {
+  if (value) {
+    document.querySelector('.spinner').className = 'spinner';
+  } else {
+    document.querySelector('.spinner').className += ' no-visible';
+    setTimeout(() => {
+      document.querySelector('.spinner').className += ' hidden';
+    }, 500);
+  }
+}

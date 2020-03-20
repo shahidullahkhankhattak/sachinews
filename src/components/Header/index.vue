@@ -49,7 +49,7 @@ export default {
         value: 'english',
       },
       {
-        label: 'Urdu',
+        label: 'اردو',
         value: 'urdu',
       },
     ],
