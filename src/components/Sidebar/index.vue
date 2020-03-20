@@ -1,6 +1,6 @@
 <template>
   <q-drawer
-    v-model="isSidebarOpen"
+    ref="sidebar"
     content-class="bg-white"
     :side="sidebarPos"
     :width="280"
@@ -87,7 +87,7 @@
 </template>
 <script>
 import { fasGlobeAmericas, fasFlask } from '@quasar/extras/fontawesome-v5';
-import { getters, setters } from './handleStore';
+import { getters } from './handleStore';
 
 export default {
   data: () => ({
@@ -119,11 +119,12 @@ export default {
     ],
   }),
   computed: {
-    isSidebarOpen: {
-      get: getters.isSidebarOpen,
-      set: setters.setSidebarOpen,
-    },
     sidebarPos: getters.sidebarPos,
+  },
+  mounted() {
+    this.$root.$on('toggleSidebar', () => {
+      this.$refs.sidebar.toggle();
+    });
   },
 };
 </script>

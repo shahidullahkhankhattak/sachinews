@@ -37,7 +37,8 @@
 </template>
 
 <script>
-import { setters, getters } from './handleStore';
+import { getters } from './handleStore';
+import { setLocale } from '../../config/configSetters';
 
 export default {
   data: () => ({
@@ -54,12 +55,10 @@ export default {
     ],
   }),
   methods: {
-    toggleSidebar: setters.toggleSidebar,
-    setLocale(newLocale) {
-      const { value } = newLocale;
-      if (!value || value === this.locale) return;
-      setters.setLocale.bind(this)(newLocale);
+    toggleSidebar() {
+      this.$root.$emit('toggleSidebar');
     },
+    setLocale,
   },
   computed: {
     locale: {
