@@ -1,5 +1,5 @@
 <template>
-  <div id="q-app" :style="{direction: siteDir}">
+  <div id="q-app" :dir="siteDir" :style="{direction: siteDir}">
     <router-view />
   </div>
 </template>

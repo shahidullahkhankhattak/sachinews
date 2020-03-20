@@ -27,7 +27,6 @@
           .q-field__native, .q-icon
             color: var(--search-ip-clr)
 
-
     .q-field__control
       height: 3rem
       box-shadow: none
@@ -85,6 +84,7 @@
     &:hover
       color: #000
 
+
 // for desktop body
 body.desktop
   .GNL
@@ -93,6 +93,19 @@ body.desktop
         & > .q-focus-helper
             background: transparent
             opacity: 0
+
+// direction support [ltr]
+
+[dir='ltr']
+  .q-item__section--side
+    padding-right: 16px
+    padding-left: 0
+
+// direction support [rtl]
+[dir='rtl']
+  .q-item__section--side
+    padding-right: 0
+    padding-left: 16px
 
 @media (max-width: 768px)
   .GNL

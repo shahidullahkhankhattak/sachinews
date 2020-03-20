@@ -1,24 +1,47 @@
 <template>
   <q-page>
     <div class="p-pa-md news-container">
+      <transition name="slide-fade">
+        <div class="q-pa-md q-gutter-sm" v-if="topStories.error">
+          <q-banner rounded class="bg-red-5 col-6 text-white">
+            <template v-slot:avatar>
+              <q-icon name="error_outline" color="white" />
+            </template>
+            Couldn't fetch stories due to some temprory problem.
+            <template v-slot:action>
+              <q-btn
+                flat
+                color="white"
+                label="Retry"
+                @click="fetchTopStories"
+              />
+            </template>
+          </q-banner>
+        </div>
+      </transition>
       <div class="row">
         <div class="col-12">
           <div class="row">
             <div
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
-              v-for="story in topStories"
+              v-for="story in topStories.stories"
               :key="story.id"
             >
-              <q-card
-                class="news-card"
-                flat
-                bordered
-              >
-                <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
+              <q-card class="news-card" flat bordered>
+                <q-card-section
+                  :horizontal="$q.screen.gt.xs"
+                  :vertical="$q.screen.lt.xs"
+                >
                   <q-card-section class="q-pt-xs col-8">
                     <div class="text-overline">{{ story.source }}</div>
-                    <div class="text-h5 q-mt-sm q-mb-xs" v-html="story.title"></div>
-                    <div class="text-caption text-grey-8" v-html="story.description"></div>
+                    <div
+                      class="text-h5 q-mt-sm q-mb-xs"
+                      v-html="story.title"
+                    ></div>
+                    <div
+                      class="text-caption text-grey-8"
+                      v-html="story.description"
+                    ></div>
                   </q-card-section>
 
                   <q-card-section class="col-4 flex flex-right">
@@ -45,15 +68,13 @@
 <script>
 import { config } from '../../config';
 import { Actions } from '../../store/Stories/constants';
-import { getters } from './handleStore';
+import { getters, setters } from './handleStore';
 
 const {
   app: { logo },
 } = config;
 
-const {
-  FETCH_TOP_STORIES,
-} = Actions;
+const { FETCH_TOP_STORIES } = Actions;
 
 export default {
   name: 'TopStories',
@@ -63,9 +84,11 @@ export default {
   computed: {
     ...getters,
   },
+  methods: {
+    ...setters,
+  },
   preFetch({ store }) {
     return store.dispatch(FETCH_TOP_STORIES);
   },
-
 };
 </script>

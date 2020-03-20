@@ -8,8 +8,13 @@ export async function fetchTopStories(context) {
   try {
     const response = await Axios.get(HOME);
     const { data: { data } } = response && response;
-    context.commit(Mutations.FETCH_TOP_STORIES, data);
+    const storiesObj = { error: null, stories: data };
+    context.commit(Mutations.FETCH_TOP_STORIES, storiesObj);
   } catch (ex) {
-    console.error(ex);
+    const storiesObj = {
+      error: ex,
+      stories: [],
+    };
+    context.commit(Mutations.FETCH_TOP_STORIES, storiesObj);
   }
 }
