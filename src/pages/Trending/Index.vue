@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { config } from '../config';
+import { config } from '../../config';
 
 const { app: { logo } } = config;
 export default {

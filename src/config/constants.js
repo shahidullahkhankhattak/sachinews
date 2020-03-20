@@ -12,3 +12,10 @@ export const sidebarDirs = {
   RIGHT: 'right',
   left: 'left',
 };
+
+const apiEndpoint = 'https://addictivebulletin.com/api/';
+export const server = {
+  API: {
+    HOME: `${apiEndpoint}english?page=1`,
+  },
+};

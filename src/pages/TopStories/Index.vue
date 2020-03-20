@@ -5,9 +5,9 @@
         <div class="col-12">
           <div class="row">
             <div
-              class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3"
-              v-for="i in 20"
-              :key="i"
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
+              v-for="story in topStories"
+              :key="story.id"
             >
               <q-card
                 class="news-card"
@@ -15,20 +15,17 @@
                 bordered
               >
                 <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
-                  <q-card-section class="q-pt-xs">
-                    <div class="text-overline">Overline</div>
-                    <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
-                    <div class="text-caption text-grey">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </div>
+                  <q-card-section class="q-pt-xs col-8">
+                    <div class="text-overline">{{ story.source }}</div>
+                    <div class="text-h5 q-mt-sm q-mb-xs" v-html="story.title"></div>
+                    <div class="text-caption text-grey-8" v-html="story.description"></div>
                   </q-card-section>
 
                   <q-card-section class="col-4 flex flex-right">
                     <q-img
                       class="rounded-borders"
-                      src="https://cdn.quasar.dev/img/parallax2.jpg"
+                      :src="story.media"
+                      height="100%"
                     />
                   </q-card-section>
                 </q-card-section>
@@ -46,15 +43,29 @@
 </template>
 
 <script>
-import { config } from '../config';
+import { config } from '../../config';
+import { Actions } from '../../store/Stories/constants';
+import { getters } from './handleStore';
 
 const {
   app: { logo },
 } = config;
+
+const {
+  FETCH_TOP_STORIES,
+} = Actions;
+
 export default {
+  name: 'TopStories',
   data: () => ({
     logo,
   }),
-  name: 'HomePage',
+  computed: {
+    ...getters,
+  },
+  preFetch({ store }) {
+    return store.dispatch(FETCH_TOP_STORIES);
+  },
+
 };
 </script>
