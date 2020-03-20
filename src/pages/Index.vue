@@ -14,7 +14,7 @@
                 flat
                 bordered
               >
-                <q-card-section horizontal>
+                <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
                   <q-card-section class="q-pt-xs">
                     <div class="text-overline">Overline</div>
                     <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
@@ -25,7 +25,7 @@
                     </div>
                   </q-card-section>
 
-                  <q-card-section class="col-3 flex flex-right">
+                  <q-card-section class="col-4 flex flex-right">
                     <q-img
                       class="rounded-borders"
                       src="https://cdn.quasar.dev/img/parallax2.jpg"
