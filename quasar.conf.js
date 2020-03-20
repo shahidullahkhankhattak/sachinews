@@ -181,5 +181,6 @@ module.exports = function (ctx) {
         // chainWebpack also available besides this extendWebpack
       },
     },
+    preFetch: true,
   };
 };

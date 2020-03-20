@@ -10,6 +10,11 @@ import { setLoading } from './config/configSetters';
 
 export default {
   name: 'App',
+  preFetch({ store }) {
+    // prefetch examle
+    return store.dispatch('App/setLocale', { value: 'english' });
+    // initialize something in store here
+  },
   computed: {
     ...getters,
   },
