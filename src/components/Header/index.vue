@@ -26,7 +26,7 @@
         <q-space />
 
         <div class="q-gutter-sm row items-center no-wrap">
-          <q-select outlined v-model="locale" :options="langOptions" :dense="true" :options-dense="true">
+          <q-select outlined :value="locale" @input="setLocale" :options="langOptions" :dense="true" :options-dense="true">
             <template v-slot:prepend>
               <q-icon name="language" />
             </template>
@@ -55,11 +55,15 @@ export default {
   }),
   methods: {
     toggleSidebar: setters.toggleSidebar,
+    setLocale(newLocale) {
+      const { value } = newLocale;
+      if (!value || value === this.locale) return;
+      setters.setLocale.bind(this)(newLocale);
+    },
   },
   computed: {
     locale: {
       get: getters.locale,
-      set: setters.setLocale,
     },
   },
 };
