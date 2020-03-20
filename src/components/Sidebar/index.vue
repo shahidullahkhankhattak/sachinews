@@ -1,5 +1,6 @@
 <template>
   <q-drawer
+    :key="sidebarKey"
     ref="sidebar"
     content-class="bg-white"
     :side="sidebarPos"
@@ -91,6 +92,7 @@ import { getters } from './handleStore';
 
 export default {
   data: () => ({
+    sidebarKey: true,
     links1: [
       { icon: 'web', text: 'Top stories', link: '/' },
       { icon: 'trending_up', text: 'Trending', link: '/trending' },
@@ -121,9 +123,16 @@ export default {
   computed: {
     sidebarPos: getters.sidebarPos,
   },
+  watch: {
+    sidebarPos() {
+      this.sidebarKey = !this.sidebarKey;
+    },
+  },
   mounted() {
     this.$root.$on('toggleSidebar', () => {
-      this.$refs.sidebar.toggle();
+      setTimeout(() => {
+        this.$refs.sidebar.toggle();
+      });
     });
   },
 };
