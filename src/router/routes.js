@@ -21,6 +21,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Admin') },
       { path: 'sources', component: () => import('pages/Admin/Sources') },
+      { path: 'categories', component: () => import('pages/Admin/Categories') },
     ],
   },
 ];
