@@ -32,11 +32,11 @@
                       </q-input>
                     </div>
                     <div class="col-md-4 q-pt-xs q-pr-xs">
-                      <q-input outlined label="Language">
+                      <q-select outlined label="Language" value="english" :options="['english', 'urdu']">
                         <template v-slot:prepend>
                           <q-icon name="language" />
                         </template>
-                      </q-input>
+                      </q-select>
                     </div>
                   </div>
 
@@ -184,17 +184,19 @@
               </q-input>
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-input
+              <q-select
                 bg-color="white"
                 color="blue-4"
                 label-color="blue-4"
                 outlined
                 label="Language"
+                value="english"
+                :options="['english', 'urdu']"
               >
                 <template v-slot:prepend>
                   <q-icon name="language" color="blue-4" />
                 </template>
-              </q-input>
+              </q-select>
             </div>
             <div class="col-md-12 q-pt-md">
               <q-btn color="white" text-color="blue-8">Submit</q-btn>
