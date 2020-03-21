@@ -6,7 +6,7 @@
       <div class="row">
         <q-card rounded bordered class="q-pa-lg shadow-1">
           <q-card-section class="q-pt-xs">
-            <div class="text-overline text-red">Addictive Bulletin</div>
+            <div class="text-overline"><span class="text-red">Addictive</span> Bulletin</div>
             <div class="text-h5 q-mt-sm q-mb-xs">Login</div>
             <div class="text-caption text-grey">
               Please Login Below
@@ -23,9 +23,8 @@
           <q-card-section>
             <q-form class="q-gutter-md">
               <q-input
-                color="red-4"
+                color="green-4"
                 outlined
-                clearable
                 v-model="email"
                 type="email"
                 label="email"
@@ -35,9 +34,8 @@
                 </template>
               </q-input>
               <q-input
-                color="red-4"
+                color="green-4"
                 outlined
-                clearable
                 v-model="password"
                 type="password"
                 label="password"
@@ -50,8 +48,9 @@
           </q-card-section>
           <q-card-actions class="q-px-md">
             <q-btn
+              @click="$router.push('/admin')"
               unelevated
-              color="red-4"
+              color="green-4"
               size="lg"
               class="full-width"
               label="Login"

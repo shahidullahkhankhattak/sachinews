@@ -1,6 +1,8 @@
 <template>
   <div id="q-app" :dir="siteDir" :style="{direction: siteDir}">
-    <router-view />
+    <transition name="fade" mode="out-in" appear>
+      <router-view />
+    </transition>
   </div>
 </template>
 

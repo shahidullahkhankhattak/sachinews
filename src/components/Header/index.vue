@@ -11,7 +11,7 @@
         />
 
         <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
-          <span class="q-ml-sm"><font color="red">Addictive</font> Bulletin</span>
+          <span class="q-ml-sm" v-html="logo.html"></span>
         </q-toolbar-title>
 
         <q-space />
@@ -39,9 +39,13 @@
 <script>
 import { getters } from './handleStore';
 import { setLocale } from '../../config/configSetters';
+import { config } from '../../config';
+
+const { app: { logo } } = config && config;
 
 export default {
   data: () => ({
+    logo,
     search: '',
     langOptions: [
       {

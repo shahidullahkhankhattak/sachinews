@@ -36,6 +36,7 @@ module.exports = {
 
   // add your custom rules here
   rules: {
+    'func-names': 'off',
     'global-required': 'off',
     'no-param-reassign': 'off',
     'max-len': 'off',

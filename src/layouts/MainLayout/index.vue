@@ -6,7 +6,7 @@
     <sidebar />
 
     <q-page-container>
-      <transition name="slide-fade" mode="out-in">
+      <transition name="slide-fade" mode="out-in" appear>
         <router-view />
       </transition>
     </q-page-container>

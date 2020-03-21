@@ -1,5 +1,10 @@
 <template>
   <q-layout view="hHh LpR fFf">
+
+    <admin-header />
+
+    <admin-sidebar />
+
     <q-page-container>
       <transition name="slide-fade" mode="out-in" appear>
         <router-view />
@@ -12,6 +17,6 @@
 <script>
 
 export default {
-  name: 'Login',
+  name: 'AdminLayout',
 };
 </script>

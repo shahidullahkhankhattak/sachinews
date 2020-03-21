@@ -15,6 +15,14 @@ const routes = [
       { path: '', component: () => import('pages/Login') },
     ],
   },
+  {
+    path: '/admin',
+    component: () => import('layouts/Admin'),
+    children: [
+      { path: '', component: () => import('pages/Admin') },
+      { path: 'sources', component: () => import('pages/Admin/Sources') },
+    ],
+  },
 ];
 
 // Always leave this as last one
