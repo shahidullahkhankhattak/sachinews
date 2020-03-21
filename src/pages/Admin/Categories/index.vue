@@ -165,6 +165,19 @@
                 </template>
               </q-input>
             </div>
+            <div class="col-md-12 q-pt-xs q-pr-xs">
+              <q-input
+                bg-color="white"
+                color="blue-4"
+                label-color="blue-4"
+                outlined
+                label="Icon"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="donut_small" color="blue-4" />
+                </template>
+              </q-input>
+            </div>
             <div class="col-md-12 q-pt-md">
               <q-btn color="white" text-color="blue-8">Submit</q-btn>
               <q-btn class="q-ml-md" @click="editDialog = !editDialog" outline>Cancel</q-btn>

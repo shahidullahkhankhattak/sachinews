@@ -92,8 +92,8 @@ export default {
     links1: [
       { icon: 'account_balance', text: 'Sources', link: '/admin/sources' },
       { icon: 'sports_baseball', text: 'Categories', link: '/admin/categories' },
-      { icon: 'show_chart', text: 'Source Datapath', link: '/admin/source-datapath' },
       { icon: 'link', text: 'Source Links', link: '/admin/source-links' },
+      { icon: 'show_chart', text: 'Source Datapath', link: '/admin/source-datapath' },
     ],
     links2: [
       { icon: 'g_translate', text: 'Translations' },
