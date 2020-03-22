@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios from '../../api/axios';
 import { server } from '../../config/constants';
 import { Mutations } from './constants';
 

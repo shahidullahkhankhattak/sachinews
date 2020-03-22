@@ -13,6 +13,7 @@ Vue.use(VueRouter);
  * async/await or return a Promise which resolves
  * with the Router instance.
  */
+import bindAuth from './auth';
 
 export default function (/* { store, ssrContext } */) {
   const Router = new VueRouter({
@@ -25,6 +26,6 @@ export default function (/* { store, ssrContext } */) {
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE,
   });
-
+  Router.beforeEach(bindAuth);
   return Router;
 }

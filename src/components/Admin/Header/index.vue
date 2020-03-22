@@ -30,7 +30,7 @@ export default {
   }),
   methods: {
     toggleSidebar() {
-      this.$root.$emit('toggleSidebar');
+      this.$root.$emit('toggleSidebarAdmin');
     },
   },
 };

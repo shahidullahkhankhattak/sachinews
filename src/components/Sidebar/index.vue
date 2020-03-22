@@ -1,6 +1,5 @@
 <template>
   <q-drawer
-    show-if-above
     :key="sidebarKey"
     ref="sidebar"
     content-class="bg-white"
@@ -133,7 +132,7 @@ export default {
     this.$root.$on('toggleSidebar', () => {
       setTimeout(() => {
         this.$refs.sidebar.toggle();
-      });
+      }, 1);
     });
   },
 };

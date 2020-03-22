@@ -103,10 +103,8 @@ export default {
     ],
   }),
   mounted() {
-    this.$root.$on('toggleSidebar', () => {
-      setTimeout(() => {
-        this.$refs.sidebar.toggle();
-      });
+    this.$root.$on('toggleSidebarAdmin', () => {
+      this.$refs.sidebar.toggle();
     });
   },
 };

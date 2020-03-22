@@ -36,6 +36,7 @@ module.exports = {
 
   // add your custom rules here
   rules: {
+    'consistent-return': 'off',
     'func-names': 'off',
     'global-required': 'off',
     'no-param-reassign': 'off',

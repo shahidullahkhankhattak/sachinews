@@ -107,7 +107,15 @@ body.desktop
     padding-right: 0
     padding-left: 16px
 
-@media (max-width: 768px)
+@media only (max-width: 768px)
   .GNL
     &__toolbar-input
       width: 60%
+
+  .locale_select
+    .q-field__inner
+      .q-field__control
+        &> .q-field__prepend
+          padding: 0
+        &> div:not(:first-child)
+          display: none

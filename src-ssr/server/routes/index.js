@@ -1,7 +1,5 @@
-const express = require('express');
-
-const router = express.Router();
+const adminRoutes = require('./admin');
 
 module.exports = function ({ app }) {
-  app.use(router);
+  adminRoutes({ app });
 };

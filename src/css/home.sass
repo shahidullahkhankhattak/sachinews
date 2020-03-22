@@ -21,3 +21,15 @@
 
 .text-caption
   font-size: 0.9rem
+
+// news to move icons to bottom on bigger screen only
+@media only ( min-width: 600px )
+  .news-card
+    display: flex
+    flex-direction: column
+
+    &.q-card
+      &> div.q-card__section:first-child
+        display: flex
+        flex-grow: 1
+

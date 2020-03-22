@@ -19,3 +19,11 @@ export const server = {
     HOME: `${apiEndpoint}english?page=1`,
   },
 };
+
+export const roles = {
+  ADMIN: 'admin',
+};
+
+export const localStorageKeys = {
+  JWT_AUTH: 'jwtAuth',
+};
