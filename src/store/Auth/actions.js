@@ -1,4 +1,5 @@
 import { LocalStorage } from 'quasar';
+import { wait } from 'src/helpers/asyncHelpers';
 import axios from '../../api/axios';
 import { se2errors } from '../formatters';
 import { apiEndpoints } from '../../api/constants';
@@ -33,6 +34,8 @@ export async function authenticate(context, payload) {
     } else {
       this.$router.push('/');
     }
+    await wait(1000);
+    setLoading(false);
   } catch (ex) {
     setLoading(false);
     const state = {

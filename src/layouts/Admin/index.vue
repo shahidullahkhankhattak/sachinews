@@ -16,15 +16,11 @@
 
 <script>
 import { actions } from './handleStore';
-import { setLoading } from '../../config/configSetters';
 
 export default {
   name: 'AdminLayout',
   beforeMount() {
     actions.setJwtAuth.bind(this)();
-  },
-  mounted() {
-    setLoading(false);
   },
 };
 </script>

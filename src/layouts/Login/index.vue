@@ -11,12 +11,7 @@
 </template>
 
 <script>
-import { setLoading } from '../../config/configSetters';
-
 export default {
   name: 'Login',
-  mounted() {
-    setLoading(false);
-  },
 };
 </script>
