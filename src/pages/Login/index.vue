@@ -6,7 +6,9 @@
       <div class="row">
         <q-card rounded bordered class="q-pa-lg shadow-1">
           <q-card-section class="q-pt-xs">
-            <div class="text-overline"><span class="text-red">Addictive</span> Bulletin</div>
+            <div class="text-overline">
+              <span class="text-red">Addictive</span> Bulletin
+            </div>
             <div class="text-h5 q-mt-sm q-mb-xs">Login</div>
             <div class="text-caption text-grey">
               Please Login Below
@@ -21,13 +23,22 @@
             />
           </q-card-section>
           <q-card-section>
-            <q-form class="q-gutter-md">
+            <transition-group name="slide-fade" mode="out-in">
+              <q-banner class="text-white bg-red" v-for="({ msg }) in errors" :key="msg">
+                {{msg}}
+              </q-banner>
+            </transition-group>
+          </q-card-section>
+          <q-form @submit="handleSubmit(form)">
+            <q-card-section class="q-gutter-md">
               <q-input
                 color="green-4"
                 outlined
-                v-model="email"
+                v-model="form.email"
                 type="email"
                 label="email"
+                lazy-rules
+                :rules="[val => val.length || 'Please enter your email']"
               >
                 <template v-slot:append>
                   <q-icon name="person" />
@@ -36,26 +47,27 @@
               <q-input
                 color="green-4"
                 outlined
-                v-model="password"
+                v-model="form.password"
                 type="password"
                 label="password"
+                :rules="[val => val.length || 'Please enter your password']"
               >
                 <template v-slot:append>
                   <q-icon name="lock" />
                 </template>
               </q-input>
-            </q-form>
-          </q-card-section>
-          <q-card-actions class="q-px-md">
-            <q-btn
-              @click="$router.push('/admin')"
-              unelevated
-              color="green-4"
-              size="lg"
-              class="full-width"
-              label="Login"
-            />
-          </q-card-actions>
+            </q-card-section>
+            <q-card-actions class="q-px-md">
+              <q-btn
+                type="submit"
+                unelevated
+                color="green-4"
+                size="lg"
+                class="full-width"
+                label="Login"
+              />
+            </q-card-actions>
+          </q-form>
           <q-card-section class="text-center q-pa-none">
             <p class="text-grey-6">Not reigistered? Created an Account</p>
           </q-card-section>
@@ -66,13 +78,23 @@
 </template>
 
 <script>
+import { actions, getters } from './handleStore';
+
 export default {
   name: 'LoginPage',
   data() {
     return {
-      email: '',
-      password: '',
+      form: {
+        email: '',
+        password: '',
+      },
     };
+  },
+  computed: {
+    ...getters,
+  },
+  methods: {
+    ...actions,
   },
 };
 </script>

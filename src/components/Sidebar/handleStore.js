@@ -1,5 +1,7 @@
 import { mapGetters } from 'vuex';
-import { APP_SIDEBAR_POS } from '../../store/App/constants';
+import { Getters } from '../../store/App/constants';
+
+const { APP_SIDEBAR_POS } = Getters;
 
 export const getters = {
   ...mapGetters({ sidebarPos: APP_SIDEBAR_POS }),

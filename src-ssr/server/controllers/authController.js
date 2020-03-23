@@ -59,5 +59,12 @@ module.exports.authenticate = async (req, res) => {
     });
   }
   const token = jwt.sign({ user }, jwtSecret, { expiresIn: jwtExpireSessionTime });
-  res.status(resSuccess).json({ auth: true, token, user: user.toJSON() });
+  res.status(resSuccess).json({
+    statusCode: resSuccess,
+    jwtAuth: {
+      auth: true,
+      token,
+      user: user.toJSON(),
+    },
+  });
 };

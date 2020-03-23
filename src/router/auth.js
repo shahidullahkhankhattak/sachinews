@@ -12,7 +12,7 @@ export default (to, _from, next) => {
         params: { nextUrl: to.fullPath },
       });
     } else {
-      const jwtAuth = JSON.parse(LocalStorage.getItem(JWT_AUTH) || null) || {};
+      const jwtAuth = LocalStorage.getItem(JWT_AUTH) || {};
       const { user } = jwtAuth;
       if (to.matched.some((record) => record.meta.admin)) {
         if (user.role === ADMIN) {

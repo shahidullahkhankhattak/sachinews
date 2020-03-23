@@ -1,9 +1,9 @@
 
-import { mutations } from './constants';
+import { Mutations } from './constants';
 
 const {
   SET_LOCALE,
-} = mutations;
+} = Mutations;
 
 export function setLocale(context, payload) {
   context.commit(SET_LOCALE, payload);

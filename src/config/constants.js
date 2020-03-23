@@ -10,7 +10,7 @@ export const siteDirs = {
 
 export const sidebarDirs = {
   RIGHT: 'right',
-  left: 'left',
+  LEFT: 'left',
 };
 
 const apiEndpoint = 'https://addictivebulletin.com/api/';
