@@ -15,8 +15,12 @@
 </template>
 
 <script>
+import { setLoading } from '../../config/configSetters';
 
 export default {
   name: 'MainLayout',
+  mounted() {
+    setLoading(false);
+  },
 };
 </script>

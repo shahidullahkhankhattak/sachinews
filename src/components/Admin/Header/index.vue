@@ -15,11 +15,13 @@
         </q-toolbar-title>
 
         <q-space />
+        <q-btn @click="logout"> Logout </q-btn>
       </q-toolbar>
     </q-header>
 </template>
 
 <script>
+import { actions } from './handleStore';
 import { config } from '../../../config';
 
 const { app: { logoAdmin } } = config && config;
@@ -29,6 +31,7 @@ export default {
     logo: logoAdmin,
   }),
   methods: {
+    ...actions,
     toggleSidebar() {
       this.$root.$emit('toggleSidebarAdmin');
     },

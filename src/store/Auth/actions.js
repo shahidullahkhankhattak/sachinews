@@ -2,10 +2,11 @@ import { LocalStorage } from 'quasar';
 import axios from '../../api/axios';
 import { se2errors } from '../formatters';
 import { apiEndpoints } from '../../api/constants';
-import { localStorageKeys } from '../../config/constants';
+import { localStorageKeys, roles } from '../../config/constants';
 import { setLoading } from '../../config/configSetters';
 import { Mutations } from './constants';
 
+const { ADMIN } = roles;
 const {
   LOGIN_ENDPOINT,
 } = apiEndpoints;
@@ -20,13 +21,18 @@ export async function authenticate(context, payload) {
   setLoading(true);
   try {
     const { data: { errors, jwtAuth } } = await axios.post(LOGIN_ENDPOINT, payload);
-    setLoading(false);
     const state = {
       errors,
       jwtAuth,
     };
+    const { user } = jwtAuth || {};
     if (!errors) LocalStorage.set(JWT_AUTH, jwtAuth);
     context.commit(SET_AUTH, state);
+    if (user && user.role === ADMIN) {
+      this.$router.push('/admin');
+    } else {
+      this.$router.push('/');
+    }
   } catch (ex) {
     setLoading(false);
     const state = {
@@ -34,4 +40,20 @@ export async function authenticate(context, payload) {
     };
     context.commit(SET_AUTH, state);
   }
+}
+
+export function setJwtAuth(context) {
+  const state = {
+    jwtAuth: LocalStorage.getItem(JWT_AUTH),
+  };
+  context.commit(SET_AUTH, state);
+}
+
+export function deAuthenticate(context) {
+  LocalStorage.remove(JWT_AUTH);
+  const state = {
+    jwtAuth: undefined,
+  };
+  context.commit(SET_AUTH, state);
+  this.$router.push('/login');
 }

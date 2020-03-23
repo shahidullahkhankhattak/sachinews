@@ -7,10 +7,7 @@ const { JWT_AUTH } = localStorageKeys;
 export default (to, _from, next) => {
   if (to.matched.some((record) => record.meta.auth)) {
     if (LocalStorage.getItem(JWT_AUTH) == null) {
-      next({
-        path: '/login',
-        params: { nextUrl: to.fullPath },
-      });
+      next('/login');
     } else {
       const jwtAuth = LocalStorage.getItem(JWT_AUTH) || {};
       const { user } = jwtAuth;
@@ -18,7 +15,7 @@ export default (to, _from, next) => {
         if (user.role === ADMIN) {
           next();
         } else {
-          next({ name: 'userboard' });
+          next('/');
         }
       } else {
         next();
@@ -28,7 +25,13 @@ export default (to, _from, next) => {
     if (!LocalStorage.getItem(JWT_AUTH)) {
       next();
     } else {
-      next({ name: 'userboard' });
+      const jwtAuth = LocalStorage.getItem(JWT_AUTH) || {};
+      const { user } = jwtAuth;
+      if (user.role === ADMIN) {
+        next('/admin');
+      } else {
+        next('/');
+      }
     }
   } else {
     next();

@@ -19,6 +19,7 @@ const {
   resStatuses: {
     resUnprocessibleEntity,
     resSuccess,
+    resServerError,
   },
 } = config;
 
@@ -38,33 +39,39 @@ module.exports.register = (req, res) => {
 };
 
 module.exports.authenticate = async (req, res) => {
-  const validator = validationResult(req);
-  if (!validator.isEmpty()) {
-    return res.status(resUnprocessibleEntity)
-      .json({
-        statusCode: resUnprocessibleEntity,
-        errors: validator.errors,
+  try {
+    const validator = validationResult(req);
+    if (!validator.isEmpty()) {
+      return res.status(resUnprocessibleEntity)
+        .json({
+          statusCode: resUnprocessibleEntity,
+          errors: validator.errors,
+        });
+    }
+    const { email, password } = req.body;
+    const user = await User.authenticate(email, password);
+    if (!user) {
+      return res.status(resSuccess).json({
+        statusCode: resSuccess,
+        errors: [
+          {
+            msg: userNotFound,
+          },
+        ],
       });
-  }
-  const { email, password } = req.body;
-  const user = await User.authenticate(email, password);
-  if (!user) {
-    return res.status(resSuccess).json({
+    }
+    const token = jwt.sign({ user }, jwtSecret, { expiresIn: jwtExpireSessionTime });
+    res.status(resSuccess).json({
       statusCode: resSuccess,
-      errors: [
-        {
-          msg: userNotFound,
-        },
-      ],
+      jwtAuth: {
+        auth: true,
+        token,
+        user: user.toJSON(),
+      },
+    });
+  } catch (_ex) {
+    res.status(resServerError).json({
+      statusCode: resServerError,
     });
   }
-  const token = jwt.sign({ user }, jwtSecret, { expiresIn: jwtExpireSessionTime });
-  res.status(resSuccess).json({
-    statusCode: resSuccess,
-    jwtAuth: {
-      auth: true,
-      token,
-      user: user.toJSON(),
-    },
-  });
 };

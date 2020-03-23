@@ -7,6 +7,8 @@ export const Getters = {
 // actions
 export const Actions = {
   AUTH_AUTHENTICATE: 'Auth/authenticate',
+  AUTH_DEAUTHENTICATE: 'Auth/deAuthenticate',
+  SET_JWT_AUTH: 'Auth/setJwtAuth',
 };
 
 // mutations
