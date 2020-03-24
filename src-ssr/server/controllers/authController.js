@@ -23,6 +23,8 @@ const {
   },
 } = config;
 
+
+// register
 module.exports.register = (req, res) => {
   const userData = {
     ...req.query,
@@ -38,6 +40,8 @@ module.exports.register = (req, res) => {
   });
 };
 
+
+// login
 module.exports.authenticate = async (req, res) => {
   try {
     const validator = validationResult(req);
