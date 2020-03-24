@@ -3,6 +3,27 @@
     <div class="p-pa-md main-container">
       <div class="row">
 
+        <!-- breadcrumb [START] -->
+        <div class="col-12">
+          <div class="q-pa-md">
+            <q-card class="main-card" flat bordered>
+              <q-card-section>
+                <q-breadcrumbs class="text-purple" active-color="blue">
+                  <template v-slot:separator>
+                    <q-icon size="1.2em" name="arrow_forward" color="purple" />
+                  </template>
+                  <q-breadcrumbs-el to="/admin" label="Home" icon="home" />
+                  <q-breadcrumbs-el
+                    to="/admin/sources"
+                    label="sources"
+                  />
+                </q-breadcrumbs>
+              </q-card-section>
+            </q-card>
+          </div>
+        </div>
+        <!-- breadcrumb [END] -->
+
         <!-- add card [START] -->
         <div class="col-12">
           <div class="q-pa-md">
@@ -32,7 +53,12 @@
                       </q-input>
                     </div>
                     <div class="col-md-4 q-pt-xs q-pr-xs">
-                      <q-select outlined label="Language" value="english" :options="['english', 'urdu']">
+                      <q-select
+                        outlined
+                        label="Language"
+                        value="english"
+                        :options="['english', 'urdu']"
+                      >
                         <template v-slot:prepend>
                           <q-icon name="language" />
                         </template>
@@ -93,7 +119,9 @@
               <template v-slot:body="props">
                 <q-tr :props="props">
                   <q-td>
-                    <q-btn size="10px" round outline color="green-5"> Urls </q-btn>
+                    <q-btn size="10px" round outline color="green-5">
+                      Urls
+                    </q-btn>
                     <q-btn
                       size="10px"
                       class="q-ml-xs"
@@ -128,7 +156,6 @@
           </div>
         </div>
         <!-- list Table [END] -->
-
       </div>
     </div>
     <!-- main container [END] -->
@@ -200,14 +227,15 @@
             </div>
             <div class="col-md-12 q-pt-md">
               <q-btn color="white" text-color="blue-8">Submit</q-btn>
-              <q-btn class="q-ml-md" @click="editDialog = !editDialog" outline>Cancel</q-btn>
+              <q-btn class="q-ml-md" @click="editDialog = !editDialog" outline
+                >Cancel</q-btn
+              >
             </div>
           </div>
         </q-card-section>
       </q-card>
     </q-dialog>
     <!-- edit dialog [END] -->
-
   </q-page>
 </template>
 <script>
