@@ -1,12 +1,12 @@
-import Axios from '../../api/axios';
 import { server } from '../../config/constants';
 import { Mutations } from './constants';
+import axios from '../../api/axios';
 
 const { API: { HOME } } = server;
 
 export async function fetchTopStories(context) {
   try {
-    const response = await Axios.get(HOME);
+    const response = await axios.get(HOME);
     const { data: { data } } = response && response;
     const storiesObj = { error: null, stories: data };
     context.commit(Mutations.FETCH_TOP_STORIES, storiesObj);

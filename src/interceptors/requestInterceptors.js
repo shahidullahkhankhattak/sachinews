@@ -3,15 +3,15 @@ import { localStorageKeys } from '../config/constants';
 
 const { JWT_AUTH } = localStorageKeys;
 
-export const bindRequestInterceptors = (axios) => {
+export default function (axios) {
   axios.interceptors.request.use(
     (reqConfig) => {
-      const { token } = JSON.parse(LocalStorage.getItem(JWT_AUTH) || null) || {};
-      if (token) reqConfig.headers.authorization = `Bearer ${token}`;
+      const { token } = LocalStorage.getItem(JWT_AUTH) || {};
+      if (token) reqConfig.headers.authorization = token;
       return reqConfig;
     },
     (err) => Promise.reject(err),
   );
 
   return axios;
-};
+}

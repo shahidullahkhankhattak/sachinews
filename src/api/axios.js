@@ -1,7 +1,8 @@
 
 import axios from 'axios';
-import { bindRequestInterceptors } from '../interceptors/requestInterceptors';
+import requestInterceptors from '../interceptors/requestInterceptors';
+import responseInterceptors from '../interceptors/responseInterceptors';
 
-const interceptorAxios = bindRequestInterceptors(axios);
-
-export default interceptorAxios;
+const reqInterceptAxios = requestInterceptors(axios);
+const resInterceptAxios = responseInterceptors(reqInterceptAxios);
+export default resInterceptAxios;

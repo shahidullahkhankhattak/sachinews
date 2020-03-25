@@ -2,16 +2,22 @@
   <q-page>
     <div class="p-pa-md main-container">
       <div class="row">
+        <!-- breadcrumb [START] -->
         <div class="col-12">
           <div class="q-pa-md">
-            <q-breadcrumbs class="text-primary" active-color="purple">
-              <template v-slot:separator>
-                <q-icon size="1.2em" name="arrow_forward" color="purple" />
-              </template>
-              <q-breadcrumbs-el to="/admin" label="Home" icon="home" />
-            </q-breadcrumbs>
+            <q-card class="main-card" flat bordered>
+              <q-card-section>
+                <q-breadcrumbs class="text-purple" active-color="blue">
+                  <template v-slot:separator>
+                    <q-icon size="1.2em" name="arrow_forward" color="purple" />
+                  </template>
+                  <q-breadcrumbs-el to="/admin" label="Home" icon="home" />
+                </q-breadcrumbs>
+              </q-card-section>
+            </q-card>
           </div>
         </div>
+        <!-- breadcrumb [END] -->
       </div>
       <div class="row">
         <div class="col-md-3">

@@ -2,7 +2,6 @@
   <q-page>
     <div class="p-pa-md main-container">
       <div class="row">
-
         <!-- breadcrumb [START] -->
         <div class="col-12">
           <div class="q-pa-md">
@@ -13,10 +12,7 @@
                     <q-icon size="1.2em" name="arrow_forward" color="purple" />
                   </template>
                   <q-breadcrumbs-el to="/admin" label="Home" icon="home" />
-                  <q-breadcrumbs-el
-                    to="/admin/sources"
-                    label="sources"
-                  />
+                  <q-breadcrumbs-el to="/admin/sources" label="sources" />
                 </q-breadcrumbs>
               </q-card-section>
             </q-card>
@@ -29,52 +25,86 @@
           <div class="q-pa-md">
             <q-card class="main-card" flat bordered>
               <q-card-section>
-                <q-card-section class="q-pt-xs col-xs-12">
-                  <div class="text-overline">Sources</div>
-                  <div class="text-h5 q-mt-sm q-mb-xs">Add Sources</div>
-                  <div class="text-caption text-grey-8">
-                    Please add sources below
-                  </div>
-                </q-card-section>
-                <q-card-section class="q-pt-xs col-xs-12">
-                  <div class="row">
-                    <div class="col-md-4 q-pt-xs q-pr-xs">
-                      <q-input outlined label="Source Name">
-                        <template v-slot:prepend>
-                          <q-icon name="home" />
-                        </template>
-                      </q-input>
+                <q-form @submit="addSource(addForm)">
+                  <q-card-section class="q-pt-xs col-xs-12">
+                    <div class="text-overline">Sources</div>
+                    <div class="text-h5 q-mt-sm q-mb-xs">Add Sources</div>
+                    <div class="text-caption text-grey-8">
+                      Please add sources below
                     </div>
-                    <div class="col-md-4 q-pt-xs q-pr-xs">
-                      <q-input outlined label="Website">
-                        <template v-slot:prepend>
-                          <q-icon name="link" />
-                        </template>
-                      </q-input>
+                  </q-card-section>
+                  <q-card-section class="q-pt-xs col-xs-12">
+                    <div class="row">
+                      <div class="col-md-4 q-pt-xs q-pr-xs">
+                        <q-input
+                          outlined
+                          label="Source Name"
+                          v-model="addForm.name"
+                          :rules="[val => !!val || 'Field is required']"
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="home" />
+                          </template>
+                        </q-input>
+                      </div>
+                      <div class="col-md-4 q-pt-xs q-pr-xs">
+                        <q-input
+                          outlined
+                          label="Website"
+                          v-model="addForm.website"
+                          :rules="[val => !!val || 'Field is required']"
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="link" />
+                          </template>
+                        </q-input>
+                      </div>
+                      <div class="col-md-4 q-pt-xs q-pr-xs">
+                        <q-select
+                          v-model="addForm.lang"
+                          outlined
+                          label="Language"
+                          value="english"
+                          :rules="[val => !!val || 'Field is required']"
+                          :options="['english', 'urdu']"
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="language" />
+                          </template>
+                        </q-select>
+                      </div>
+                      <div class="col-md-4 q-pt-xs p-pr-xs">
+                        <q-input
+                          outlined
+                          label="Color"
+                          v-model="addForm.color"
+                          :rules="['anyColor']"
+                          class="my-input"
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="colorize" class="cursor-pointer">
+                              <q-popup-proxy
+                                transition-show="scale"
+                                transition-hide="scale"
+                              >
+                                <q-color v-model="addForm.color" />
+                              </q-popup-proxy>
+                            </q-icon>
+                          </template>
+                        </q-input>
+                      </div>
                     </div>
-                    <div class="col-md-4 q-pt-xs q-pr-xs">
-                      <q-select
-                        outlined
-                        label="Language"
-                        value="english"
-                        :options="['english', 'urdu']"
-                      >
-                        <template v-slot:prepend>
-                          <q-icon name="language" />
-                        </template>
-                      </q-select>
-                    </div>
-                  </div>
 
-                  <div class="row q-pt-md">
-                    <div class="col-12">
-                      <q-btn outline color="green" size="16px">
-                        <q-icon name="check"></q-icon>
-                        <div class="q-ml-xs text-center">Add Source</div>
-                      </q-btn>
+                    <div class="row q-pt-md">
+                      <div class="col-12">
+                        <q-btn type="submit" outline color="green" size="16px">
+                          <q-icon name="check"></q-icon>
+                          <div class="q-ml-xs text-center">Add Source</div>
+                        </q-btn>
+                      </div>
                     </div>
-                  </div>
-                </q-card-section>
+                  </q-card-section>
+                </q-form>
               </q-card-section>
             </q-card>
           </div>
@@ -96,24 +126,35 @@
 <script>
 import EditModal from './EditModal';
 import ListTable from './ListTable';
+import { actions } from './handleStore';
 
 export default {
   components: {
     EditModal,
     ListTable,
   },
-  methods: {
-    confirmDelete() {
+  data: () => ({
+    addForm: {
+      name: '',
+      website: '',
+      lang: '',
+      color: '',
     },
+  }),
+  methods: {
+    ...actions,
+    confirmDelete() {},
     onDelete(item) {
-      this.$q.dialog({
-        title: 'Confirm',
-        message: 'Do you really want to delete this?',
-        cancel: true,
-        persistent: true,
-      }).onOk(() => {
-        this.confirmDelete(item);
-      });
+      this.$q
+        .dialog({
+          title: 'Confirm',
+          message: 'Do you really want to delete this?',
+          cancel: true,
+          persistent: true,
+        })
+        .onOk(() => {
+          this.confirmDelete(item);
+        });
     },
   },
 };
