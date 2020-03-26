@@ -1,10 +1,8 @@
 import { LocalStorage } from 'quasar';
-import { wait } from 'src/helpers/asyncHelpers';
 import axios from '../../api/axios';
 import { se2errors } from '../formatters';
 import { apiEndpoints } from '../../api/constants';
 import { localStorageKeys, roles } from '../../config/constants';
-import { setLoading } from '../../config/configSetters';
 import { Mutations } from './constants';
 
 const { ADMIN } = roles;
@@ -19,7 +17,6 @@ const {
 } = Mutations;
 
 export async function authenticate(context, payload) {
-  setLoading(true);
   try {
     const { data: { errors, jwtAuth } } = await axios.post(LOGIN_ENDPOINT, payload);
     const state = {
@@ -34,10 +31,7 @@ export async function authenticate(context, payload) {
     } else {
       this.$router.push('/');
     }
-    await wait(1000);
-    setLoading(false);
   } catch (ex) {
-    setLoading(false);
     const state = {
       errors: se2errors(ex),
     };

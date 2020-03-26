@@ -20,6 +20,7 @@ const {
     resUnprocessibleEntity,
     resSuccess,
     resServerError,
+    resConflict,
   },
 } = config;
 
@@ -55,8 +56,8 @@ module.exports.authenticate = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.authenticate(email, password);
     if (!user) {
-      return res.status(resSuccess).json({
-        statusCode: resSuccess,
+      return res.status(resConflict).json({
+        statusCode: resConflict,
         errors: [
           {
             msg: userNotFound,

@@ -6,8 +6,8 @@ const {
 
 // server exceptions to errors
 export function se2errors(ex) {
-  if (ex.response) {
-    const { data: { errors } } = ex.response;
+  if (ex.data) {
+    const { errors } = ex.data;
     return errors;
   }
   return [{

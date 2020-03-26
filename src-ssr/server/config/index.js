@@ -22,5 +22,7 @@ module.exports = {
     resUnprocessibleEntity: 422,
     // unauthenticated
     resUnAuthenticated: 401,
+    // conflict (alrady exists)
+    resConflict: 409,
   },
 };
