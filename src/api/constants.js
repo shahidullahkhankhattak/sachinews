@@ -1,6 +1,7 @@
+const apiV1Endpoint = '/api/v1';
 export const apiEndpoints = {
-  LOGIN_ENDPOINT: '/login',
+  LOGIN_ENDPOINT: `${apiV1Endpoint}/login`,
   SOURCE_ENDPOINTS: {
-    REST: '/admin/source',
+    REST: `${apiV1Endpoint}/admin/source`,
   },
 };

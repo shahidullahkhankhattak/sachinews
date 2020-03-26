@@ -1,8 +1,8 @@
 
 const cors = require('./cors');
-const bindRouter = require('./routes');
+const apiRoutes = require('./api/routes');
 
 module.exports = function ({ app }) {
   app.use(cors);
-  bindRouter({ app });
+  app.use('/api/v1', apiRoutes);
 };

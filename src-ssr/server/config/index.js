@@ -3,7 +3,7 @@ module.exports = {
     connectUrl: 'mongodb://localhost:27017/addictive_bulletin',
   },
   jwt: {
-    expireSessionTime: 5000, // 1 day
+    expireSessionTime: 86400, // 1 day
     secret: 'addictive bulletin is awesome',
   },
   bcrypt: {

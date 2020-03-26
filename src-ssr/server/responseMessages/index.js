@@ -4,4 +4,9 @@ module.exports = {
   },
   userNotFound: 'Invalid email or password.',
   tokenExpired: 'Session token expired.',
+  sourceMsgs: {
+    CREATED: 'Source Added Successfully.',
+    UPDATED: 'Source Updated Successfully.',
+    DELETED: 'Source Deleted Successfully.',
+  },
 };

@@ -21,7 +21,8 @@ const {
 module.exports.checkAuth = (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    jwt.verify(token, jwtSecret);
+    const { user } = jwt.verify(token, jwtSecret);
+    res.locals.user = user;
     next();
   } catch (err) {
     res.status(resUnAuthenticated).json({

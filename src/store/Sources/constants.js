@@ -3,7 +3,7 @@ export const Getters = {
 };
 
 export const Mutations = {
-
+  ADD_SOURCE: 'addSource',
 };
 
 export const Actions = {

@@ -12,4 +12,4 @@ const sourceSchema = new Schema({
   updated_date: { type: Date, default: Date.now },
 });
 
-export default sourceSchema;
+module.exports = sourceSchema;
