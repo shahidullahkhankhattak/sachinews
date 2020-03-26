@@ -18,7 +18,7 @@ const {
 
 export async function authenticate(context, payload) {
   try {
-    const { data: { errors, jwtAuth } } = await axios.post(LOGIN_ENDPOINT, payload);
+    const { errors, jwtAuth } = await axios.post(LOGIN_ENDPOINT, payload);
     const state = {
       errors,
       jwtAuth,

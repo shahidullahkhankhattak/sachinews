@@ -1,3 +1,3 @@
-export function addSource({ list }, payload) {
+export function addSource({ sources: { list } }, payload) {
   list.push(payload);
 }

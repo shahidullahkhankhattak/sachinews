@@ -12,17 +12,16 @@ const {
   ADD_SOURCE,
 } = Mutations;
 
-export async function addSource(context, form) {
+export async function addSource(context, { form, reset }) {
   try {
     const slug = form.name.replace(/ /g, '_').toLowerCase();
     form = {
       ...form,
       slug,
     };
-    const {
-      source,
-    } = await axios.post(SOURCE_REST, form);
+    const { source } = await axios.post(SOURCE_REST, form);
     context.commit(ADD_SOURCE, source);
+    reset();
   } catch (ex) {
     se2errors(ex);
   }

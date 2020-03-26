@@ -25,7 +25,7 @@
           <div class="q-pa-md">
             <q-card class="main-card" flat bordered>
               <q-card-section>
-                <q-form @submit="addSource(addForm)">
+                <q-form @submit="addSource({ form: addForm, reset: resetForm})" >
                   <q-card-section class="q-pt-xs col-xs-12">
                     <div class="text-overline">Sources</div>
                     <div class="text-h5 q-mt-sm q-mb-xs">Add Sources</div>
@@ -135,14 +135,22 @@ export default {
   },
   data: () => ({
     addForm: {
-      name: '',
-      website: '',
-      lang: '',
-      color: '',
+      name: null,
+      website: null,
+      lang: null,
+      color: null,
     },
   }),
   methods: {
     ...actions,
+    resetForm() {
+      this.addForm = {
+        name: null,
+        website: null,
+        lang: null,
+        color: null,
+      };
+    },
     confirmDelete() {},
     onDelete(item) {
       this.$q

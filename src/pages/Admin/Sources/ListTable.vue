@@ -6,7 +6,7 @@
         bordered
         :grid="$q.screen.xs"
         title="Added Sources"
-        :data="data"
+        :data="sources"
         :columns="columns"
         :pagination.sync="pagination"
         row-key="name"
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import { getters } from './handleStore';
+
 export default {
   props: ['onDelete'],
   data: () => ({
@@ -81,10 +83,10 @@ export default {
         sortable: true,
       },
       {
-        name: 'url',
+        name: 'website',
         align: 'center',
-        label: 'Url',
-        field: 'url',
+        label: 'Website',
+        field: 'website',
         sortable: true,
       },
       {
@@ -102,29 +104,9 @@ export default {
         sortable: true,
       },
     ],
-    data: [
-      {
-        id: 1,
-        name: 'BBC',
-        url: 'https://bbc.com',
-        lang: 'english',
-        color: '#333',
-      },
-      {
-        id: 2,
-        name: 'BBC',
-        url: 'https://bbc.com',
-        lang: 'urdu',
-        color: '#333',
-      },
-      {
-        id: 3,
-        name: 'BBC',
-        url: 'https://bbc.com',
-        lang: 'english',
-        color: '#333',
-      },
-    ],
   }),
+  computed: {
+    ...getters,
+  },
 };
 </script>

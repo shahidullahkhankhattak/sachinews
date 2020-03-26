@@ -1,5 +1,5 @@
 export const Getters = {
-
+  ALL_SOURCES: 'Sources/allSources',
 };
 
 export const Mutations = {

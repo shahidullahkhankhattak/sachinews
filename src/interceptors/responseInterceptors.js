@@ -20,7 +20,7 @@ export default function (axios) {
           message: successMessage,
         });
       }
-      return response;
+      return response.data;
     },
     (err) => {
       if (!process.env.SERVER) {
