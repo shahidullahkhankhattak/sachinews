@@ -36,6 +36,7 @@ module.exports = {
 
   // add your custom rules here
   rules: {
+    'no-underscore-dangle': 'off',
     'consistent-return': 'off',
     'func-names': 'off',
     'global-required': 'off',

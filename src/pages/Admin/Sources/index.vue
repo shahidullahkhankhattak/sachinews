@@ -20,12 +20,31 @@
         </div>
         <!-- breadcrumb [END] -->
 
+        <div class="col-12" v-if="errors">
+          <div class="q-pa-md">
+            <transition-group name="slide-fade">
+              <div class="q-pa-md q-gutter-sm"  v-for="error in errors" :key="error.msg">
+                <q-banner rounded class="bg-red-5 col-6 text-white">
+                  <template v-slot:avatar>
+                    <q-icon name="error_outline" color="white" />
+                  </template>
+                  {{ error.msg }}
+                </q-banner>
+              </div>
+            </transition-group>
+          </div>
+        </div>
+
         <!-- add card [START] -->
         <div class="col-12">
           <div class="q-pa-md">
             <q-card class="main-card" flat bordered>
               <q-card-section>
-                <q-form @submit="addSource({ form: addForm, reset: resetForm})" >
+                <q-form
+                  @submit="addSource({ form: addForm, reset: resetForm })"
+                  @reset="resetFields()"
+                  ref="addSourceForm"
+                >
                   <q-card-section class="q-pt-xs col-xs-12">
                     <div class="text-overline">Sources</div>
                     <div class="text-h5 q-mt-sm q-mb-xs">Add Sources</div>
@@ -35,37 +54,40 @@
                   </q-card-section>
                   <q-card-section class="q-pt-xs col-xs-12">
                     <div class="row">
-                      <div class="col-md-4 q-pt-xs q-pr-xs">
+                      <div class="col-md-4 q-pr-md">
                         <q-input
                           outlined
                           label="Source Name"
                           v-model="addForm.name"
-                          :rules="[val => !!val || 'Field is required']"
+                          lazy-rules
+                          :rules="[rules.REQUIRED]"
                         >
                           <template v-slot:prepend>
                             <q-icon name="home" />
                           </template>
                         </q-input>
                       </div>
-                      <div class="col-md-4 q-pt-xs q-pr-xs">
+                      <div class="col-md-4 q-pr-md">
                         <q-input
                           outlined
                           label="Website"
                           v-model="addForm.website"
-                          :rules="[val => !!val || 'Field is required']"
+                          lazy-rules
+                          :rules="[rules.URL, rules.REQUIRED]"
                         >
                           <template v-slot:prepend>
                             <q-icon name="link" />
                           </template>
                         </q-input>
                       </div>
-                      <div class="col-md-4 q-pt-xs q-pr-xs">
+                      <div class="col-md-4 q-pr-md">
                         <q-select
                           v-model="addForm.lang"
                           outlined
                           label="Language"
                           value="english"
-                          :rules="[val => !!val || 'Field is required']"
+                          lazy-rules
+                          :rules="[rules.REQUIRED]"
                           :options="['english', 'urdu']"
                         >
                           <template v-slot:prepend>
@@ -73,12 +95,14 @@
                           </template>
                         </q-select>
                       </div>
-                      <div class="col-md-4 q-pt-xs p-pr-xs">
+                      <div class="col-md-4 q-pr-md">
                         <q-input
                           outlined
                           label="Color"
                           v-model="addForm.color"
-                          :rules="['anyColor']"
+                          format-model="hex"
+                          lazy-rules
+                          :rules="[rules.HASH_COLOR, rules.REQUIRED]"
                           class="my-input"
                         >
                           <template v-slot:prepend>
@@ -101,6 +125,14 @@
                           <q-icon name="check"></q-icon>
                           <div class="q-ml-xs text-center">Add Source</div>
                         </q-btn>
+                        <q-btn
+                          label="Reset"
+                          outline
+                          size="16px"
+                          type="reset"
+                          color="primary"
+                          class="q-ml-sm"
+                        />
                       </div>
                     </div>
                   </q-card-section>
@@ -126,32 +158,43 @@
 <script>
 import EditModal from './EditModal';
 import ListTable from './ListTable';
-import { actions } from './handleStore';
+import { actions, getters } from './handleStore';
+import { validations } from '../../../validators';
 
+const addForm = () => ({
+  name: '',
+  website: '',
+  lang: '',
+  color: '',
+});
 export default {
   components: {
     EditModal,
     ListTable,
   },
-  data: () => ({
-    addForm: {
-      name: null,
-      website: null,
-      lang: null,
-      color: null,
-    },
-  }),
+  data() {
+    return {
+      rules: {
+        ...validations,
+      },
+      addForm: addForm(),
+    };
+  },
+  computed: {
+    ...getters,
+  },
   methods: {
     ...actions,
-    resetForm() {
-      this.addForm = {
-        name: null,
-        website: null,
-        lang: null,
-        color: null,
-      };
+    resetFields() {
+      this.addForm = addForm();
     },
-    confirmDelete() {},
+    resetForm() {
+      this.addForm = addForm();
+      this.$refs.addSourceForm.reset();
+    },
+    confirmDelete(item) {
+      this.deleteSource(item);
+    },
     onDelete(item) {
       this.$q
         .dialog({
@@ -164,6 +207,9 @@ export default {
           this.confirmDelete(item);
         });
     },
+  },
+  beforeMount() {
+    this.fetchAllSources();
   },
 };
 </script>
