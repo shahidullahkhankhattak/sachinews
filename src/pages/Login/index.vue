@@ -31,7 +31,7 @@
                 type="email"
                 label="email"
                 lazy-rules
-                :rules="[val => val.length || 'Please enter your email']"
+                :rules="[rules.REQUIRED, rules.EMAIL]"
               >
                 <template v-slot:append>
                   <q-icon name="person" />
@@ -43,7 +43,7 @@
                 v-model="form.password"
                 type="password"
                 label="password"
-                :rules="[val => val.length || 'Please enter your password']"
+                :rules="[rules.REQUIRED]"
               >
                 <template v-slot:append>
                   <q-icon name="lock" />
@@ -71,12 +71,14 @@
 </template>
 
 <script>
+import { validations } from '../../validators';
 import { actions } from './handleStore';
 
 export default {
   name: 'LoginPage',
   data() {
     return {
+      rules: { ...validations },
       form: {
         email: '',
         password: '',
