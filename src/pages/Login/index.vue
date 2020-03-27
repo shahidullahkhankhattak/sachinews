@@ -22,13 +22,6 @@
               src="/statics/login-avatar.png"
             />
           </q-card-section>
-          <q-card-section>
-            <transition-group name="slide-fade" mode="out-in">
-              <q-banner class="text-white bg-red" v-for="({ msg }) in errors" :key="msg">
-                {{msg}}
-              </q-banner>
-            </transition-group>
-          </q-card-section>
           <q-form @submit="handleSubmit(form)">
             <q-card-section class="q-gutter-md">
               <q-input
@@ -78,7 +71,7 @@
 </template>
 
 <script>
-import { actions, getters } from './handleStore';
+import { actions } from './handleStore';
 
 export default {
   name: 'LoginPage',
@@ -89,9 +82,6 @@ export default {
         password: '',
       },
     };
-  },
-  computed: {
-    ...getters,
   },
   methods: {
     ...actions,

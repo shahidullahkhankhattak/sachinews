@@ -1,7 +1,6 @@
 // getters
 export const Getters = {
   AUTH_USER: 'Auth/user',
-  AUTH_ERRORS: 'Auth/authErrors',
 };
 
 // actions

@@ -32,10 +32,7 @@ export async function authenticate(context, payload) {
       this.$router.push('/');
     }
   } catch (ex) {
-    const state = {
-      errors: se2errors(ex),
-    };
-    context.commit(SET_AUTH, state);
+    se2errors(ex);
   }
 }
 

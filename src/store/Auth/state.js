@@ -9,7 +9,6 @@ export default function () {
   return {
     auth: {
       jwtAuth: LocalStorage.getItem(JWT_AUTH),
-      errors: null,
     },
   };
 }
