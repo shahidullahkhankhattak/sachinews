@@ -1,3 +1,10 @@
+<style>
+  span.color-box {
+    display: inline-block;
+    height:12px;
+    width:12px;
+  }
+</style>
 <template>
   <div class="col-12">
     <div class="q-pa-md">
@@ -57,6 +64,7 @@
               </q-btn>
             </q-td>
             <q-td v-for="col in props.cols" :key="col.name" :props="props">
+              <span class="color-box" v-if="col.name === 'color'" :style="{backgroundColor: col.value}"></span>
               {{ col.value }}
             </q-td>
           </q-tr>

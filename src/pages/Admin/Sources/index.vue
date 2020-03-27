@@ -20,21 +20,6 @@
         </div>
         <!-- breadcrumb [END] -->
 
-        <div class="col-12" v-if="errors">
-          <div class="q-pa-md">
-            <transition-group name="slide-fade">
-              <div class="q-pa-md q-gutter-sm"  v-for="error in errors" :key="error.msg">
-                <q-banner rounded class="bg-red-5 col-6 text-white">
-                  <template v-slot:avatar>
-                    <q-icon name="error_outline" color="white" />
-                  </template>
-                  {{ error.msg }}
-                </q-banner>
-              </div>
-            </transition-group>
-          </div>
-        </div>
-
         <!-- add card [START] -->
         <div class="col-12">
           <div class="q-pa-md">
@@ -53,8 +38,8 @@
                     </div>
                   </q-card-section>
                   <q-card-section class="q-pt-xs col-xs-12">
-                    <div class="row">
-                      <div class="col-md-4 q-pr-md">
+                    <div class="row q-col-gutter-md">
+                      <div class="col-md-4">
                         <q-input
                           outlined
                           label="Source Name"
@@ -67,7 +52,7 @@
                           </template>
                         </q-input>
                       </div>
-                      <div class="col-md-4 q-pr-md">
+                      <div class="col-md-4">
                         <q-input
                           outlined
                           label="Website"
@@ -80,7 +65,7 @@
                           </template>
                         </q-input>
                       </div>
-                      <div class="col-md-4 q-pr-md">
+                      <div class="col-md-4">
                         <q-select
                           v-model="addForm.lang"
                           outlined
@@ -95,7 +80,7 @@
                           </template>
                         </q-select>
                       </div>
-                      <div class="col-md-4 q-pr-md">
+                      <div class="col-md-4">
                         <q-input
                           outlined
                           label="Color"

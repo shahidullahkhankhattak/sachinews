@@ -11,14 +11,16 @@ export default function (axios) {
       if (!process.env.SERVER) {
         setTimeout(() => {
           setLoading(false);
-        }, 1000);
+        }, 200);
       }
       const { data: { successMessage } = {} } = response;
       if (successMessage) {
-        Notify({
-          type: 'positive',
-          message: successMessage,
-        });
+        setTimeout(() => {
+          Notify({
+            type: 'positive',
+            message: successMessage,
+          });
+        }, 500);
       }
       return response.data;
     },
@@ -26,9 +28,19 @@ export default function (axios) {
       if (!process.env.SERVER) {
         setTimeout(() => {
           setLoading(false);
-        }, 1000);
+        }, 200);
       }
       const { data: { statusCode, errors } = {} } = err.response;
+      if (errors && errors.length) {
+        errors.forEach((error) => {
+          setTimeout(() => {
+            Notify({
+              type: 'negative',
+              message: error.msg,
+            });
+          }, 500);
+        });
+      }
       if (statusCode === UNAUTHORIZED && errors.find((item) => item.param === SESSION_EXPIRED)) {
         LocalStorage.remove(localStorageKeys.JWT_AUTH);
         router().push('/login');

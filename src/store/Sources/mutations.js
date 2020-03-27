@@ -2,10 +2,6 @@ export function addSource({ sources: { list } }, payload) {
   list.push(payload);
 }
 
-export function errors({ sources }, payload) {
-  sources.errors = payload;
-}
-
 export function allSources({ sources }, payload) {
   sources.list = payload;
 }

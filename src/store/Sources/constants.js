@@ -1,6 +1,5 @@
 export const Getters = {
   ALL_SOURCES: 'Sources/allSources',
-  ERRORS: 'Sources/errors',
 };
 
 export const Mutations = {
@@ -8,7 +7,6 @@ export const Mutations = {
   ALL_SOURCES: 'allSources',
   DELETE_SOURCE: 'deleteSource',
   UPDATE_SOURCE: 'updateSource',
-  ERRORS: 'errors',
 };
 
 export const Actions = {

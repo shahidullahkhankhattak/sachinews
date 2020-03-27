@@ -10,12 +10,10 @@ const {
 
 const {
   ALL_SOURCES,
-  ERRORS,
 } = Getters;
 
 export const getters = {
   ...mapGetters({
-    errors: ERRORS,
     sources: ALL_SOURCES,
   }),
 };
