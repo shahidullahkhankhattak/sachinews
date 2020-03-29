@@ -4,9 +4,10 @@ const { sourceMsgs: { EXISTS } } = require('../responseMessages');
 
 module.exports.createSourceValidator = [
   body('name').exists(),
-  body('name').custom(async (value) => {
+  body('name').custom(async (value, { req }) => {
+    const { _id } = req.body;
     const source = await Source.findOne({ name: value });
-    if (source) return Promise.reject(EXISTS);
+    if ((source && !_id) || (source && _id && _id !== source._id.toString())) return Promise.reject(EXISTS);
   }),
   body('website').isURL(),
   body('lang').isIn(['english', 'urdu']),
@@ -14,6 +15,11 @@ module.exports.createSourceValidator = [
   body('slug').isSlug(),
 ];
 
-module.exports.updateDeleteSourceValidator = [
+module.exports.updateSourceValidator = [
+  body('_id').isMongoId(),
+  ...this.createSourceValidator,
+];
+
+module.exports.deleteSourceValidator = [
   body('_id').isMongoId(),
 ];

@@ -10,4 +10,10 @@ module.exports = {
     UPDATED: 'Source updated successfully.',
     DELETED: 'Source deleted successfully.',
   },
+  categoryMsgs: {
+    EXISTS: 'Category already exists.',
+    CREATED: 'Category added successfully.',
+    UPDATED: 'Category updated successfully.',
+    DELETED: 'Category deleted successfully.',
+  },
 };

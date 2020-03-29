@@ -12,7 +12,7 @@
         flat
         bordered
         :grid="$q.screen.xs"
-        title="Added Sources"
+        title="Added Categories"
         :data="list"
         :columns="columns"
         :pagination.sync="pagination"
@@ -64,7 +64,6 @@
               </q-btn>
             </q-td>
             <q-td v-for="col in props.cols" :key="col.name" :props="props">
-              <span class="color-box" v-if="col.name === 'color'" :style="{backgroundColor: col.value}"></span>
               {{ col.value }}
             </q-td>
           </q-tr>
@@ -91,24 +90,10 @@ export default {
         sortable: true,
       },
       {
-        name: 'website',
+        name: 'icon',
         align: 'center',
-        label: 'Website',
-        field: 'website',
-        sortable: true,
-      },
-      {
-        name: 'color',
-        align: 'center',
-        label: 'Color',
-        field: 'color',
-        sortable: true,
-      },
-      {
-        name: 'lang',
-        align: 'center',
-        label: 'Language',
-        field: 'lang',
+        label: 'Icon',
+        field: 'icon',
         sortable: true,
       },
     ],

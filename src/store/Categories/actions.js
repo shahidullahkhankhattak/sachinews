@@ -4,7 +4,7 @@ import { se2errors } from '../formatters';
 import { Mutations } from './constants';
 
 const {
-  SOURCE_ENDPOINTS: {
+  CATEGORY_ENDPOINTS: {
     REST: REST_API,
   },
 } = apiEndpoints;

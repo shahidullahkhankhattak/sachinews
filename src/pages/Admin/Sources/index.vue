@@ -26,7 +26,7 @@
             <q-card class="main-card" flat bordered>
               <q-card-section>
                 <q-form
-                  @submit="addSource({ form: addForm, reset: resetForm })"
+                  @submit="add({ form: addForm, reset: resetForm })"
                   @reset="resetFields()"
                   ref="addSourceForm"
                 >
@@ -178,7 +178,7 @@ export default {
       this.$refs.addSourceForm.reset();
     },
     confirmDelete(item) {
-      this.deleteSource(item);
+      this.delete(item);
     },
     onDelete(item) {
       this.$q
@@ -194,7 +194,7 @@ export default {
     },
   },
   beforeMount() {
-    this.fetchAllSources();
+    this.fetch();
   },
 };
 </script>

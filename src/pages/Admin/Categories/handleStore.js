@@ -1,5 +1,5 @@
 import { mapActions, mapGetters } from 'vuex';
-import { Actions, Getters } from '../../../store/Sources/constants';
+import { Actions, Getters } from '../../../store/Categories/constants';
 
 const {
   ADD,

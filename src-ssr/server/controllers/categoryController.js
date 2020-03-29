@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
-const Source = require('../db/models/Source');
+const Category = require('../db/models/Category');
 const {
-  sourceMsgs: {
+  categoryMsgs: {
     CREATED,
     UPDATED,
     DELETED,
@@ -18,10 +18,10 @@ const {
 
 module.exports.index = async function (req, res) {
   try {
-    const sources = await Source.find();
+    const categories = await Category.find();
     res.status(resSuccess).json({
       statusCode: resSuccess,
-      list: sources,
+      list: categories,
     });
   } catch (ex) {
     res.status(resServerError).json({
@@ -40,11 +40,11 @@ module.exports.create = async function (req, res) {
           errors: validator.errors,
         });
     }
-    const source = await Source.create(req.body);
+    const category = await Category.create(req.body);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: CREATED,
-      item: source,
+      item: category,
     });
   } catch (ex) {
     res.status(resServerError).json({
@@ -64,11 +64,11 @@ module.exports.update = async function (req, res) {
         });
     }
     const { _id } = req.body;
-    const source = await Source.findOneAndUpdate({ _id }, req.body);
+    const category = await Category.findOneAndUpdate({ _id }, req.body);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: UPDATED,
-      item: source,
+      item: category,
     });
   } catch (ex) {
     res.status(resServerError).json({
@@ -88,7 +88,7 @@ module.exports.destroy = async function (req, res) {
         });
     }
     const { _id } = req.body;
-    await Source.deleteOne({ _id });
+    await Category.deleteOne({ _id });
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: DELETED,

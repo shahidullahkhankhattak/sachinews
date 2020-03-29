@@ -1,4 +1,4 @@
-const PREFIX = 'Sources';
+const PREFIX = 'Categories';
 
 export const Getters = {
   LIST: `${PREFIX}/list`,

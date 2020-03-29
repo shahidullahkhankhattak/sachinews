@@ -40,58 +40,16 @@
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
               <q-input
-                v-model="item.website"
+                v-model="item.icon"
                 bg-color="white"
                 color="blue-4"
                 label-color="blue-4"
                 outlined
                 label="Url"
-                :rules="[rules.URL, rules.REQUIRED]"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="link" color="blue-4" />
-                </template>
-              </q-input>
-            </div>
-            <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
-                v-model="item.lang"
-                bg-color="white"
-                color="blue-4"
-                label-color="blue-4"
-                outlined
-                label="Language"
-                value="english"
-                :options="['english', 'urdu']"
                 :rules="[rules.REQUIRED]"
               >
                 <template v-slot:prepend>
-                  <q-icon name="language" color="blue-4" />
-                </template>
-              </q-select>
-            </div>
-            <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-input
-                outlined
-                bg-color="white"
-                color="blue-4"
-                label-color="blue-4"
-                label="Color"
-                v-model="item.color"
-                format-model="hex"
-                lazy-rules
-                class="my-input"
-                :rules="[rules.HASH_COLOR, rules.REQUIRED]"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="colorize" class="cursor-pointer">
-                    <q-popup-proxy
-                      transition-show="scale"
-                      transition-hide="scale"
-                    >
-                      <q-color v-model="item.color" />
-                    </q-popup-proxy>
-                  </q-icon>
+                  <q-icon name="bug_report" color="blue-4" />
                 </template>
               </q-input>
             </div>
