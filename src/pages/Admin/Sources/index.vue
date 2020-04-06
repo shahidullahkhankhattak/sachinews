@@ -145,13 +145,8 @@ import EditModal from './EditModal';
 import ListTable from './ListTable';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
+import { formElems as addForm } from './common';
 
-const addForm = () => ({
-  name: '',
-  website: '',
-  lang: '',
-  color: '',
-});
 export default {
   components: {
     EditModal,

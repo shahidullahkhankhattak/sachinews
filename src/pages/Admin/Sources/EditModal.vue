@@ -111,13 +111,7 @@
 import { extend } from 'quasar';
 import { actions } from './handleStore';
 import { validations } from '../../../validators';
-
-const editForm = () => ({
-  name: '',
-  website: '',
-  lang: '',
-  color: '',
-});
+import { formElems as editForm } from './common';
 
 export default {
   data: () => ({

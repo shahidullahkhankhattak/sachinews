@@ -1,6 +1,5 @@
 import { LocalStorage } from 'quasar';
 import { responseTypes, localStorageKeys } from '../config/constants';
-import router from '../router';
 import { Notify } from '../plugins/notify';
 import { setLoading } from '../config/configSetters';
 
@@ -43,7 +42,7 @@ export default function (axios) {
       }
       if (statusCode === UNAUTHORIZED && errors.find((item) => item.param === SESSION_EXPIRED)) {
         LocalStorage.remove(localStorageKeys.JWT_AUTH);
-        router().push('/login');
+        window.location.href = '/login';
       }
       if (err.response) { return Promise.reject(err.response); }
       Promise.reject(err);

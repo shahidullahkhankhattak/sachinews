@@ -108,11 +108,8 @@ import EditModal from './EditModal';
 import ListTable from './ListTable';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
+import { formElems as addForm } from './common';
 
-const addForm = () => ({
-  name: '',
-  icon: '',
-});
 export default {
   components: {
     EditModal,

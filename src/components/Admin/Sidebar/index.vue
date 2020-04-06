@@ -8,13 +8,16 @@
     <q-scroll-area class="fit">
       <q-list tag="nav" padding class="text-grey-8">
         <q-item
-          class="GNL__drawer-item"
           v-ripple
           v-for="link in links1"
           :key="link.text"
           :to="link.link"
           :title="link.text"
           clickable
+          class="GNL__drawer-item"
+          :class="{
+            active: isActive(link.pageName)
+          }"
         >
           <q-item-section avatar>
             <q-icon :name="link.icon" />
@@ -86,12 +89,18 @@
   </q-drawer>
 </template>
 <script>
+import { isSidebarLinkActive as isActive } from '../../../helpers/navigationHelpers';
+
 export default {
   data: () => ({
     sidebarKey: true,
     links1: [
-      { icon: 'account_balance', text: 'Sources', link: '/admin/sources' },
-      { icon: 'sports_baseball', text: 'Categories', link: '/admin/categories' },
+      {
+        icon: 'account_balance', text: 'Sources', link: '/admin/sources', pageName: 'dashboard-sources',
+      },
+      {
+        icon: 'sports_baseball', text: 'Categories', link: '/admin/categories', pageName: 'dashboard-categories',
+      },
       { icon: 'link', text: 'Source Links', link: '/admin/source-links' },
       { icon: 'show_chart', text: 'Source Datapath', link: '/admin/source-datapath' },
     ],
@@ -102,6 +111,9 @@ export default {
       { icon: '', text: 'Settings' },
     ],
   }),
+  methods: {
+    isActive,
+  },
   mounted() {
     this.$root.$on('toggleSidebarAdmin', () => {
       this.$refs.sidebar.toggle();
