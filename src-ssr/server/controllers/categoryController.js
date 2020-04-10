@@ -16,7 +16,7 @@ const {
 } = require('../config/index');
 
 
-module.exports.index = async function (req, res) {
+module.exports.index = async function (_req, res) {
   try {
     const categories = await Category.find();
     res.status(resSuccess).json({
@@ -40,11 +40,11 @@ module.exports.create = async function (req, res) {
           errors: validator.errors,
         });
     }
-    const category = await Category.create(req.body);
+    const item = await Category.create(req.body);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: CREATED,
-      item: category,
+      item,
     });
   } catch (ex) {
     res.status(resServerError).json({
@@ -64,11 +64,11 @@ module.exports.update = async function (req, res) {
         });
     }
     const { _id } = req.body;
-    const category = await Category.findOneAndUpdate({ _id }, req.body);
+    const item = await Category.findOneAndUpdate({ _id }, req.body, { useFindAndModify: false, new: true }).exec();
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: UPDATED,
-      item: category,
+      item,
     });
   } catch (ex) {
     res.status(resServerError).json({

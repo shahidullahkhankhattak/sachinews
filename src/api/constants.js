@@ -7,4 +7,7 @@ export const apiEndpoints = {
   CATEGORY_ENDPOINTS: {
     REST: `${apiV1Endpoint}/admin/category`,
   },
+  SOURCE_LINKS_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/admin/source_link`,
+  },
 };

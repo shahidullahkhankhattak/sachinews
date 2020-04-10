@@ -39,8 +39,8 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td>
-              <q-btn size="10px" round outline color="green-5">
-                Urls
+              <q-btn size="10px" round outline color="green-5" :to="`source-links/${props.row._id}`">
+                URLS
               </q-btn>
               <q-btn
                 size="10px"
@@ -75,10 +75,9 @@
 </template>
 
 <script>
-import { getters } from './handleStore';
+import { getters, actions } from './handleStore';
 
 export default {
-  props: ['onDelete'],
   data: () => ({
     pagination: { rowsPerPage: 10 },
     filter: '',
@@ -115,6 +114,24 @@ export default {
   }),
   computed: {
     ...getters,
+  },
+  methods: {
+    ...actions,
+    confirmDelete(item) {
+      this.delete(item);
+    },
+    onDelete(item) {
+      this.$q
+        .dialog({
+          title: 'Confirm',
+          message: 'Do you really want to delete this?',
+          cancel: true,
+          persistent: true,
+        })
+        .onOk(() => {
+          this.confirmDelete(item);
+        });
+    },
   },
 };
 </script>

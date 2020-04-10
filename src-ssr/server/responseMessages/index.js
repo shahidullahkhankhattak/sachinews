@@ -16,4 +16,11 @@ module.exports = {
     UPDATED: 'Category updated successfully.',
     DELETED: 'Category deleted successfully.',
   },
+  sourceLinksMsgs: {
+    EXISTS: 'Source link already exists.',
+    CREATED: 'Source link added successfully.',
+    UPDATED: 'Source link updated successfully.',
+    DELETED: 'Source link deleted successfully.',
+    INVALID_SOURCE: 'Source does not exists',
+  },
 };

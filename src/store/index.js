@@ -6,6 +6,7 @@ import Auth from './Auth';
 import Sources from './Sources';
 import Stories from './Stories';
 import Categories from './Categories';
+import SourceLinks from './SourceLinks';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default function (/* { ssrContext } */) {
       Sources,
       Stories,
       Categories,
+      SourceLinks,
     },
     strict: process.env.DEV,
   });

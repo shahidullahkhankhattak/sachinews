@@ -2,6 +2,7 @@ import axios from '../../api/axios';
 import { apiEndpoints } from '../../api/constants';
 import { se2errors } from '../formatters';
 import { Mutations } from './constants';
+import { getWithSlug } from '../../helpers/objectHelpers';
 
 const {
   SOURCE_ENDPOINTS: {
@@ -17,12 +18,7 @@ const {
 
 export async function add(context, { form, reset }) {
   try {
-    const slug = form.name.replace(/ /g, '_').toLowerCase();
-    form = {
-      ...form,
-      slug,
-    };
-    const { item } = await axios.post(REST_API, form);
+    const { item } = await axios.post(REST_API, getWithSlug(form));
     context.commit(ADD, item);
     reset();
   } catch (ex) {
@@ -30,10 +26,11 @@ export async function add(context, { form, reset }) {
   }
 }
 
-export async function fetch(context) {
+export async function fetch({ commit, state }) {
+  if (state.list.length) return;
   try {
     const { list } = await axios.get(REST_API);
-    context.commit(ALL, list);
+    commit(ALL, list);
   } catch (ex) {
     se2errors(ex);
   }
@@ -50,8 +47,8 @@ export async function _delete(context, item) {
 
 export async function update(context, { item, toggleDialog }) {
   try {
-    await axios.put(REST_API, item);
-    context.commit(UPDATE, item);
+    const { item: _item } = await axios.put(REST_API, getWithSlug(item));
+    context.commit(UPDATE, _item);
     toggleDialog();
   } catch (ex) {
     se2errors(ex);

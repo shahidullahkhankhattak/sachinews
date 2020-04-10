@@ -1,7 +1,7 @@
 const mongoose = require('../index');
 
 const { Schema } = mongoose;
-const sourceSchema = new Schema({
+const schema = new Schema({
   name: String,
   slug: String,
   website: String,
@@ -12,4 +12,4 @@ const sourceSchema = new Schema({
   updated_date: { type: Date, default: Date.now },
 });
 
-module.exports = sourceSchema;
+module.exports = schema;

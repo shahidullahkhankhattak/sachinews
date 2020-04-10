@@ -12,7 +12,7 @@
                     <q-icon size="1.2em" name="arrow_forward" color="purple" />
                   </template>
                   <q-breadcrumbs-el to="/admin" label="Home" icon="home" />
-                  <q-breadcrumbs-el to="/admin/categories" label="categories" />
+                  <q-breadcrumbs-el to="/admin/source-links" label="source links" />
                 </q-breadcrumbs>
               </q-card-section>
             </q-card>
@@ -26,15 +26,15 @@
             <q-card class="main-card" flat bordered>
               <q-card-section>
                 <q-form
-                  @submit="add({ form: addForm, reset: resetForm })"
+                  @submit="add({ form: { ...addForm, source: source_id} , reset: resetForm })"
                   @reset="resetFields()"
-                  ref="addCategoryForm"
+                  ref="addSourceLinkForm"
                 >
                   <q-card-section class="q-pt-xs col-xs-12">
-                    <div class="text-overline">Categories</div>
-                    <div class="text-h5 q-mt-sm q-mb-xs">Add Categories</div>
+                    <div class="text-overline">Source Links</div>
+                    <div class="text-h5 q-mt-sm q-mb-xs">Add Source Links</div>
                     <div class="text-caption text-grey-8">
-                      Please add categories below
+                      Please add source link below
                     </div>
                   </q-card-section>
                   <q-card-section class="q-pt-xs col-xs-12">
@@ -42,28 +42,48 @@
                       <div class="col-md-4">
                         <q-input
                           outlined
-                          label="Category Name"
-                          v-model="addForm.name"
+                          label="Link"
+                          v-model="addForm.url"
                           lazy-rules
-                          :rules="[rules.REQUIRED]"
+                          :rules="[rules.REQUIRED, rules.URL]"
                         >
                           <template v-slot:prepend>
-                            <q-icon name="category" />
+                            <q-icon name="link" />
                           </template>
                         </q-input>
                       </div>
                       <div class="col-md-4">
-                        <q-input
+                        <q-select
+                          v-model="addForm.category"
                           outlined
-                          label="Icon"
-                          v-model="addForm.icon"
+                          label="Category"
                           lazy-rules
+                          :option-value="opt => opt._id"
+                          :option-label="opt => opt.name"
                           :rules="[rules.REQUIRED]"
+                          :options="categories"
+                          map-options
+                          emit-value
                         >
                           <template v-slot:prepend>
-                            <q-icon name="bug_report" />
+                            <q-icon name="class" />
                           </template>
-                        </q-input>
+                        </q-select>
+                      </div>
+                      <div class="col-md-4">
+                        <q-select
+                          v-model="addForm.encoding"
+                          outlined
+                          label="Encoding"
+                          lazy-rules
+                          :rules="[rules.REQUIRED]"
+                          :options="['xml', 'html']"
+                          map-options
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="code" />
+                          </template>
+                        </q-select>
                       </div>
                     </div>
 
@@ -71,7 +91,7 @@
                       <div class="col-12">
                         <q-btn type="submit" outline color="green" size="16px">
                           <q-icon name="check"></q-icon>
-                          <div class="q-ml-xs text-center">Add Category</div>
+                          <div class="q-ml-xs text-center">Add Link</div>
                         </q-btn>
                         <q-btn
                           label="Reset"
@@ -124,6 +144,9 @@ export default {
     };
   },
   computed: {
+    source_id() {
+      return this.$route.params.id;
+    },
     ...getters,
   },
   methods: {
@@ -133,10 +156,11 @@ export default {
     },
     resetForm() {
       this.addForm = addForm();
-      this.$refs.addCategoryForm.reset();
+      this.$refs.addSourceLinkForm.reset();
     },
   },
   beforeMount() {
+    if (!this.$route.params.id) { this.$router.push('/admin'); }
     this.fetch();
   },
 };

@@ -16,9 +16,11 @@
 
 <script>
 import { actions } from './handleStore';
+import { config } from '../../config';
 
 export default {
   name: 'AdminLayout',
+  meta: config.app.metaAdmin,
   beforeMount() {
     actions.setJwtAuth.bind(this)();
   },

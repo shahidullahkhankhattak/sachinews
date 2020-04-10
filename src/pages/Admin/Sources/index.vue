@@ -129,7 +129,7 @@
         <!-- add card [END] -->
 
         <!-- list table [START] -->
-        <ListTable :onDelete="onDelete" />
+        <ListTable />
         <!-- list Table [END] -->
       </div>
     </div>
@@ -171,21 +171,6 @@ export default {
     resetForm() {
       this.addForm = addForm();
       this.$refs.addSourceForm.reset();
-    },
-    confirmDelete(item) {
-      this.delete(item);
-    },
-    onDelete(item) {
-      this.$q
-        .dialog({
-          title: 'Confirm',
-          message: 'Do you really want to delete this?',
-          cancel: true,
-          persistent: true,
-        })
-        .onOk(() => {
-          this.confirmDelete(item);
-        });
     },
   },
   beforeMount() {

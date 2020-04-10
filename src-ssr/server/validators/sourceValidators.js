@@ -2,12 +2,12 @@ const { body } = require('express-validator');
 const Source = require('../db/models/Source');
 const { sourceMsgs: { EXISTS } } = require('../responseMessages');
 
-module.exports.createSourceValidator = [
+module.exports.create = [
   body('name').exists(),
   body('name').custom(async (value, { req }) => {
     const { _id } = req.body;
-    const source = await Source.findOne({ name: value });
-    if ((source && !_id) || (source && _id && _id !== source._id.toString())) return Promise.reject(EXISTS);
+    const item = await Source.findOne({ name: value });
+    if ((item && !_id) || (item && _id && _id !== item._id.toString())) return Promise.reject(EXISTS);
   }),
   body('website').isURL(),
   body('lang').isIn(['english', 'urdu']),
@@ -15,11 +15,11 @@ module.exports.createSourceValidator = [
   body('slug').isSlug(),
 ];
 
-module.exports.updateSourceValidator = [
+module.exports.update = [
   body('_id').isMongoId(),
-  ...this.createSourceValidator,
+  ...this.create,
 ];
 
-module.exports.deleteSourceValidator = [
+module.exports.delete = [
   body('_id').isMongoId(),
 ];

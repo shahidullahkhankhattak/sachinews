@@ -39,6 +39,9 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td>
+              <q-btn size="10px" round outline color="green-5">
+                Urls
+              </q-btn>
               <q-btn
                 size="10px"
                 class="q-ml-xs"
@@ -61,7 +64,8 @@
               </q-btn>
             </q-td>
             <q-td v-for="col in props.cols" :key="col.name" :props="props">
-              {{ col.value }}
+              <span v-if="col.name === 'category'">{{ getCategoryNameById(col.value) }}</span>
+              <span v-else>{{ col.value }}</span>
             </q-td>
           </q-tr>
         </template>
@@ -79,17 +83,24 @@ export default {
     filter: '',
     columns: [
       {
-        name: 'name',
-        label: 'Name',
+        name: 'url',
+        label: 'Link',
         align: 'center',
-        field: 'name',
+        field: 'url',
         sortable: true,
       },
       {
-        name: 'icon',
+        name: 'encoding',
         align: 'center',
-        label: 'Icon',
-        field: 'icon',
+        label: 'Encoding',
+        field: 'encoding',
+        sortable: true,
+      },
+      {
+        name: 'category',
+        align: 'center',
+        label: 'Category',
+        field: 'category',
         sortable: true,
       },
     ],
@@ -101,6 +112,10 @@ export default {
     ...actions,
     confirmDelete(item) {
       this.delete(item);
+    },
+    getCategoryNameById(id) {
+      const { name = '' } = this.categories && this.categories.find((cat) => cat._id === id);
+      return name;
     },
     onDelete(item) {
       this.$q
@@ -115,5 +130,6 @@ export default {
         });
     },
   },
+
 };
 </script>

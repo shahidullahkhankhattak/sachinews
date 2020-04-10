@@ -2,10 +2,10 @@ import axios from '../../api/axios';
 import { apiEndpoints } from '../../api/constants';
 import { se2errors } from '../formatters';
 import { Mutations } from './constants';
-import { getWithSlug } from '../../helpers/objectHelpers';
+import { Actions as CatActions } from '../Categories/constants';
 
 const {
-  CATEGORY_ENDPOINTS: {
+  SOURCE_LINKS_ENDPOINTS: {
     REST: REST_API,
   },
 } = apiEndpoints;
@@ -18,7 +18,7 @@ const {
 
 export async function add(context, { form, reset }) {
   try {
-    const { item } = await axios.post(REST_API, getWithSlug(form));
+    const { item } = await axios.post(REST_API, form);
     context.commit(ADD, item);
     reset();
   } catch (ex) {
@@ -26,8 +26,18 @@ export async function add(context, { form, reset }) {
   }
 }
 
-export async function fetch({ commit, state }) {
+export async function fetch({
+  commit, state, dispatch,
+  rootState: {
+    Categories: {
+      list: CatList,
+    },
+  },
+}) {
   if (state.list.length) return;
+  if (!CatList.length) {
+    dispatch(CatActions.FETCH, {}, { root: true });
+  }
   try {
     const { list } = await axios.get(REST_API);
     commit(ALL, list);
@@ -47,7 +57,7 @@ export async function _delete(context, item) {
 
 export async function update(context, { item, toggleDialog }) {
   try {
-    const { item: _item } = await axios.put(REST_API, getWithSlug(item));
+    const { item: _item } = await axios.put(REST_API, item);
     context.commit(UPDATE, _item);
     toggleDialog();
   } catch (ex) {

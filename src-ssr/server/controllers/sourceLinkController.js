@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
-const Source = require('../db/models/Source');
+const SourceLink = require('../db/models/SourceLink');
 const {
-  sourceMsgs: {
+  sourceLinksMsgs: {
     CREATED,
     UPDATED,
     DELETED,
@@ -18,10 +18,10 @@ const {
 
 module.exports.index = async function (_req, res) {
   try {
-    const list = await Source.find();
+    const categories = await SourceLink.find();
     res.status(resSuccess).json({
       statusCode: resSuccess,
-      list,
+      list: categories,
     });
   } catch (ex) {
     res.status(resServerError).json({
@@ -40,7 +40,7 @@ module.exports.create = async function (req, res) {
           errors: validator.errors,
         });
     }
-    const item = await Source.create(req.body);
+    const item = await SourceLink.create(req.body);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: CREATED,
@@ -64,7 +64,7 @@ module.exports.update = async function (req, res) {
         });
     }
     const { _id } = req.body;
-    const item = await Source.findOneAndUpdate({ _id }, req.body, { useFindAndModify: false, new: true }).exec();
+    const item = await SourceLink.findOneAndUpdate({ _id }, req.body, { useFindAndModify: false, new: true }).exec();
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: UPDATED,
@@ -88,7 +88,7 @@ module.exports.destroy = async function (req, res) {
         });
     }
     const { _id } = req.body;
-    await Source.deleteOne({ _id });
+    await SourceLink.deleteOne({ _id });
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: DELETED,

@@ -3,7 +3,7 @@ export function add({ list }, payload) {
 }
 
 export function all(state, payload) {
-  state.list = payload;
+  state.list = payload || [];
 }
 
 export function _delete({ list }, payload) {
@@ -11,6 +11,6 @@ export function _delete({ list }, payload) {
 }
 
 export function update({ list }, payload) {
-  const source = list.find((item) => item._id === payload._id);
-  Object.assign(source, payload);
+  const item = list.find((_item) => _item._id === payload._id);
+  Object.assign(item, payload);
 }

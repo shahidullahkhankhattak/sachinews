@@ -15,7 +15,10 @@
 </template>
 
 <script>
+import { config } from '../../config';
+
 export default {
   name: 'MainLayout',
+  meta: config.app.meta,
 };
 </script>

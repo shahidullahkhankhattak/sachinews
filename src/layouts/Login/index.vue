@@ -11,7 +11,10 @@
 </template>
 
 <script>
+import { config } from '../../config';
+
 export default {
   name: 'Login',
+  meta: config.app.meta,
 };
 </script>
