@@ -16,9 +16,12 @@ const {
 } = require('../config/index');
 
 
-module.exports.index = async function (_req, res) {
+module.exports.index = async function (req, res) {
   try {
-    const categories = await SourceLink.find();
+    const { source } = req.params;
+    const query = {};
+    if (source) { query.source = source; }
+    const categories = await SourceLink.find(query);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       list: categories,

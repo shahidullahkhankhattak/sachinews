@@ -29,7 +29,7 @@ const routes = [
       { path: '', name: 'dashboard', component: () => import('pages/Admin') },
       { path: 'sources', name: 'dashboard-sources', component: () => import('pages/Admin/Sources') },
       { path: 'categories', name: 'dashboard-categories', component: () => import('pages/Admin/Categories') },
-      { path: 'source-links/:id', name: 'dashboard-source-links', component: () => import('pages/Admin/SourceLinks') },
+      { path: 'source-links/:source_id', name: 'dashboard-source-links', component: () => import('pages/Admin/SourceLinks') },
     ],
   },
 ];

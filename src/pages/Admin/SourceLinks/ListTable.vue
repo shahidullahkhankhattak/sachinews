@@ -12,7 +12,7 @@
         flat
         bordered
         :grid="$q.screen.xs"
-        title="Added Categories"
+        title="Added Links"
         :data="list"
         :columns="columns"
         :pagination.sync="pagination"

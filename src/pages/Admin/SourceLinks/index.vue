@@ -145,7 +145,7 @@ export default {
   },
   computed: {
     source_id() {
-      return this.$route.params.id;
+      return this.$route.params.source_id;
     },
     ...getters,
   },
@@ -160,7 +160,7 @@ export default {
     },
   },
   beforeMount() {
-    if (!this.$route.params.id) { this.$router.push('/admin'); }
+    if (!this.$route.params.source_id) { this.$router.push('/admin'); }
     this.fetch();
   },
 };
