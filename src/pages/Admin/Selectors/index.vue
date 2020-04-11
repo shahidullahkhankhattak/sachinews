@@ -12,7 +12,7 @@
                     <q-icon size="1.2em" name="arrow_forward" color="purple" />
                   </template>
                   <q-breadcrumbs-el to="/admin" label="Home" icon="home" />
-                  <q-breadcrumbs-el to="/admin/source-links" label="source links" />
+                  <q-breadcrumbs-el label="selectors" />
                 </q-breadcrumbs>
               </q-card-section>
             </q-card>
@@ -26,65 +26,73 @@
             <q-card class="main-card" flat bordered>
               <q-card-section>
                 <q-form
-                  @submit="add({ form: { ...addForm, source: source_id} , reset: resetForm })"
+                  @submit="add({ form: { ...addForm, source: source_id}, reset: resetForm })"
                   @reset="resetFields()"
-                  ref="addSourceLinkForm"
+                  ref="addSourceForm"
                 >
                   <q-card-section class="q-pt-xs col-xs-12">
-                    <div class="text-overline">Source Links</div>
-                    <div class="text-h5 q-mt-sm q-mb-xs">Add Source Links</div>
+                    <div class="text-overline">Selectors</div>
+                    <div class="text-h5 q-mt-sm q-mb-xs">Add Selectors</div>
                     <div class="text-caption text-grey-8">
-                      Please add source link below
+                      Please add selectors below
                     </div>
                   </q-card-section>
                   <q-card-section class="q-pt-xs col-xs-12">
                     <div class="row q-col-gutter-md">
                       <div class="col-md-4">
-                        <q-input
+                        <q-select
+                          v-model="addForm.name"
                           outlined
-                          label="Link"
-                          v-model="addForm.url"
+                          label="Data Name"
+                          value=""
                           lazy-rules
-                          :rules="[rules.REQUIRED, rules.URL]"
+                          :rules="[rules.REQUIRED]"
+                          :options="selectorNames"
                         >
                           <template v-slot:prepend>
-                            <q-icon name="link" />
+                            <q-icon name="home" />
+                          </template>
+                        </q-select>
+                      </div>
+                      <div class="col-md-4">
+                        <q-input
+                          outlined
+                          label="Selector"
+                          v-model="addForm.selector"
+                          lazy-rules
+                          :rules="[rules.REQUIRED]"
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="show_chart" />
                           </template>
                         </q-input>
                       </div>
                       <div class="col-md-4">
                         <q-select
-                          v-model="addForm.category"
+                          v-model="addForm.type"
                           outlined
-                          label="Category"
+                          label="Type"
+                          value="string"
                           lazy-rules
-                          :option-value="opt => opt._id"
-                          :option-label="opt => opt.name"
                           :rules="[rules.REQUIRED]"
-                          :options="categories"
-                          map-options
-                          emit-value
+                          :options="['string', 'html', 'multi']"
                         >
                           <template v-slot:prepend>
-                            <q-icon name="class" />
+                            <q-icon name="language" />
                           </template>
                         </q-select>
                       </div>
                       <div class="col-md-4">
-                        <q-select
-                          disable
-                          v-model="addForm.encoding"
+                        <q-input
                           outlined
-                          label="Encoding"
+                          label="Filter"
+                          v-model="addForm.filter"
                           lazy-rules
-                          :rules="[rules.REQUIRED]"
-                          :options="['xml', 'html']"
-                          map-options
                         >
                           <template v-slot:prepend>
-                            <q-icon name="code" />
+                            <q-icon name="filter" />
                           </template>
-                        </q-select>
+                        </q-input>
                       </div>
                     </div>
 
@@ -92,7 +100,7 @@
                       <div class="col-12">
                         <q-btn type="submit" outline color="green" size="16px">
                           <q-icon name="check"></q-icon>
-                          <div class="q-ml-xs text-center">Add Link</div>
+                          <div class="q-ml-xs text-center">Add Selector</div>
                         </q-btn>
                         <q-btn
                           label="Reset"
@@ -129,7 +137,7 @@ import EditModal from './EditModal';
 import ListTable from './ListTable';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
-import { formElems as addForm } from './common';
+import { formElems as addForm, selectorNames } from './common';
 
 export default {
   components: {
@@ -142,6 +150,7 @@ export default {
         ...validations,
       },
       addForm: addForm(),
+      selectorNames,
     };
   },
   computed: {
@@ -157,7 +166,7 @@ export default {
     },
     resetForm() {
       this.addForm = addForm();
-      this.$refs.addSourceLinkForm.reset();
+      this.$refs.addSourceForm.reset();
     },
   },
   beforeMount() {

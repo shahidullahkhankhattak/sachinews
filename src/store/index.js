@@ -7,6 +7,7 @@ import Sources from './Sources';
 import Stories from './Stories';
 import Categories from './Categories';
 import SourceLinks from './SourceLinks';
+import Selectors from './Selectors';
 
 Vue.use(Vuex);
 
@@ -19,6 +20,7 @@ export default function (/* { ssrContext } */) {
       Stories,
       Categories,
       SourceLinks,
+      Selectors,
     },
     strict: process.env.DEV,
   });

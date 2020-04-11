@@ -24,5 +24,7 @@ module.exports = {
     resUnAuthenticated: 401,
     // conflict (alrady exists)
     resConflict: 409,
+    // server was unable to complete the request completely
+    resIncomplete: 417,
   },
 };

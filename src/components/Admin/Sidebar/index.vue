@@ -101,8 +101,8 @@ export default {
       {
         icon: 'sports_baseball', text: 'Categories', link: '/admin/categories', pageName: 'dashboard-categories',
       },
-      { icon: 'link', text: 'Source Links', link: '/admin/source-links' },
-      { icon: 'show_chart', text: 'Source Datapath', link: '/admin/source-datapath' },
+      { icon: 'link', text: 'Source Links', link: '/admin/select-source?next=source-links' },
+      { icon: 'show_chart', text: 'Selectors', link: '/admin/select-source?next=selectors' },
     ],
     links2: [
       { icon: 'g_translate', text: 'Translations' },

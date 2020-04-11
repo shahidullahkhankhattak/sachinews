@@ -39,9 +39,6 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td>
-              <q-btn size="10px" round outline color="green-5">
-                Urls
-              </q-btn>
               <q-btn
                 size="10px"
                 class="q-ml-xs"

@@ -3,7 +3,7 @@ import { responseTypes, localStorageKeys } from '../config/constants';
 import { Notify } from '../plugins/notify';
 import { setLoading } from '../config/configSetters';
 
-const { SESSION_EXPIRED, statusCodes: { UNAUTHORIZED } } = responseTypes;
+const { SESSION_EXPIRED, statusCodes: { UNAUTHORIZED, INCOMPLETE } } = responseTypes;
 export default function (axios) {
   axios.interceptors.response.use(
     (response) => {
@@ -30,7 +30,7 @@ export default function (axios) {
         }, 200);
       }
       const { data: { statusCode, errors } = {} } = err.response;
-      if (errors && errors.length) {
+      if (errors && errors.length && statusCode !== INCOMPLETE) {
         errors.forEach((error) => {
           setTimeout(() => {
             Notify({

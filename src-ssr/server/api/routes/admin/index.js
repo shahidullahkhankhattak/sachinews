@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const SourceController = require('../../../controllers/sourceController');
 const CategoryController = require('../../../controllers/categoryController');
 const SourceLinkController = require('../../../controllers/sourceLinkController');
+const SelectorController = require('../../../controllers/selectorController');
 
 // middlewares
 const { checkAuth } = require('../../../middleware/auth');
@@ -12,6 +13,7 @@ const { checkAuth } = require('../../../middleware/auth');
 const SourceValidator = require('../../../validators/sourceValidators');
 const CategoryValidator = require('../../../validators/categoryValidators');
 const SourceLinkValidator = require('../../../validators/sourceLinkValidator');
+const selectorValidator = require('../../../validators/selectorValidators');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -32,11 +34,18 @@ router.route('/category')
   .put([CategoryValidator.update], CategoryController.update)
   .delete([CategoryValidator.delete], CategoryController.destroy);
 
-// category routes crud
+// source link routes crud
 router.route('/source_link/:source?')
   .get(SourceLinkController.index)
   .post([SourceLinkValidator.create], SourceLinkController.create)
   .put([SourceLinkValidator.update], SourceLinkController.update)
   .delete([SourceLinkValidator.delete], SourceLinkController.destroy);
+
+// selectors routes crud
+router.route('/selector/:source?')
+  .get(SelectorController.index)
+  .post([selectorValidator.create], SelectorController.create)
+  .put([selectorValidator.update], SelectorController.update)
+  .delete([selectorValidator.delete], SelectorController.destroy);
 
 module.exports = router;

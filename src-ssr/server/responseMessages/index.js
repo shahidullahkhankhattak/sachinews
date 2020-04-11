@@ -2,6 +2,9 @@ module.exports = {
   params: {
     TOKEN_EXPIRED: 'JWT_EXPIRED',
   },
+  serverError: {
+    msg: 'There was some temporary problem on server side, please check back later',
+  },
   userNotFound: 'Invalid email or password.',
   tokenExpired: 'Session token expired.',
   sourceMsgs: {
@@ -9,6 +12,13 @@ module.exports = {
     CREATED: 'Source added successfully.',
     UPDATED: 'Source updated successfully.',
     DELETED: 'Source deleted successfully.',
+    haveNumChildren: ({ linksCount, selectorsCount }) => {
+      const selectorMsg = selectorsCount && `${selectorsCount} selector${selectorsCount > 1 && 's'}`;
+      const linksMsg = linksCount && `${linksCount} link${linksCount > 1 && 's'}`;
+      return {
+        msg: `This source have ${(selectorMsg && linksMsg && `${selectorMsg} and ${linksMsg}`) || selectorMsg || linksMsg} are you sure you want to delete them all?`,
+      };
+    },
   },
   categoryMsgs: {
     EXISTS: 'Category already exists.',
@@ -21,6 +31,13 @@ module.exports = {
     CREATED: 'Source link added successfully.',
     UPDATED: 'Source link updated successfully.',
     DELETED: 'Source link deleted successfully.',
+    INVALID_SOURCE: 'Source does not exists',
+  },
+  selectorsMsgs: {
+    EXISTS: 'Selector already exists.',
+    CREATED: 'Selector added successfully.',
+    UPDATED: 'Selector updated successfully.',
+    DELETED: 'Selector deleted successfully.',
     INVALID_SOURCE: 'Source does not exists',
   },
 };

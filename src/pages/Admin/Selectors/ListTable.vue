@@ -12,7 +12,7 @@
         flat
         bordered
         :grid="$q.screen.xs"
-        title="Added Sources"
+        title="Added Selectors"
         :data="list"
         :columns="columns"
         :pagination.sync="pagination"
@@ -39,12 +39,6 @@
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td>
-              <q-btn size="10px" round outline color="green-5" :to="`source-links/${props.row._id}`">
-                URLS
-              </q-btn>
-              <q-btn class="q-ml-xs" size="10px" round outline color="green-5" :to="`selectors/${props.row._id}`">
-                SEL
-              </q-btn>
               <q-btn
                 size="10px"
                 class="q-ml-xs"
@@ -93,24 +87,24 @@ export default {
         sortable: true,
       },
       {
-        name: 'website',
+        name: 'selector',
         align: 'center',
-        label: 'Website',
-        field: 'website',
+        label: 'Selector',
+        field: 'selector',
         sortable: true,
       },
       {
-        name: 'color',
+        name: 'type',
         align: 'center',
-        label: 'Color',
-        field: 'color',
+        label: 'Type',
+        field: 'type',
         sortable: true,
       },
       {
-        name: 'lang',
+        name: 'filter',
         align: 'center',
-        label: 'Language',
-        field: 'lang',
+        label: 'Filter',
+        field: 'filter',
         sortable: true,
       },
     ],

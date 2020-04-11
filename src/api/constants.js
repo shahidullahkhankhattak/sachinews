@@ -10,4 +10,7 @@ export const apiEndpoints = {
   SOURCE_LINKS_ENDPOINTS: {
     REST: `${apiV1Endpoint}/admin/source_link`,
   },
+  SELECTORS_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/admin/selector`,
+  },
 };

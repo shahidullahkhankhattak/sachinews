@@ -7,6 +7,7 @@ const { validationResult } = require('express-validator');
 const config = require('../config');
 const User = require('../db/models/User');
 const {
+  serverError,
   userNotFound,
 } = require('../responseMessages');
 
@@ -77,6 +78,7 @@ module.exports.authenticate = async (req, res) => {
   } catch (_ex) {
     res.status(resServerError).json({
       statusCode: resServerError,
+      errors: [serverError],
     });
   }
 };

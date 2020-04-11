@@ -30,6 +30,8 @@ const routes = [
       { path: 'sources', name: 'dashboard-sources', component: () => import('pages/Admin/Sources') },
       { path: 'categories', name: 'dashboard-categories', component: () => import('pages/Admin/Categories') },
       { path: 'source-links/:source_id', name: 'dashboard-source-links', component: () => import('pages/Admin/SourceLinks') },
+      { path: 'selectors/:source_id', name: 'dashboard-source-links', component: () => import('src/pages/Admin/Selectors') },
+      { path: 'select-source', name: 'dashboard-select-source', component: () => import('src/pages/Admin/SelectSource') },
     ],
   },
 ];

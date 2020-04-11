@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const Category = require('../db/models/Category');
 const {
+  serverError,
   categoryMsgs: {
     CREATED,
     UPDATED,
@@ -26,6 +27,7 @@ module.exports.index = async function (_req, res) {
   } catch (ex) {
     res.status(resServerError).json({
       statusCode: resServerError,
+      errors: [serverError],
     });
   }
 };
@@ -49,6 +51,7 @@ module.exports.create = async function (req, res) {
   } catch (ex) {
     res.status(resServerError).json({
       statusCode: resServerError,
+      errors: [serverError],
     });
   }
 };
@@ -73,6 +76,7 @@ module.exports.update = async function (req, res) {
   } catch (ex) {
     res.status(resServerError).json({
       statusCode: resServerError,
+      errors: [serverError],
     });
   }
 };
@@ -96,6 +100,7 @@ module.exports.destroy = async function (req, res) {
   } catch (ex) {
     res.status(resServerError).json({
       statusCode: resServerError,
+      errors: [serverError],
     });
   }
 };
