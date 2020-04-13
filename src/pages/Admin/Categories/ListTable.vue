@@ -36,6 +36,14 @@
           </q-tr>
         </template>
 
+        <template v-slot:no-data="{ icon, message, filter }">
+          <div class="full-width row flex-center text-accent q-gutter-sm">
+            <q-icon size="2em" name="sentiment_dissatisfied" />
+            <span> Well this is sad... {{ message }} </span>
+            <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
+          </div>
+        </template>
+
         <template v-slot:body="props">
           <q-tr :props="props">
             <q-td>
@@ -61,7 +69,12 @@
               </q-btn>
             </q-td>
             <q-td v-for="col in props.cols" :key="col.name" :props="props">
+              <span v-if="col.name === 'icon'">
+                <q-icon :name="col.value" size="20px"></q-icon>
+              </span>
+              <span v-else>
               {{ col.value }}
+              </span>
             </q-td>
           </q-tr>
         </template>

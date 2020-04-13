@@ -105,9 +105,11 @@ export default {
       { icon: 'show_chart', text: 'Selectors', link: '/admin/select-source?next=selectors' },
     ],
     links2: [
-      { icon: 'g_translate', text: 'Translations' },
+      { icon: 'input', text: 'Scrap Test', link: '/admin/select-source?next=selectors' },
+      { icon: 'launch', text: 'Scrap Data', link: '/admin/select-source?next=selectors' },
     ],
     links3: [
+      { icon: '', text: 'Translations' },
       { icon: '', text: 'Settings' },
     ],
   }),

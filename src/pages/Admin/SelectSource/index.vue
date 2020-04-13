@@ -45,7 +45,7 @@
                             :option-value="opt => opt._id"
                             :option-label="opt => opt.name"
                             :rules="[rules.REQUIRED]"
-                            :options="list"
+                            :options="(list.length && list) || [{value: '', name: 'No sources found'}]"
                             map-options
                             emit-value
                           >

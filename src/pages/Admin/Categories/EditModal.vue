@@ -45,7 +45,7 @@
                 color="blue-4"
                 label-color="blue-4"
                 outlined
-                label="Url"
+                label="Icon"
                 :rules="[rules.REQUIRED]"
               >
                 <template v-slot:prepend>
