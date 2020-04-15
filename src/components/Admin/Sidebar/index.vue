@@ -33,6 +33,7 @@
           class="GNL__drawer-item"
           v-ripple
           v-for="link in links2"
+          :to="link.link"
           :key="link.text"
           clickable
         >
@@ -105,7 +106,7 @@ export default {
       { icon: 'show_chart', text: 'Selectors', link: '/admin/select-source?next=selectors' },
     ],
     links2: [
-      { icon: 'input', text: 'Scrap Test', link: '/admin/select-source?next=selectors' },
+      { icon: 'input', text: 'Scrap Test', link: '/admin/scrap-test' },
       { icon: 'launch', text: 'Scrap Data', link: '/admin/select-source?next=selectors' },
     ],
     links3: [

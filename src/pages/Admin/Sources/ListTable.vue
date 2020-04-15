@@ -7,7 +7,7 @@ span.color-box {
 </style>
 <template>
   <div class="col-12">
-    <div class="q-pa-md">
+    <div class="q-pa-sm">
       <q-table
         flat
         bordered

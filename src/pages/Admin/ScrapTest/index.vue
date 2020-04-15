@@ -12,7 +12,7 @@
                     <q-icon size="1.2em" name="arrow_forward" color="purple" />
                   </template>
                   <q-breadcrumbs-el to="/admin" label="Home" icon="home" />
-                  <q-breadcrumbs-el to="/admin/sources" label="sources" />
+                  <q-breadcrumbs-el label="scrap test" />
                 </q-breadcrumbs>
               </q-card-section>
             </q-card>
@@ -26,10 +26,10 @@
             <q-card class="main-card" flat bordered>
               <q-card-section>
                   <q-card-section class="q-pt-xs col-xs-12">
-                    <div class="text-overline">Select Source</div>
-                    <div class="text-h5 q-mt-sm q-mb-xs">Select Source & Redirect</div>
+                    <div class="text-overline">Scrap Test</div>
+                    <div class="text-h5 q-mt-sm q-mb-xs">Test Scrap Links</div>
                     <div class="text-caption text-grey-8">
-                      Please select a source below and click on Go to proceed
+                      Please select a source below, select it's link and then click on Test
                     </div>
                   </q-card-section>
                   <q-card-section>
@@ -39,9 +39,10 @@
                           <q-select
                             outlined
                             label="Source"
-                            :value="selected"
-                            v-model="selected"
+                            :value="form.source"
+                            v-model="form.source"
                             lazy-rules
+                            @input="selectSource"
                             :option-value="opt => opt._id"
                             :option-label="opt => opt.name"
                             :rules="[rules.REQUIRED]"
@@ -54,10 +55,29 @@
                             </template>
                           </q-select>
                         </div>
+                        <div class="col-md-4">
+                          <q-select
+                            :disable="!form.source"
+                            outlined
+                            label="Source Link"
+                            v-model="form.link"
+                            lazy-rules
+                            :option-value="opt => opt._id"
+                            :option-label="opt => opt.url"
+                            :rules="[rules.REQUIRED]"
+                            :options="(linkList.length && linkList) || [{value: '', url: 'No Links found'}]"
+                            map-options
+                            emit-value
+                          >
+                            <template v-slot:prepend>
+                              <q-icon name="home" />
+                            </template>
+                          </q-select>
+                        </div>
                         <div class="col-md-12">
                           <q-btn type="submit" outline color="green" size="16px">
                             <q-icon name="check"></q-icon>
-                            <div class="q-ml-xs text-center">Go</div>
+                            <div class="q-ml-xs text-center">Test</div>
                           </q-btn>
                         </div>
                       </div>
@@ -81,9 +101,17 @@ export default {
   data() {
     return {
       redirect: '',
-      selected: '',
+      form: {
+        source: '',
+        link: '',
+      },
       rules: { ...validations },
     };
+  },
+  sockets: {
+    connect() {
+      console.log('socket connected');
+    },
   },
   watch: {
     $route() {
@@ -97,6 +125,9 @@ export default {
     ...actions,
     next() {
       this.$router.push(`${this.redirect}/${this.selected}`);
+    },
+    selectSource(val) {
+      this.fetchCat.bind(this)(val);
     },
   },
   beforeMount() {

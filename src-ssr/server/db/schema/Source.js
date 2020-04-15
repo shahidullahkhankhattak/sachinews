@@ -10,6 +10,14 @@ const schema = new Schema({
   active: { type: Boolean, default: true },
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
+  sourceLinks: [{
+    type: Schema.Types.ObjectId,
+    ref: 'SourceLink',
+  }],
+  selectors: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Selector',
+  }],
 });
 
 module.exports = schema;

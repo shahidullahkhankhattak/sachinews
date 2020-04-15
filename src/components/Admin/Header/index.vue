@@ -1,5 +1,5 @@
 <template>
-  <q-header elevated class="bg-white text-grey-8" height-hint="64">
+  <q-header class="bg-white text-grey-8 shadow-up-3" height-hint="64">
       <q-toolbar class="GNL__toolbar">
         <q-btn
           flat
@@ -15,7 +15,7 @@
         </q-toolbar-title>
 
         <q-space />
-        <q-btn @click="logout"> Logout </q-btn>
+        <q-btn flat rounded class="btn-fixed-width shadow-1" @click="logout"> logout</q-btn>
       </q-toolbar>
     </q-header>
 </template>

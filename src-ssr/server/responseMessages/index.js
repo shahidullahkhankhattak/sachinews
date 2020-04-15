@@ -13,10 +13,11 @@ module.exports = {
     UPDATED: 'Source updated successfully.',
     DELETED: 'Source deleted successfully.',
     haveNumChildren: ({ linksCount, selectorsCount }) => {
-      const selectorMsg = selectorsCount && `${selectorsCount} selector${selectorsCount > 1 && 's'}`;
-      const linksMsg = linksCount && `${linksCount} link${linksCount > 1 && 's'}`;
+      const selectorMsg = selectorsCount && `${selectorsCount} selector${(selectorsCount > 1 && 's') || ''}`;
+      const linksMsg = linksCount && `${linksCount} link${(linksCount > 1 && 's') || ''}`;
+      const relativeChildCountMsg = ((linksCount > 1 || selectorsCount > 1) && 'delete them all too') || 'delete it too';
       return {
-        msg: `This source have ${(selectorMsg && linksMsg && `${selectorMsg} and ${linksMsg}`) || selectorMsg || linksMsg} are you sure you want to delete them all?`,
+        msg: `This source have ${(selectorMsg && linksMsg && `${selectorMsg} and ${linksMsg}`) || selectorMsg || linksMsg} are you sure you want to ${relativeChildCountMsg}?`,
       };
     },
   },

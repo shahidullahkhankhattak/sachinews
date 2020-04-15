@@ -1,10 +1,10 @@
 <template>
   <q-page>
-    <div class="p-pa-md main-container">
+    <div class="p-pa-md main-container q-mt-sm">
       <div class="row">
         <!-- breadcrumb [START] -->
         <div class="col-12">
-          <div class="q-pa-md">
+          <div class="q-pa-sm">
             <q-card class="main-card" flat bordered>
               <q-card-section>
                 <q-breadcrumbs class="text-purple" active-color="blue">
@@ -22,7 +22,7 @@
 
         <!-- add card [START] -->
         <div class="col-12">
-          <div class="q-pa-md">
+          <div class="q-pa-sm">
             <q-card class="main-card" flat bordered>
               <q-card-section>
                 <q-form

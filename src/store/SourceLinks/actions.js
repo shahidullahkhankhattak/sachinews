@@ -33,12 +33,13 @@ export async function fetch({
       list: CatList,
     },
   },
-}) {
+}, sourceId) {
   if (!CatList.length) {
     dispatch(CatActions.FETCH, {}, { root: true });
   }
   try {
-    const { source_id: sourceId } = this.$router.app.$route && this.$router.app.$route.params;
+    const { source_id: sourceIdRoute } = this.$router.app.$route && this.$router.app.$route.params;
+    if (!sourceId) { sourceId = sourceIdRoute; }
     const { list } = await axios.get(`${REST_API}/${sourceId}`);
     commit(ALL, list);
   } catch (ex) {

@@ -2,7 +2,10 @@ const mongoose = require('../index');
 
 const { Schema } = mongoose;
 const schema = new Schema({
-  source: String,
+  source: {
+    type: Schema.Types.ObjectId,
+    ref: 'Source',
+  },
   name: String,
   selector: String,
   type: String,
