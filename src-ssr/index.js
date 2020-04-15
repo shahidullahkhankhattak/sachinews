@@ -17,9 +17,14 @@ const compression = require('compression');
 
 const
   ssr = require('quasar-ssr');
+const http = require('http');
+const socketio = require('socket.io');
 const extension = require('./extension');
+const bindSocketEvents = require('./socket');
 
 const app = express();
+const server = http.createServer(app);
+const socket = socketio.listen(server);
 const port = process.env.PORT || 3000;
 
 const serve = (path, cache) => express.static(ssr.resolveWWW(path), {
@@ -39,6 +44,7 @@ app.use('/', serve('.', true));
 
 // we extend the custom common dev & prod parts here
 extension.extendApp({ app, ssr });
+bindSocketEvents(socket);
 
 // this should be last get(), rendering with SSR
 app.get('*', (req, res) => {
@@ -95,6 +101,6 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Server listening at port ${port}`);
 });

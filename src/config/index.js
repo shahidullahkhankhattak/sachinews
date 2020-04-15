@@ -17,4 +17,8 @@ export const config = {
       html: '<span class="text-red">HACK-PRO</span> Admin',
     },
   },
+  socketEnv: {
+    development: 'localhost:8081',
+    production: '/',
+  },
 };

@@ -12,6 +12,4 @@
  */
 const app = require('./server');
 
-module.exports = {
-  extendApp: app,
-};
+module.exports.extendApp = app;

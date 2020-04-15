@@ -1,10 +1,17 @@
 import Vue from 'vue';
-import io from 'socket.io-client';
+import VueSocketIO from 'vue-socket.io';
+import { config } from '../config';
 
-
+const {
+  socketEnv: {
+    development,
+    production,
+  },
+} = config;
+const socketPath = (process.env.DEV && development) || production;
 if (process.browser) {
-  Vue.prototype.socket = io.connect('/', {
-    secure: true,
-    rejectUnauthorized: false,
-  });
+  Vue.use(new VueSocketIO({
+    debug: true,
+    connection: socketPath,
+  }));
 }
