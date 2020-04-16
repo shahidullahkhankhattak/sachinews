@@ -9,11 +9,14 @@ module.exports = function ({ app }) {
   if (process.env.NODE_ENV === 'development') {
     const server = http.createServer(app);
     const socket = socketio.listen(server);
-    socket.origins((origin, callback) => {
+    socket.origins((_origin, callback) => {
       callback(null, true);
     });
-    if (!server.listening) { server.listen(8081); }
-    bindSocketEvents(socket);
+    try {
+      bindSocketEvents(socket);
+    } catch (ex) {
+      console.log(ex);
+    }
   }
   app.use(cors);
   app.use('/api/v1', apiRoutes);
