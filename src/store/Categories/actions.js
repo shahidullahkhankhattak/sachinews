@@ -2,7 +2,7 @@ import axios from '../../api/axios';
 import { apiEndpoints } from '../../api/constants';
 import { se2errors } from '../formatters';
 import { Mutations } from './constants';
-import { getWithSlug } from '../../helpers/objectHelpers';
+import { getWithSlug } from '../../utils/objectHelpers';
 
 const {
   CATEGORY_ENDPOINTS: {

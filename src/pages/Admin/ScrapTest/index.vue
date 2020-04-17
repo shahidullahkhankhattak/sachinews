@@ -96,7 +96,12 @@
 <script>
 import { validations } from '../../../validators';
 import { actions, getters } from './handleStore';
+import SocketEvents from '../../../sockets/constants';
+import { ProtectedData } from '../../../utils/socketIoHelpers';
 
+const {
+  SCRAP_TEST,
+} = SocketEvents;
 export default {
   data() {
     return {
@@ -109,8 +114,7 @@ export default {
     };
   },
   sockets: {
-    connect() {
-      console.log('socket connected');
+    connected() {
     },
   },
   watch: {
@@ -124,7 +128,10 @@ export default {
   methods: {
     ...actions,
     next() {
-      this.$router.push(`${this.redirect}/${this.selected}`);
+      const data = {
+        form: this.form,
+      };
+      this.$socket.emit(SCRAP_TEST, ProtectedData(data));
     },
     selectSource(val) {
       this.fetchCat.bind(this)(val);

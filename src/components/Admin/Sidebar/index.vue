@@ -90,7 +90,7 @@
   </q-drawer>
 </template>
 <script>
-import { isSidebarLinkActive as isActive } from '../../../helpers/navigationHelpers';
+import { isSidebarLinkActive as isActive } from '../../../utils/navigationHelpers';
 
 export default {
   data: () => ({

@@ -11,7 +11,7 @@ const {
 const socketPath = (process.env.DEV && development) || production;
 if (process.browser) {
   Vue.use(new VueSocketIO({
-    debug: true,
+    debug: process.env.DEV === development,
     connection: socketPath,
   }));
 }
