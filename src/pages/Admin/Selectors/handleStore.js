@@ -10,11 +10,13 @@ const {
 
 const {
   LIST,
+  AUTOCOMPLETE,
 } = Getters;
 
 export const getters = {
   ...mapGetters({
     list: LIST,
+    autocomplete: AUTOCOMPLETE,
   }),
 };
 

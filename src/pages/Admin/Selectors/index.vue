@@ -55,17 +55,23 @@
                         </q-select>
                       </div>
                       <div class="col-md-4">
-                        <q-input
+                        <q-select
                           outlined
                           label="Selector"
+                          use-input
+                          hide-selected
+                          fill-input
+                          lazy-rulesd
+                          @input-value="(val) => addForm.selector = val"
+                          @filter="autoCompleteFilter"
                           v-model="addForm.selector"
-                          lazy-rules
+                          :options="autoCompleteOptions"
                           :rules="[rules.REQUIRED]"
                         >
                           <template v-slot:prepend>
                             <q-icon name="show_chart" />
                           </template>
-                        </q-input>
+                        </q-select>
                       </div>
                       <div class="col-md-4">
                         <q-select
@@ -150,6 +156,7 @@ export default {
         ...validations,
       },
       addForm: addForm(),
+      autoCompleteOptions: [],
       selectorNames,
     };
   },
@@ -160,6 +167,12 @@ export default {
     ...getters,
   },
   methods: {
+    autoCompleteFilter(val, update) {
+      update(() => {
+        const needle = val.toLocaleLowerCase();
+        this.autoCompleteOptions = this.autocomplete.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
+      });
+    },
     ...actions,
     resetFields() {
       this.addForm = addForm();

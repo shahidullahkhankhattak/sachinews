@@ -28,8 +28,8 @@ export async function add(context, { form, reset }) {
 export async function fetch({ commit }) {
   try {
     const { source_id: sourceId } = this.$router.app.$route && this.$router.app.$route.params;
-    const { list } = await axios.get(`${REST_API}/${sourceId}`);
-    commit(ALL, list);
+    const { list, autocomplete } = await axios.get(`${REST_API}/${sourceId}`);
+    commit(ALL, { list, autocomplete });
   } catch (ex) {
     se2errors(ex);
   }

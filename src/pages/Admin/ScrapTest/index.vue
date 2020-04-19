@@ -97,10 +97,12 @@
 import { validations } from '../../../validators';
 import { actions, getters } from './handleStore';
 import SocketEvents from '../../../sockets/constants';
-import { ProtectedData } from '../../../utils/socketIoHelpers';
+// import { ProtectedData } from '../../../utils/socketIoHelpers';
 
 const {
-  SCRAP_TEST,
+  adminEvents: {
+    ADMIN_SCRAP_TEST,
+  },
 } = SocketEvents;
 export default {
   data() {
@@ -131,7 +133,7 @@ export default {
       const data = {
         form: this.form,
       };
-      this.$socket.emit(SCRAP_TEST, ProtectedData(data));
+      this.$socket.emit(ADMIN_SCRAP_TEST, data);
     },
     selectSource(val) {
       this.fetchCat.bind(this)(val);

@@ -8,7 +8,7 @@ const SourceLinkController = require('../../../controllers/sourceLinkController'
 const SelectorController = require('../../../controllers/selectorController');
 
 // middlewares
-const { checkAuth } = require('../../../middleware/auth');
+const { checkAuthAdmin } = require('../../../middleware/auth');
 // validators
 const SourceValidator = require('../../../validators/sourceValidators');
 const CategoryValidator = require('../../../validators/categoryValidators');
@@ -18,7 +18,7 @@ const selectorValidator = require('../../../validators/selectorValidators');
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
-router.use(checkAuth);
+router.use(checkAuthAdmin);
 
 // source routes crud
 router.route('/source')

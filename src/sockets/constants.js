@@ -1,3 +1,9 @@
 module.exports = {
-  SCRAP_TEST: 'SCRAP_TEST',
+  adminEvents: {
+    ADMIN_SCRAP_TEST: 'ADMIN_SCRAP_TEST',
+  },
+  userEvents: {
+
+  },
+  LOGOUT: 'LOGOUT',
 };

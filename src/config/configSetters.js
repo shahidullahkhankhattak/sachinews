@@ -1,5 +1,5 @@
 import { Screen } from 'quasar';
-import { wait } from '../helpers/asyncHelpers';
+import { wait } from '../utils/asyncHelpers';
 import { setters } from './handleStore';
 
 export async function setLocale(newLocale) {

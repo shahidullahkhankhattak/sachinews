@@ -97,10 +97,10 @@ module.exports.destroy = async function (req, res) {
     }
     const { _id, confirm } = req.body;
     if (!confirm) {
-      const linksCount = await SourceLink.estimatedDocumentCount({
+      const linksCount = await SourceLink.countDocuments({
         source: _id,
       });
-      const selectorsCount = await Selector.estimatedDocumentCount({
+      const selectorsCount = await Selector.countDocuments({
         source: _id,
       });
       if (linksCount || selectorsCount) {

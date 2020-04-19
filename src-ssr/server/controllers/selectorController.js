@@ -22,10 +22,12 @@ module.exports.index = async function (req, res) {
     const { source } = req.params;
     const query = {};
     if (source) { query.source = source; }
-    const categories = await Selector.find(query);
+    const list = await Selector.find(query);
+    const autocomplete = await Selector.find({}).select({ selector: 1, _id: 0 }).distinct('selector');
     res.status(resSuccess).json({
       statusCode: resSuccess,
-      list: categories,
+      list,
+      autocomplete,
     });
   } catch (ex) {
     res.status(resServerError).json({

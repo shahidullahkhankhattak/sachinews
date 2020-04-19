@@ -13,8 +13,8 @@ module.exports.create = [
   }),
   body('name').exists(),
   body('name').custom(async (value, { req }) => {
-    const { _id } = req.body;
-    const item = await Selector.findOne({ name: value });
+    const { _id, source } = req.body;
+    const item = await Selector.findOne({ name: value, source });
     if ((item && !_id) || (item && _id && _id !== item._id.toString())) return Promise.reject(EXISTS);
   }),
   body('type').isIn(['string', 'html', 'multi']),
