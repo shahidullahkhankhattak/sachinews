@@ -117,7 +117,7 @@ export default {
       this.delete(item);
     },
     getCategoryNameById(id) {
-      const { name = '' } = this.categories && this.categories.find((cat) => cat._id === id);
+      const { name = '' } = (this.categories && this.categories.find((cat) => cat._id === id)) || {};
       return name;
     },
     onDelete(item) {

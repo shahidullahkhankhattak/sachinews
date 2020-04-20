@@ -2,23 +2,24 @@ const mongoose = require('../index');
 
 const { Schema } = mongoose;
 const schema = new Schema({
-  name: String,
+  title: String,
+  description: String,
+  media: String,
+  body: String,
   slug: String,
-  website: String,
-  lang: String,
-  color: String,
-  logo: String,
-  active: { type: Boolean, default: true },
+  url: String,
+  tags: String,
+  author: String,
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
-  sourceLinks: [{
+  source: {
     type: Schema.Types.ObjectId,
-    ref: 'SourceLink',
-  }],
-  selectors: [{
+    ref: 'Source',
+  },
+  category: {
     type: Schema.Types.ObjectId,
-    ref: 'Selector',
-  }],
+    ref: 'Category',
+  },
 });
 
 module.exports = schema;

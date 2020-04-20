@@ -61,7 +61,8 @@
                           use-input
                           hide-selected
                           fill-input
-                          lazy-rulesd
+                          lazy-rules
+                          input-debounce="0"
                           @input-value="(val) => addForm.selector = val"
                           @filter="autoCompleteFilter"
                           v-model="addForm.selector"

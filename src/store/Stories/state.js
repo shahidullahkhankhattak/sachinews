@@ -3,7 +3,6 @@ export default function () {
     topStories: {
       loading: false,
       stories: [],
-      error: null,
     },
   };
 }

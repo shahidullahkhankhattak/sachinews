@@ -35,7 +35,7 @@ router.route('/category')
   .delete([CategoryValidator.delete], CategoryController.destroy);
 
 // source link routes crud
-router.route('/source_link/:source?')
+router.route('/source-link/:source?')
   .get(SourceLinkController.index)
   .post([SourceLinkValidator.create], SourceLinkController.create)
   .put([SourceLinkValidator.update], SourceLinkController.update)

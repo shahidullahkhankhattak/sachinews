@@ -42,19 +42,26 @@
               </q-select>
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-input
+              <q-select
                 bg-color="white"
                 color="blue-4"
                 outlined
                 label="Selector"
-                v-model="item.selector"
+                use-input
+                hide-selected
+                fill-input
                 lazy-rules
+                input-debounce="0"
+                @input-value="(val) => item.selector = val"
+                @filter="autoCompleteFilter"
+                v-model="item.selector"
+                :options="$parent.autoCompleteOptions"
                 :rules="[rules.REQUIRED]"
               >
                 <template v-slot:prepend>
                   <q-icon name="show_chart" />
                 </template>
-              </q-input>
+              </q-select>
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
               <q-select
@@ -104,7 +111,7 @@
 </template>
 <script>
 import { extend } from 'quasar';
-import { actions } from './handleStore';
+import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as editForm, selectorNames } from './common';
 
@@ -117,8 +124,17 @@ export default {
     item: editForm(),
     selectorNames,
   }),
+  computed: {
+    ...getters,
+  },
   methods: {
     ...actions,
+    autoCompleteFilter(val, update) {
+      update(() => {
+        const needle = val.toLocaleLowerCase();
+        this.$parent.autoCompleteOptions = this.autocomplete.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
+      });
+    },
     onEdit(item) {
       this.toggleDialog();
       extend(true, this.item, item);

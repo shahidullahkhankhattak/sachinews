@@ -13,13 +13,6 @@ export const sidebarDirs = {
   LEFT: 'left',
 };
 
-const apiEndpoint = 'https://addictivebulletin.com/api/';
-export const server = {
-  API: {
-    HOME: `${apiEndpoint}english?page=1`,
-  },
-};
-
 export const roles = {
   ADMIN: 'admin',
 };
@@ -36,4 +29,9 @@ export const responseTypes = {
     INCOMPLETE: 417,
   },
   SESSION_EXPIRED: 'JWT_EXPIRED',
+};
+
+export const serverBase = {
+  local: 'http://localhost:8080',
+  production: 'http://localhost:8080',
 };

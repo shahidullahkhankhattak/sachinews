@@ -1,13 +1,14 @@
 const eventConstants = require('../../../../src/sockets/constants');
+const Scrapper = require('../../controllers/scrapper');
 
 const {
   adminEvents: {
-    SCRAP_TEST,
+    ADMIN_SCRAP_TEST,
   },
 } = eventConstants;
 
 module.exports = (socket) => {
-  socket.on(SCRAP_TEST, (data) => {
-    console.log('working', data);
+  socket.on(ADMIN_SCRAP_TEST, (data) => {
+    Scrapper.test(data, socket);
   });
 };
