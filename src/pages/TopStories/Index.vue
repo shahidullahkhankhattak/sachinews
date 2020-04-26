@@ -24,8 +24,8 @@
           <div class="row">
             <div
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
-              v-for="story in topStories.stories"
-              :key="story.id"
+              v-for="{_id, source: { name: sourceName, color }, category: { name: categoryName }, title, description, media } in topStories.stories"
+              :key="_id"
             >
               <q-card class="news-card" flat bordered>
                 <q-card-section
@@ -33,21 +33,25 @@
                   :vertical="$q.screen.lt.xs"
                 >
                   <q-card-section class="q-pt-xs col-8">
-                    <div class="text-overline">{{ story.source }}</div>
+                    <div class="text-overline">{{ sourceName }} - {{ categoryName }}</div>
                     <div
                       class="text-h5 q-mt-sm q-mb-xs"
-                      v-html="story.title"
-                    ></div>
+                    >
+                    {{ title }}
+                    </div>
+                    <div class="text-subtitle2"><time>1 hour ago</time></div>
+                    <q-space/>
                     <div
-                      class="text-caption text-grey-8"
-                      v-html="story.description"
-                    ></div>
+                      class="text-caption text-grey-8 q-mt-sm"
+                    >
+                    {{ description }}
+                    </div>
                   </q-card-section>
 
                   <q-card-section class="col-4 flex flex-right">
                     <q-img
                       class="rounded-borders"
-                      :src="story.media"
+                      :src="media"
                       height="100%"
                     />
                   </q-card-section>

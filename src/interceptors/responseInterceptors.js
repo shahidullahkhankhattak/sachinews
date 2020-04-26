@@ -21,7 +21,7 @@ export default function (axios) {
           });
         }, 500);
       }
-      return response.data;
+      return Promise.resolve(response.data);
     },
     (err) => {
       if (!process.env.SERVER) {

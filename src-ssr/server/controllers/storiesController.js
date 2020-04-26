@@ -11,7 +11,7 @@ const {
 
 module.exports.topStories = async (req, res) => {
   try {
-    const list = await Story.find();
+    const list = await Story.find().populate('source').populate('category').exec();
     res.status(resSuccess).json({
       statusCode: resSuccess,
       stories: list,
