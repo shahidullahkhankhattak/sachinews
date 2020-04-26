@@ -7,6 +7,7 @@ import { getWithSlug } from '../../utils/objectHelpers';
 const {
   CATEGORY_ENDPOINTS: {
     REST: REST_API,
+    USER_CATEGORY,
   },
 } = apiEndpoints;
 const {
@@ -30,6 +31,15 @@ export async function fetch({ commit, state }) {
   if (state.list.length) return;
   try {
     const { list } = await axios.get(REST_API);
+    commit(ALL, list);
+  } catch (ex) {
+    se2errors(ex);
+  }
+}
+
+export async function fetchUserCategories({ commit }) {
+  try {
+    const { list } = await axios.get(USER_CATEGORY);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);

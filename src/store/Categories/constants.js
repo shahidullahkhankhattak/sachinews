@@ -15,5 +15,6 @@ export const Actions = {
   UPDATE: `${PREFIX}/update`,
   ADD: `${PREFIX}/add`,
   FETCH: `${PREFIX}/fetch`,
+  FETCH_USER_CATEGORIES: `${PREFIX}/fetchUserCategories`,
   DELETE: `${PREFIX}/_delete`,
 };

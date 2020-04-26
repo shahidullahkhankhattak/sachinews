@@ -16,9 +16,14 @@
 
 <script>
 import { config } from '../../config';
+import { preFetchMethods } from './handleStore';
 
 export default {
   name: 'MainLayout',
   meta: config.app.meta,
+  async preFetch({ store }) {
+    await preFetchMethods.fetchCategories({ store });
+    return preFetchMethods.fetchSources({ store });
+  },
 };
 </script>

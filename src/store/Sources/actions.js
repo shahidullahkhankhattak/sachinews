@@ -8,6 +8,7 @@ import { Notify } from '../../plugins/notify';
 const {
   SOURCE_ENDPOINTS: {
     REST: REST_API,
+    USER_SOURCE,
   },
 } = apiEndpoints;
 const {
@@ -22,6 +23,15 @@ export async function add(context, { form, reset }) {
     const { item } = await axios.post(REST_API, getWithSlug(form));
     context.commit(ADD, item);
     reset();
+  } catch (ex) {
+    se2errors(ex);
+  }
+}
+
+export async function fetchUserSources({ commit }) {
+  try {
+    const { list } = await axios.get(USER_SOURCE);
+    commit(ALL, list);
   } catch (ex) {
     se2errors(ex);
   }

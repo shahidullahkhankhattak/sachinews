@@ -30,15 +30,15 @@
         <q-item
           class="GNL__drawer-item"
           v-ripple
-          v-for="link in links2"
-          :key="link.text"
+          v-for="link in categories"
+          :key="link.name"
           clickable
         >
           <q-item-section avatar>
             <q-icon :name="link.icon" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ link.text }}</q-item-label>
+            <q-item-label>{{ link.name }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -121,7 +121,7 @@ export default {
     ],
   }),
   computed: {
-    sidebarPos: getters.sidebarPos,
+    ...getters,
   },
   watch: {
     sidebarPos() {
