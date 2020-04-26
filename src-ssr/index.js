@@ -20,7 +20,7 @@ const
 const http = require('http');
 const socketio = require('socket.io');
 const extension = require('./extension');
-const bindSocketEvents = require('./socket');
+const bindSocketEvents = require('./server/sockets');
 
 const app = express();
 const server = http.createServer(app);
@@ -101,6 +101,6 @@ app.get('*', (req, res) => {
   });
 });
 
-http.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server listening at port ${port}`);
 });

@@ -32,13 +32,16 @@ module.exports = {
     CREATED: 'Source link added successfully.',
     UPDATED: 'Source link updated successfully.',
     DELETED: 'Source link deleted successfully.',
-    INVALID_SOURCE: 'Source does not exists',
+    INVALID_SOURCE: 'Source does not exists.',
   },
   selectorsMsgs: {
     EXISTS: 'Selector already exists.',
     CREATED: 'Selector added successfully.',
     UPDATED: 'Selector updated successfully.',
     DELETED: 'Selector deleted successfully.',
-    INVALID_SOURCE: 'Source does not exists',
+    INVALID_SOURCE: 'Source does not exists.',
+  },
+  scrapperMsgs: {
+    // SUCCESS: 'Source scrapped successfully.',
   },
 };
