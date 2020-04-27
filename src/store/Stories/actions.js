@@ -13,14 +13,14 @@ const {
   FETCH_TOP_STORIES,
   SET_LOADING,
 } = Mutations;
-export async function fetchTopStories(context) {
+export async function fetchTopStories({ commit }) {
   try {
-    context.commit(SET_LOADING, true);
+    commit(SET_LOADING, true);
     const { stories } = await axios.get(TOP_STORIES, axiosConfig.noLoader);
-    context.commit(FETCH_TOP_STORIES, stories);
-    context.commit(SET_LOADING, false);
+    commit(FETCH_TOP_STORIES, stories);
+    commit(SET_LOADING, false);
   } catch (ex) {
-    context.commit(SET_LOADING, false);
+    commit(SET_LOADING, false);
     se2errors(ex);
   }
 }

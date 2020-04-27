@@ -21,3 +21,9 @@ export const actions = {
     fetchTopStories: FETCH_TOP_STORIES,
   }),
 };
+
+export function handlePrefetch({ store }) {
+  if (!store.getters[GET_TOP_STORIES].length) {
+    return store.dispatch(FETCH_TOP_STORIES);
+  }
+}
