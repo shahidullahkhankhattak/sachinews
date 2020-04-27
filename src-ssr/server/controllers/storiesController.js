@@ -11,17 +11,21 @@ const {
 
 module.exports.topStories = async (req, res) => {
   try {
-    const { offset, perPage } = req.query;
-    let query = Story.find()
-      .populate('source')
-      .populate('category');
-    if (offset && perPage) {
-      query = query
-        .skip(parseInt(offset, 10))
-        .limit(parseInt(perPage, 10));
+    const {
+      offset, perPage, category, source, search,
+    } = req.query;
+    const filter = {};
+
+    if (category) filter['category.slug'] = category;
+    if (source) filter['source.slug'] = source;
+    if (search) {
+      filter.$or = [
+        { title: new RegExp(search, 'i') },
+        { description: new RegExp(search, 'i') },
+      ];
     }
-    const stories = await query.exec();
-    const total = await Story.estimatedDocumentCount();
+
+    const { stories, total } = await Story.withSourceAndCategory(filter, offset, perPage);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       stories,
