@@ -47,7 +47,9 @@
                   </q-card-section>
 
                   <q-card-actions>
-                    <q-btn flat round icon="event" />
+                    <q-btn flat round color="red" icon="favorite_border" />
+                    <q-btn flat round color="teal" icon="bookmark" />
+                    <q-btn flat round color="primary" icon="share" />
                   </q-card-actions>
                 </q-card>
               </div>
@@ -90,6 +92,18 @@
                   </q-card-section>
 
                   <q-card-actions>
+                    <q-skeleton
+                      class="q-mx-sm q-mb-sm"
+                      type="QBtn"
+                      width="35px"
+                      height="30px"
+                    />
+                    <q-skeleton
+                      class="q-mx-sm q-mb-sm"
+                      type="QBtn"
+                      width="35px"
+                      height="30px"
+                    />
                     <q-skeleton
                       class="q-mx-sm q-mb-sm"
                       type="QBtn"
