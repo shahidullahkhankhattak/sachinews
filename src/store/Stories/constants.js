@@ -11,5 +11,5 @@ export const Mutations = {
 
 export const Getters = {
   LOADING: `${PREFIX}/loading`,
-  GET_TOP_STORIES: `${PREFIX}/getTopStories`,
+  GET_TOP_STORIES: `${PREFIX}/topStories`,
 };

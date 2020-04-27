@@ -14,7 +14,7 @@
                   title,
                   description,
                   media
-                } in topStories"
+                } in topStories.stories"
                 :key="_id"
               >
                 <q-card class="news-card" flat bordered>
@@ -121,10 +121,9 @@ export default {
   },
   methods: {
     ...actions,
-    onScroll(index, done) {
-      if (this.topStories.length) {
-        this.fetchTopStories.bind(this)();
-        done();
+    onScroll(_index, done) {
+      if (this.topStories.stories.length) {
+        this.fetchTopStories.bind(this)(done);
       }
     },
   },
