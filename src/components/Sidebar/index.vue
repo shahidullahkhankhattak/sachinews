@@ -2,7 +2,9 @@
   <q-drawer
     :key="sidebarKey"
     ref="sidebar"
+    :persistent="true"
     content-class="bg-white"
+    v-model="open"
     :side="sidebarPos"
     :width="280"
   >
@@ -32,6 +34,7 @@
           v-ripple
           v-for="link in categories"
           :key="link.name"
+          :to="`/category/${link.slug}`"
           clickable
         >
           <q-item-section avatar>
@@ -87,37 +90,27 @@
   </q-drawer>
 </template>
 <script>
-import { fasGlobeAmericas, fasFlask } from '@quasar/extras/fontawesome-v5';
+import { Screen } from 'quasar';
 import { getters } from './handleStore';
 
 export default {
   data: () => ({
     sidebarKey: true,
+    open: false,
     links1: [
       { icon: 'web', text: 'Top stories', link: '/' },
       { icon: 'trending_up', text: 'Trending', link: '/trending' },
-      { icon: 'person', text: 'For you' },
-      { icon: 'star_border', text: 'Favourites' },
-      { icon: 'search', text: 'Saved searches' },
-    ],
-    links2: [
-      { icon: 'flag', text: 'Canada' },
-      { icon: fasGlobeAmericas, text: 'World' },
-      { icon: 'place', text: 'Local' },
-      { icon: 'domain', text: 'Business' },
-      { icon: 'memory', text: 'Technology' },
-      { icon: 'local_movies', text: 'Entertainment' },
-      { icon: 'directions_bike', text: 'Sports' },
-      { icon: fasFlask, text: 'Science' },
-      { icon: 'fitness_center', text: 'Health ' },
+      // { icon: 'person', text: 'For you' },
+      // { icon: 'star_border', text: 'Favourites' },
+      // { icon: 'search', text: 'Saved searches' },
     ],
     links3: [
-      { icon: '', text: 'Language & region' },
-      { icon: '', text: 'Settings' },
-      { icon: 'open_in_new', text: 'Get the Android app' },
-      { icon: 'open_in_new', text: 'Get the iOS app' },
-      { icon: '', text: 'Send feedback' },
-      { icon: 'open_in_new', text: 'Help' },
+      // { icon: '', text: 'Language & region' },
+      // { icon: '', text: 'Settings' },
+      // { icon: 'open_in_new', text: 'Get the Android app' },
+      // { icon: 'open_in_new', text: 'Get the iOS app' },
+      // { icon: '', text: 'Send feedback' },
+      // { icon: 'open_in_new', text: 'Help' },
     ],
   }),
   computed: {
@@ -128,11 +121,12 @@ export default {
       this.sidebarKey = !this.sidebarKey;
     },
   },
+  beforeMount() {
+    this.open = Screen.gt.md;
+  },
   mounted() {
     this.$root.$on('toggleSidebar', () => {
-      setTimeout(() => {
-        this.$refs.sidebar.toggle();
-      }, 1);
+      setTimeout(() => this.$refs.sidebar && this.$refs.sidebar.toggle(), 1);
     });
   },
 };

@@ -1,8 +1,10 @@
 export default function () {
   return {
+    loading: false,
+    perPage: 12,
     topStories: {
-      loading: false,
       stories: [],
+      total: -1,
     },
   };
 }

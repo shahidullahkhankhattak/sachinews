@@ -35,3 +35,11 @@ export const serverBase = {
   local: 'http://localhost:8080',
   production: 'http://localhost:8080',
 };
+
+export const axiosConfig = {
+  noLoader: {
+    headers: {
+      noLoader: true,
+    },
+  },
+};
