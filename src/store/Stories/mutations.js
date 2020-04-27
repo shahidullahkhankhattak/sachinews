@@ -1,3 +1,7 @@
-export function fetchTopStories(state, payload) {
-  state.topStories = { stories: payload, loading: false };
+export function fetchTopStories({ topStories: { stories } }, payload) {
+  stories.push(...payload);
+}
+
+export function setLoading(state, payload) {
+  state.loading = payload;
 }

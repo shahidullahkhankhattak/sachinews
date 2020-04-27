@@ -1,7 +1,7 @@
 export default function () {
   return {
+    loading: false,
     topStories: {
-      loading: false,
       stories: [],
     },
   };

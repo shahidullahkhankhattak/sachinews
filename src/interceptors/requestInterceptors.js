@@ -7,7 +7,7 @@ const { JWT_AUTH } = localStorageKeys;
 export default function (axios) {
   axios.interceptors.request.use(
     (reqConfig) => {
-      if (!process.env.SERVER) {
+      if (!process.env.SERVER && !reqConfig.headers.noLoader) {
         setLoading(true);
       }
       const { token } = LocalStorage.getItem(JWT_AUTH) || {};
