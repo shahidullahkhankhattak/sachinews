@@ -24,9 +24,9 @@ export default {
   computed: {
     ...getters,
   },
-  async preFetch({ store }) {
-    await preFetchMethods.fetchCategories({ store });
-    return preFetchMethods.fetchSources({ store });
+  async preFetch(params) {
+    await preFetchMethods.fetchCategories(params);
+    return preFetchMethods.fetchSources(params);
   },
   beforeMount() {
     if (!this.categories.length) {
