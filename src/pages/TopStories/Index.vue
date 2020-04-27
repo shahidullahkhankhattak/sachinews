@@ -5,6 +5,7 @@
         <div class="row">
           <div class="col-12">
             <div class="row">
+              <!-- News cards [START] -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
                 v-for="{
@@ -50,9 +51,12 @@
                   </q-card-actions>
                 </q-card>
               </div>
+              <!-- News cards [END] -->
+
+              <!-- Loaders section [START} -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
-                v-for="num in (loading && 20 || 0) "
+                v-for="num in (loading && perPage || 0) "
                 :key="num"
               >
                 <q-card
@@ -95,6 +99,7 @@
                   </q-card-actions>
                 </q-card>
               </div>
+              <!-- Loaders section [END}-->
             </div>
           </div>
         </div>

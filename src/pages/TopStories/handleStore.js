@@ -4,6 +4,7 @@ import { Getters, Actions } from '../../store/Stories/constants';
 const {
   GET_TOP_STORIES,
   LOADING,
+  PER_PAGE,
 } = Getters;
 const {
   FETCH_TOP_STORIES,
@@ -13,6 +14,7 @@ export const getters = {
   ...mapGetters({
     topStories: GET_TOP_STORIES,
     loading: LOADING,
+    perPage: PER_PAGE,
   }),
 };
 
