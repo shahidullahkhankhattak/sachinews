@@ -9,7 +9,7 @@ const {
   },
 } = require('../config/index');
 
-module.exports.topStories = async (req, res) => {
+module.exports.getStories = async (req, res) => {
   try {
     const {
       offset, perPage, category, source, search,
