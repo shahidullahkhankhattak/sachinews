@@ -60,6 +60,7 @@ export default {
       const query = {
         category: slug,
       };
+      if (this.stories.length >= this.total) return done();
       if (this.stories.length) {
         this.fetchStories.bind(this)({ done, query });
       }

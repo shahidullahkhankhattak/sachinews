@@ -14,4 +14,5 @@ export const Getters = {
   LOADING: `${PREFIX}/loading`,
   PER_PAGE: `${PREFIX}/perPage`,
   STORIES: `${PREFIX}/stories`,
+  TOTAL: `${PREFIX}/total`,
 };

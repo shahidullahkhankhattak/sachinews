@@ -53,6 +53,7 @@ export default {
     ...actions,
     onScroll(_index, done) {
       const { query } = this.$route;
+      if (this.stories.length >= this.total) return done();
       if (this.stories.length) {
         this.fetchStories.bind(this)({ done, query });
       }

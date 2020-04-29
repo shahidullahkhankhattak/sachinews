@@ -26,7 +26,9 @@ export async function fetchStories({ commit, getters: { stories: allStories, tot
       totalStories = -1;
     }
     const offset = allStories.length;
-    if (totalStories > -1 && offset >= totalStories) { return done && done(); }
+    if (totalStories > -1 && offset >= totalStories) {
+      return done && done();
+    }
 
     commit(SET_LOADING, true);
     const $query = routeQueryToString({

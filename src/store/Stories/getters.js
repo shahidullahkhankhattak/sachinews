@@ -9,3 +9,7 @@ export function loading({ loading: _loading }) {
 export function perPage({ perPage: _perPage }) {
   return _perPage;
 }
+
+export function total({ total: _total }) {
+  return _total;
+}

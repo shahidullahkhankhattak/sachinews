@@ -5,6 +5,7 @@ const {
   STORIES,
   LOADING,
   PER_PAGE,
+  TOTAL,
 } = Getters;
 const {
   FETCH_STORIES,
@@ -15,6 +16,7 @@ export const getters = {
     stories: STORIES,
     loading: LOADING,
     perPage: PER_PAGE,
+    total: TOTAL,
   }),
 };
 
