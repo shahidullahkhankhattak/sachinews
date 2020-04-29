@@ -9,6 +9,7 @@ const routes = [
       { path: '/source/:slug', name: 'source-stories', component: () => import('pages/Source') },
       { path: '/search/:q', name: 'search-stories', component: () => import('pages/Search') },
       { path: '/trending', component: () => import('pages/Trending') },
+      { path: '/story/:slug', component: () => import('pages/Story') },
     ],
   },
   {

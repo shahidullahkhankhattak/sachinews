@@ -3,9 +3,9 @@
     <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
       <q-card-section class="q-pt-xs col-8">
         <div class="text-overline">{{ news.source }} - {{ news.category }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">
+        <h2 class="text-h5 q-mt-sm q-mb-xs">
           {{ news.title }}
-        </div>
+        </h2>
         <div class="text-subtitle2"><time>1 hour ago</time></div>
         <q-space />
         <div class="text-caption text-grey-8 q-mt-sm">
