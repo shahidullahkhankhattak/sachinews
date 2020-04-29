@@ -29,7 +29,8 @@ export default {
     return preFetchMethods.fetchSources(params);
   },
   beforeMount() {
-    if (!this.categories.length) {
+    if (!this.categories.length || !this.sources.length) {
+      preFetchMethods.fetchSources({ store: this.$store });
       preFetchMethods.fetchCategories({ store: this.$store });
     }
   },

@@ -34,7 +34,7 @@
           v-ripple
           v-for="link in categories"
           :key="link.name"
-          :to="`/?${generateQueryParam('category', link.slug)}`"
+          :to="`/category/${link.slug}`"
           clickable
         >
           <q-item-section avatar>
@@ -44,7 +44,19 @@
             <q-item-label>{{ link.name }}</q-item-label>
           </q-item-section>
         </q-item>
-
+        <q-separator inset class="q-my-sm" />
+        <q-item
+          class="GNL__drawer-item"
+          v-ripple
+          v-for="link in sources"
+          :key="link.name"
+          :to="`/source/${link.slug}`"
+          clickable
+        >
+          <q-item-section>
+            <q-item-label>{{ link.name }}</q-item-label>
+          </q-item-section>
+        </q-item>
         <q-separator inset class="q-my-sm" />
 
         <q-item

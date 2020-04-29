@@ -15,10 +15,12 @@ const {
   SET_LOADING,
   RESET_STORIES,
 } = Mutations;
-export async function fetchTopStories({ commit, getters: { topStories: { stories: topStories, total: totalStories }, perPage } }, { done, refresh, query }) {
+export async function fetchTopStories({ commit, getters: { topStories: { stories: topStories, total: totalStories }, perPage } }, {
+  done, refresh, query,
+}) {
   try {
     if (refresh) commit(RESET_STORIES);
-    const offset = topStories.length;
+    const offset = (refresh && 0) || topStories.length;
     if (totalStories > -1 && offset >= totalStories) { return done && done(); }
 
     commit(SET_LOADING, true);
