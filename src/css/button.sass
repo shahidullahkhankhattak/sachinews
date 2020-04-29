@@ -1,9 +1,11 @@
 .q-btn
-  .q-icon
-    margin-right: 5px
+  &not(.q-btn--round)
+    .q-icon
+      margin-right: 5px
 
 // direction support [rtl]
 [dir='rtl']
   .q-btn
+    &not(.q-btn--round)
     .q-icon
       margin-left: 5px

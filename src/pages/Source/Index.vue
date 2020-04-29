@@ -8,7 +8,7 @@
               <!-- News cards [START] -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
-                v-for="story in topStories.stories"
+                v-for="story in stories"
                 :key="story._id"
               >
                 <NewsCard :story="story" />
@@ -38,7 +38,7 @@ import NewsCard from '../../components/Cards/NewsCard';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 
 export default {
-  name: 'TopStories',
+  name: 'SourceStories',
   components: { NewsCard, NewsLoader },
   computed: {
     ...getters,
@@ -49,7 +49,7 @@ export default {
       const query = {
         source: slug,
       };
-      this.fetchTopStories.bind(this)({ refresh: true, query });
+      this.fetchStories.bind(this)({ refresh: true, query });
     },
   },
   methods: {
@@ -59,8 +59,8 @@ export default {
       const query = {
         source: slug,
       };
-      if (this.topStories.stories.length) {
-        this.fetchTopStories.bind(this)({ done, query });
+      if (this.stories.length) {
+        this.fetchStories.bind(this)({ done, query });
       }
     },
   },

@@ -1,5 +1,5 @@
-export function topStories({ topStories: _topStories }) {
-  return _topStories;
+export function stories(state) {
+  return state.stories;
 }
 
 export function loading({ loading: _loading }) {

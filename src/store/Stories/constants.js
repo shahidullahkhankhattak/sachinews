@@ -1,11 +1,11 @@
 const PREFIX = 'Stories';
 
 export const Actions = {
-  FETCH_TOP_STORIES: `${PREFIX}/fetchTopStories`,
+  FETCH_STORIES: `${PREFIX}/fetchStories`,
 };
 
 export const Mutations = {
-  FETCH_TOP_STORIES: 'fetchTopStories',
+  FETCH_STORIES: 'fetchStories',
   SET_LOADING: 'setLoading',
   RESET_STORIES: 'resetStories',
 };
@@ -13,5 +13,5 @@ export const Mutations = {
 export const Getters = {
   LOADING: `${PREFIX}/loading`,
   PER_PAGE: `${PREFIX}/perPage`,
-  GET_TOP_STORIES: `${PREFIX}/topStories`,
+  STORIES: `${PREFIX}/stories`,
 };

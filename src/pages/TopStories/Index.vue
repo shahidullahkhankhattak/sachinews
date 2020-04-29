@@ -8,7 +8,7 @@
               <!-- News cards [START] -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
-                v-for="story in topStories.stories"
+                v-for="story in stories"
                 :key="story._id"
               >
                 <NewsCard :story="story" />
@@ -46,15 +46,15 @@ export default {
   watch: {
     $route(currentRoute) {
       const { query } = currentRoute;
-      this.fetchTopStories.bind(this)({ refresh: true, query });
+      this.fetchStories.bind(this)({ refresh: true, query });
     },
   },
   methods: {
     ...actions,
     onScroll(_index, done) {
       const { query } = this.$route;
-      if (this.topStories.stories.length) {
-        this.fetchTopStories.bind(this)({ done, query });
+      if (this.stories.length) {
+        this.fetchStories.bind(this)({ done, query });
       }
     },
   },
