@@ -7,6 +7,7 @@ const routes = [
       { path: '', name: 'top-stories', component: () => import('pages/TopStories') },
       { path: '/category/:slug', name: 'categories-stories', component: () => import('pages/Category') },
       { path: '/source/:slug', name: 'source-stories', component: () => import('pages/Source') },
+      { path: '/search/:q', name: 'search-stories', component: () => import('pages/Search') },
       { path: '/trending', component: () => import('pages/Trending') },
     ],
   },
