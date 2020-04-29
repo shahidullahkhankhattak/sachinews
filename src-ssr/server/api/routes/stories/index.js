@@ -7,6 +7,6 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-router.get('/top-stories', storiesController.topStories);
+router.get('/get-stories', storiesController.getStories);
 
 module.exports = router;

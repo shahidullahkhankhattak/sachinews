@@ -2,9 +2,7 @@ export default function () {
   return {
     loading: false,
     perPage: 12,
-    topStories: {
-      stories: [],
-      total: -1,
-    },
+    stories: [],
+    total: -1,
   };
 }

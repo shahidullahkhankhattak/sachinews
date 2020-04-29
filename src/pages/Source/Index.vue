@@ -38,21 +38,27 @@ import NewsCard from '../../components/Cards/NewsCard';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 
 export default {
-  name: 'TopStories',
+  name: 'SourceStories',
   components: { NewsCard, NewsLoader },
   computed: {
     ...getters,
   },
   watch: {
     $route(currentRoute) {
-      const { query } = currentRoute;
+      const { slug } = currentRoute.params;
+      const query = {
+        source: slug,
+      };
       this.fetchStories.bind(this)({ refresh: true, query });
     },
   },
   methods: {
     ...actions,
     onScroll(_index, done) {
-      const { query } = this.$route;
+      const { slug } = this.$route.params;
+      const query = {
+        source: slug,
+      };
       if (this.stories.length >= this.total) return done();
       if (this.stories.length) {
         this.fetchStories.bind(this)({ done, query });

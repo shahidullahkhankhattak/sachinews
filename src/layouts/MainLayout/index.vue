@@ -1,16 +1,12 @@
 <template>
   <q-layout view="hHh LpR fFf">
-
     <app-header />
 
     <sidebar />
 
     <q-page-container>
-      <transition name="slide-fade" mode="out-in" appear>
-        <router-view />
-      </transition>
+      <router-view />
     </q-page-container>
-
   </q-layout>
 </template>
 
@@ -29,7 +25,8 @@ export default {
     return preFetchMethods.fetchSources(params);
   },
   beforeMount() {
-    if (!this.categories.length) {
+    if (!this.categories.length || !this.sources.length) {
+      preFetchMethods.fetchSources({ store: this.$store });
       preFetchMethods.fetchCategories({ store: this.$store });
     }
   },

@@ -21,6 +21,6 @@ export const apiEndpoints = {
     REST: `${apiV1Endpoint}/admin/selector`,
   },
   STORIES_ENDPOINTS: {
-    TOP_STORIES: `${apiV1Endpoint}/stories/top-stories`,
+    TOP_STORIES: `${apiV1Endpoint}/stories/get-stories`,
   },
 };

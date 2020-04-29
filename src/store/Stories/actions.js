@@ -3,6 +3,7 @@ import { axiosConfig } from '../../config/constants';
 import { Mutations } from './constants';
 import axios from '../../api/axios';
 import { se2errors } from '../formatters';
+import { routeQueryToString } from '../../utils/navigationHelpers';
 
 const {
   STORIES_ENDPOINTS: {
@@ -10,18 +11,33 @@ const {
   },
 } = apiEndpoints;
 const {
-  FETCH_TOP_STORIES,
+  FETCH_STORIES,
   SET_LOADING,
+  RESET_STORIES,
 } = Mutations;
-export async function fetchTopStories({ commit, getters: { topStories: { stories: topStories, total: totalStories }, perPage } }, done) {
+
+export async function fetchStories({ commit, getters: { stories: allStories, total: totalStories, perPage } }, {
+  done, refresh, query,
+}) {
   try {
-    const offset = topStories.length;
-    if (totalStories > -1 && offset >= totalStories) { return done && done(); }
+    if (refresh) {
+      commit(RESET_STORIES);
+      allStories = [];
+      totalStories = -1;
+    }
+    const offset = allStories.length;
+    if (totalStories > -1 && offset >= totalStories) {
+      return done && done();
+    }
 
     commit(SET_LOADING, true);
-    const $query = `offset=${offset}&perPage=${perPage}`;
+    const $query = routeQueryToString({
+      ...query,
+      offset,
+      perPage,
+    });
     const { stories, total } = await axios.get(`${TOP_STORIES}?${$query}`, axiosConfig.noLoader);
-    commit(FETCH_TOP_STORIES, { stories, total, done });
+    commit(FETCH_STORIES, { stories, total, done });
     commit(SET_LOADING, false);
   } catch (ex) {
     commit(SET_LOADING, false);

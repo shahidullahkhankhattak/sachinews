@@ -44,7 +44,19 @@
             <q-item-label>{{ link.name }}</q-item-label>
           </q-item-section>
         </q-item>
-
+        <q-separator inset class="q-my-sm" />
+        <q-item
+          class="GNL__drawer-item"
+          v-ripple
+          v-for="link in sources"
+          :key="link.name"
+          :to="`/source/${link.slug}`"
+          clickable
+        >
+          <q-item-section>
+            <q-item-label>{{ link.name }}</q-item-label>
+          </q-item-section>
+        </q-item>
         <q-separator inset class="q-my-sm" />
 
         <q-item
@@ -92,6 +104,7 @@
 <script>
 import { Screen } from 'quasar';
 import { getters } from './handleStore';
+import { queryParams } from '../../utils/navigationHelpers';
 
 export default {
   data: () => ({
@@ -115,6 +128,11 @@ export default {
   }),
   computed: {
     ...getters,
+  },
+  methods: {
+    generateQueryParam(name, value) {
+      return queryParams(name, value, this.$route);
+    },
   },
   watch: {
     sidebarPos() {

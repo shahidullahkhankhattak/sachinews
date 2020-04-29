@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="p-pa-md news-container">
-      <q-infinite-scroll @load="onScroll" :offset="250">
+      <q-infinite-scroll @load="onScroll" :offset="0">
         <div class="row">
           <div class="col-12">
             <div class="row">
@@ -14,7 +14,7 @@
                 <NewsCard :story="story" />
               </div>
               <!-- News cards [END] -->
-
+              <NoNews v-if="!loading && !stories.length"/>
               <!-- Loaders section [START} -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
@@ -35,24 +35,31 @@
 <script>
 import { getters, actions, handlePrefetch } from './handleStore';
 import NewsCard from '../../components/Cards/NewsCard';
+import NoNews from '../../components/Cards/NoNews';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 
 export default {
-  name: 'TopStories',
-  components: { NewsCard, NewsLoader },
+  name: 'CategoryStories',
+  components: { NewsCard, NewsLoader, NoNews },
   computed: {
     ...getters,
   },
   watch: {
     $route(currentRoute) {
-      const { query } = currentRoute;
+      const { slug } = currentRoute.params;
+      const query = {
+        category: slug,
+      };
       this.fetchStories.bind(this)({ refresh: true, query });
     },
   },
   methods: {
     ...actions,
     onScroll(_index, done) {
-      const { query } = this.$route;
+      const { slug } = this.$route.params;
+      const query = {
+        category: slug,
+      };
       if (this.stories.length >= this.total) return done();
       if (this.stories.length) {
         this.fetchStories.bind(this)({ done, query });

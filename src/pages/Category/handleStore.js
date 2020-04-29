@@ -27,6 +27,9 @@ export const actions = {
 };
 
 export function handlePrefetch({ store, currentRoute }) {
-  const { query } = currentRoute;
+  const { slug } = currentRoute.params;
+  const query = {
+    category: slug,
+  };
   return store.dispatch(FETCH_STORIES, { refresh: true, query });
 }
