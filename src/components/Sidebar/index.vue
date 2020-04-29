@@ -34,7 +34,7 @@
           v-ripple
           v-for="link in categories"
           :key="link.name"
-          :to="`/category/${link.slug}`"
+          :to="`/?${generateQueryParam('category', link.slug)}`"
           clickable
         >
           <q-item-section avatar>
@@ -92,6 +92,7 @@
 <script>
 import { Screen } from 'quasar';
 import { getters } from './handleStore';
+import { queryParams } from '../../utils/navigationHelpers';
 
 export default {
   data: () => ({
@@ -115,6 +116,11 @@ export default {
   }),
   computed: {
     ...getters,
+  },
+  methods: {
+    generateQueryParam(name, value) {
+      return queryParams(name, value, this.$route);
+    },
   },
   watch: {
     sidebarPos() {

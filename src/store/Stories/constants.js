@@ -7,6 +7,7 @@ export const Actions = {
 export const Mutations = {
   FETCH_TOP_STORIES: 'fetchTopStories',
   SET_LOADING: 'setLoading',
+  RESET_STORIES: 'resetStories',
 };
 
 export const Getters = {

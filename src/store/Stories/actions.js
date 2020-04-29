@@ -3,6 +3,7 @@ import { axiosConfig } from '../../config/constants';
 import { Mutations } from './constants';
 import axios from '../../api/axios';
 import { se2errors } from '../formatters';
+import { routeQueryToString } from '../../utils/navigationHelpers';
 
 const {
   STORIES_ENDPOINTS: {
@@ -12,14 +13,20 @@ const {
 const {
   FETCH_TOP_STORIES,
   SET_LOADING,
+  RESET_STORIES,
 } = Mutations;
-export async function fetchTopStories({ commit, getters: { topStories: { stories: topStories, total: totalStories }, perPage } }, done) {
+export async function fetchTopStories({ commit, getters: { topStories: { stories: topStories, total: totalStories }, perPage } }, { done, refresh, query }) {
   try {
+    if (refresh) commit(RESET_STORIES);
     const offset = topStories.length;
     if (totalStories > -1 && offset >= totalStories) { return done && done(); }
 
     commit(SET_LOADING, true);
-    const $query = `offset=${offset}&perPage=${perPage}`;
+    const $query = routeQueryToString({
+      ...query,
+      offset,
+      perPage,
+    });
     const { stories, total } = await axios.get(`${TOP_STORIES}?${$query}`, axiosConfig.noLoader);
     commit(FETCH_TOP_STORIES, { stories, total, done });
     commit(SET_LOADING, false);

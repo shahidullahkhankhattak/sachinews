@@ -33,29 +33,28 @@
 </template>
 
 <script>
-import { config } from '../../config';
 import { getters, actions, handlePrefetch } from './handleStore';
 import NewsCard from '../../components/Cards/NewsCard';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 
-const {
-  app: { logo },
-} = config;
-
 export default {
   name: 'TopStories',
   components: { NewsCard, NewsLoader },
-  data: () => ({
-    logo,
-  }),
   computed: {
     ...getters,
+  },
+  watch: {
+    $route(currentRoute) {
+      const { query } = currentRoute;
+      this.fetchTopStories.bind(this)({ refresh: true, query });
+    },
   },
   methods: {
     ...actions,
     onScroll(_index, done) {
+      const { query } = this.$route;
       if (this.topStories.stories.length) {
-        this.fetchTopStories.bind(this)(done);
+        this.fetchTopStories.bind(this)({ done, query });
       }
     },
   },

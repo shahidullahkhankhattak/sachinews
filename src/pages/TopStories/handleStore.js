@@ -24,8 +24,7 @@ export const actions = {
   }),
 };
 
-export function handlePrefetch({ store }) {
-  if (!store.getters[GET_TOP_STORIES].stories.length) {
-    return store.dispatch(FETCH_TOP_STORIES);
-  }
+export function handlePrefetch({ store, currentRoute }) {
+  const { query } = currentRoute;
+  return store.dispatch(FETCH_TOP_STORIES, { refresh: true, query });
 }
