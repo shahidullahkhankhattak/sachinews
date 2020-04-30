@@ -22,5 +22,6 @@ export const apiEndpoints = {
   },
   STORIES_ENDPOINTS: {
     TOP_STORIES: `${apiV1Endpoint}/stories/get-stories`,
+    STORY: `${apiV1Endpoint}/stories/get-story/`,
   },
 };

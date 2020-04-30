@@ -13,3 +13,7 @@ export function perPage({ perPage: _perPage }) {
 export function total({ total: _total }) {
   return _total;
 }
+
+export function story({ story: _story }) {
+  return _story;
+}

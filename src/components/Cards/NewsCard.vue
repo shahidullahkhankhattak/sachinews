@@ -3,10 +3,12 @@
     <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
       <q-card-section class="q-pt-xs col-8">
         <div class="text-overline">{{ news.source }} - {{ news.category }}</div>
-        <h2 class="text-h5 q-mt-sm q-mb-xs">
-          {{ news.title }}
-        </h2>
-        <div class="text-subtitle2"><time>1 hour ago</time></div>
+        <router-link class="news-title-link" :to="`/story/${story.slug}`">
+          <h2 class="text-h5 q-mt-sm q-mb-xs">
+            {{ news.title }}
+          </h2>
+        </router-link>
+        <div class="text-subtitle2"><time>{{ timeAgo(story.created_date) }}</time></div>
         <q-space />
         <div class="text-caption text-grey-8 q-mt-sm">
           {{ news.description }}
@@ -26,6 +28,11 @@
   </q-card>
 </template>
 <script>
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+
+TimeAgo.addLocale(en);
+const timeAgoFn = new TimeAgo('en-US');
 export default {
   props: ['story'],
   computed: {
@@ -42,6 +49,11 @@ export default {
         media,
         color,
       };
+    },
+  },
+  methods: {
+    timeAgo(time) {
+      return timeAgoFn.format(new Date(time));
     },
   },
 };

@@ -12,3 +12,7 @@ export function resetStories(state) {
   state.stories = [];
   state.total = -1;
 }
+
+export function fetchStory(state, payload) {
+  state.story = payload;
+}

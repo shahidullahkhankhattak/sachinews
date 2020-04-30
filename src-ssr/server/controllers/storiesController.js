@@ -38,3 +38,19 @@ module.exports.getStories = async (req, res) => {
     });
   }
 };
+
+module.exports.getStory = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const story = await Story.findOne({ slug }).populate('source').populate('category').exec();
+    res.status(resSuccess).json({
+      statusCode: resSuccess,
+      story,
+    });
+  } catch (ex) {
+    res.status(resServerError).json({
+      statusCode: resServerError,
+      errors: [serverError],
+    });
+  }
+};

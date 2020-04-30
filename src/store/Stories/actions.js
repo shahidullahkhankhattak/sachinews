@@ -8,12 +8,14 @@ import { routeQueryToString } from '../../utils/navigationHelpers';
 const {
   STORIES_ENDPOINTS: {
     TOP_STORIES,
+    STORY,
   },
 } = apiEndpoints;
 const {
   FETCH_STORIES,
   SET_LOADING,
   RESET_STORIES,
+  FETCH_STORY,
 } = Mutations;
 
 export async function fetchStories({ commit, getters: { stories: allStories, total: totalStories, perPage } }, {
@@ -43,5 +45,17 @@ export async function fetchStories({ commit, getters: { stories: allStories, tot
     commit(SET_LOADING, false);
     se2errors(ex);
     done && done();
+  }
+}
+
+export async function fetchStory({ commit }, slug) {
+  try {
+    commit(SET_LOADING, true);
+    const { story } = await axios.get(`${STORY}${slug}`, axiosConfig.noLoader);
+    commit(FETCH_STORY, story);
+    commit(SET_LOADING, false);
+  } catch (ex) {
+    commit(SET_LOADING, false);
+    se2errors(ex);
   }
 }
