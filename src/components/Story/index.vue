@@ -1,5 +1,8 @@
 <template>
   <article class="col-xs-12 col-lg-8 news-article q-pa-md">
+    <div class="q-mb-md">
+      <q-btn icon="arrow_left" @click="$router.go(-1)"> Back </q-btn>
+    </div>
     <q-img
       class="q-mb-sm article-media"
       :src="story.media"
@@ -25,6 +28,7 @@
         <q-btn flat round color="teal" icon="bookmark" />
         <q-btn flat round color="primary" icon="share" />
       </div>
+      <div class="clearfix"></div>
     </div>
     <div class="article-body" v-html="story.body"></div>
   </article>
