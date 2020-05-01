@@ -8,6 +8,7 @@ module.exports = {
   userNotFound: 'Invalid email or password.',
   tokenExpired: 'Session token expired.',
   sourceMsgs: {
+    INVALID_LANGUAGE: 'Language does not exist.',
     EXISTS: 'Source already exists.',
     CREATED: 'Source added successfully.',
     UPDATED: 'Source updated successfully.',
@@ -45,7 +46,7 @@ module.exports = {
     CREATED: 'Selector added successfully.',
     UPDATED: 'Selector updated successfully.',
     DELETED: 'Selector deleted successfully.',
-    INVALID_SOURCE: 'Source does not exists.',
+    INVALID_SOURCE: 'Source does not exist.',
   },
   scrapperMsgs: {
     // SUCCESS: 'Source scrapped successfully.',

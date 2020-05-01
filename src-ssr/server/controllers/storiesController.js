@@ -12,7 +12,7 @@ const {
 module.exports.getStories = async (req, res) => {
   try {
     const {
-      offset, perPage, category, source, search,
+      offset, perPage, category, source, search, lang,
     } = req.query;
     const filter = {};
 
@@ -23,6 +23,9 @@ module.exports.getStories = async (req, res) => {
         { title: new RegExp(search, 'i') },
         { description: new RegExp(search, 'i') },
       ];
+    }
+    if (lang) {
+      filter['source.lang'] = Story.ObjectId(lang);
     }
 
     const { stories, total } = await Story.withSourceAndCategory(filter, offset, perPage);

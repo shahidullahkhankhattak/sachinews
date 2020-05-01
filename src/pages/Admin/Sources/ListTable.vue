@@ -88,12 +88,17 @@ span.color-box {
               </q-btn>
             </q-td>
             <q-td v-for="col in props.cols" :key="col.name" :props="props">
-              <span
-                class="color-box"
-                v-if="col.name === 'color'"
-                :style="{ backgroundColor: col.value }"
-              ></span>
-              {{ col.value }}
+              <div v-if="col.name !== 'lang'">
+                <span
+                  class="color-box"
+                  v-if="col.name === 'color'"
+                  :style="{ backgroundColor: col.value }"
+                ></span>
+                {{ col.value }}
+              </div>
+              <div v-else>
+                {{ col.value.name}}
+              </div>
             </q-td>
           </q-tr>
         </template>

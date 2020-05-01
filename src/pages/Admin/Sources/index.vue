@@ -73,7 +73,8 @@
                           value="english"
                           lazy-rules
                           :rules="[rules.REQUIRED]"
-                          :options="['english', 'urdu']"
+                          map-options
+                          :options="languages.map(lang => ({ label: lang.name, value: lang._id}))"
                         >
                           <template v-slot:prepend>
                             <q-icon name="language" />
@@ -175,6 +176,7 @@ export default {
   },
   beforeMount() {
     this.fetch();
+    this.fetchLanguages();
   },
 };
 </script>

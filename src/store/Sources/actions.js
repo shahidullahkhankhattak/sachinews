@@ -21,7 +21,8 @@ const {
 
 export async function add(context, { form, reset }) {
   try {
-    const { item } = await axios.post(REST_API, getWithSlug(form));
+    const newForm = { ...form, lang: form.lang.value };
+    const { item } = await axios.post(REST_API, getWithSlug(newForm));
     context.commit(ADD, item);
     reset();
   } catch (ex) {
@@ -78,7 +79,8 @@ export async function _delete(context, item) {
 
 export async function update(context, { item, toggleDialog }) {
   try {
-    const { item: _item } = await axios.put(REST_API, getWithSlug(item));
+    const newItem = { ...item, lang: item.lang.value };
+    const { item: _item } = await axios.put(REST_API, getWithSlug(newItem));
     context.commit(UPDATE, _item);
     toggleDialog();
   } catch (ex) {

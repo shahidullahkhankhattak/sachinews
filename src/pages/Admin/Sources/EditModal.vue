@@ -62,7 +62,8 @@
                 outlined
                 label="Language"
                 value="english"
-                :options="['english', 'urdu']"
+                map-options
+                :options="languages.map(lang => ({ label: lang.name, value: lang._id}))"
                 :rules="[rules.REQUIRED]"
               >
                 <template v-slot:prepend>
@@ -109,7 +110,7 @@
 </template>
 <script>
 import { extend } from 'quasar';
-import { actions } from './handleStore';
+import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as editForm } from './common';
 
@@ -121,6 +122,9 @@ export default {
     show: false,
     item: editForm(),
   }),
+  computed: {
+    ...getters,
+  },
   methods: {
     ...actions,
     onEdit(item) {

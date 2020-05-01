@@ -22,6 +22,7 @@ const schema = new Schema({
   },
 });
 
+schema.statics.ObjectId = mongoose.Types.ObjectId;
 schema.statics.withSourceAndCategory = async function (filter, offset, perPage) {
   const lookupQuery = [{
     $lookup: {

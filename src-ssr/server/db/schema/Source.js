@@ -5,7 +5,10 @@ const schema = new Schema({
   name: String,
   slug: String,
   website: String,
-  lang: String,
+  lang: {
+    type: Schema.Types.ObjectId,
+    ref: 'Language',
+  },
   color: String,
   logo: String,
   active: { type: Boolean, default: true },
