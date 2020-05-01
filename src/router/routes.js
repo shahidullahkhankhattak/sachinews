@@ -7,7 +7,9 @@ const routes = [
       { path: '', name: 'top-stories', component: () => import('pages/TopStories') },
       { path: '/category/:slug', name: 'categories-stories', component: () => import('pages/Category') },
       { path: '/source/:slug', name: 'source-stories', component: () => import('pages/Source') },
+      { path: '/search/:q', name: 'search-stories', component: () => import('pages/Search') },
       { path: '/trending', component: () => import('pages/Trending') },
+      { path: '/story/:slug', component: () => import('pages/Story') },
     ],
   },
   {
@@ -35,6 +37,7 @@ const routes = [
       { path: 'selectors/:source_id', name: 'dashboard-selectors', component: () => import('src/pages/Admin/Selectors') },
       { path: 'select-source', name: 'dashboard-select-source', component: () => import('src/pages/Admin/SelectSource') },
       { path: 'scrap-test', name: 'dashboard-scrap-test', component: () => import('src/pages/Admin/ScrapTest') },
+      { path: 'languages', name: 'dashboard-languages', component: () => import('src/pages/Admin/Languages') },
     ],
   },
 ];

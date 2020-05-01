@@ -93,7 +93,7 @@
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
               aria-label="About"
-              >About Google</a
+              >About Us</a
             >
           </div>
         </div>

@@ -81,7 +81,7 @@
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
               aria-label="About"
-              >About Google</a
+              >About Us</a
             >
           </div>
         </div>
@@ -104,6 +104,7 @@ export default {
       },
       { icon: 'link', text: 'Source Links', link: '/admin/select-source?next=source-links' },
       { icon: 'show_chart', text: 'Selectors', link: '/admin/select-source?next=selectors' },
+      { icon: 'translate', text: 'Languages', link: '/admin/languages' },
     ],
     links2: [
       { icon: 'input', text: 'Scrap Test', link: '/admin/scrap-test' },

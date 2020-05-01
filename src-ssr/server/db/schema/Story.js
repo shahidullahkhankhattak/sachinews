@@ -33,6 +33,10 @@ schema.statics.withSourceAndCategory = async function (filter, offset, perPage) 
     },
   }, {
     $match: filter,
+  }, {
+    $sort: {
+      created_date: -1,
+    },
   }];
   const countLookupQuery = [...lookupQuery];
   countLookupQuery.push({

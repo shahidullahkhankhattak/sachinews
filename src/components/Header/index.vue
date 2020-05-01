@@ -22,18 +22,22 @@
 
       <q-input
         class="GNL__toolbar-input"
+        @focus="searchFocus = true"
+        @blur="searchFocus = false"
         standout
         v-model="search"
+        @keydown.enter="triggerSearch(search)"
+        @keydown.esc="(e) => cancelSearch(e)"
         color="bg-grey-7 shadow-1"
         placeholder="Search for topics, authors & sources"
       >
         <template v-slot:prepend>
-          <q-icon v-if="search === ''" name="search" />
+          <q-icon v-if="!searchFocus" name="search" />
           <q-icon
             v-else
             name="clear"
             class="cursor-pointer"
-            @click="search = ''"
+            @click="cancelSearch()"
           />
         </template>
       </q-input>
@@ -74,6 +78,7 @@ export default {
   data: () => ({
     logo,
     search: '',
+    searchFocus: false,
     langOptions: [
       {
         label: 'English',
@@ -90,6 +95,16 @@ export default {
       this.$root.$emit('toggleSidebar');
     },
     setLocale,
+    triggerSearch(keyword) {
+      if (keyword && keyword.length >= 2) {
+        this.$router.push(`/search/${keyword}`);
+      }
+    },
+    cancelSearch(e) {
+      if (e) e.target.blur();
+      this.search = '';
+      this.$router.push('/');
+    },
   },
   computed: {
     locale: {

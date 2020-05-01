@@ -3,10 +3,14 @@
     <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
       <q-card-section class="q-pt-xs col-8">
         <div class="text-overline">{{ news.source }} - {{ news.category }}</div>
-        <div class="text-h5 q-mt-sm q-mb-xs">
-          {{ news.title }}
+        <router-link class="news-title-link" :to="`/story/${story.slug}`">
+          <h2 class="text-h5 q-mt-sm q-mb-xs">
+            {{ news.title }}
+          </h2>
+        </router-link>
+        <div class="text-subtitle2">
+          <time>{{ timeAgo(story.created_date) }}</time>
         </div>
-        <div class="text-subtitle2"><time>1 hour ago</time></div>
         <q-space />
         <div class="text-caption text-grey-8 q-mt-sm">
           {{ news.description }}
@@ -19,19 +23,35 @@
     </q-card-section>
 
     <q-card-actions>
-      <q-btn flat round color="red" icon="favorite_border" />
-      <q-btn flat round color="teal" icon="bookmark" />
-      <q-btn flat round color="primary" icon="share" />
+      <q-btn flat round color="red" icon="favorite_border">
+        <q-badge color="red" floating>4</q-badge>
+      </q-btn>
+      <Share />
+      <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
     </q-card-actions>
   </q-card>
 </template>
 <script>
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+import Share from '../../components/Buttons/Share';
+
+TimeAgo.addLocale(en);
+const timeAgoFn = new TimeAgo('en-US');
 export default {
+  components: {
+    Share,
+  },
   props: ['story'],
   computed: {
     news() {
       const {
-        title, description, media, source: [{ name: source, color }], category: [{ name: category }], slug,
+        title,
+        description,
+        media,
+        source: [{ name: source, color }],
+        category: [{ name: category }],
+        slug,
       } = this.story || { source: [{}], category: [{}] };
       return {
         source,
@@ -42,6 +62,11 @@ export default {
         media,
         color,
       };
+    },
+  },
+  methods: {
+    timeAgo(time) {
+      return timeAgoFn.format(new Date(time));
     },
   },
 };

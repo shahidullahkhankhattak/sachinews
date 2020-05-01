@@ -3,6 +3,8 @@
 @import url(./sidebar-topbar.sass)
 @import url(./home.sass)
 @import url(./button.sass)
+@import url(./article.sass)
+@import url(./badge.sass)
 
 // spinner
 .spinner
@@ -37,3 +39,26 @@
         &.no-wrap
           &.items-end
             z-index: 9999
+.clearfix
+  clear: both
+.float-
+    &right
+      float: right
+    &left
+      float: left
+
+.q-mr
+  &sm
+    margin-right: 8px
+
+
+[dir='rtl']
+  .float-
+    &right
+      float: left
+    &left
+      float: right
+  .q-mr
+    &sm
+      margin-left: 8px
+

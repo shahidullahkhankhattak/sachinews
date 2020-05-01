@@ -10,6 +10,9 @@ export const apiEndpoints = {
     REST: `${apiV1Endpoint}/admin/source`,
     USER_SOURCE: `${apiV1Endpoint}/source`,
   },
+  LANGUAGES_ENDPOITNS: {
+    REST: `${apiV1Endpoint}/admin/language`,
+  },
   CATEGORY_ENDPOINTS: {
     REST: `${apiV1Endpoint}/admin/category`,
     USER_CATEGORY: `${apiV1Endpoint}/category`,
@@ -22,5 +25,6 @@ export const apiEndpoints = {
   },
   STORIES_ENDPOINTS: {
     TOP_STORIES: `${apiV1Endpoint}/stories/get-stories`,
+    STORY: `${apiV1Endpoint}/stories/get-story/`,
   },
 };

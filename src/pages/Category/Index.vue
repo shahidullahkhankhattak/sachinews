@@ -3,6 +3,18 @@
     <div class="p-pa-md news-container">
       <q-infinite-scroll @load="onScroll" :offset="0">
         <div class="row">
+          <div class="col-xs-12">
+            <q-card class="news-card text-center" flat bordered>
+              <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
+                <q-card-section class="q-pt-xs col-12">
+                  <div class="text-overline">Showing News For Category</div>
+                  <div class="text-h5 q-mt-sm q-mb-xs text-uppercase">
+                    {{$route.params.slug}}
+                  </div>
+                </q-card-section>
+              </q-card-section>
+            </q-card>
+          </div>
           <div class="col-12">
             <div class="row">
               <!-- News cards [START] -->

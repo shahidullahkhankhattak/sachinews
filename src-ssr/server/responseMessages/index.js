@@ -21,6 +21,12 @@ module.exports = {
       };
     },
   },
+  languageMsgs: {
+    EXISTS: 'Language already exists.',
+    CREATED: 'Language added successfully.',
+    UPDATED: 'Language updated successfully.',
+    DELETED: 'Language deleted successfully.',
+  },
   categoryMsgs: {
     EXISTS: 'Category already exists.',
     CREATED: 'Category added successfully.',

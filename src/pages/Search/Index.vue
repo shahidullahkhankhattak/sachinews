@@ -1,22 +1,10 @@
 <template>
   <q-page>
     <div class="p-pa-md news-container">
-      <q-infinite-scroll @load="onScroll" :offset="250">
+      <q-infinite-scroll @load="onScroll" :offset="0">
         <div class="row">
           <div class="col-12">
             <div class="row">
-              <div class="col-xs-12">
-                <q-card class="news-card text-center" flat bordered>
-                  <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
-                    <q-card-section class="q-pt-xs col-12">
-                      <div class="text-overline">Showing News For Source</div>
-                      <div class="text-h5 q-mt-sm q-mb-xs text-uppercase">
-                        {{$route.params.slug}}
-                      </div>
-                    </q-card-section>
-                  </q-card-section>
-                </q-card>
-              </div>
               <!-- News cards [START] -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
@@ -26,7 +14,7 @@
                 <NewsCard :story="story" />
               </div>
               <!-- News cards [END] -->
-
+              <NoNews v-if="!loading && !stories.length"/>
               <!-- Loaders section [START} -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
@@ -47,19 +35,20 @@
 <script>
 import { getters, actions, handlePrefetch } from './handleStore';
 import NewsCard from '../../components/Cards/NewsCard';
+import NoNews from '../../components/Cards/NoNews';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 
 export default {
-  name: 'SourceStories',
-  components: { NewsCard, NewsLoader },
+  name: 'CategoryStories',
+  components: { NewsCard, NewsLoader, NoNews },
   computed: {
     ...getters,
   },
   watch: {
     $route(currentRoute) {
-      const { slug } = currentRoute.params;
+      const { q } = currentRoute.params;
       const query = {
-        source: slug,
+        search: q,
       };
       this.fetchStories.bind(this)({ refresh: true, query });
     },
@@ -67,9 +56,9 @@ export default {
   methods: {
     ...actions,
     onScroll(_index, done) {
-      const { slug } = this.$route.params;
+      const { q } = this.$route.params;
       const query = {
-        source: slug,
+        search: q,
       };
       if (this.stories.length >= this.total) return done();
       if (this.stories.length) {
