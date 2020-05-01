@@ -8,7 +8,9 @@
             {{ news.title }}
           </h2>
         </router-link>
-        <div class="text-subtitle2"><time>{{ timeAgo(story.created_date) }}</time></div>
+        <div class="text-subtitle2">
+          <time>{{ timeAgo(story.created_date) }}</time>
+        </div>
         <q-space />
         <div class="text-caption text-grey-8 q-mt-sm">
           {{ news.description }}
@@ -38,7 +40,12 @@ export default {
   computed: {
     news() {
       const {
-        title, description, media, source: [{ name: source, color }], category: [{ name: category }], slug,
+        title,
+        description,
+        media,
+        source: [{ name: source, color }],
+        category: [{ name: category }],
+        slug,
       } = this.story || { source: [{}], category: [{}] };
       return {
         source,

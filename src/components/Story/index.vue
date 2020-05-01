@@ -13,7 +13,18 @@
       {{ story.title }}
     </h1>
     <div class="text-subtitle2 q-mb-md">
-      <time>{{timeAgo(story.created_date)}}</time> - <span>{{story.source.name}}</span>
+      <q-badge class="badge-sm" color="blue"><time>{{timeAgo(story.created_date)}}</time></q-badge>
+      <q-badge class="q-ma-sm badge-sm" :color="story.source.color">{{story.source.name}}</q-badge>
+      <a :href="story.url" target="_blank" class="no-deco">
+        <q-badge class="badge-sm" outline color="primary">View article on {{story.source.name}}</q-badge>
+      </a>
+      <div class="float-right">
+        <q-btn flat round color="red" icon="favorite_border">
+          <q-badge color="red" floating>4</q-badge>
+        </q-btn>
+        <q-btn flat round color="teal" icon="bookmark" />
+        <q-btn flat round color="primary" icon="share" />
+      </div>
     </div>
     <div class="article-body" v-html="story.body"></div>
   </article>

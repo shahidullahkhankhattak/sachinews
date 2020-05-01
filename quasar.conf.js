@@ -10,6 +10,7 @@ module.exports = function (ctx) {
       'axios',
       'registerComponents',
       'registerSocketIo',
+      'vueSharer',
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

@@ -4,6 +4,7 @@
 @import url(./home.sass)
 @import url(./button.sass)
 @import url(./article.sass)
+@import url(./badge.sass)
 
 // spinner
 .spinner
@@ -38,3 +39,15 @@
         &.no-wrap
           &.items-end
             z-index: 9999
+.float-
+    &right
+      float: right
+    &left
+      float: left
+
+[dir='rtl']
+  .float-
+    &right
+      float: left
+    &left
+      float: right
