@@ -37,6 +37,7 @@ const routes = [
       { path: 'selectors/:source_id', name: 'dashboard-selectors', component: () => import('src/pages/Admin/Selectors') },
       { path: 'select-source', name: 'dashboard-select-source', component: () => import('src/pages/Admin/SelectSource') },
       { path: 'scrap-test', name: 'dashboard-scrap-test', component: () => import('src/pages/Admin/ScrapTest') },
+      { path: 'languages', name: 'dashboard-languages', component: () => import('src/pages/Admin/Languages') },
     ],
   },
 ];

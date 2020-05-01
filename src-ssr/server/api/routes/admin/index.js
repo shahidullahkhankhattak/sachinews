@@ -6,6 +6,7 @@ const SourceController = require('../../../controllers/sourceController');
 const CategoryController = require('../../../controllers/categoryController');
 const SourceLinkController = require('../../../controllers/sourceLinkController');
 const SelectorController = require('../../../controllers/selectorController');
+const languageController = require('../../../controllers/languageController');
 
 // middlewares
 const { checkAuthAdmin } = require('../../../middleware/auth');
@@ -14,6 +15,7 @@ const SourceValidator = require('../../../validators/sourceValidators');
 const CategoryValidator = require('../../../validators/categoryValidators');
 const SourceLinkValidator = require('../../../validators/sourceLinkValidator');
 const selectorValidator = require('../../../validators/selectorValidators');
+const languageValidator = require('../../../validators/languageValidator');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -47,5 +49,12 @@ router.route('/selector/:source?')
   .post([selectorValidator.create], SelectorController.create)
   .put([selectorValidator.update], SelectorController.update)
   .delete([selectorValidator.delete], SelectorController.destroy);
+
+// languages routes crud
+router.route('/language')
+  .get(languageController.index)
+  .post([languageValidator.create], languageController.create)
+  .put([languageValidator.update], languageController.update)
+  .delete([languageValidator.delete], languageController.destroy);
 
 module.exports = router;
