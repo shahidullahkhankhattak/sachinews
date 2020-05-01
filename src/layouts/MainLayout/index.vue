@@ -28,7 +28,7 @@ export default {
     const languages = getters.languages.bind({ $store: store })();
     const language = languages.find((lang) => lang.iso === locale);
     await preFetchMethods.setLocale(params, language);
-    await preFetchMethods.fetchTranslations({ store: this.$store }, language);
+    await preFetchMethods.fetchTranslations(params, language);
     return preFetchMethods.fetchSources(params, language);
   },
   async beforeMount() {

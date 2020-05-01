@@ -30,6 +30,6 @@ export const apiEndpoints = {
   },
   TRANSLATIONS_ENDPOINTS: {
     REST: `${apiV1Endpoint}/admin/translation`,
-    USER_TRANSLATION: `${apiV1Endpoint}/category`,
+    USER_TRANSLATION: `${apiV1Endpoint}/translation`,
   },
 };
