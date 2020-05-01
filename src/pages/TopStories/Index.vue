@@ -14,7 +14,7 @@
                 <NewsCard :story="story" />
               </div>
               <!-- News cards [END] -->
-
+              <NoNews v-if="!loading && !stories.length"/>
               <!-- Loaders section [START} -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
@@ -35,11 +35,12 @@
 <script>
 import { getters, actions, handlePrefetch } from './handleStore';
 import NewsCard from '../../components/Cards/NewsCard';
+import NoNews from '../../components/Cards/NoNews';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 
 export default {
   name: 'TopStories',
-  components: { NewsCard, NewsLoader },
+  components: { NewsCard, NewsLoader, NoNews },
   computed: {
     ...getters,
   },

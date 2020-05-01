@@ -28,4 +28,8 @@ export const apiEndpoints = {
     TOP_STORIES: `${apiV1Endpoint}/stories/get-stories`,
     STORY: `${apiV1Endpoint}/stories/get-story/`,
   },
+  TRANSLATIONS_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/admin/translation`,
+    USER_TRANSLATION: `${apiV1Endpoint}/category`,
+  },
 };

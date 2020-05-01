@@ -28,6 +28,13 @@ module.exports = {
     UPDATED: 'Language updated successfully.',
     DELETED: 'Language deleted successfully.',
   },
+  translationMsgs: {
+    INVALID_LANGUAGE: 'Language does not exist.',
+    EXISTS: 'Translation already exists.',
+    CREATED: 'Translation added successfully.',
+    UPDATED: 'Translation updated successfully.',
+    DELETED: 'Translation deleted successfully.',
+  },
   categoryMsgs: {
     EXISTS: 'Category already exists.',
     CREATED: 'Category added successfully.',

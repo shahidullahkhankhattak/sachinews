@@ -51,6 +51,7 @@
           class="GNL__drawer-item"
           v-ripple
           v-for="link in links3"
+          :to="link.link"
           :key="link.text"
           clickable
         >
@@ -111,8 +112,8 @@ export default {
       { icon: 'launch', text: 'Scrap Data', link: '/admin/select-source?next=selectors' },
     ],
     links3: [
-      { icon: '', text: 'Translations' },
-      { icon: '', text: 'Settings' },
+      { icon: '', text: 'Translations', link: '/admin/translations' },
+      { icon: '', text: 'Settings', link: '/admin/settings' },
     ],
   }),
   methods: {
