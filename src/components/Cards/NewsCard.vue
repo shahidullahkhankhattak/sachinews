@@ -24,7 +24,7 @@
 
     <q-card-actions>
       <q-btn flat round color="red" icon="favorite_border" />
-      <q-btn flat round color="teal" icon="bookmark" />
+      <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
       <q-btn flat round color="primary" icon="share" />
     </q-card-actions>
   </q-card>

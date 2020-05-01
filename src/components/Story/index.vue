@@ -6,6 +6,7 @@
     <q-img
       class="q-mb-sm article-media"
       :src="story.media"
+      height="400px"
       native-context-menu
     >
       <div class="absolute-bottom text-subtitle1 text-center">
@@ -25,7 +26,7 @@
         <q-btn flat round color="red" icon="favorite_border">
           <q-badge color="red" floating>4</q-badge>
         </q-btn>
-        <q-btn flat round color="teal" icon="bookmark" />
+        <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
         <q-btn flat round color="primary" icon="share" />
       </div>
       <div class="clearfix"></div>
