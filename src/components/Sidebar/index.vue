@@ -15,7 +15,7 @@
           v-ripple
           v-for="link in links1"
           :key="link.text"
-          :to="link.link"
+          :to="`/${locale.iso}/${link.link}`"
           :title="link.text"
           clickable
         >
@@ -34,7 +34,7 @@
           v-ripple
           v-for="link in categories"
           :key="link.name"
-          :to="`/category/${link.slug}`"
+          :to="`/${locale.iso}/category/${link.slug}`"
           clickable
         >
           <q-item-section avatar>
@@ -50,7 +50,7 @@
           v-ripple
           v-for="link in sources"
           :key="link.name"
-          :to="`/source/${link.slug}`"
+          :to="`/${locale.iso}/source/${link.slug}`"
           clickable
         >
           <q-item-section>
@@ -111,7 +111,7 @@ export default {
     sidebarKey: true,
     open: false,
     links1: [
-      { icon: 'web', text: 'Top stories', link: '/' },
+      { icon: 'web', text: 'Top stories', link: '' },
       { icon: 'trending_up', text: 'Trending', link: '/trending' },
       // { icon: 'person', text: 'For you' },
       // { icon: 'star_border', text: 'Favourites' },

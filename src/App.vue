@@ -24,9 +24,6 @@ export default {
   methods: {
     ...actions,
   },
-  preFetch({ store }) {
-    return store.dispatch('App/setLocale', { value: 'english' });
-  },
   computed: {
     ...getters,
   },

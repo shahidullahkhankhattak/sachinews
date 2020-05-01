@@ -4,6 +4,7 @@ import { se2errors } from '../formatters';
 import { Mutations } from './constants';
 import { getWithSlug } from '../../utils/objectHelpers';
 import { Notify } from '../../plugins/notify';
+import { axiosConfig } from '../../config/constants';
 
 const {
   SOURCE_ENDPOINTS: {
@@ -28,9 +29,9 @@ export async function add(context, { form, reset }) {
   }
 }
 
-export async function fetchUserSources({ commit }) {
+export async function fetchUserSources({ commit }, language) {
   try {
-    const { list } = await axios.get(USER_SOURCE);
+    const { list } = await axios.get(`${USER_SOURCE}?lang=${language && language._id}`, axiosConfig.noLoader);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);

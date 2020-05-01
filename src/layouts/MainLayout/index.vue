@@ -21,13 +21,24 @@ export default {
     ...getters,
   },
   async preFetch(params) {
+    const { store, currentRoute } = params;
+    const { locale } = currentRoute.params;
     await preFetchMethods.fetchCategories(params);
-    return preFetchMethods.fetchSources(params);
+    await preFetchMethods.fetchLanguages(params);
+    const languages = getters.languages.bind({ $store: store })();
+    const language = languages.find((lang) => lang.iso === locale);
+    await preFetchMethods.setLocale(params, language);
+    return preFetchMethods.fetchSources(params, language);
   },
-  beforeMount() {
-    if (!this.categories.length || !this.sources.length) {
-      preFetchMethods.fetchSources({ store: this.$store });
-      preFetchMethods.fetchCategories({ store: this.$store });
+  async beforeMount() {
+    if (!this.categories.length || !this.sources.length || !this.languages.length) {
+      await preFetchMethods.fetchCategories({ store: this.$store });
+      await preFetchMethods.fetchLanguages({ store: this.$store });
+      const { locale } = this.$route.params;
+      const language = this.languages.find((lang) => lang.iso === locale);
+      if (!language) { this.$router.push('/404'); }
+      preFetchMethods.setLocale({ store: this.$store }, language);
+      await preFetchMethods.fetchSources({ store: this.$store }, language);
     }
   },
 };

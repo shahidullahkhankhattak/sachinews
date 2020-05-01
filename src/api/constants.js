@@ -12,6 +12,7 @@ export const apiEndpoints = {
   },
   LANGUAGES_ENDPOITNS: {
     REST: `${apiV1Endpoint}/admin/language`,
+    USER_LANGUAGE: `${apiV1Endpoint}/language`,
   },
   CATEGORY_ENDPOINTS: {
     REST: `${apiV1Endpoint}/admin/category`,

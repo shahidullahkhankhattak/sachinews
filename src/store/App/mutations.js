@@ -1,3 +1,3 @@
 export function setLocale({ config }, payload) {
-  config.locale = payload.value;
+  config.locale = { ...payload };
 }

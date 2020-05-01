@@ -3,7 +3,7 @@
     <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
       <q-card-section class="q-pt-xs col-8">
         <div class="text-overline">{{ news.source }} - {{ news.category }}</div>
-        <router-link class="news-title-link" :to="`/story/${story.slug}`">
+        <router-link class="news-title-link" :to="`/${locale.iso}/story/${story.slug}`">
           <h2 class="text-h5 q-mt-sm q-mb-xs">
             {{ news.title }}
           </h2>
@@ -35,6 +35,7 @@
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Share from '../../components/Buttons/Share';
+import { getters } from './handleStore';
 
 TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
@@ -44,6 +45,7 @@ export default {
   },
   props: ['story'],
   computed: {
+    ...getters,
     news() {
       const {
         title,

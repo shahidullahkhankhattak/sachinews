@@ -3,6 +3,7 @@ import { apiEndpoints } from '../../api/constants';
 import { se2errors } from '../formatters';
 import { Mutations } from './constants';
 import { getWithSlug } from '../../utils/objectHelpers';
+import { axiosConfig } from '../../config/constants';
 
 const {
   CATEGORY_ENDPOINTS: {
@@ -39,7 +40,7 @@ export async function fetch({ commit, state }) {
 
 export async function fetchUserCategories({ commit }) {
   try {
-    const { list } = await axios.get(USER_CATEGORY);
+    const { list } = await axios.get(USER_CATEGORY, axiosConfig.noLoader);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);

@@ -4,10 +4,12 @@ import { se2errors } from '../formatters';
 import { Mutations } from './constants';
 import { getWithSlug } from '../../utils/objectHelpers';
 import { Notify } from '../../plugins/notify';
+import { axiosConfig } from '../../config/constants';
 
 const {
   LANGUAGES_ENDPOITNS: {
     REST: REST_API,
+    USER_LANGUAGE,
   },
 } = apiEndpoints;
 const {
@@ -31,6 +33,15 @@ export async function fetch({ commit, state }) {
   if (state.list.length) return;
   try {
     const { list } = await axios.get(REST_API);
+    commit(ALL, list);
+  } catch (ex) {
+    se2errors(ex);
+  }
+}
+
+export async function fetchUserLanguages({ commit }) {
+  try {
+    const { list } = await axios.get(USER_LANGUAGE, axiosConfig.noLoader);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);

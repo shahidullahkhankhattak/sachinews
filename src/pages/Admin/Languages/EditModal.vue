@@ -21,7 +21,7 @@
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        <q-form @submit="update({ item, toggleDialog})">
+        <q-form @submit="update({ item, toggleDialog })">
           <div class="row">
             <div class="col-md-12 q-pt-xs q-pr-xs">
               <q-input
@@ -53,8 +53,28 @@
                 </template>
               </q-input>
             </div>
+            <div class="col-md-12 q-pt-xs q-pr-xs">
+              <q-select
+                bg-color="white"
+                color="blue-4"
+                label-color="blue-4"
+                v-model="item.direction"
+                outlined
+                label="Direction"
+                value="rtl"
+                lazy-rules
+                :rules="[rules.REQUIRED]"
+                :options="['ltr', 'rtl']"
+              >
+                <template v-slot:prepend>
+                  <q-icon name="swap_horizontal_circle" color="blue-4"  />
+                </template>
+              </q-select>
+            </div>
             <div class="col-md-12 q-pt-md">
-              <q-btn type="submit" color="white" text-color="blue-8">Submit</q-btn>
+              <q-btn type="submit" color="white" text-color="blue-8"
+                >Submit</q-btn
+              >
               <q-btn class="q-ml-md" @click="toggleDialog()" outline
                 >Cancel</q-btn
               >

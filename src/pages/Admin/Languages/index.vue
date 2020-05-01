@@ -65,6 +65,21 @@
                           </template>
                         </q-input>
                       </div>
+                      <div class="col-md-4">
+                        <q-select
+                          v-model="addForm.direction"
+                          outlined
+                          label="Direction"
+                          value="rtl"
+                          lazy-rules
+                          :rules="[rules.REQUIRED]"
+                          :options="['ltr', 'rtl']"
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="swap_horizontal_circle" />
+                          </template>
+                        </q-select>
+                      </div>
                     </div>
 
                     <div class="row q-pt-md">
