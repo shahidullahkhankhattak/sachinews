@@ -28,16 +28,18 @@ export default {
     const languages = getters.languages.bind({ $store: store })();
     const language = languages.find((lang) => lang.iso === locale);
     await preFetchMethods.setLocale(params, language);
+    await preFetchMethods.fetchTranslations({ store: this.$store }, language);
     return preFetchMethods.fetchSources(params, language);
   },
   async beforeMount() {
-    if (!this.categories.length || !this.sources.length || !this.languages.length) {
+    if (!this.categories.length || !this.sources.length || !this.languages.length || !this.translations.length) {
       await preFetchMethods.fetchCategories({ store: this.$store });
       await preFetchMethods.fetchLanguages({ store: this.$store });
       const { locale } = this.$route.params;
       const language = this.languages.find((lang) => lang.iso === locale);
       if (!language) { this.$router.push('/404'); }
-      preFetchMethods.setLocale({ store: this.$store }, language);
+      await preFetchMethods.setLocale({ store: this.$store }, language);
+      await preFetchMethods.fetchTranslations({ store: this.$store }, language);
       await preFetchMethods.fetchSources({ store: this.$store }, language);
     }
   },

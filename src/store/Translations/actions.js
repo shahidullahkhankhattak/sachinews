@@ -30,7 +30,7 @@ export async function add(context, { form, reset }) {
 
 export async function fetchUserTranslations({ commit }, language) {
   try {
-    const { list } = await axios.get(`${USER_TRANSLATION}?lang=${language && language._id}`, axiosConfig.noLoader);
+    const { list } = await axios.get(`${USER_TRANSLATION}?lang=${language && language.iso}`, axiosConfig.noLoader);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);

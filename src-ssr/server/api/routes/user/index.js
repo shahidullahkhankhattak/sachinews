@@ -4,6 +4,7 @@ const storiesRoutes = require('../stories');
 const SourceController = require('../../../controllers/sourceController');
 const CategoryController = require('../../../controllers/categoryController');
 const LanguageController = require('../../../controllers/languageController');
+const TranslationController = require('../../../controllers/translationController');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -16,5 +17,7 @@ router.route('/category')
   .get(CategoryController.index);
 router.route('/language')
   .get(LanguageController.index);
+router.route('/translation')
+  .get(TranslationController.index);
 
 module.exports = router;
