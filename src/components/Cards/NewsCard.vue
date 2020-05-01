@@ -23,19 +23,25 @@
     </q-card-section>
 
     <q-card-actions>
-      <q-btn flat round color="red" icon="favorite_border" />
+      <q-btn flat round color="red" icon="favorite_border">
+        <q-badge color="red" floating>4</q-badge>
+      </q-btn>
+      <Share />
       <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
-      <q-btn flat round color="primary" icon="share" />
     </q-card-actions>
   </q-card>
 </template>
 <script>
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import Share from '../../components/Buttons/Share';
 
 TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
 export default {
+  components: {
+    Share,
+  },
   props: ['story'],
   computed: {
     news() {
