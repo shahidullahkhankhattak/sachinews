@@ -16,14 +16,14 @@
           v-for="link in links1"
           :key="link.text"
           :to="`/${locale.iso}/${link.link}`"
-          :title="link.text"
+          :title="$t(link.text)"
           clickable
         >
           <q-item-section avatar>
             <q-icon :name="link.icon" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ link.text }}</q-item-label>
+            <q-item-label>{{ $t(link.text) }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -34,6 +34,7 @@
           v-ripple
           v-for="link in categories"
           :key="link.name"
+          :title="$t(link.name)"
           :to="`/${locale.iso}/category/${link.slug}`"
           clickable
         >
@@ -41,7 +42,7 @@
             <q-icon :name="link.icon" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ link.name }}</q-item-label>
+            <q-item-label>{{ $t(link.name) }}</q-item-label>
           </q-item-section>
         </q-item>
         <q-separator inset class="q-my-sm" />
@@ -51,10 +52,11 @@
           v-for="link in sources"
           :key="link.name"
           :to="`/${locale.iso}/source/${link.slug}`"
+          :title="$t(link.name)"
           clickable
         >
           <q-item-section>
-            <q-item-label>{{ link.name }}</q-item-label>
+            <q-item-label>{{ $t(link.name) }}</q-item-label>
           </q-item-section>
         </q-item>
         <q-separator inset class="q-my-sm" />
@@ -64,11 +66,12 @@
           v-ripple
           v-for="link in links3"
           :key="link.text"
+          :title="$t(link.text)"
           clickable
         >
           <q-item-section>
             <q-item-label
-              >{{ link.text }} <q-icon v-if="link.icon" :name="link.icon"
+              >{{ $t(link.text) }} <q-icon v-if="link.icon" :name="link.icon"
             /></q-item-label>
           </q-item-section>
         </q-item>
@@ -79,21 +82,24 @@
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
               aria-label="Privacy"
-              >Privacy</a
+              :title="$t('Privacy')"
+              >{{ $t('Privacy') }}</a
             >
             <span> · </span>
             <a
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
               aria-label="Terms"
-              >Terms</a
+              :title="$t('Terms')"
+              >{{ $t('Terms') }}</a
             >
             <span> · </span>
             <a
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
               aria-label="About"
-              >About Us</a
+              :title="$t('About Us')"
+              >{{ $t('About Us') }}</a
             >
           </div>
         </div>

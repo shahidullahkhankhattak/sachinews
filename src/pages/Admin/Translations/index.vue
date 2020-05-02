@@ -148,8 +148,10 @@ export default {
       this.addForm = addForm();
     },
     resetForm() {
+      const { lang } = this.addForm;
       this.addForm = addForm();
       this.$refs.addSourceForm.reset();
+      this.addForm.lang = lang;
     },
   },
   beforeMount() {

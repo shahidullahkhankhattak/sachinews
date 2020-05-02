@@ -32,7 +32,7 @@ export default {
     return preFetchMethods.fetchSources(params, language);
   },
   async beforeMount() {
-    if (!this.categories.length || !this.sources.length || !this.languages.length || !this.translations.length) {
+    if (!this.categories.length || !this.sources.length || !this.languages.length || !this.translations || !this.translations.length) {
       await preFetchMethods.fetchCategories({ store: this.$store });
       await preFetchMethods.fetchLanguages({ store: this.$store });
       const { locale } = this.$route.params;
@@ -42,6 +42,10 @@ export default {
       await preFetchMethods.fetchTranslations({ store: this.$store }, language);
       await preFetchMethods.fetchSources({ store: this.$store }, language);
     }
+
+    const { locale } = this.$route.params;
+    const language = this.languages.find((lang) => lang.iso === locale);
+    if (!language) { this.$router.push('/404'); }
   },
 };
 </script>

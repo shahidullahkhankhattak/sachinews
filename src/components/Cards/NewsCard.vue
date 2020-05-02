@@ -2,14 +2,14 @@
   <q-card class="news-card" flat bordered>
     <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
       <q-card-section class="q-pt-xs col-8">
-        <div class="text-overline">{{ news.source }} - {{ news.category }}</div>
+        <div class="text-overline">{{ $t(news.source) }} - {{ $t(news.category) }}</div>
         <router-link class="news-title-link" :to="`/${locale.iso}/story/${story.slug}`">
           <h2 class="text-h5 q-mt-sm q-mb-xs">
             {{ news.title }}
           </h2>
         </router-link>
         <div class="text-subtitle2">
-          <time>{{ timeAgo(story.created_date) }}</time>
+          <time>{{ $td(timeAgo(story.created_date)) }}</time>
         </div>
         <q-space />
         <div class="text-caption text-grey-8 q-mt-sm">
@@ -68,6 +68,7 @@ export default {
   },
   methods: {
     timeAgo(time) {
+      this.$t(time);
       return timeAgoFn.format(new Date(time));
     },
   },

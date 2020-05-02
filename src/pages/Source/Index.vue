@@ -9,9 +9,9 @@
                 <q-card class="news-card text-center" flat bordered>
                   <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
                     <q-card-section class="q-pt-xs col-12">
-                      <div class="text-overline">Showing News For Source</div>
+                      <div class="text-overline">{{ $t('Showing News For Source') }}</div>
                       <div class="text-h5 q-mt-sm q-mb-xs text-uppercase">
-                        {{$route.params.slug}}
+                        {{ $t($route.params.slug.replace(/[-_]/g, ' ')) }}
                       </div>
                     </q-card-section>
                   </q-card-section>

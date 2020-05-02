@@ -29,7 +29,7 @@
         @keydown.enter="triggerSearch(search)"
         @keydown.esc="(e) => cancelSearch(e)"
         color="bg-grey-7 shadow-1"
-        placeholder="Search for topics, authors & sources"
+        :placeholder="$t('Search for topics, authors & sources')"
       >
         <template v-slot:prepend>
           <q-icon v-if="!searchFocus" name="search" />
@@ -54,6 +54,7 @@
 <script>
 import { config } from '../../config';
 import SelectLocale from '../../components/Select/SelectLocale';
+import { getters } from './handleStore';
 
 const {
   app: { logo },
@@ -68,13 +69,16 @@ export default {
     search: '',
     searchFocus: false,
   }),
+  computed: {
+    ...getters,
+  },
   methods: {
     toggleSidebar() {
       this.$root.$emit('toggleSidebar');
     },
     triggerSearch(keyword) {
       if (keyword && keyword.length >= 2) {
-        this.$router.push(`/search/${keyword}`);
+        this.$router.push(`/${this.locale.iso}/search/${keyword}`);
       }
     },
     cancelSearch(e) {

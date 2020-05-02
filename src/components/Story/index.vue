@@ -1,7 +1,7 @@
 <template>
   <article class="col-xs-12 col-lg-8 news-article q-pa-md">
     <div class="q-mb-md">
-      <q-btn icon="arrow_left" @click="$router.go(-1)"> Back </q-btn>
+      <q-btn :icon="siteDir === 'ltr' && 'arrow_back' || 'arrow_forward'" @click="$router.go(-1)"> {{ $t('Back') }} </q-btn>
     </div>
     <q-img
       class="q-mb-sm article-media"
@@ -17,10 +17,10 @@
       {{ story.title }}
     </h1>
     <div class="text-subtitle2 q-mb-md">
-      <q-badge class="badge-sm" color="blue"><time>{{timeAgo(story.created_date)}}</time></q-badge>
-      <q-badge class="q-ma-sm badge-sm" :color="story.source.color">{{story.source.name}}</q-badge>
+      <q-badge class="badge-sm" color="blue"><time>{{ $td(timeAgo(story.created_date)) }}</time></q-badge>
+      <q-badge class="q-ma-sm badge-sm" :color="story.source.color">{{ $t(story.source.name) }}</q-badge>
       <a :href="story.url" target="_blank" class="no-deco">
-        <q-badge class="badge-sm" outline color="primary">View article on {{story.source.name}}</q-badge>
+        <q-badge class="badge-sm" outline color="primary">{{ $t('View article on') }} {{ $t(story.source.name) }} </q-badge>
       </a>
       <div class="float-right">
         <q-btn flat round color="red" icon="favorite_border">
@@ -37,6 +37,7 @@
 <script>
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { getters } from './handleStore';
 
 TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
@@ -47,6 +48,9 @@ export default {
     timeAgo(time) {
       return timeAgoFn.format(new Date(time));
     },
+  },
+  computed: {
+    ...getters,
   },
 };
 </script>

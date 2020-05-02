@@ -116,6 +116,13 @@ export default {
     filter: '',
     columns: [
       {
+        name: '_id',
+        label: 'Id',
+        align: 'center',
+        field: '_id',
+        sortable: true,
+      },
+      {
         name: 'name',
         label: 'Name',
         align: 'center',
