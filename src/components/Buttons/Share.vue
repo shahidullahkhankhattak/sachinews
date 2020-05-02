@@ -10,26 +10,29 @@
     >
       <q-list>
         <q-item clickable v-close-popup>
-          <q-item-section>
-            <q-item-label><i class="fab fa-facebook-f q-mr-sm"></i>Instagram</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup>
-          <q-item-section>
-            <q-item-label>Facebook</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable v-close-popup>
-          <q-item-section>
-            <q-item-label>Google</q-item-label>
-          </q-item-section>
+          <SocialShare :details="details" :type="'facebook'"/>
         </q-item>
       </q-list>
     </q-btn-dropdown>
   </span>
 </template>
 <script>
-export default {};
+import SocialShare from '../Sharing/SocialShare';
+
+export default {
+  components: {
+    SocialShare,
+  },
+  data() {
+    return {
+      details: {
+        url: 'https://vuejs.org/',
+        title: 'The Progressive JavaScript Framework',
+        hashtags: 'vue, javascript, meta',
+        quote: 'Vue is a progressive framework for building user interfaces.',
+        description: 'Intuitive, Fast and Composable MVVM for building interactive interfaces.',
+      },
+    };
+  },
+};
 </script>
