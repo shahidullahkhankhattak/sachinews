@@ -84,7 +84,7 @@ export default {
     cancelSearch(e) {
       if (e) e.target.blur();
       this.search = '';
-      this.$router.push('/');
+      this.$router.push(`/${this.locale.iso}/`);
     },
   },
 };

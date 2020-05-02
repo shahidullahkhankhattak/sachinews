@@ -11,12 +11,10 @@
 </template>
 
 <script>
-import { config } from '../../config';
 import { preFetchMethods, getters } from './handleStore';
 
 export default {
   name: 'MainLayout',
-  meta: config.app.meta,
   computed: {
     ...getters,
   },

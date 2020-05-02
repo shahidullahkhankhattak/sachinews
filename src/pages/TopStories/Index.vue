@@ -37,9 +37,21 @@ import { getters, actions, handlePrefetch } from './handleStore';
 import NewsCard from '../../components/Cards/NewsCard';
 import NoNews from '../../components/Cards/NoNews';
 import NewsLoader from '../../components/Loaders/NewsLoader';
+import { config } from '../../config';
 
+const { app: { logo: { title } } } = config;
 export default {
   name: 'TopStories',
+  meta() {
+    return {
+      title: `Top Stories - ${title}`,
+      meta: {
+        description: { name: 'description', content: 'Get & scroll through the latest news to the current second stories from all the sources througout the globe' },
+        ogTitle: { name: 'og:title', content: `Top Stories - ${title}` },
+        ogDescription: { name: 'og:description', content: 'Get & scroll through the latest news to the current second stories from all the sources througout the globe' },
+      },
+    };
+  },
   components: { NewsCard, NewsLoader, NoNews },
   computed: {
     ...getters,
