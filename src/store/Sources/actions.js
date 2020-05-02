@@ -32,7 +32,7 @@ export async function add(context, { form, reset }) {
 
 export async function fetchUserSources({ commit }, language) {
   try {
-    const { list } = await axios.get(`${USER_SOURCE}?lang=${language && language._id}`, axiosConfig.noLoader);
+    const { list } = await axios.get(`${USER_SOURCE}?lang=${(language && language._id) || ''}`, axiosConfig.noLoader);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);

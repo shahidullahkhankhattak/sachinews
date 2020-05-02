@@ -47,15 +47,14 @@ module.exports.getStories = async (req, res) => {
 
 module.exports.getStory = async (req, res) => {
   try {
-    const { slug } = req.params;
+    const { id } = req.params;
     const address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    const [story] = await Story.findOneWithAllInfo({ slug }, address);
+    const [story] = await Story.findOneWithAllInfo({ _id: Story.ObjectId(id) }, address);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       story,
     });
   } catch (ex) {
-    console.log(ex);
     res.status(resServerError).json({
       statusCode: resServerError,
       errors: [serverError],

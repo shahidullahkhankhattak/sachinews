@@ -66,7 +66,7 @@ export default {
         source,
         color,
         category,
-        link: `/${this.locale.iso}/story/${this.story.slug}`,
+        link: `/${this.locale.iso}/story/${this.story._id}/${this.story.slug}`,
       };
     },
   },

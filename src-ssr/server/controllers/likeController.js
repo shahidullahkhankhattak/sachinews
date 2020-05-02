@@ -26,7 +26,7 @@ module.exports.create = async function (req, res) {
     req.body.address = address;
     const exists = await Like.findOne(req.body);
     if (exists) {
-      await Like.remove(req.body);
+      await Like.deleteOne(req.body);
       return res.status(resSuccess).json({
         statusCode: resSuccess,
       });

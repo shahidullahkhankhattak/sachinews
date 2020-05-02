@@ -55,10 +55,10 @@ export async function fetchStories({ commit, rootState, getters: { stories: allS
   }
 }
 
-export async function fetchStory({ commit }, slug) {
+export async function fetchStory({ commit }, id) {
   try {
     commit(SET_LOADING, true);
-    const { story } = await axios.get(`${STORY}${slug}`, axiosConfig.noLoader);
+    const { story } = await axios.get(`${STORY}${id}`, axiosConfig.noLoader);
     commit(FETCH_STORY, story);
     commit(SET_LOADING, false);
   } catch (ex) {

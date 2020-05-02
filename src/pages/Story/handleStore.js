@@ -17,6 +17,6 @@ export const getters = {
 };
 
 export function handlePrefetch({ store, currentRoute }) {
-  const { slug } = currentRoute.params;
-  return store.dispatch(FETCH_STORY, slug);
+  const { id } = currentRoute.params;
+  return store.dispatch(FETCH_STORY, id);
 }
