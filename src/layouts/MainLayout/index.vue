@@ -27,6 +27,13 @@ export default {
     const language = languages.find((lang) => lang.iso === locale);
     await preFetchMethods.setLocale(params, language);
     await preFetchMethods.fetchTranslations(params, language);
+    if (!process.browser) {
+      params.ssrContext.Q_HTML_ATTRS = `lang=${language && language.iso} dir=${language && language.direction} %%Q_HTML_ATTRS%%`;
+    } else {
+      const html = document.querySelector('html');
+      html.setAttribute('lang', language.iso);
+      html.setAttribute('dir', language.direction);
+    }
     return preFetchMethods.fetchSources(params, language);
   },
   async beforeMount() {
