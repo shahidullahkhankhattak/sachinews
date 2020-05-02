@@ -31,7 +31,7 @@ module.exports.getStories = async (req, res) => {
       filter['source.lang'] = Story.ObjectId(lang);
     }
 
-    const { stories, total } = await Story.withSourceAndCategory(filter, sort, offset, perPage, address);
+    const { stories, total } = await Story.findWithInfo(filter, sort, offset, perPage, address);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       stories,
@@ -48,12 +48,14 @@ module.exports.getStories = async (req, res) => {
 module.exports.getStory = async (req, res) => {
   try {
     const { slug } = req.params;
-    const story = await Story.findOne({ slug }).populate('source').populate('category').exec();
+    const address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const [story] = await Story.findOneWithAllInfo({ slug }, address);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       story,
     });
   } catch (ex) {
+    console.log(ex);
     res.status(resServerError).json({
       statusCode: resServerError,
       errors: [serverError],

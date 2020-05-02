@@ -66,10 +66,10 @@ export async function fetchStory({ commit }, slug) {
   }
 }
 
-export async function likeStory({ commit }, id) {
+export async function likeStory({ commit }, { id, main }) {
   try {
     await axios.post(LIKES_REST, { story: id }, axiosConfig.noLoader);
-    commit(LIKE_STORY, id);
+    commit(LIKE_STORY, { id, main });
   } catch (ex) {
     se2errors(ex);
   }

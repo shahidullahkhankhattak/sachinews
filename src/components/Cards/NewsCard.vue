@@ -28,7 +28,7 @@
 
     <q-card-actions>
       <q-btn
-        @click="likeStory(news._id)"
+        @click="likeStory({ id: news._id })"
         flat
         round
         :color="(news.liked && 'red') || 'orange'"
