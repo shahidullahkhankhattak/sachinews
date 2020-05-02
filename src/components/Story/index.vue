@@ -9,13 +9,9 @@
       height="400px"
       native-context-menu
     >
-      <div class="absolute-bottom text-subtitle1 text-center">
-        {{ story.title }}
-      </div>
+      <div class="absolute-bottom text-subtitle1 text-center" v-html="story.title"></div>
     </q-img>
-    <h1 class="article-title q-my-md">
-      {{ story.title }}
-    </h1>
+    <h1 class="article-title q-my-md" v-html="story.title"></h1>
     <div class="text-subtitle2 q-mb-md">
       <q-badge class="badge-sm" color="blue"><time>{{ $td(timeAgo(story.created_date)) }}</time></q-badge>
       <q-badge class="q-ma-sm badge-sm" :color="story.source.color">{{ $t(story.source.name) }}</q-badge>
