@@ -36,6 +36,7 @@ export async function fetchStories({ commit, rootState, getters: { stories: allS
     if (totalStories > -1 && offset >= totalStories) {
       return done && done();
     }
+    if (trending) { query.trending = true; }
 
     commit(SET_LOADING, true);
     const $query = routeQueryToString({
@@ -43,7 +44,6 @@ export async function fetchStories({ commit, rootState, getters: { stories: allS
       offset,
       perPage,
       lang: locale && locale._id,
-      trending,
     });
     const { stories, total } = await axios.get(`${TOP_STORIES}?${$query}`, axiosConfig.noLoader);
     commit(FETCH_STORIES, { stories, total, done });

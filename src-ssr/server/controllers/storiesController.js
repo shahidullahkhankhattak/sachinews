@@ -30,7 +30,6 @@ module.exports.getStories = async (req, res) => {
     if (lang) {
       filter['source.lang'] = Story.ObjectId(lang);
     }
-
     const { stories, total } = await Story.findWithInfo(filter, sort, offset, perPage, address);
     res.status(resSuccess).json({
       statusCode: resSuccess,
