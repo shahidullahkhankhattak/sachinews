@@ -2,15 +2,23 @@
   <q-card class="news-card" flat bordered>
     <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
       <q-card-section class="q-pt-xs col-8">
-        <div class="text-overline">{{ $t(news.source) }} - {{ $t(news.category) }}</div>
-        <router-link class="news-title-link" :to="`/${locale.iso}/story/${story.slug}`">
+        <div class="text-overline">
+          {{ $t(news.source) }} - {{ $t(news.category) }}
+        </div>
+        <router-link
+          class="news-title-link"
+          :to="`/${locale.iso}/story/${story.slug}`"
+        >
           <h2 class="text-h5 q-mt-sm q-mb-xs" v-html="news.title"></h2>
         </router-link>
         <div class="text-subtitle2">
           <time>{{ $td(timeAgo(story.created_date)) }}</time>
         </div>
         <q-space />
-        <div class="text-caption text-grey-8 q-mt-sm" v-html="news.description"></div>
+        <div
+          class="text-caption text-grey-8 q-mt-sm"
+          v-html="news.description"
+        ></div>
       </q-card-section>
 
       <q-card-section class="col-4 flex flex-right">
@@ -19,8 +27,14 @@
     </q-card-section>
 
     <q-card-actions>
-      <q-btn flat round color="red" icon="favorite_border">
-        <q-badge color="red" floating>4</q-badge>
+      <q-btn
+        @click="likeStory(news._id)"
+        flat
+        round
+        :color="(news.liked && 'red') || 'orange'"
+        icon="whatshot"
+      >
+        <q-badge :color="(news.liked && 'red') || 'grey'" floating>{{ news.likes }}</q-badge>
       </q-btn>
       <Share />
       <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
@@ -31,7 +45,7 @@
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Share from '../../components/Buttons/Share';
-import { getters } from './handleStore';
+import { getters, actions } from './handleStore';
 
 TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
@@ -44,25 +58,16 @@ export default {
     ...getters,
     news() {
       const {
-        title,
-        description,
-        media,
         source: [{ name: source, color }],
         category: [{ name: category }],
-        slug,
-      } = this.story || { source: [{}], category: [{}] };
+      } = this.story;
       return {
-        source,
-        category,
-        slug,
-        title,
-        description,
-        media,
-        color,
+        ...this.story, source, color, category,
       };
     },
   },
   methods: {
+    ...actions,
     timeAgo(time) {
       this.$t(time);
       return timeAgoFn.format(new Date(time));

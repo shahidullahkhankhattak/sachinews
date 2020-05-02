@@ -10,12 +10,16 @@ const {
     TOP_STORIES,
     STORY,
   },
+  LIKES_ENDPOINTS: {
+    REST: LIKES_REST,
+  },
 } = apiEndpoints;
 const {
   FETCH_STORIES,
   SET_LOADING,
   RESET_STORIES,
   FETCH_STORY,
+  LIKE_STORY,
 } = Mutations;
 
 export async function fetchStories({ commit, rootState, getters: { stories: allStories, total: totalStories, perPage } }, {
@@ -58,6 +62,15 @@ export async function fetchStory({ commit }, slug) {
     commit(SET_LOADING, false);
   } catch (ex) {
     commit(SET_LOADING, false);
+    se2errors(ex);
+  }
+}
+
+export async function likeStory({ commit }, id) {
+  try {
+    await axios.post(LIKES_REST, { story: id }, axiosConfig.noLoader);
+    commit(LIKE_STORY, id);
+  } catch (ex) {
     se2errors(ex);
   }
 }

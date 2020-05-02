@@ -14,8 +14,11 @@ module.exports.getStories = async (req, res) => {
     const {
       offset, perPage, category, source, search, lang,
     } = req.query;
+    const address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const filter = {};
-
+    const sort = {
+      created_date: -1,
+    };
     if (category) filter['category.slug'] = category;
     if (source) filter['source.slug'] = source;
     if (search) {
@@ -28,7 +31,7 @@ module.exports.getStories = async (req, res) => {
       filter['source.lang'] = Story.ObjectId(lang);
     }
 
-    const { stories, total } = await Story.withSourceAndCategory(filter, offset, perPage);
+    const { stories, total } = await Story.withSourceAndCategory(filter, sort, offset, perPage, address);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       stories,

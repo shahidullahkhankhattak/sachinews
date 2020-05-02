@@ -1,6 +1,6 @@
 <template>
   <span class="relative-position q-mx-sm">
-    <q-badge floating>5</q-badge>
+    <!-- <q-badge floating>5</q-badge> -->
     <q-btn-dropdown
       class="no-caret round"
       flat

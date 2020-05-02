@@ -32,4 +32,7 @@ export const apiEndpoints = {
     REST: `${apiV1Endpoint}/admin/translation`,
     USER_TRANSLATION: `${apiV1Endpoint}/translation`,
   },
+  LIKES_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/like`,
+  },
 };

@@ -35,6 +35,9 @@ module.exports = {
     UPDATED: 'Translation updated successfully.',
     DELETED: 'Translation deleted successfully.',
   },
+  likeMsgs: {
+    INVALID_STORY: 'Story does not exist.',
+  },
   categoryMsgs: {
     EXISTS: 'Category already exists.',
     CREATED: 'Category added successfully.',
