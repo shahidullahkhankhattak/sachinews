@@ -24,7 +24,7 @@
       <q-badge class="badge-sm" color="blue"
         ><time>{{ $td(timeAgo(news.created_date)) }}</time></q-badge
       >
-      <q-badge class="q-ma-sm badge-sm" :color="story.color">{{
+      <q-badge class="q-ma-sm badge-sm" :style="`background: ${news.color}`">{{
         $t(news.source)
       }}</q-badge>
       <a :href="news.url" target="_blank" class="no-deco">
