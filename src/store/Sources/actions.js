@@ -4,6 +4,7 @@ import { se2errors } from '../formatters';
 import { Mutations } from './constants';
 import { getWithSlug } from '../../utils/objectHelpers';
 import { Notify } from '../../plugins/notify';
+import { axiosConfig } from '../../config/constants';
 
 const {
   SOURCE_ENDPOINTS: {
@@ -20,7 +21,8 @@ const {
 
 export async function add(context, { form, reset }) {
   try {
-    const { item } = await axios.post(REST_API, getWithSlug(form));
+    const newForm = { ...form, lang: form.lang.value };
+    const { item } = await axios.post(REST_API, getWithSlug(newForm));
     context.commit(ADD, item);
     reset();
   } catch (ex) {
@@ -28,9 +30,9 @@ export async function add(context, { form, reset }) {
   }
 }
 
-export async function fetchUserSources({ commit }) {
+export async function fetchUserSources({ commit }, language) {
   try {
-    const { list } = await axios.get(USER_SOURCE);
+    const { list } = await axios.get(`${USER_SOURCE}?lang=${(language && language._id) || ''}`, axiosConfig.noLoader);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);
@@ -77,7 +79,8 @@ export async function _delete(context, item) {
 
 export async function update(context, { item, toggleDialog }) {
   try {
-    const { item: _item } = await axios.put(REST_API, getWithSlug(item));
+    const newItem = { ...item, lang: item.lang.value };
+    const { item: _item } = await axios.put(REST_API, getWithSlug(newItem));
     context.commit(UPDATE, _item);
     toggleDialog();
   } catch (ex) {

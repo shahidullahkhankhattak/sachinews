@@ -6,7 +6,8 @@ const SourceController = require('../../../controllers/sourceController');
 const CategoryController = require('../../../controllers/categoryController');
 const SourceLinkController = require('../../../controllers/sourceLinkController');
 const SelectorController = require('../../../controllers/selectorController');
-const languageController = require('../../../controllers/languageController');
+const LanguageController = require('../../../controllers/languageController');
+const TranslationController = require('../../../controllers/translationController');
 
 // middlewares
 const { checkAuthAdmin } = require('../../../middleware/auth');
@@ -16,6 +17,7 @@ const CategoryValidator = require('../../../validators/categoryValidators');
 const SourceLinkValidator = require('../../../validators/sourceLinkValidator');
 const selectorValidator = require('../../../validators/selectorValidators');
 const languageValidator = require('../../../validators/languageValidator');
+const translationValidator = require('../../../validators/translationValidators');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -52,9 +54,16 @@ router.route('/selector/:source?')
 
 // languages routes crud
 router.route('/language')
-  .get(languageController.index)
-  .post([languageValidator.create], languageController.create)
-  .put([languageValidator.update], languageController.update)
-  .delete([languageValidator.delete], languageController.destroy);
+  .get(LanguageController.index)
+  .post([languageValidator.create], LanguageController.create)
+  .put([languageValidator.update], LanguageController.update)
+  .delete([languageValidator.delete], LanguageController.destroy);
+
+// translations routes crud
+router.route('/translation')
+  .get(TranslationController.index)
+  .post([translationValidator.create], TranslationController.create)
+  .put([translationValidator.update], TranslationController.update)
+  .delete([translationValidator.delete], TranslationController.destroy);
 
 module.exports = router;

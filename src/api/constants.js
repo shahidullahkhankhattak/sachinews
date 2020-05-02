@@ -12,6 +12,7 @@ export const apiEndpoints = {
   },
   LANGUAGES_ENDPOITNS: {
     REST: `${apiV1Endpoint}/admin/language`,
+    USER_LANGUAGE: `${apiV1Endpoint}/language`,
   },
   CATEGORY_ENDPOINTS: {
     REST: `${apiV1Endpoint}/admin/category`,
@@ -26,5 +27,12 @@ export const apiEndpoints = {
   STORIES_ENDPOINTS: {
     TOP_STORIES: `${apiV1Endpoint}/stories/get-stories`,
     STORY: `${apiV1Endpoint}/stories/get-story/`,
+  },
+  TRANSLATIONS_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/admin/translation`,
+    USER_TRANSLATION: `${apiV1Endpoint}/translation`,
+  },
+  LIKES_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/like`,
   },
 };

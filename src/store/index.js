@@ -9,6 +9,7 @@ import Categories from './Categories';
 import SourceLinks from './SourceLinks';
 import Selectors from './Selectors';
 import Languages from './Languages';
+import Translations from './Translations';
 
 Vue.use(Vuex);
 
@@ -23,6 +24,7 @@ export default function (/* { ssrContext } */) {
       SourceLinks,
       Selectors,
       Languages,
+      Translations,
     },
     strict: process.env.DEV,
   });

@@ -1,6 +1,7 @@
 const { body } = require('express-validator');
 const Source = require('../db/models/Source');
-const { sourceMsgs: { EXISTS } } = require('../responseMessages');
+const Language = require('../db/models/Language');
+const { sourceMsgs: { EXISTS, INVALID_LANGUAGE } } = require('../responseMessages');
 
 module.exports.create = [
   body('name').exists(),
@@ -10,7 +11,13 @@ module.exports.create = [
     if ((item && !_id) || (item && _id && _id !== item._id.toString())) return Promise.reject(EXISTS);
   }),
   body('website').isURL(),
-  body('lang').isIn(['english', 'urdu']),
+  body('lang').exists(),
+  body('lang').custom(async (value) => {
+    const item = await Language.findOne({ _id: value });
+    if (!item) {
+      return Promise.reject(INVALID_LANGUAGE);
+    }
+  }),
   body('color').isHexColor(),
   body('slug').isSlug(),
 ];

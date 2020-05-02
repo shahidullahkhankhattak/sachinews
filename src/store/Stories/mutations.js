@@ -16,3 +16,21 @@ export function resetStories(state) {
 export function fetchStory(state, payload) {
   state.story = payload;
 }
+
+export function likeStory(state, { id, main }) {
+  let item = state.story;
+  if (!main) { item = state.stories.find((_item) => _item._id === id); }
+  if (!item.liked) {
+    Object.assign(item, {
+      ...item,
+      liked: true,
+      likes: (item.likes || 0) + 1,
+    });
+  } else {
+    Object.assign(item, {
+      ...item,
+      liked: false,
+      likes: (item.likes || 0) - 1,
+    });
+  }
+}

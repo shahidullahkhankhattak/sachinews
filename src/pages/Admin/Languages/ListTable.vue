@@ -105,6 +105,13 @@ export default {
         field: 'iso',
         sortable: true,
       },
+      {
+        name: 'direction',
+        align: 'center',
+        label: 'Direction',
+        field: 'direction',
+        sortable: true,
+      },
     ],
   }),
   computed: {

@@ -8,5 +8,5 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
 router.get('/get-stories', storiesController.getStories);
-router.get('/get-story/:slug', storiesController.getStory);
+router.get('/get-story/:id', storiesController.getStory);
 module.exports = router;

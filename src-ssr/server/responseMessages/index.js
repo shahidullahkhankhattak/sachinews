@@ -8,6 +8,7 @@ module.exports = {
   userNotFound: 'Invalid email or password.',
   tokenExpired: 'Session token expired.',
   sourceMsgs: {
+    INVALID_LANGUAGE: 'Language does not exist.',
     EXISTS: 'Source already exists.',
     CREATED: 'Source added successfully.',
     UPDATED: 'Source updated successfully.',
@@ -27,6 +28,16 @@ module.exports = {
     UPDATED: 'Language updated successfully.',
     DELETED: 'Language deleted successfully.',
   },
+  translationMsgs: {
+    INVALID_LANGUAGE: 'Language does not exist.',
+    EXISTS: 'Translation already exists.',
+    CREATED: 'Translation added successfully.',
+    UPDATED: 'Translation updated successfully.',
+    DELETED: 'Translation deleted successfully.',
+  },
+  likeMsgs: {
+    INVALID_STORY: 'Story does not exist.',
+  },
   categoryMsgs: {
     EXISTS: 'Category already exists.',
     CREATED: 'Category added successfully.',
@@ -45,7 +56,7 @@ module.exports = {
     CREATED: 'Selector added successfully.',
     UPDATED: 'Selector updated successfully.',
     DELETED: 'Selector deleted successfully.',
-    INVALID_SOURCE: 'Source does not exists.',
+    INVALID_SOURCE: 'Source does not exist.',
   },
   scrapperMsgs: {
     // SUCCESS: 'Source scrapped successfully.',

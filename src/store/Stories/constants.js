@@ -3,6 +3,7 @@ const PREFIX = 'Stories';
 export const Actions = {
   FETCH_STORIES: `${PREFIX}/fetchStories`,
   FETCH_STORY: `${PREFIX}/fetchStory`,
+  LIKE_STORY: `${PREFIX}/likeStory`,
 };
 
 export const Mutations = {
@@ -10,6 +11,7 @@ export const Mutations = {
   SET_LOADING: 'setLoading',
   RESET_STORIES: 'resetStories',
   FETCH_STORY: 'fetchStory',
+  LIKE_STORY: 'likeStory',
 };
 
 export const Getters = {

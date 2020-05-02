@@ -29,7 +29,7 @@
         @keydown.enter="triggerSearch(search)"
         @keydown.esc="(e) => cancelSearch(e)"
         color="bg-grey-7 shadow-1"
-        placeholder="Search for topics, authors & sources"
+        :placeholder="$t('Search for topics, authors & sources')"
       >
         <template v-slot:prepend>
           <q-icon v-if="!searchFocus" name="search" />
@@ -45,70 +45,46 @@
       <q-space />
 
       <div class="q-gutter-sm row items-center no-wrap">
-        <q-select
-          class="locale_select"
-          map-options
-          outlined
-          behavior="menu"
-          :value="locale"
-          @input="setLocale"
-          :options="langOptions"
-          :dense="true"
-          :options-dense="true"
-        >
-          <template v-slot:prepend>
-            <q-icon name="g_translate" />
-          </template>
-        </q-select>
+        <SelectLocale />
       </div>
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
-import { getters } from './handleStore';
-import { setLocale } from '../../config/configSetters';
 import { config } from '../../config';
+import SelectLocale from '../../components/Select/SelectLocale';
+import { getters } from './handleStore';
 
 const {
   app: { logo },
 } = config && config;
 
 export default {
+  components: {
+    SelectLocale,
+  },
   data: () => ({
     logo,
     search: '',
     searchFocus: false,
-    langOptions: [
-      {
-        label: 'English',
-        value: 'english',
-      },
-      {
-        label: 'اردو',
-        value: 'urdu',
-      },
-    ],
   }),
+  computed: {
+    ...getters,
+  },
   methods: {
     toggleSidebar() {
       this.$root.$emit('toggleSidebar');
     },
-    setLocale,
     triggerSearch(keyword) {
       if (keyword && keyword.length >= 2) {
-        this.$router.push(`/search/${keyword}`);
+        this.$router.push(`/${this.locale.iso}/search/${keyword}`);
       }
     },
     cancelSearch(e) {
       if (e) e.target.blur();
       this.search = '';
-      this.$router.push('/');
-    },
-  },
-  computed: {
-    locale: {
-      get: getters.locale,
+      this.$router.push(`/${this.locale.iso}/`);
     },
   },
 };

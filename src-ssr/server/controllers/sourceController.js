@@ -23,7 +23,10 @@ const {
 
 module.exports.index = async function (_req, res) {
   try {
-    const list = await Source.find();
+    const { lang } = _req.query && _req.query;
+    const query = {};
+    if (lang) query.lang = lang;
+    const list = await Source.find(query).populate('lang').exec();
     res.status(resSuccess).json({
       statusCode: resSuccess,
       list,

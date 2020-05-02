@@ -15,6 +15,8 @@ module.exports.create = [
     const item = await Language.findOne({ iso: value });
     if ((item && !_id) || (item && _id && _id !== item._id.toString())) return Promise.reject(EXISTS);
   }),
+  body('direction').exists(),
+  body('direction').isIn(['ltr', 'rtl']),
 ];
 
 module.exports.update = [

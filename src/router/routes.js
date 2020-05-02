@@ -1,26 +1,12 @@
 
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout'),
-    children: [
-      { path: '', name: 'top-stories', component: () => import('pages/TopStories') },
-      { path: '/category/:slug', name: 'categories-stories', component: () => import('pages/Category') },
-      { path: '/source/:slug', name: 'source-stories', component: () => import('pages/Source') },
-      { path: '/search/:q', name: 'search-stories', component: () => import('pages/Search') },
-      { path: '/trending', component: () => import('pages/Trending') },
-      { path: '/story/:slug', component: () => import('pages/Story') },
-    ],
+    path: '',
+    redirect: '/en/',
   },
   {
-    path: '/login',
-    meta: {
-      guest: true,
-    },
-    component: () => import('layouts/Login'),
-    children: [
-      { path: '', name: 'login', component: () => import('pages/Login') },
-    ],
+    path: '/404',
+    component: () => import('pages/Error404.vue'),
   },
   {
     path: '/admin',
@@ -38,6 +24,29 @@ const routes = [
       { path: 'select-source', name: 'dashboard-select-source', component: () => import('src/pages/Admin/SelectSource') },
       { path: 'scrap-test', name: 'dashboard-scrap-test', component: () => import('src/pages/Admin/ScrapTest') },
       { path: 'languages', name: 'dashboard-languages', component: () => import('src/pages/Admin/Languages') },
+      { path: 'translations', name: 'dashboard-translations', component: () => import('src/pages/Admin/Translations') },
+    ],
+  },
+  {
+    path: '/:locale/',
+    component: () => import('layouts/MainLayout'),
+    children: [
+      { path: '', name: 'top-stories', component: () => import('pages/TopStories') },
+      { path: 'category/:slug', name: 'categories-stories', component: () => import('pages/Category') },
+      { path: 'source/:slug', name: 'source-stories', component: () => import('pages/Source') },
+      { path: 'search/:q', name: 'search-stories', component: () => import('pages/Search') },
+      { path: 'trending', name: 'trending-stories', component: () => import('pages/Trending') },
+      { path: 'story/:id/:slug', name: 'story-details', component: () => import('pages/Story') },
+    ],
+  },
+  {
+    path: '/login',
+    meta: {
+      guest: true,
+    },
+    component: () => import('layouts/Login'),
+    children: [
+      { path: '', name: 'login', component: () => import('pages/Login') },
     ],
   },
 ];

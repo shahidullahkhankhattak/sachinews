@@ -51,8 +51,17 @@
   &sm
     margin-right: 8px
 
+.q-badge--floating
+  right: -3px
+  left: auto
+  &.left
+    left: -3px
+    right: auto
 
 [dir='rtl']
+  font-size: 17px
+  .text-overline
+    letter-spacing: 0.05em
   .float-
     &right
       float: left
@@ -61,4 +70,11 @@
   .q-mr
     &sm
       margin-left: 8px
+
+  .q-badge--floating
+    left: -3px
+    right: auto
+    &.left
+      right: -3px
+      left: auto
 

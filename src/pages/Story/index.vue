@@ -16,8 +16,16 @@ import { getters, handlePrefetch } from './handleStore';
 export default {
   meta() {
     return {
-      title: this.story && this.story.title,
-      description: this.story && this.story.description,
+      title: this.story.title,
+      meta: {
+        description: { name: 'description', content: this.story.description },
+        ogTitle: { name: 'og:title', content: `${this.story.title}` },
+        dcTitle: { name: 'DC.title', content: this.story.title },
+        ogDescription: { name: 'og:description', content: this.story.description },
+        ogImage: { name: 'og:image', content: this.story.media },
+        ogUrl: { name: 'og:url', content: this.story.url },
+        keywords: { name: 'keywords', content: this.story.title.split(' ').join(', ') },
+      },
     };
   },
   components: {

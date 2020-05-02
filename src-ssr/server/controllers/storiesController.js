@@ -12,10 +12,13 @@ const {
 module.exports.getStories = async (req, res) => {
   try {
     const {
-      offset, perPage, category, source, search,
+      offset, perPage, category, source, search, lang, trending,
     } = req.query;
+    const address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const filter = {};
-
+    const sort = {
+    };
+    if (trending) { sort.likes = -1; } else sort.created_date = -1;
     if (category) filter['category.slug'] = category;
     if (source) filter['source.slug'] = source;
     if (search) {
@@ -24,8 +27,10 @@ module.exports.getStories = async (req, res) => {
         { description: new RegExp(search, 'i') },
       ];
     }
-
-    const { stories, total } = await Story.withSourceAndCategory(filter, offset, perPage);
+    if (lang) {
+      filter['source.lang'] = Story.ObjectId(lang);
+    }
+    const { stories, total } = await Story.findWithInfo(filter, sort, offset, perPage, address);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       stories,
@@ -41,8 +46,9 @@ module.exports.getStories = async (req, res) => {
 
 module.exports.getStory = async (req, res) => {
   try {
-    const { slug } = req.params;
-    const story = await Story.findOne({ slug }).populate('source').populate('category').exec();
+    const { id } = req.params;
+    const address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const [story] = await Story.findOneWithAllInfo({ _id: Story.ObjectId(id) }, address);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       story,
