@@ -71,6 +71,7 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
       $sort: sort,
     },
   ];
+
   const countLookupQuery = [...lookupQuery];
   countLookupQuery.push({
     $count: 'total',

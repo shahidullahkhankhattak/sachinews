@@ -9,9 +9,7 @@
       icon="share"
     >
       <q-list>
-        <q-item clickable v-close-popup>
-          <SocialShare :details="details" :type="'facebook'"/>
-        </q-item>
+        <SocialShare :details="socialDetails" />
       </q-list>
     </q-btn-dropdown>
   </span>
@@ -20,19 +18,19 @@
 import SocialShare from '../Sharing/SocialShare';
 
 export default {
+  props: ['details'],
   components: {
     SocialShare,
   },
-  data() {
-    return {
-      details: {
-        url: 'https://vuejs.org/',
-        title: 'The Progressive JavaScript Framework',
-        hashtags: 'vue, javascript, meta',
-        quote: 'Vue is a progressive framework for building user interfaces.',
-        description: 'Intuitive, Fast and Composable MVVM for building interactive interfaces.',
-      },
-    };
+  computed: {
+    socialDetails() {
+      return {
+        ...this.details,
+        url: `${document && document.location.origin}${this.details.link}`,
+        hashtags: this.details.title.split(' ').join(','),
+        quote: this.details.description,
+      };
+    },
   },
 };
 </script>

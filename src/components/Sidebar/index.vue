@@ -118,7 +118,7 @@ export default {
     open: false,
     links1: [
       { icon: 'web', text: 'Top stories', link: '' },
-      { icon: 'trending_up', text: 'Trending', link: '/trending' },
+      { icon: 'trending_up', text: 'Trending', link: 'trending' },
       // { icon: 'person', text: 'For you' },
       // { icon: 'star_border', text: 'Favourites' },
       // { icon: 'search', text: 'Saved searches' },

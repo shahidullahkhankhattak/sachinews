@@ -23,7 +23,7 @@ const {
 } = Mutations;
 
 export async function fetchStories({ commit, rootState, getters: { stories: allStories, total: totalStories, perPage } }, {
-  done, refresh, query,
+  done, refresh, query, trending,
 }) {
   const { locale } = rootState.App.config;
   try {
@@ -43,6 +43,7 @@ export async function fetchStories({ commit, rootState, getters: { stories: allS
       offset,
       perPage,
       lang: locale && locale._id,
+      trending,
     });
     const { stories, total } = await axios.get(`${TOP_STORIES}?${$query}`, axiosConfig.noLoader);
     commit(FETCH_STORIES, { stories, total, done });

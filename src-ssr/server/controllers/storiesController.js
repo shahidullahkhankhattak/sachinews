@@ -12,13 +12,13 @@ const {
 module.exports.getStories = async (req, res) => {
   try {
     const {
-      offset, perPage, category, source, search, lang,
+      offset, perPage, category, source, search, lang, trending,
     } = req.query;
     const address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const filter = {};
     const sort = {
-      created_date: -1,
     };
+    if (trending) { sort.likes = -1; } else sort.created_date = -1;
     if (category) filter['category.slug'] = category;
     if (source) filter['source.slug'] = source;
     if (search) {

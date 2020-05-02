@@ -35,8 +35,8 @@ const routes = [
       { path: 'category/:slug', name: 'categories-stories', component: () => import('pages/Category') },
       { path: 'source/:slug', name: 'source-stories', component: () => import('pages/Source') },
       { path: 'search/:q', name: 'search-stories', component: () => import('pages/Search') },
-      { path: 'trending', component: () => import('pages/Trending') },
-      { path: 'story/:slug', component: () => import('pages/Story') },
+      { path: 'trending', name: 'trending-stories', component: () => import('pages/Trending') },
+      { path: 'story/:slug', name: 'story-details', component: () => import('pages/Story') },
     ],
   },
   {

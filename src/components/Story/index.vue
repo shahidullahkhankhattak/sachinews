@@ -43,7 +43,7 @@
           <q-badge class="left" color="red" floating>{{ news.likes }}</q-badge>
         </q-btn>
         <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
-        <q-btn flat round color="primary" icon="share" />
+        <Share :details="news" />
       </div>
       <div class="clearfix"></div>
     </div>
@@ -53,6 +53,7 @@
 <script>
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import Share from '../Buttons/Share';
 import { getters, actions } from './handleStore';
 
 TimeAgo.addLocale(en);
@@ -60,6 +61,9 @@ const timeAgoFn = new TimeAgo('en-US');
 
 export default {
   props: ['story'],
+  components: {
+    Share,
+  },
   methods: {
     ...actions,
     timeAgo(time) {
@@ -78,6 +82,7 @@ export default {
         source,
         color,
         category,
+        link: `/${this.locale.iso}/story/${this.story.slug}`,
       };
     },
   },

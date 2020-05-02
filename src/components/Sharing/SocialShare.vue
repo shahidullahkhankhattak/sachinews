@@ -9,24 +9,23 @@
     inline-template
   >
     <div class="share-items">
-      <network network="email">
-        <i class="fa fa-envelope"></i> Email {{ type }}
+      <network network="facebook" class="bg-blue-9 q-pa-sm q-px-md cursor-pointer text-white">
+        <i class="fab fa-facebook q-mr-sm"></i> {{ $t('Facebook') }}
       </network>
-      <network network="facebook">
-        <i class="fa fa-facebook"></i> Facebook
+      <network network="twitter" class="bg-blue-4 q-pa-sm q-px-md cursor-pointer text-white">
+        <i class="fab fa-twitter q-mr-sm"></i> {{ $t('Twitter' )}}
       </network>
-      <network network="googleplus">
-        <i class="fa fa-google-plus"></i> Google +
+      <network network="whatsapp" class="bg-green-14 q-pa-sm q-px-md cursor-pointer text-white">
+        <i class="fab fa-whatsapp q-mr-sm"></i> {{ $t('Whatsapp') }}
       </network>
-      <network network="line"> <i class="fa fa-line"></i> Line </network>
-      <network network="linkedin">
-        <i class="fa fa-linkedin"></i> LinkedIn
+      <network network="linkedin" class="bg-cyan-6 q-pa-sm q-px-md cursor-pointer text-white">
+        <i class="fab fa-linkedin q-mr-sm"></i> {{ $t('LinkedIn') }}
       </network>
-      <network network="odnoklassniki">
+      <network network="pinterest" class="bg-red-7 q-pa-sm q-px-md cursor-pointer text-white">
+        <i class="fab fa-pinterest q-mr-sm"></i>{{ $t('Pinterest') }}
+      </network>
+      <!-- <network network="odnoklassniki">
         <i class="fa fa-odnoklassniki"></i> Odnoklassniki
-      </network>
-      <network network="pinterest">
-        <i class="fa fa-pinterest"></i> Pinterest
       </network>
       <network network="reddit"> <i class="fa fa-reddit"></i> Reddit </network>
       <network network="skype"> <i class="fa fa-skype"></i> Skype </network>
@@ -34,14 +33,14 @@
       <network network="telegram">
         <i class="fa fa-telegram"></i> Telegram
       </network>
-      <network network="twitter">
-        <i class="fa fa-twitter"></i> Twitter
-      </network>
       <network network="vk"> <i class="fa fa-vk"></i> VKontakte </network>
       <network network="weibo"> <i class="fa fa-weibo"></i> Weibo </network>
-      <network network="whatsapp">
-        <i class="fa fa-whatsapp"></i> Whatsapp
+      <network network="email">
+        <i class="fa fa-envelope"></i> Email
       </network>
+      <network network="googleplus">
+        <i class="fa fa-google-plus"></i> Google +
+      </network> -->
     </div>
   </social-sharing>
 </template>

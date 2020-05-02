@@ -7,7 +7,7 @@
         </div>
         <router-link
           class="news-title-link"
-          :to="`/${locale.iso}/story/${story.slug}`"
+          :to="news.link"
         >
           <h2 class="text-h5 q-mt-sm q-mb-xs" v-html="news.title"></h2>
         </router-link>
@@ -36,7 +36,7 @@
       >
         <q-badge :color="(news.liked && 'red') || 'grey'" floating>{{ news.likes }}</q-badge>
       </q-btn>
-      <Share />
+      <Share :details="news" />
       <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
     </q-card-actions>
   </q-card>
@@ -62,7 +62,11 @@ export default {
         category: [{ name: category }],
       } = this.story;
       return {
-        ...this.story, source, color, category,
+        ...this.story,
+        source,
+        color,
+        category,
+        link: `/${this.locale.iso}/story/${this.story.slug}`,
       };
     },
   },
