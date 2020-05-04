@@ -92,7 +92,7 @@ module.exports.destroy = async function (req, res) {
         });
     }
     const { _id } = req.body;
-    await Language.deleteOne({ _id });
+    await Language.findOneAndDelete({ _id });
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: DELETED,

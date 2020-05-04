@@ -114,7 +114,7 @@ module.exports.destroy = async function (req, res) {
         });
       }
     }
-    await Source.deleteOne({ _id });
+    await Source.findOneAndDelete({ _id });
     if (confirm) {
       await SourceLink.deleteMany({ source: _id });
       await Selector.deleteMany({ source: _id });
