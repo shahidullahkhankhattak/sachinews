@@ -1,11 +1,15 @@
 const { validationResult } = require('express-validator');
 const Category = require('../db/models/Category');
+const SourceLink = require('../db/models/SourceLink');
+const Story = require('../db/models/Story');
+
 const {
   serverError,
   categoryMsgs: {
     CREATED,
     UPDATED,
     DELETED,
+    haveNumChildren,
   },
 } = require('../responseMessages');
 const {
@@ -13,6 +17,7 @@ const {
     resSuccess,
     resServerError,
     resUnprocessibleEntity,
+    resIncomplete,
   },
 } = require('../config/index');
 
@@ -91,8 +96,27 @@ module.exports.destroy = async function (req, res) {
           errors: validator.errors,
         });
     }
-    const { _id } = req.body;
+    const { _id, confirm } = req.body;
+    if (!confirm) {
+      const linksCount = await SourceLink.countDocuments({
+        category: _id,
+      });
+      const storiesCount = await Story.countDocuments({
+        category: _id,
+      });
+      if (linksCount || storiesCount) {
+        return res.status(resIncomplete).json({
+          statusCode: resIncomplete,
+          confirmObj: { ...req.body, confirm: true },
+          errors: [haveNumChildren({ linksCount, storiesCount })],
+        });
+      }
+    }
     await Category.findOneAndDelete({ _id });
+    if (confirm) {
+      await SourceLink.deleteMany({ category: _id });
+      await Story.deleteMany({ category: _id });
+    }
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: DELETED,

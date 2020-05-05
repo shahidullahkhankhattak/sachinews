@@ -13,12 +13,14 @@ module.exports = {
     CREATED: 'Source added successfully.',
     UPDATED: 'Source updated successfully.',
     DELETED: 'Source deleted successfully.',
-    haveNumChildren: ({ linksCount, selectorsCount }) => {
+    haveNumChildren: ({ linksCount, selectorsCount, storiesCount }) => {
       const selectorMsg = selectorsCount && `${selectorsCount} selector${(selectorsCount > 1 && 's') || ''}`;
+      const storyMsg = storiesCount && `${storiesCount} Stor${(storiesCount > 1 && 'ies') || 'y'}`;
       const linksMsg = linksCount && `${linksCount} link${(linksCount > 1 && 's') || ''}`;
-      const relativeChildCountMsg = ((linksCount > 1 || selectorsCount > 1) && 'delete them all too') || 'delete it too';
+      const relativeChildCountMsg = ((linksCount > 1 || selectorsCount > 1 || storiesCount > 1) && 'delete them all too') || 'delete it too';
+      const combined = [selectorMsg, storyMsg, linksMsg].filter((c) => c).join(', ');
       return {
-        msg: `This source have ${(selectorMsg && linksMsg && `${selectorMsg} and ${linksMsg}`) || selectorMsg || linksMsg} are you sure you want to ${relativeChildCountMsg}?`,
+        msg: `This source have ${combined} are you sure you want to ${relativeChildCountMsg}?`,
       };
     },
   },
@@ -43,6 +45,15 @@ module.exports = {
     CREATED: 'Category added successfully.',
     UPDATED: 'Category updated successfully.',
     DELETED: 'Category deleted successfully.',
+    haveNumChildren: ({ linksCount, storiesCount }) => {
+      const storyMsg = storiesCount && `${storiesCount} Stor${(storiesCount > 1 && 'ies') || 'y'}`;
+      const linksMsg = linksCount && `${linksCount} link${(linksCount > 1 && 's') || ''}`;
+      const relativeChildCountMsg = ((linksCount > 1 || storyMsg > 1) && 'delete them all too') || 'delete it too';
+      const combined = [storyMsg, linksMsg].filter((c) => c).join(', ');
+      return {
+        msg: `This category have ${combined} are you sure you want to ${relativeChildCountMsg}?`,
+      };
+    },
   },
   sourceLinksMsgs: {
     EXISTS: 'Source link already exists.',
