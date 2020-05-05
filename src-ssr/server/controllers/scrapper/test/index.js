@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer');
 const SourceLink = require('../../../db/models/SourceLink');
 const Selector = require('../../../db/models/Selector');
 const Source = require('../../../db/models/Source');
-const { adminEvents: { ADMIN_SCRAP_NEWS_ITEM } } = require('../../../../../src/sockets/constants');
+const { adminEvents: { ADMIN_SCRAP_NEWS_ITEM, ADMIN_ERROR } } = require('../../../../../src/sockets/constants');
 
 const options = { waitUntil: 'load', timeout: 0 };
 module.exports.test = async function ({ form: { source, link, numItems } }, socket) {
@@ -80,6 +80,6 @@ module.exports.test = async function ({ form: { source, link, numItems } }, sock
     }
     await browser.close();
   } catch (ex) {
-    console.log(ex);
+    socket.emit(ADMIN_ERROR, ex.message);
   }
 };
