@@ -35,12 +35,12 @@ export const actions = {
 };
 
 export function handlePrefetch({ store, currentRoute, redirect }) {
-  const { slug } = currentRoute.params;
+  const { slug, locale } = currentRoute.params;
   const query = {
     category: slug,
   };
   const categories = getters.categories.bind({ $store: store })();
   const category = categories.find((cat) => cat.slug === slug);
-  if (!category) redirect('/404');
+  if (!category) redirect(`/${locale}/404`);
   return store.dispatch(FETCH_STORIES, { refresh: true, query });
 }

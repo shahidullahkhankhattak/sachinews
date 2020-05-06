@@ -15,6 +15,16 @@ import { preFetchMethods, getters } from './handleStore';
 
 export default {
   name: 'MainLayout',
+  meta() {
+    const { locale } = this.$route.params;
+    const language = this.languages.find((lang) => lang.iso === locale);
+    return {
+      htmlAttr: {
+        lang: language.iso,
+        dir: language.direction,
+      },
+    };
+  },
   computed: {
     ...getters,
   },
@@ -25,16 +35,9 @@ export default {
     await preFetchMethods.fetchLanguages(params);
     const languages = getters.languages.bind({ $store: store })();
     const language = languages.find((lang) => lang.iso === locale);
-    if (!language) { redirect('/404'); }
+    if (!language) { redirect(`/${locale}/404`); }
     await preFetchMethods.setLocale(params, language);
     await preFetchMethods.fetchTranslations(params, language);
-    if (!process.browser) {
-      params.ssrContext.Q_HTML_ATTRS = `lang=${language && language.iso} dir=${language && language.direction} %%Q_HTML_ATTRS%%`;
-    } else {
-      const html = document.querySelector('html');
-      html.setAttribute('lang', language.iso);
-      html.setAttribute('dir', language.direction);
-    }
     return preFetchMethods.fetchSources(params, language);
   },
 };

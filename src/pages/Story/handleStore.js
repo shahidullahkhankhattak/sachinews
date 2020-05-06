@@ -17,8 +17,8 @@ export const getters = {
 };
 
 export async function handlePrefetch({ store, currentRoute, redirect }) {
-  const { id } = currentRoute.params;
+  const { id, locale } = currentRoute.params;
   await store.dispatch(FETCH_STORY, id);
   const story = getters.story.bind({ $store: store })();
-  if (!story) { redirect('/404'); }
+  if (!story) { redirect(`/${locale}/404`); }
 }

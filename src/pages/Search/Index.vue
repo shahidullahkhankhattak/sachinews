@@ -49,10 +49,26 @@ import { getters, actions, handlePrefetch } from './handleStore';
 import NewsCard from '../../components/Cards/NewsCard';
 import NoNews from '../../components/Cards/NoNews';
 import NewsLoader from '../../components/Loaders/NewsLoader';
+import { config } from '../../config';
+
+const { app: { logo: { title } } } = config;
 
 export default {
   name: 'CategoryStories',
   components: { NewsCard, NewsLoader, NoNews },
+  meta() {
+    const pageTitle = `${this.$t('Search')} - ${title}`;
+    return {
+      title: pageTitle,
+      meta: {
+        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        ogTitle: { name: 'og:title', content: pageTitle },
+        dcTitle: { name: 'DC.title', content: pageTitle },
+        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through') },
+      },
+    };
+  },
   computed: {
     ...getters,
   },
