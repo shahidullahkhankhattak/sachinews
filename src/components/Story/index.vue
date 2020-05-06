@@ -1,6 +1,6 @@
 <template>
   <article class="col-xs-12 col-lg-8 news-article q-pa-md">
-    <div class="q-mb-md">
+    <div class="q-mb-md" v-if="!isTest">
       <q-btn
         :icon="(siteDir === 'ltr' && 'arrow_back') || 'arrow_forward'"
         @click="$router.go(-1)"
@@ -20,7 +20,7 @@
       ></div>
     </q-img>
     <h1 class="article-title q-my-md" v-html="news.title"></h1>
-    <div class="text-subtitle2 q-mb-md">
+    <div class="text-subtitle2 q-mb-md" v-if="!isTest">
       <q-badge class="badge-sm" color="blue"
         ><time>{{ $td(timeAgo(news.created_date)) }}</time></q-badge
       >
@@ -60,7 +60,7 @@ TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
 
 export default {
-  props: ['story'],
+  props: ['story', 'isTest'],
   components: {
     Share,
   },
@@ -74,15 +74,15 @@ export default {
     ...getters,
     news() {
       const {
-        source: [{ name: source, color }],
-        category: [{ name: category }],
+        source: [{ name: source, color }] = [{}],
+        category: [{ name: category }] = [{}],
       } = this.story;
       return {
         ...this.story,
         source,
         color,
         category,
-        link: `/${this.locale.iso}/story/${this.story._id}/${this.story.slug}`,
+        link: !this.isTest && `/${this.locale.iso}/story/${this.story._id}/${this.story.slug}`,
       };
     },
   },

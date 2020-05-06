@@ -28,6 +28,16 @@ const routes = [
     ],
   },
   {
+    path: '/login',
+    meta: {
+      guest: true,
+    },
+    component: () => import('layouts/Login'),
+    children: [
+      { path: '', name: 'login', component: () => import('pages/Login') },
+    ],
+  },
+  {
     path: '/:locale/',
     component: () => import('layouts/MainLayout'),
     children: [
@@ -37,16 +47,6 @@ const routes = [
       { path: 'search/:q', name: 'search-stories', component: () => import('pages/Search') },
       { path: 'trending', name: 'trending-stories', component: () => import('pages/Trending') },
       { path: 'story/:id/:slug', name: 'story-details', component: () => import('pages/Story') },
-    ],
-  },
-  {
-    path: '/login',
-    meta: {
-      guest: true,
-    },
-    component: () => import('layouts/Login'),
-    children: [
-      { path: '', name: 'login', component: () => import('pages/Login') },
     ],
   },
 ];

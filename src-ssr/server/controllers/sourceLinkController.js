@@ -95,7 +95,7 @@ module.exports.destroy = async function (req, res) {
         });
     }
     const { _id } = req.body;
-    await SourceLink.deleteOne({ _id });
+    await SourceLink.findOneAndDelete({ _id });
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: DELETED,
