@@ -23,7 +23,7 @@
       </q-card-section>
 
       <q-card-section class="col-4 flex flex-right">
-        <q-img class="rounded-borders" :src="news.media" :alt="news.title" height="100%" />
+        <q-img class="rounded-borders" :src="news.media" :alt="news.title" height="100%" native-context-menu/>
       </q-card-section>
     </q-card-section>
 
