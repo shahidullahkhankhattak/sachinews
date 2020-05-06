@@ -36,10 +36,5 @@ export default {
     ...getters,
   },
   preFetch: handlePrefetch,
-  beforeMount() {
-    if (!this.loading && !this.story) {
-      this.$router.push('/404');
-    }
-  },
 };
 </script>

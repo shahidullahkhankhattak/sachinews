@@ -16,7 +16,9 @@ export const getters = {
   }),
 };
 
-export function handlePrefetch({ store, currentRoute }) {
+export async function handlePrefetch({ store, currentRoute, redirect }) {
   const { id } = currentRoute.params;
-  return store.dispatch(FETCH_STORY, id);
+  await store.dispatch(FETCH_STORY, id);
+  const story = getters.story.bind({ $store: store })();
+  if (!story) { redirect('/404'); }
 }
