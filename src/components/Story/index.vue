@@ -10,7 +10,8 @@
     </div>
     <q-img
       class="q-mb-sm article-media"
-      :src="story.media"
+      :src="news.media"
+      :alt="news.title"
       height="400px"
       native-context-menu
     >
@@ -19,15 +20,22 @@
         v-html="news.title"
       ></div>
     </q-img>
-    <h1 class="article-title q-my-md" v-html="news.title"></h1>
+    <header>
+      <h1 :aria-label="news.title" class="article-title q-my-md" v-html="news.title"></h1>
+    </header>
     <div class="text-subtitle2 q-mb-md" v-if="!isTest">
-      <q-badge class="badge-sm" color="blue"
-        ><time>{{ $td(timeAgo(news.created_date)) }}</time></q-badge
+      <q-badge class="badge-sm" color="blue">
+        <time>{{ $td(timeAgo(news.created_date)) }}</time>
+      </q-badge>
+      <q-badge class="q-ma-sm badge-sm" :style="{ background: news.color }">
+        {{ $t(news.source) }}
+      </q-badge>
+      <a
+        :href="news.url"
+        :title="$t(news.source)"
+        target="_blank"
+        class="no-deco"
       >
-      <q-badge class="q-ma-sm badge-sm" :style="`background: ${news.color}`">{{
-        $t(news.source)
-      }}</q-badge>
-      <a :href="news.url" target="_blank" class="no-deco">
         <q-badge class="badge-sm" outline color="primary"
           >{{ $t("View article on") }} {{ $t(news.source) }}
         </q-badge>
@@ -36,18 +44,19 @@
         <q-btn
           flat
           round
+          aria-label="like news"
           :color="(news.liked && 'red') || 'orange'"
           @click="likeStory({ id: news._id, main: true })"
           icon="whatshot"
         >
-          <q-badge class="left" color="red" floating>{{ news.likes }}</q-badge>
+          <q-badge class="left" color="red" :aria-label="`there are ${news.likes} likes on the news`" floating>{{ news.likes }}</q-badge>
         </q-btn>
         <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
         <Share :details="news" />
       </div>
       <div class="clearfix"></div>
     </div>
-    <div class="article-body" v-html="news.body"></div>
+    <div class="article-body" :aria-label="news.description" v-html="news.body"></div>
   </article>
 </template>
 <script>
@@ -82,7 +91,9 @@ export default {
         source,
         color,
         category,
-        link: !this.isTest && `/${this.locale.iso}/story/${this.story._id}/${this.story.slug}`,
+        link:
+          !this.isTest
+          && `/${this.locale.iso}/story/${this.story._id}/${this.story.slug}`,
       };
     },
   },

@@ -1,13 +1,14 @@
 <template>
-  <q-card class="news-card" flat bordered>
+  <q-card tag="article" class="news-card" flat bordered>
     <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
-      <q-card-section class="q-pt-xs col-8">
+      <q-card-section tag="header" class="q-pt-xs col-8">
         <div class="text-overline">
           {{ $t(news.source) }} - {{ $t(news.category) }}
         </div>
         <router-link
           class="news-title-link"
           :to="news.link"
+          :title="news.title"
         >
           <h2 class="text-h5 q-mt-sm q-mb-xs" v-html="news.title"></h2>
         </router-link>
@@ -15,14 +16,14 @@
           <time>{{ $td(timeAgo(story.created_date)) }}</time>
         </div>
         <q-space />
-        <div
+        <p
           class="text-caption text-grey-8 q-mt-sm"
           v-html="news.description"
-        ></div>
+        ></p>
       </q-card-section>
 
       <q-card-section class="col-4 flex flex-right">
-        <q-img class="rounded-borders" :src="news.media" height="100%" />
+        <q-img class="rounded-borders" :src="news.media" :alt="news.title" height="100%" />
       </q-card-section>
     </q-card-section>
 
