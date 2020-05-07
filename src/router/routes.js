@@ -5,10 +5,6 @@ const routes = [
     redirect: '/en/',
   },
   {
-    path: '/404',
-    component: () => import('pages/Error404.vue'),
-  },
-  {
     path: '/admin',
     meta: {
       auth: true,
@@ -23,6 +19,7 @@ const routes = [
       { path: 'selectors/:source_id', name: 'dashboard-selectors', component: () => import('src/pages/Admin/Selectors') },
       { path: 'select-source', name: 'dashboard-select-source', component: () => import('src/pages/Admin/SelectSource') },
       { path: 'scrap-test', name: 'dashboard-scrap-test', component: () => import('src/pages/Admin/ScrapTest') },
+      { path: 'scrap-data', name: 'dashboard-scrap-test', component: () => import('src/pages/Admin/ScrapData') },
       { path: 'languages', name: 'dashboard-languages', component: () => import('src/pages/Admin/Languages') },
       { path: 'translations', name: 'dashboard-translations', component: () => import('src/pages/Admin/Translations') },
     ],
@@ -42,6 +39,7 @@ const routes = [
     component: () => import('layouts/MainLayout'),
     children: [
       { path: '', name: 'top-stories', component: () => import('pages/TopStories') },
+      { path: '/404', component: () => import('pages/Error404.vue') },
       { path: 'category/:slug', name: 'categories-stories', component: () => import('pages/Category') },
       { path: 'source/:slug', name: 'source-stories', component: () => import('pages/Source') },
       { path: 'search/:q', name: 'search-stories', component: () => import('pages/Search') },

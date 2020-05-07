@@ -109,7 +109,7 @@ export default {
     ],
     links2: [
       { icon: 'input', text: 'Scrap Test', link: '/admin/scrap-test' },
-      { icon: 'launch', text: 'Scrap Data', link: '/admin/select-source?next=selectors' },
+      { icon: 'launch', text: 'Scrap Data', link: '/admin/scrap-data' },
     ],
     links3: [
       { icon: '', text: 'Translations', link: '/admin/translations' },

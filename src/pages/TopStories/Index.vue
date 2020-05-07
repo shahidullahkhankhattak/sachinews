@@ -40,15 +40,17 @@ import NewsLoader from '../../components/Loaders/NewsLoader';
 import { config } from '../../config';
 
 const { app: { logo: { title } } } = config;
+
 export default {
   name: 'TopStories',
   meta() {
+    const pageTitle = `${this.$t('Top Stories')} - ${this.$t(title)}`;
     return {
-      title: `Top Stories - ${title}`,
+      title: pageTitle,
       meta: {
-        description: { name: 'description', content: 'Get & scroll through the latest news to the current second stories from all the sources througout the globe' },
-        ogTitle: { name: 'og:title', content: `Top Stories - ${title}` },
-        ogDescription: { name: 'og:description', content: 'Get & scroll through the latest news to the current second stories from all the sources througout the globe' },
+        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        ogTitle: { name: 'og:title', content: pageTitle },
+        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
       },
     };
   },

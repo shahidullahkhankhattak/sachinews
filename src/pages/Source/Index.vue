@@ -26,7 +26,7 @@
                 <NewsCard :story="story" />
               </div>
               <!-- News cards [END] -->
-
+              <NoNews v-if="!loading && !stories.length"/>
               <!-- Loaders section [START} -->
               <div
                 class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-4"
@@ -48,10 +48,29 @@
 import { getters, actions, handlePrefetch } from './handleStore';
 import NewsCard from '../../components/Cards/NewsCard';
 import NewsLoader from '../../components/Loaders/NewsLoader';
+import NoNews from '../../components/Cards/NoNews';
+import { config } from '../../config';
+
+const { app: { logo: { title } } } = config;
 
 export default {
   name: 'SourceStories',
-  components: { NewsCard, NewsLoader },
+  components: { NewsCard, NewsLoader, NoNews },
+  meta() {
+    const { slug } = this.$route.params;
+    const source = this.sources.find((cat) => cat.slug === slug);
+    const pageTitle = `${this.$t(source.name)} - ${this.$t(title)}`;
+    return {
+      title: pageTitle,
+      meta: {
+        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        ogTitle: { name: 'og:title', content: pageTitle },
+        dcTitle: { name: 'DC.title', content: pageTitle },
+        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through') },
+      },
+    };
+  },
   computed: {
     ...getters,
   },
