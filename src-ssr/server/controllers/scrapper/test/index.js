@@ -64,10 +64,13 @@ module.exports.test = async function ({ form: { source, link, numItems } }, sock
           bodySel.selectors.forEach((sel) => {
             if (document.querySelector(sel)) { bodyDom = document.querySelector(sel); }
           });
-          bodySel.filters.forEach((filter) => {
-            bodyDom.querySelectorAll(filter).forEach((item) => item.remove());
-          });
-          body = bodyDom[attrib];
+          if (bodyDom) {
+            bodySel.filters.forEach((filter) => {
+              const filterDom = bodyDom.querySelectorAll(filter);
+              if (filterDom && filterDom.length) filterDom.forEach((item) => item.remove());
+            });
+            body = bodyDom[attrib];
+          }
         }
 
         return {

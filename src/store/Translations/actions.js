@@ -37,8 +37,7 @@ export async function fetchUserTranslations({ commit }, language) {
   }
 }
 
-export async function fetch({ commit, state }) {
-  if (state.list.length) return;
+export async function fetch({ commit }) {
   try {
     const { list } = await axios.get(REST_API);
     commit(ALL, list);

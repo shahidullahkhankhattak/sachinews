@@ -82,18 +82,25 @@
               </q-select>
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-input
+              <q-select
                 bg-color="white"
                 color="blue-4"
                 outlined
                 label="Filter"
-                v-model="item.filter"
+                use-input
+                hide-selected
+                fill-input
                 lazy-rules
+                input-debounce="0"
+                @input-value="(val) => item.filter = val"
+                @filter="autoCompleteFilterFilter"
+                v-model="item.filter"
+                :options="$parent.autoCompleteFilterOptions"
               >
                 <template v-slot:prepend>
                   <q-icon name="filter" />
                 </template>
-              </q-input>
+              </q-select>
             </div>
             <div class="col-md-12 q-pt-md">
               <q-btn type="submit" color="white" text-color="blue-8"
@@ -133,6 +140,12 @@ export default {
       update(() => {
         const needle = val.toLocaleLowerCase();
         this.$parent.autoCompleteOptions = this.autocomplete.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
+      });
+    },
+    autoCompleteFilterFilter(val, update) {
+      update(() => {
+        const needle = val.toLocaleLowerCase();
+        this.$parent.autoCompleteFilterOptions = this.autocompleteFilter.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
       });
     },
     onEdit(item) {

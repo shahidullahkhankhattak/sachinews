@@ -11,12 +11,14 @@ const {
 const {
   LIST,
   AUTOCOMPLETE,
+  AUTOCOMPLETE_FILTER,
 } = Getters;
 
 export const getters = {
   ...mapGetters({
     list: LIST,
     autocomplete: AUTOCOMPLETE,
+    autocompleteFilter: AUTOCOMPLETE_FILTER,
   }),
 };
 

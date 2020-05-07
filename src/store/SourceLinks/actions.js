@@ -29,15 +29,8 @@ export async function add(context, { form, reset }) {
 
 export async function fetch({
   commit, dispatch,
-  rootState: {
-    Categories: {
-      list: CatList,
-    },
-  },
 }, sourceId) {
-  if (!CatList.length) {
-    dispatch(CatActions.FETCH, {}, { root: true });
-  }
+  dispatch(CatActions.FETCH, {}, { root: true });
   try {
     const { source_id: sourceIdRoute } = this.$router.app.$route && this.$router.app.$route.params;
     if (!sourceId) { sourceId = sourceIdRoute; }

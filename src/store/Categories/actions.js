@@ -29,8 +29,7 @@ export async function add(context, { form, reset }) {
   }
 }
 
-export async function fetch({ commit, state }) {
-  if (state.list.length) return;
+export async function fetch({ commit }) {
   try {
     const { list } = await axios.get(REST_API);
     commit(ALL, list);
