@@ -90,16 +90,23 @@
                         </q-select>
                       </div>
                       <div class="col-md-4">
-                        <q-input
+                        <q-select
                           outlined
                           label="Filter"
-                          v-model="addForm.filter"
+                          use-input
+                          hide-selected
+                          fill-input
                           lazy-rules
+                          input-debounce="0"
+                          @input-value="(val) => addForm.filter = val"
+                          @filter="autoCompleteFilterFilter"
+                          v-model="addForm.filter"
+                          :options="autoCompleteFilterOptions"
                         >
                           <template v-slot:prepend>
                             <q-icon name="filter" />
                           </template>
-                        </q-input>
+                        </q-select>
                       </div>
                     </div>
 
@@ -158,6 +165,7 @@ export default {
       },
       addForm: addForm(),
       autoCompleteOptions: [],
+      autoCompleteFilterOptions: [],
       selectorNames,
     };
   },
@@ -172,6 +180,12 @@ export default {
       update(() => {
         const needle = val.toLocaleLowerCase();
         this.autoCompleteOptions = this.autocomplete.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
+      });
+    },
+    autoCompleteFilterFilter(val, update) {
+      update(() => {
+        const needle = val.toLocaleLowerCase();
+        this.autoCompleteFilterOptions = this.autocompleteFilter.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
       });
     },
     ...actions,

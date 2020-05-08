@@ -3,6 +3,7 @@ const PREFIX = 'Selectors';
 export const Getters = {
   LIST: `${PREFIX}/list`,
   AUTOCOMPLETE: `${PREFIX}/autocomplete`,
+  AUTOCOMPLETE_FILTER: `${PREFIX}/autocompleteFilter`,
 };
 
 export const Mutations = {

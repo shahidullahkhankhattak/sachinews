@@ -8,6 +8,7 @@ const SourceLinkController = require('../../../controllers/sourceLinkController'
 const SelectorController = require('../../../controllers/selectorController');
 const LanguageController = require('../../../controllers/languageController');
 const TranslationController = require('../../../controllers/translationController');
+const CountController = require('../../../controllers/countController');
 
 // middlewares
 const { checkAuthAdmin } = require('../../../middleware/auth');
@@ -23,6 +24,10 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(checkAuthAdmin);
+
+// count route
+router.route('/counts')
+  .get(CountController.index);
 
 // source routes crud
 router.route('/source')

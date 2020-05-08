@@ -35,4 +35,7 @@ export const apiEndpoints = {
   LIKES_ENDPOINTS: {
     REST: `${apiV1Endpoint}/like`,
   },
+  COUNTS_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/admin/counts`,
+  },
 };

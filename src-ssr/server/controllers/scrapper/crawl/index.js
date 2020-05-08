@@ -66,7 +66,8 @@ module.exports.crawl = async function (source) {
             });
             if (bodyDom) {
               bodySel.filters.forEach((filter) => {
-                bodyDom.querySelectorAll(filter).forEach((item) => item.remove());
+                const filterDom = bodyDom.querySelectorAll(filter);
+                if (filterDom && filterDom.length) filterDom.forEach((item) => item.remove());
               });
               body = bodyDom[attrib];
             }

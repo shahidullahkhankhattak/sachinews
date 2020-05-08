@@ -20,39 +20,13 @@
         <!-- breadcrumb [END] -->
       </div>
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" v-for="(key, index) in Object.keys(counts)" :key="key">
           <div class="q-pa-md">
             <q-card class="my-card">
-              <q-card-section class="bg-primary text-white">
-                <div class="text-h6">Sources</div>
-                <div class="text-subtitle2">3 sources added</div>
+              <q-card-section :class="`${backgrounds[index]} text-white`">
+                <div class="text-h6 text-capitalize">{{ key }}</div>
+                <div class="text-subtitle2">{{ counts[key] }} {{key}} in database</div>
               </q-card-section>
-
-              <q-separator />
-
-              <q-card-actions align="left">
-                <q-btn color="primary" outline to="/admin/sources"
-                  >View / Add Sources</q-btn
-                >
-              </q-card-actions>
-            </q-card>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="q-pa-md">
-            <q-card class="my-card">
-              <q-card-section class="bg-green-8 text-white">
-                <div class="text-h6">Categories</div>
-                <div class="text-subtitle2">2 Categories Added</div>
-              </q-card-section>
-
-              <q-separator />
-
-              <q-card-actions align="left">
-                <q-btn color="green-8" outline to="/admin/categories"
-                  >View / Add Categories</q-btn
-                >
-              </q-card-actions>
             </q-card>
           </div>
         </div>
@@ -61,5 +35,24 @@
   </q-page>
 </template>
 <script>
-export default {};
+import { getters, actions } from './handleStore';
+
+export default {
+  data() {
+    return {
+      backgrounds: [
+        'bg-primary', 'bg-deep-purple-6', 'bg-green-6', 'bg-cyan-6', 'bg-deep-orange-6', 'bg-brown-6', 'bg-blue-grey-6', 'bg-teal-6',
+      ],
+    };
+  },
+  computed: {
+    ...getters,
+  },
+  methods: {
+    ...actions,
+  },
+  beforeMount() {
+    this.fetchCounts();
+  },
+};
 </script>
