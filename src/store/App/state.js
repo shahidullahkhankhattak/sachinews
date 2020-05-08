@@ -3,5 +3,6 @@ export default function () {
     config: {
       locale: null,
     },
+    counts: {},
   };
 }
