@@ -113,7 +113,8 @@ export default {
     ],
     links3: [
       { icon: '', text: 'Translations', link: '/admin/translations' },
-      { icon: '', text: 'Settings', link: '/admin/settings' },
+      { icon: '', text: 'Regions', link: '/admin/regions' },
+      { icon: '', text: 'Countries', link: '/admin/countries' },
     ],
   }),
   methods: {

@@ -38,4 +38,12 @@ export const apiEndpoints = {
   COUNTS_ENDPOINTS: {
     REST: `${apiV1Endpoint}/admin/counts`,
   },
+  REGIONS_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/admin/region`,
+    USER_REGION: `${apiV1Endpoint}/region`,
+  },
+  COUNTRIES_ENDPOINTS: {
+    REST: `${apiV1Endpoint}/admin/country`,
+    USER_COUNTRY: `${apiV1Endpoint}/country`,
+  },
 };

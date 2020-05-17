@@ -1,3 +1,10 @@
+const ecud = (name) => ({
+  EXISTS: `${name} already exists.`,
+  CREATED: `${name} added successfully.`,
+  UPDATED: `${name} updated successfully.`,
+  DELETED: `${name} deleted successfully.`,
+});
+
 module.exports = {
   params: {
     TOKEN_EXPIRED: 'JWT_EXPIRED',
@@ -8,11 +15,8 @@ module.exports = {
   userNotFound: 'Invalid email or password.',
   tokenExpired: 'Session token expired.',
   sourceMsgs: {
+    ...ecud('Source'),
     INVALID_LANGUAGE: 'Language does not exist.',
-    EXISTS: 'Source already exists.',
-    CREATED: 'Source added successfully.',
-    UPDATED: 'Source updated successfully.',
-    DELETED: 'Source deleted successfully.',
     haveNumChildren: ({ linksCount, selectorsCount, storiesCount }) => {
       const selectorMsg = selectorsCount && `${selectorsCount} selector${(selectorsCount > 1 && 's') || ''}`;
       const storyMsg = storiesCount && `${storiesCount} Stor${(storiesCount > 1 && 'ies') || 'y'}`;
@@ -24,27 +28,45 @@ module.exports = {
       };
     },
   },
+  countryMsgs: {
+    ...ecud('Country'),
+    INVALID_LANGUAGE: 'Language does not exist.',
+    INVALID_REGION: 'Region does not exist.',
+    haveNumChildren: ({ linksCount, selectorsCount, storiesCount }) => {
+      const selectorMsg = selectorsCount && `${selectorsCount} selector${(selectorsCount > 1 && 's') || ''}`;
+      const storyMsg = storiesCount && `${storiesCount} Stor${(storiesCount > 1 && 'ies') || 'y'}`;
+      const linksMsg = linksCount && `${linksCount} link${(linksCount > 1 && 's') || ''}`;
+      const relativeChildCountMsg = ((linksCount > 1 || selectorsCount > 1 || storiesCount > 1) && 'delete them all too') || 'delete it too';
+      const combined = [selectorMsg, storyMsg, linksMsg].filter((c) => c).join(', ');
+      return {
+        msg: `This country have ${combined} are you sure you want to ${relativeChildCountMsg}?`,
+      };
+    },
+  },
   languageMsgs: {
-    EXISTS: 'Language already exists.',
-    CREATED: 'Language added successfully.',
-    UPDATED: 'Language updated successfully.',
-    DELETED: 'Language deleted successfully.',
+    ...ecud('Language'),
   },
   translationMsgs: {
+    ...ecud('Translation'),
     INVALID_LANGUAGE: 'Language does not exist.',
-    EXISTS: 'Translation already exists.',
-    CREATED: 'Translation added successfully.',
-    UPDATED: 'Translation updated successfully.',
-    DELETED: 'Translation deleted successfully.',
   },
   likeMsgs: {
     INVALID_STORY: 'Story does not exist.',
   },
   categoryMsgs: {
-    EXISTS: 'Category already exists.',
-    CREATED: 'Category added successfully.',
-    UPDATED: 'Category updated successfully.',
-    DELETED: 'Category deleted successfully.',
+    ...ecud('Category'),
+    haveNumChildren: ({ linksCount, storiesCount }) => {
+      const storyMsg = storiesCount && `${storiesCount} Stor${(storiesCount > 1 && 'ies') || 'y'}`;
+      const linksMsg = linksCount && `${linksCount} link${(linksCount > 1 && 's') || ''}`;
+      const relativeChildCountMsg = ((linksCount > 1 || storyMsg > 1) && 'delete them all too') || 'delete it too';
+      const combined = [storyMsg, linksMsg].filter((c) => c).join(', ');
+      return {
+        msg: `This category have ${combined} are you sure you want to ${relativeChildCountMsg}?`,
+      };
+    },
+  },
+  regionMsgs: {
+    ...ecud('Region'),
     haveNumChildren: ({ linksCount, storiesCount }) => {
       const storyMsg = storiesCount && `${storiesCount} Stor${(storiesCount > 1 && 'ies') || 'y'}`;
       const linksMsg = linksCount && `${linksCount} link${(linksCount > 1 && 's') || ''}`;
@@ -56,17 +78,11 @@ module.exports = {
     },
   },
   sourceLinksMsgs: {
-    EXISTS: 'Source link already exists.',
-    CREATED: 'Source link added successfully.',
-    UPDATED: 'Source link updated successfully.',
-    DELETED: 'Source link deleted successfully.',
+    ...ecud('Source'),
     INVALID_SOURCE: 'Source does not exists.',
   },
   selectorsMsgs: {
-    EXISTS: 'Selector already exists.',
-    CREATED: 'Selector added successfully.',
-    UPDATED: 'Selector updated successfully.',
-    DELETED: 'Selector deleted successfully.',
+    ...ecud('Selector'),
     INVALID_SOURCE: 'Source does not exist.',
   },
   scrapperMsgs: {
