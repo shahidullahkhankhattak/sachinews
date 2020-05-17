@@ -17,7 +17,7 @@
       </q-bar>
 
       <q-card-section>
-        <div class="text-h6">Edit Category</div>
+        <div class="text-h6">Edit Region</div>
       </q-card-section>
 
       <q-card-section class="q-pt-none">
@@ -34,22 +34,7 @@
                 :rules="[rules.REQUIRED]"
               >
                 <template v-slot:prepend>
-                  <q-icon name="home" color="blue-4" />
-                </template>
-              </q-input>
-            </div>
-            <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-input
-                v-model="item.icon"
-                bg-color="white"
-                color="blue-4"
-                label-color="blue-4"
-                outlined
-                label="Icon"
-                :rules="[rules.REQUIRED]"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="bug_report" color="blue-4" />
+                  <q-icon name="public" color="blue-4" />
                 </template>
               </q-input>
             </div>
