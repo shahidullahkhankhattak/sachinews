@@ -8,7 +8,7 @@ const schema = new Schema({
   body: String,
   slug: String,
   url: String,
-  tags: String,
+  tags: Array,
   author: String,
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },

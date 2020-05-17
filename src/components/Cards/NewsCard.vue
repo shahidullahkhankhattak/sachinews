@@ -5,6 +5,14 @@
         <div class="text-overline">
           {{ $t(news.source) }} - {{ $t(news.category) }}
         </div>
+        <div>
+          <q-badge v-if="isImportant(news)" color="red" class="animated infinite flash">
+            {{ $t('Important') }}
+          </q-badge>
+          <q-badge v-if="isLatest(news)" color="yellow" text-color="black" class="animated infinite bounceIn q-ml-sm">
+            {{ $t('Latest') }}
+          </q-badge>
+        </div>
         <router-link
           class="news-title-link"
           :to="news.link"
@@ -23,7 +31,13 @@
       </q-card-section>
 
       <q-card-section class="col-4 flex flex-right">
-        <q-img class="rounded-borders" :src="news.media" :alt="news.title" height="100%" native-context-menu/>
+        <q-img
+          class="rounded-borders"
+          :src="news.media"
+          :alt="news.title"
+          height="100%"
+          native-context-menu
+        />
       </q-card-section>
     </q-card-section>
 
@@ -35,7 +49,9 @@
         :color="(news.liked && 'red') || 'orange'"
         icon="whatshot"
       >
-        <q-badge :color="(news.liked && 'red') || 'grey'" floating>{{ news.likes }}</q-badge>
+        <q-badge :color="(news.liked && 'red') || 'grey'" floating>{{
+          news.likes
+        }}</q-badge>
       </q-btn>
       <Share :details="news" />
       <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
@@ -73,6 +89,18 @@ export default {
   },
   methods: {
     ...actions,
+    isLatest(news) {
+      const diff = (new Date() - new Date(news.created_date)) / 1000 / 60;
+      if (diff < 30) {
+        return true;
+      }
+      return false;
+    },
+    isImportant(news) {
+      const { tags } = news;
+      if (tags && tags.includes('important')) { return true; }
+      return false;
+    },
     timeAgo(time) {
       this.$t(time);
       return timeAgoFn.format(new Date(time));
