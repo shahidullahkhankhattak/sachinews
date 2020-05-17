@@ -129,7 +129,7 @@ export default {
     ...actions,
     onEdit(item) {
       this.toggleDialog();
-      extend(true, this.item, item);
+      extend(true, this.item, { ...item, lang: item.lang._id });
     },
     toggleDialog() {
       this.show = !this.show;

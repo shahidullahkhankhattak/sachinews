@@ -5,7 +5,9 @@ import { Mutations } from './constants';
 import { getWithSlug } from '../../utils/objectHelpers';
 import { Notify } from '../../plugins/notify';
 import { axiosConfig } from '../../config/constants';
+import { Getters as LanguageGetters } from '../Languages/constants';
 
+const { LIST: LANG_LIST } = LanguageGetters;
 const {
   SOURCE_ENDPOINTS: {
     REST: REST_API,
@@ -19,11 +21,14 @@ const {
   UPDATE,
 } = Mutations;
 
-export async function add(context, { form, reset }) {
+export async function add({ rootGetters, commit }, { form, reset }) {
   try {
     const newForm = { ...form, lang: form.lang.value };
     const { item } = await axios.post(REST_API, getWithSlug(newForm));
-    context.commit(ADD, item);
+    const languages = rootGetters[LANG_LIST];
+    const lang = languages.find((_lang) => _lang._id === item.lang);
+    Object.assign(item, { lang });
+    commit(ADD, item);
     reset();
   } catch (ex) {
     se2errors(ex);
@@ -76,11 +81,14 @@ export async function _delete(context, item) {
   }
 }
 
-export async function update(context, { item, toggleDialog }) {
+export async function update({ commit, rootGetters }, { item, toggleDialog }) {
   try {
     const newItem = { ...item, lang: item.lang.value };
     const { item: _item } = await axios.put(REST_API, getWithSlug(newItem));
-    context.commit(UPDATE, _item);
+    const languages = rootGetters[LANG_LIST];
+    const lang = languages.find((_lang) => _lang._id === _item.lang);
+    Object.assign(_item, { lang });
+    commit(UPDATE, _item);
     toggleDialog();
   } catch (ex) {
     se2errors(ex);
