@@ -47,6 +47,7 @@
                           value=""
                           lazy-rules
                           :rules="[rules.REQUIRED]"
+                          @input="onDataNameChange()"
                           :options="selectorNames"
                         >
                           <template v-slot:prepend>
@@ -176,6 +177,9 @@ export default {
     ...getters,
   },
   methods: {
+    onDataNameChange() {
+      if (this.addForm.name === 'body') { this.addForm.type = 'html'; } else this.addForm.type = 'string';
+    },
     autoCompleteFilter(val, update) {
       update(() => {
         const needle = val.toLocaleLowerCase();
