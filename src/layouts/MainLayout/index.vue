@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { Screen } from 'quasar';
 import { preFetchMethods, getters } from './handleStore';
 
 export default {
@@ -27,6 +28,14 @@ export default {
   },
   computed: {
     ...getters,
+  },
+  watch: {
+    $route(to, from) {
+      // toggle sidebar on language change
+      if (from.name === to.name && to.name === 'top-stories' && Screen.gt.sm) {
+        this.$root.$emit('toggleSidebar');
+      }
+    },
   },
   async preFetch(params) {
     const { store, currentRoute, redirect } = params;

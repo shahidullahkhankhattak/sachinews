@@ -14,7 +14,6 @@ export async function setLocale(currentValue) {
     await wait(200);
   }
   this.$router.push(`/${newLocale.iso}/`);
-  if (isScLg) this.$root.$emit('toggleSidebar');
 }
 
 export function setLoading(value) {

@@ -50,6 +50,7 @@ import NewsCard from '../../components/Cards/NewsCard';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 import NoNews from '../../components/Cards/NoNews';
 import { config } from '../../config';
+import bus from '../../utils/dataBus';
 
 const { app: { logo: { title } } } = config;
 
@@ -97,6 +98,8 @@ export default {
     },
   },
   mounted() {
+    const { prevRoute } = bus;
+    if (prevRoute && prevRoute.name === 'story-details') { return; }
     handlePrefetch({ store: this.$store, currentRoute: this.$route, redirect: this.$router.push }, true);
   },
   preFetch: handlePrefetch,
