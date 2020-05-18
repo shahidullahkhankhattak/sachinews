@@ -74,6 +74,9 @@ export default {
       }
     },
   },
+  mounted() {
+    handlePrefetch({ store: this.$store, currentRoute: this.$route }, true);
+  },
   preFetch: handlePrefetch,
 };
 </script>

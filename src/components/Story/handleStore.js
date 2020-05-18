@@ -6,7 +6,7 @@ const {
   APP_SITE_DIR,
   APP_LOCALE,
 } = Getters;
-const { LIKE_STORY } = Actions;
+const { LIKE_STORY, REMOVE_STORY } = Actions;
 
 export const getters = {
   ...mapGetters({
@@ -19,5 +19,6 @@ export const getters = {
 export const actions = {
   ...mapActions({
     likeStory: LIKE_STORY,
+    clearStory: REMOVE_STORY,
   }),
 };

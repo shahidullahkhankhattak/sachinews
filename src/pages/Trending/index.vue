@@ -93,6 +93,9 @@ export default {
       }
     },
   },
+  mounted() {
+    handlePrefetch({ store: this.$store }, true);
+  },
   preFetch: handlePrefetch,
 };
 </script>

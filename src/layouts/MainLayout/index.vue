@@ -5,9 +5,7 @@
     <sidebar />
 
     <q-page-container>
-      <transition name="slide-bottom" mode="out-in" >
-        <router-view />
-      </transition>
+      <router-view />
     </q-page-container>
   </q-layout>
 </template>
@@ -33,6 +31,10 @@ export default {
   async preFetch(params) {
     const { store, currentRoute, redirect } = params;
     const { locale } = currentRoute.params;
+    const currentLocale = getters.locale.bind({ $store: store })();
+    // trigger only on language change
+    if (currentLocale && currentLocale.iso === locale) { return; }
+
     await preFetchMethods.fetchCategories(params);
     await preFetchMethods.fetchLanguages(params);
     const languages = getters.languages.bind({ $store: store })();

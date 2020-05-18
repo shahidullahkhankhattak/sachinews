@@ -26,7 +26,8 @@ export const actions = {
   }),
 };
 
-export function handlePrefetch({ store, currentRoute }) {
+export function handlePrefetch({ store, currentRoute }, isMount) {
+  if (process.browser && !isMount) return;
   const { q } = currentRoute.params;
   const query = {
     search: q,

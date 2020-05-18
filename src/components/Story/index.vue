@@ -3,7 +3,7 @@
     <div class="q-mb-md" v-if="!isTest">
       <q-btn
         :icon="(siteDir === 'ltr' && 'arrow_back') || 'arrow_forward'"
-        @click="$router.go(-1)"
+        @click="$router.go(-1); clearStory();"
       >
         {{ $t("Back") }}
       </q-btn>

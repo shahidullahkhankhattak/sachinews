@@ -34,7 +34,8 @@ export const actions = {
   }),
 };
 
-export function handlePrefetch({ store, currentRoute, redirect }) {
+export function handlePrefetch({ store, currentRoute, redirect }, isMount) {
+  if (process.browser && !isMount) return;
   const { slug, locale } = currentRoute.params;
   const query = {
     source: slug,

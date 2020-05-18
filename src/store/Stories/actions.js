@@ -20,6 +20,7 @@ const {
   RESET_STORIES,
   FETCH_STORY,
   LIKE_STORY,
+  REMOVE_STORY,
 } = Mutations;
 
 export async function fetchStories({ commit, rootState, getters: { stories: allStories, total: totalStories, perPage } }, {
@@ -67,6 +68,9 @@ export async function fetchStory({ commit }, id) {
   }
 }
 
+export function removeStory({ commit }) {
+  commit(REMOVE_STORY);
+}
 export async function likeStory({ commit }, { id, main }) {
   try {
     await axios.post(LIKES_REST, { story: id }, axiosConfig.noLoader);

@@ -26,7 +26,8 @@ export const actions = {
   }),
 };
 
-export function handlePrefetch({ store }) {
+export function handlePrefetch({ store }, isMount) {
+  if (process.browser && !isMount) return;
   const query = {
     trending: true,
   };
