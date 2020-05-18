@@ -23,9 +23,11 @@ export function setLoading(value) {
   if (value) {
     document.querySelector('.spinner').className = 'spinner';
   } else {
-    document.querySelector('.spinner').className += ' no-visible';
+    document.querySelector('.spinner').className = 'spinner no-visible';
     setTimeout(() => {
-      document.querySelector('.spinner').className += ' hidden';
+      if (!document.querySelector('.spinner').className.includes('hidden')) {
+        document.querySelector('.spinner').className += ' hidden';
+      }
     }, 500);
   }
 }

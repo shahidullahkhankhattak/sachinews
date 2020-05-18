@@ -5,7 +5,9 @@
     <sidebar />
 
     <q-page-container>
-      <router-view />
+      <transition name="slide-bottom" mode="out-in" >
+        <router-view />
+      </transition>
     </q-page-container>
   </q-layout>
 </template>

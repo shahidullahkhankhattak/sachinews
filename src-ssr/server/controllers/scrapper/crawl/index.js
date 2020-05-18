@@ -6,6 +6,20 @@ const SourceLink = require('../../../db/models/SourceLink');
 const Selector = require('../../../db/models/Selector');
 const Story = require('../../../db/models/Story');
 const { genSlug } = require('../../../utils/slug');
+const { tagsKeywords } = require('../../../config');
+
+const searchTags = (search, target) => {
+  if (typeof search === 'object') {
+    let found = true;
+    search.forEach((keyword) => {
+      if (!target.includes(keyword)) {
+        found = false;
+      }
+    });
+    return found;
+  }
+  return target.includes(search);
+};
 
 const options = { waitUntil: 'load', timeout: 0 };
 module.exports.crawl = async function (source) {
@@ -89,9 +103,14 @@ module.exports.crawl = async function (source) {
           slug: genSlug(crawled.title),
         };
         const exists = await Story.findOne({ title: story.title });
-        console.log(story, !exists);
         if (!exists && story.body) {
-          await Story.create(story);
+          const tags = [];
+          tagsKeywords.important.forEach((keyword) => {
+            if (searchTags(keyword, story.body)) {
+              tags.push('important');
+            }
+          });
+          await Story.create({ ...story, tags });
           stories.push(story);
         }
       }
