@@ -8,6 +8,10 @@ import Stories from './Stories';
 import Categories from './Categories';
 import SourceLinks from './SourceLinks';
 import Selectors from './Selectors';
+import Languages from './Languages';
+import Translations from './Translations';
+import Regions from './Regions';
+import Countries from './Countries';
 
 Vue.use(Vuex);
 
@@ -21,6 +25,10 @@ export default function (/* { ssrContext } */) {
       Categories,
       SourceLinks,
       Selectors,
+      Languages,
+      Translations,
+      Regions,
+      Countries,
     },
     strict: process.env.DEV,
   });

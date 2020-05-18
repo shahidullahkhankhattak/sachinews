@@ -1,3 +1,7 @@
 export function setLocale({ config }, payload) {
-  config.locale = payload.value;
+  config.locale = { ...payload };
+}
+
+export function setCounts(state, payload) {
+  state.counts = payload;
 }

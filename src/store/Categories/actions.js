@@ -3,6 +3,8 @@ import { apiEndpoints } from '../../api/constants';
 import { se2errors } from '../formatters';
 import { Mutations } from './constants';
 import { getWithSlug } from '../../utils/objectHelpers';
+import { axiosConfig } from '../../config/constants';
+import { Notify } from '../../plugins/notify';
 
 const {
   CATEGORY_ENDPOINTS: {
@@ -27,8 +29,7 @@ export async function add(context, { form, reset }) {
   }
 }
 
-export async function fetch({ commit, state }) {
-  if (state.list.length) return;
+export async function fetch({ commit }) {
   try {
     const { list } = await axios.get(REST_API);
     commit(ALL, list);
@@ -39,7 +40,7 @@ export async function fetch({ commit, state }) {
 
 export async function fetchUserCategories({ commit }) {
   try {
-    const { list } = await axios.get(USER_CATEGORY);
+    const { list } = await axios.get(USER_CATEGORY, axiosConfig.noLoader);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);
@@ -51,7 +52,26 @@ export async function _delete(context, item) {
     await axios.delete(REST_API, { data: item });
     context.commit(DELETE, item);
   } catch (ex) {
-    se2errors(ex);
+    const { confirmObj } = ex.data;
+    const [error] = se2errors(ex);
+    if (confirmObj) {
+      Notify({
+        type: 'negative',
+        message: error.msg,
+        timeout: 0,
+        actions: [
+          {
+            label: 'Yes',
+            bgColor: 'green',
+            color: 'white',
+            handler: () => {
+              _delete(context, confirmObj);
+            },
+          },
+          { label: 'Dismiss', color: 'yellow' },
+        ],
+      });
+    }
   }
 }
 

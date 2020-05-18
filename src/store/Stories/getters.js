@@ -1,3 +1,19 @@
-export function getTopStories({ topStories }) {
-  return topStories;
+export function stories(state) {
+  return state.stories;
+}
+
+export function loading({ loading: _loading }) {
+  return _loading;
+}
+
+export function perPage({ perPage: _perPage }) {
+  return _perPage;
+}
+
+export function total({ total: _total }) {
+  return _total;
+}
+
+export function story({ story: _story }) {
+  return _story;
 }

@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 const Source = require('../db/models/Source');
 const SourceLink = require('../db/models/SourceLink');
 const Selector = require('../db/models/Selector');
+const Story = require('../db/models/Story');
 const {
   serverError,
   sourceMsgs: {
@@ -23,7 +24,10 @@ const {
 
 module.exports.index = async function (_req, res) {
   try {
-    const list = await Source.find();
+    const { lang } = _req.query && _req.query;
+    const query = {};
+    if (lang) query.lang = lang;
+    const list = await Source.find(query).populate('lang').exec();
     res.status(resSuccess).json({
       statusCode: resSuccess,
       list,
@@ -97,24 +101,28 @@ module.exports.destroy = async function (req, res) {
     }
     const { _id, confirm } = req.body;
     if (!confirm) {
+      const storiesCount = await Story.countDocuments({
+        source: _id,
+      });
       const linksCount = await SourceLink.countDocuments({
         source: _id,
       });
       const selectorsCount = await Selector.countDocuments({
         source: _id,
       });
-      if (linksCount || selectorsCount) {
+      if (linksCount || selectorsCount || storiesCount) {
         return res.status(resIncomplete).json({
           statusCode: resIncomplete,
           confirmObj: { ...req.body, confirm: true },
-          errors: [haveNumChildren({ linksCount, selectorsCount })],
+          errors: [haveNumChildren({ linksCount, selectorsCount, storiesCount })],
         });
       }
     }
-    await Source.deleteOne({ _id });
+    await Source.findOneAndDelete({ _id });
     if (confirm) {
       await SourceLink.deleteMany({ source: _id });
       await Selector.deleteMany({ source: _id });
+      await Story.deleteMany({ source: _id });
     }
     res.status(resSuccess).json({
       statusCode: resSuccess,

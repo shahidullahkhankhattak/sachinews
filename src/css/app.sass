@@ -2,6 +2,9 @@
 @import url(./transitions.sass)
 @import url(./sidebar-topbar.sass)
 @import url(./home.sass)
+@import url(./button.sass)
+@import url(./article.sass)
+@import url(./badge.sass)
 
 // spinner
 .spinner
@@ -10,6 +13,7 @@
   position: fixed
   z-index: 9999
   background: white
+  transition: all .5s ease
 
   &.no-visible
     transition: all .5s ease
@@ -36,3 +40,50 @@
         &.no-wrap
           &.items-end
             z-index: 9999
+.clearfix
+  clear: both
+.float-
+    &right
+      float: right
+    &left
+      float: left
+
+.q-m
+  &r-
+    &sm
+      margin-right: 8px
+  &l-
+    &sm
+      margin-left: 8px
+
+.q-badge--floating
+  right: -3px
+  left: auto
+  &.left
+    left: -3px
+    right: auto
+
+[dir='rtl']
+  font-size: 17px
+  .text-overline
+    letter-spacing: 0.05em
+  .float-
+    &right
+      float: left
+    &left
+      float: right
+  .q-m
+    &r-
+      &sm
+        margin-left: 8px
+    &l-
+      &sm
+        margin-right: 8px
+
+  .q-badge--floating
+    left: -3px
+    right: auto
+    &.left
+      right: -3px
+      left: auto
+

@@ -1,7 +1,8 @@
 export default function () {
   return {
     config: {
-      locale: 'english',
+      locale: null,
     },
+    counts: {},
   };
 }

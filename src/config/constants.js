@@ -33,5 +33,13 @@ export const responseTypes = {
 
 export const serverBase = {
   local: 'http://localhost:8080',
-  production: 'http://localhost:8080',
+  production: 'http://localhost:3000',
+};
+
+export const axiosConfig = {
+  noLoader: {
+    headers: {
+      noLoader: true,
+    },
+  },
 };

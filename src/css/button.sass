@@ -1,0 +1,23 @@
+.q-btn
+  &not(.q-btn--round)
+    .q-icon
+      margin-right: 5px
+
+.no-deco
+  text-decoration: none
+
+.share-items span
+  display: block;
+
+.no-caret
+  i:nth-child(2)
+    display: none;
+  &.round
+    height: 42px
+
+// direction support [rtl]
+[dir='rtl']
+  .q-btn
+    &not(.q-btn--round)
+    .q-icon
+      margin-left: 5px

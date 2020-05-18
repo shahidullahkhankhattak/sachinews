@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"addictive_bulletin.likes"}],"uuid":"8d1677e6b9f94ce4bbcd54e31bb8c4f4"}

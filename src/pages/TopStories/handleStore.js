@@ -1,14 +1,32 @@
 import { mapGetters, mapActions } from 'vuex';
 import { Getters, Actions } from '../../store/Stories/constants';
 
+const {
+  STORIES,
+  LOADING,
+  PER_PAGE,
+  TOTAL,
+} = Getters;
+const {
+  FETCH_STORIES,
+} = Actions;
+
 export const getters = {
   ...mapGetters({
-    topStories: Getters.GET_TOP_STORIES,
+    stories: STORIES,
+    loading: LOADING,
+    perPage: PER_PAGE,
+    total: TOTAL,
   }),
 };
 
-export const setters = {
+export const actions = {
   ...mapActions({
-    fetchTopStories: Actions.FETCH_TOP_STORIES,
+    fetchStories: FETCH_STORIES,
   }),
 };
+
+export function handlePrefetch({ store, currentRoute }) {
+  const { query } = currentRoute;
+  return store.dispatch(FETCH_STORIES, { refresh: true, query });
+}

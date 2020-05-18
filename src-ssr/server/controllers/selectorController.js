@@ -24,10 +24,12 @@ module.exports.index = async function (req, res) {
     if (source) { query.source = source; }
     const list = await Selector.find(query);
     const autocomplete = await Selector.find({}).select({ selector: 1, _id: 0 }).distinct('selector');
+    const autocompleteFilter = await Selector.find({}).select({ filter: 1, _id: 0 }).distinct('filter');
     res.status(resSuccess).json({
       statusCode: resSuccess,
       list,
       autocomplete,
+      autocompleteFilter,
     });
   } catch (ex) {
     res.status(resServerError).json({
@@ -97,7 +99,7 @@ module.exports.destroy = async function (req, res) {
         });
     }
     const { _id } = req.body;
-    await Selector.deleteOne({ _id });
+    await Selector.findOneAndDelete({ _id });
     res.status(resSuccess).json({
       statusCode: resSuccess,
       successMessage: DELETED,

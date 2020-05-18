@@ -115,7 +115,8 @@
                   <q-card-section class="q-pt-xs col-8">
                     <div class="text-overline">{{ story.sourceName }}</div>
                     <div
-                      class="text-h5 q-mt-sm q-mb-xs"
+                      @click="popup.details = story; popup.isOpen = true"
+                      class="text-h5 q-mt-sm q-mb-xs cursor-pointer"
                       v-html="story.title"
                     ></div>
                     <div
@@ -143,6 +144,11 @@
         <!-- stories cards [END] -->
       </div>
     </div>
+    <q-dialog v-model="popup.isOpen">
+      <q-layout view="Lhh lpR fff" container class="bg-white">
+        <Story :story="popup.details" :isTest="true" />
+      </q-layout>
+    </q-dialog>
     <!-- main container [END] -->
   </q-page>
 </template>
@@ -151,6 +157,8 @@ import { validations } from '../../../validators';
 import { actions, getters } from './handleStore';
 import SocketEvents from '../../../sockets/constants';
 import { ProtectedData } from '../../../utils/socketIoHelpers';
+import { Notify } from '../../../plugins/notify';
+import Story from '../../../components/Story';
 
 const {
   adminEvents: {
@@ -158,8 +166,15 @@ const {
   },
 } = SocketEvents;
 export default {
+  components: {
+    Story,
+  },
   data() {
     return {
+      popup: {
+        isOpen: false,
+        details: {},
+      },
       redirect: '',
       form: {
         source: '',
@@ -181,6 +196,13 @@ export default {
       if (this.scraped === 0) {
         this.loading = false;
       }
+    },
+    ADMIN_ERROR(ERROR) {
+      Notify({
+        type: 'negative',
+        message: ERROR,
+      });
+      this.loading = false;
     },
   },
   watch: {

@@ -51,6 +51,7 @@
           class="GNL__drawer-item"
           v-ripple
           v-for="link in links3"
+          :to="link.link"
           :key="link.text"
           clickable
         >
@@ -81,7 +82,7 @@
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
               aria-label="About"
-              >About Google</a
+              >About Us</a
             >
           </div>
         </div>
@@ -104,14 +105,16 @@ export default {
       },
       { icon: 'link', text: 'Source Links', link: '/admin/select-source?next=source-links' },
       { icon: 'show_chart', text: 'Selectors', link: '/admin/select-source?next=selectors' },
+      { icon: 'translate', text: 'Languages', link: '/admin/languages' },
     ],
     links2: [
       { icon: 'input', text: 'Scrap Test', link: '/admin/scrap-test' },
-      { icon: 'launch', text: 'Scrap Data', link: '/admin/select-source?next=selectors' },
+      { icon: 'launch', text: 'Scrap Data', link: '/admin/scrap-data' },
     ],
     links3: [
-      { icon: '', text: 'Translations' },
-      { icon: '', text: 'Settings' },
+      { icon: '', text: 'Translations', link: '/admin/translations' },
+      { icon: '', text: 'Regions', link: '/admin/regions' },
+      { icon: '', text: 'Countries', link: '/admin/countries' },
     ],
   }),
   methods: {
