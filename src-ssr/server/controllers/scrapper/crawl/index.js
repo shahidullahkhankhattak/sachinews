@@ -41,9 +41,9 @@ module.exports.crawl = async function (source) {
     const descriptionSel = selectors.find((sel) => sel.name === 'description');
     const mediaSel = selectors.find((sel) => sel.name === 'media');
     const bodySel = selectors.find((sel) => sel.name === 'body');
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     for (let urli = 0; urli < urls.length; urli += 1) {
       const { url, source: urlSource, category: urlCategory } = urls[urli];
-      const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
       const page = await browser.newPage();
       await page.goto(url, options);
       const links = await page.evaluate(({ selectors, valSelector }) => Array.from(document.querySelectorAll(selectors[0])).map((item) => item[valSelector]), linkSel);
