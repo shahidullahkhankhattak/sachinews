@@ -40,6 +40,9 @@
           >{{ $t("View article on") }} {{ $t(news.source) }}
         </q-badge>
       </a>
+      <div v-if="$q.screen.lt.sm">
+        <br>
+      </div>
       <div class="float-right">
         <q-btn
           flat
