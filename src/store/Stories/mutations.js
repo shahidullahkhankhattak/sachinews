@@ -17,6 +17,10 @@ export function fetchStory(state, payload) {
   state.story = payload;
 }
 
+export function removeStory(state) {
+  state.story = null;
+}
+
 export function likeStory(state, { id, main }) {
   let item = state.story;
   if (!main) { item = state.stories.find((_item) => _item._id === id); }
