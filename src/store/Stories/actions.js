@@ -69,7 +69,9 @@ export async function fetchStory({ commit }, id) {
 }
 
 export function removeStory({ commit }) {
-  commit(REMOVE_STORY);
+  setTimeout(() => {
+    commit(REMOVE_STORY);
+  }, 1000);
 }
 export async function likeStory({ commit }, { id, main }) {
   try {

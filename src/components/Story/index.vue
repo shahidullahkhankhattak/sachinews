@@ -3,7 +3,7 @@
     <div class="q-mb-md" v-if="!isTest">
       <q-btn
         :icon="(siteDir === 'ltr' && 'arrow_back') || 'arrow_forward'"
-        @click="$router.go(-1); clearStory();"
+        @click="closeStory()"
       >
         {{ $t("Back") }}
       </q-btn>
@@ -77,6 +77,10 @@ export default {
     ...actions,
     timeAgo(time) {
       return timeAgoFn.format(new Date(time));
+    },
+    closeStory() {
+      this.$router.go(-1);
+      this.clearStory.bind(this)();
     },
   },
   computed: {
