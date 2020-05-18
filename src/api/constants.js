@@ -1,9 +1,4 @@
-
-import { serverBase } from '../config/constants';
-
-const baseUrl = (process.env.DEV && serverBase.local) || serverBase.production;
-
-const apiV1Endpoint = `${baseUrl}/api/v1`;
+const apiV1Endpoint = '/api/v1';
 export const apiEndpoints = {
   LOGIN_ENDPOINT: `${apiV1Endpoint}/login`,
   SOURCE_ENDPOINTS: {
