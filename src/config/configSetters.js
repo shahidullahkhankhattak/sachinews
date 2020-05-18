@@ -1,22 +1,7 @@
-import { Screen } from 'quasar';
-import { wait } from '../utils/asyncHelpers';
-import { setters } from './handleStore';
-
 export async function setLocale(currentValue) {
+  const { locale } = this.$route.params;
   const { value } = currentValue;
-  const { direction: oldDir } = this.languages.find((lang) => lang.iso === this.locale) || {};
-  const newLocale = this.languages.find((lang) => lang.iso === value) || {};
-  const { direction: newDir } = newLocale;
-  const isScLg = Screen.gt.sm;
-
-  if (!value || value === this.locale || oldDir === newDir) return;
-  if (isScLg) {
-    this.$root.$emit('toggleSidebar');
-    await wait(200);
-  }
-  setters.setLocale.bind(this)(newLocale);
-  this.$router.push(`/${newLocale.iso}/`);
-  if (isScLg) this.$root.$emit('toggleSidebar');
+  if (process.browser && value !== locale) { document.location.href = `/${value}/`; }
 }
 
 export function setLoading(value) {

@@ -15,6 +15,7 @@ import { getters, handlePrefetch } from './handleStore';
 
 export default {
   meta() {
+    if (!this.story) return {};
     return {
       title: this.story.title,
       meta: {
@@ -34,6 +35,9 @@ export default {
   },
   computed: {
     ...getters,
+  },
+  mounted() {
+    handlePrefetch({ store: this.$store, currentRoute: this.$route, redirect: this.$router.push }, true);
   },
   preFetch: handlePrefetch,
 };

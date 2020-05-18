@@ -45,8 +45,7 @@ export async function fetchStories({ commit, rootState, getters: { stories: allS
       perPage,
       lang: locale && locale._id,
     });
-    const config = !refresh && axiosConfig.noLoader;
-    const { stories, total } = await axios.get(`${TOP_STORIES}?${$query}`, config);
+    const { stories, total } = await axios.get(`${TOP_STORIES}?${$query}`, axiosConfig.noLoader);
     commit(FETCH_STORIES, { stories, total, done });
     commit(SET_LOADING, false);
   } catch (ex) {

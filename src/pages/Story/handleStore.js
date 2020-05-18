@@ -16,7 +16,8 @@ export const getters = {
   }),
 };
 
-export async function handlePrefetch({ store, currentRoute, redirect }) {
+export async function handlePrefetch({ store, currentRoute, redirect }, isMount) {
+  if (process.browser && !isMount) return;
   const { id, locale } = currentRoute.params;
   await store.dispatch(FETCH_STORY, id);
   const story = getters.story.bind({ $store: store })();

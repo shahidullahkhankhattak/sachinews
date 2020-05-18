@@ -96,6 +96,9 @@ export default {
       }
     },
   },
+  mounted() {
+    handlePrefetch({ store: this.$store, currentRoute: this.$route, redirect: this.$router.push }, true);
+  },
   preFetch: handlePrefetch,
 };
 </script>
