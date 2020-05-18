@@ -101,6 +101,7 @@ app.get('*', (req, res) => {
   });
 });
 
-server.listen(port, () => {
+const httpSrvr = server.listen(port, () => {
   console.log(`Server listening at port ${port}`);
 });
+httpSrvr.setTimeout(600000);
