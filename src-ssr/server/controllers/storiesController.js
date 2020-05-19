@@ -18,7 +18,8 @@ module.exports.getStories = async (req, res) => {
     const filter = {};
     const sort = {
     };
-    if (trending) { sort.likes = -1; } else sort.created_date = -1;
+    if (trending) { sort.likes = -1; }
+    sort._id = -1;
     if (category) filter['category.slug'] = category;
     if (source) filter['source.slug'] = source;
     if (search) {

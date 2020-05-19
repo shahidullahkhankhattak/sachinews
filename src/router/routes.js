@@ -46,7 +46,7 @@ const routes = [
       { path: 'source/:slug', name: 'source-stories', component: () => import('pages/Source') },
       { path: 'search/:q', name: 'search-stories', component: () => import('pages/Search') },
       { path: 'trending', name: 'trending-stories', component: () => import('pages/Trending') },
-      { path: 'story/:id/:slug', name: 'story-details', component: () => import('pages/Story') },
+      { path: 'story/:id/:slug?', name: 'story-details', component: () => import('pages/Story') },
     ],
   },
 ];

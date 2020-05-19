@@ -77,7 +77,7 @@ export default {
   },
   mounted() {
     const { prevRoute } = bus;
-    if (prevRoute && prevRoute.name === 'story-details') { return; }
+    if (prevRoute && prevRoute.name === 'story-details' && this.stories.length > 0) { return; }
     handlePrefetch({ store: this.$store, currentRoute: this.$route }, true);
   },
   preFetch: handlePrefetch,

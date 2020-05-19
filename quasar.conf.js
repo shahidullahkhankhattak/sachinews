@@ -110,13 +110,13 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Addictive Bulletin',
-        short_name: 'ABulletin',
-        description: 'Addictive Bulletin is a news aggregater where you can explore and search within all categories and extensive collection of news.',
+        name: 'Sachi News',
+        short_name: 'Sachi News',
+        description: 'Sachi news is a news aggregater where you can explore and search within all categories and extensive collection of news.',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#d21b0d',
         icons: [
           {
             src: 'statics/icons/icon-128x128.png',
