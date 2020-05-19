@@ -2,24 +2,12 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 const puppeteer = require('puppeteer');
+const fs = require('fs');
 const SourceLink = require('../../../db/models/SourceLink');
 const Selector = require('../../../db/models/Selector');
 const Story = require('../../../db/models/Story');
 const { genSlug } = require('../../../utils/slug');
-const { tagsKeywords } = require('../../../config');
-
-const searchTags = (search, target) => {
-  if (typeof search === 'object') {
-    let found = true;
-    search.forEach((keyword) => {
-      if (!target.includes(keyword)) {
-        found = false;
-      }
-    });
-    return found;
-  }
-  return target.includes(search);
-};
+const { searchTags } = require('../../../utils/tags');
 
 const options = { waitUntil: 'load', timeout: 0 };
 module.exports.crawl = async function (source) {
@@ -42,6 +30,7 @@ module.exports.crawl = async function (source) {
     const mediaSel = selectors.find((sel) => sel.name === 'media');
     const bodySel = selectors.find((sel) => sel.name === 'body');
     const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+    const tagsKeywords = JSON.parse(fs.readFileSync('keywords/tagsKeywords.json').toString('utf-8'));
     for (let urli = 0; urli < urls.length; urli += 1) {
       const { url, source: urlSource, category: urlCategory } = urls[urli];
       const page = await browser.newPage();
@@ -105,10 +94,13 @@ module.exports.crawl = async function (source) {
         const exists = await Story.findOne({ title: story.title });
         if (!exists && story.body) {
           const tags = [];
-          tagsKeywords.important.forEach((keyword) => {
-            if (searchTags(keyword, story.body)) {
-              tags.push('important');
-            }
+          Object.keys(tagsKeywords).forEach((key) => {
+            const value = tagsKeywords[key];
+            value.forEach((keyword) => {
+              if (searchTags(keyword, story.body)) {
+                tags.push(key);
+              }
+            });
           });
           await Story.create({ ...story, tags });
           stories.push(story);

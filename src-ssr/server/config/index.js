@@ -27,7 +27,4 @@ module.exports = {
     // server was unable to complete the request completely
     resIncomplete: 417,
   },
-  tagsKeywords: {
-    important: ['military', 'supreme court', ['corona', 'result'], 'blast', 'firing', 'death', 'dead', 'کرونا'],
-  },
 };

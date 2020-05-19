@@ -8,6 +8,7 @@
   "author": "Shahid Ullah Khan",
   "private": true,
   "scripts": {
+    "production": "node dist/ssr/index.js",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0"
   },
