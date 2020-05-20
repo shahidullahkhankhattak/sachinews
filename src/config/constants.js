@@ -32,7 +32,7 @@ export const responseTypes = {
 };
 
 export const serverBase = {
-  local: 'http://sachinews.com',
+  local: 'http://localhost:8000/',
   production: 'http://sachinews.com',
 };
 
