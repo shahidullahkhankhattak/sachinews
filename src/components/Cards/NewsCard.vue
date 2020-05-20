@@ -21,7 +21,7 @@
           <h2 class="text-h5 q-mt-sm q-mb-xs" v-html="news.title"></h2>
         </router-link>
         <div class="text-subtitle2">
-          <time>{{ $td('an hour ago') }}</time>
+          <time>{{ $td(timeAgo(story.created_date)) }}</time>
         </div>
         <q-space />
         <p
