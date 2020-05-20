@@ -9,5 +9,7 @@ router.use(bodyParser.json());
 
 router.route('/source/:source')
   .get([scrapperValidators.crawlSource], scrapperController.crawlSource);
+router.route('/all')
+  .get(scrapperController.crawlAll);
 
 module.exports = router;

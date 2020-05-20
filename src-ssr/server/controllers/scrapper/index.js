@@ -1,7 +1,8 @@
 const { test } = require('./test');
-const { crawl } = require('./crawl');
+const { crawlAll, crawlSource } = require('./crawl');
 
 module.exports = {
   test,
-  crawl,
+  crawlAll,
+  crawlSource
 };

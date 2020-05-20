@@ -11,7 +11,7 @@ const {
   },
 } = require('../config');
 
-const { crawl } = crawler;
+const { crawlSource, crawlAll } = crawler;
 
 module.exports.crawlSource = async function (req, res) {
   try {
@@ -24,7 +24,7 @@ module.exports.crawlSource = async function (req, res) {
         });
     }
     const { source: sourceId } = req.params;
-    const stories = await crawl(sourceId, res);
+    const stories = await crawlSource(sourceId, res);
     res.status(resSuccess).json({
       statusCode: resSuccess,
       stories,
@@ -36,3 +36,18 @@ module.exports.crawlSource = async function (req, res) {
     });
   }
 };
+
+module.exports.crawlAll = async function (req, res) {
+  try {
+    const stories = await crawlAll();
+    res.status(resSuccess).json({
+      statusCode: resSuccess,
+      stories,
+    });
+  } catch (ex) {
+    res.status(resServerError).json({
+      statusCode: resServerError,
+      errors: [serverError],
+    });
+  }
+}
