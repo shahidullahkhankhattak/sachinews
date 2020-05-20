@@ -62,11 +62,11 @@ export default {
     return {
       title: pageTitle,
       meta: {
-        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        description: { name: 'description', content: this.$t('search within extensive collection of news from all the sources througout the globe') },
         ogTitle: { name: 'og:title', content: pageTitle },
         dcTitle: { name: 'DC.title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
-        keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through') },
+        ogDescription: { name: 'og:description', content: this.$t('search within extensive collection of news from all the sources througout the globe') },
+        keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through,search,sachi,news,sachi news,addictive bulletin,addictive,bulletin') },
       },
     };
   },

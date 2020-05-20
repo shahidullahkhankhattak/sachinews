@@ -49,9 +49,9 @@ export default {
     return {
       title: pageTitle,
       meta: {
-        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        description: { name: 'description', content: this.$t('Get, read & scroll through all the top stories stories from all the sources througout the globe') },
         ogTitle: { name: 'og:title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        ogDescription: { name: 'og:description', content: this.$t('Get, read & scroll through all the top stories stories from all the sources througout the globe') },
       },
     };
   },
