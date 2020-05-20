@@ -12,6 +12,7 @@ const { searchTags } = require('../../../utils/tags');
 const options = { waitUntil: 'load', timeout: 0 };
 module.exports.crawl = async function (source) {
   const stories = [];
+  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   try {
     const urls = await SourceLink.find({ source });
     const selectors = (await Selector.find({ source }).exec()).map(({
@@ -29,7 +30,6 @@ module.exports.crawl = async function (source) {
     const descriptionSel = selectors.find((sel) => sel.name === 'description');
     const mediaSel = selectors.find((sel) => sel.name === 'media');
     const bodySel = selectors.find((sel) => sel.name === 'body');
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const tagsKeywords = JSON.parse(fs.readFileSync('keywords/tagsKeywords.json').toString('utf-8'));
     for (let urli = 0; urli < urls.length; urli += 1) {
       const { url, source: urlSource, category: urlCategory } = urls[urli];
@@ -110,6 +110,8 @@ module.exports.crawl = async function (source) {
     await browser.close();
     return stories;
   } catch (ex) {
-    console.log(ex);
+    console.log(ex)
+  } finally {
+    await browser.close();
   }
 };

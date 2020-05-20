@@ -1,6 +1,6 @@
 module.exports = {
   db: {
-    connectUrl: 'mongodb://localhost:27017/addictive_bulletin',
+    connectUrl: 'mongodb://localhost:27017/sachinews',
   },
   jwt: {
     expireSessionTime: 86400, // 1 day

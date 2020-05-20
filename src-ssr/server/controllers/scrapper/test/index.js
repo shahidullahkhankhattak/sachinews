@@ -9,6 +9,7 @@ const { adminEvents: { ADMIN_SCRAP_NEWS_ITEM, ADMIN_ERROR } } = require('../../.
 
 const options = { waitUntil: 'load', timeout: 0 };
 module.exports.test = async function ({ form: { source, link, numItems } }, socket) {
+  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
   try {
     const { url } = await SourceLink.findOne({ _id: link });
     const { name: sourceName } = await Source.findOne({ _id: source });
@@ -27,8 +28,6 @@ module.exports.test = async function ({ form: { source, link, numItems } }, sock
     const descriptionSel = selectors.find((sel) => sel.name === 'description');
     const mediaSel = selectors.find((sel) => sel.name === 'media');
     const bodySel = selectors.find((sel) => sel.name === 'body');
-
-    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = await browser.newPage();
     await page.goto(url, options);
     const links = await page.evaluate(({ selectors, valSelector }) => Array.from(document.querySelectorAll(selectors[0])).map((item) => item[valSelector]), linkSel);
@@ -84,5 +83,7 @@ module.exports.test = async function ({ form: { source, link, numItems } }, sock
     await browser.close();
   } catch (ex) {
     socket.emit(ADMIN_ERROR, ex.message);
+  } finally {
+    await browser.close()
   }
 };

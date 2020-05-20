@@ -32,8 +32,8 @@ export const responseTypes = {
 };
 
 export const serverBase = {
-  local: 'http://localhost:8080',
-  production: 'http://localhost:3000',
+  local: 'http://sachinews.com',
+  production: 'http://sachinews.com',
 };
 
 export const axiosConfig = {
