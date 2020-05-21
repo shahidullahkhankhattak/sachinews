@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"addictive_bulletin.sources"}],"uuid":"f89cf5735a214d4f8809956c91f7dc8d"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"sachinews.sources"},{"v":{"$numberInt":"2"},"key":{"name":{"$numberDouble":"1.0"},"lang":{"$numberDouble":"1.0"},"slug":{"$numberDouble":"1.0"}},"name":"name_1_lang_1_slug_1","ns":"sachinews.sources"}],"uuid":"2f7a1fa34f5b471aa48a2395687ddc19"}

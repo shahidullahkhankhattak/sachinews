@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"addictive_bulletin.sourcelinks"}],"uuid":"96a4a13b73384f6181cf8bb203ce99e2"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"sachinews.sourcelinks"}],"uuid":"57a3755032b24586a53f792b9e19a9ec"}
