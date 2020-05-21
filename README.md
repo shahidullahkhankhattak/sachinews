@@ -1,6 +1,6 @@
-# ABulletin (addictivebulletin)
+# Sachi News (sachinews)
 
-Addictive Bulletin is a news aggregater where you can explore and search within all categories and extensive collection of news.
+Sachi news is a news aggregater where you can explore and search within all categories and extensive collection of news.
 
 ## Install the dependencies
 ```bash

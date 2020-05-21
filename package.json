@@ -1,9 +1,9 @@
 {
-  "name": "addictivebulletin",
+  "name": "sacchinews",
   "version": "0.0.1",
-  "description": "Addictive Bulletin is a news aggregater where you can explore and search within all categories and extensive collection of news.",
-  "productName": "Addictive Bulletin",
-  "cordovaId": "abulletin",
+  "description": "Sachi News is a news aggregater where you can explore and search within all categories and extensive collection of news.",
+  "productName": "Sachi News",
+  "cordovaId": "sachinews",
   "capacitorId": "",
   "author": "Shahid Ullah Khan",
   "private": true,

@@ -6,8 +6,7 @@
       <div class="row">
         <q-card rounded bordered class="q-pa-lg shadow-1">
           <q-card-section class="q-pt-xs">
-            <div class="text-overline">
-              <span class="text-red">Addictive</span> Bulletin
+            <div class="text-overline" v-html="logo.html">
             </div>
             <div class="text-h5 q-mt-sm q-mb-xs">Login</div>
             <div class="text-caption text-grey">
@@ -73,11 +72,13 @@
 <script>
 import { validations } from '../../validators';
 import { actions } from './handleStore';
+import { config } from '../../config';
 
 export default {
   name: 'LoginPage',
   data() {
     return {
+      logo: config.app.logo,
       rules: { ...validations },
       form: {
         email: '',

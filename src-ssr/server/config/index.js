@@ -4,7 +4,7 @@ module.exports = {
   },
   jwt: {
     expireSessionTime: 86400, // 1 day
-    secret: 'addictive bulletin is awesome',
+    secret: 'sachi news is awesome',
   },
   bcrypt: {
     salt: 10,
