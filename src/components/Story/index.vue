@@ -67,7 +67,7 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Share from '../Buttons/Share';
 import { getters, actions } from './handleStore';
-import bus from '../../utils/dataBus';
+import { canGoBack } from '../../utils/dataBus';
 
 TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
@@ -83,7 +83,7 @@ export default {
       return timeAgoFn.format(new Date(time));
     },
     closeStory() {
-      if (!bus.prevRoute.name) {
+      if (!canGoBack()) {
         this.$router.push(`/${this.locale.iso}/`);
       } else {
         this.$router.go(-1);

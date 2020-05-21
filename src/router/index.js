@@ -34,6 +34,7 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE,
   });
   Router.beforeEach((to, from, next) => {
+    bus.subPrevRoute = { ...bus.prevRoute };
     bus.prevRoute = from;
     bus.nextRoute = to;
     next();

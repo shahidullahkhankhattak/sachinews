@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="p-pa-md news-container">
-      <q-infinite-scroll @load="onScroll" :offset="0">
+      <q-infinite-scroll @load="onScroll" :offset="400">
         <div class="row">
           <div class="col-xs-12">
             <q-card class="news-card text-center" flat bordered>
@@ -50,7 +50,7 @@ import NewsCard from '../../components/Cards/NewsCard';
 import NoNews from '../../components/Cards/NoNews';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 import { config } from '../../config';
-import bus from '../../utils/dataBus';
+import { shouldReloadStories } from '../../utils/dataBus';
 
 const { app: { logo: { title } } } = config;
 
@@ -95,8 +95,7 @@ export default {
     },
   },
   mounted() {
-    const { prevRoute } = bus;
-    if (prevRoute && prevRoute.name === 'story-details' && this.stories.length > 0) { return; }
+    if (!shouldReloadStories(this)) return;
     handlePrefetch({ store: this.$store }, true);
   },
   preFetch: handlePrefetch,

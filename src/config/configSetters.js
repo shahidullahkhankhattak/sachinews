@@ -3,12 +3,11 @@ import { wait } from '../utils/asyncHelpers';
 
 export async function setLocale(currentValue) {
   const { value } = currentValue;
-  const { direction: oldDir } = this.languages.find((lang) => lang.iso === this.locale) || {};
+  const { direction: oldDir } = this.languages.find((lang) => lang.iso === this.locale.iso) || {};
   const newLocale = this.languages.find((lang) => lang.iso === value) || {};
   const { direction: newDir } = newLocale;
   const isScLg = Screen.gt.sm;
-
-  if (!value || value === this.locale || oldDir === newDir) return;
+  if (!value || oldDir === newDir) return;
   if (isScLg) {
     this.$root.$emit('toggleSidebar');
     await wait(200);

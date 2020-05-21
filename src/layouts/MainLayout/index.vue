@@ -32,7 +32,7 @@ export default {
   watch: {
     $route(to, from) {
       // toggle sidebar on language change
-      if (from.name === to.name && to.name === 'top-stories' && Screen.gt.sm) {
+      if (from.params.locale !== to.params.locale && Screen.gt.sm) {
         this.$root.$emit('toggleSidebar');
       }
     },
