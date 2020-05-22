@@ -80,10 +80,10 @@ module.exports.test = async function ({ form: { source, link, numItems } }, sock
       });
       socket.emit(ADMIN_SCRAP_NEWS_ITEM, crawled);
     }
-    await browser.close();
+    await Promise.race([browser.close(), browser.close(), browser.close()]);
   } catch (ex) {
     socket.emit(ADMIN_ERROR, ex.message);
   } finally {
-    await browser.close()
+    await Promise.race([browser.close(), browser.close(), browser.close()]);
   }
 };
