@@ -12,7 +12,6 @@
       class="q-mb-sm article-media"
       :src="news.media"
       :alt="news.title"
-      height="400px"
       native-context-menu
     >
       <div

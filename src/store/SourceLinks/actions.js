@@ -3,6 +3,7 @@ import { apiEndpoints } from '../../api/constants';
 import { se2errors } from '../formatters';
 import { Mutations } from './constants';
 import { Actions as CatActions } from '../Categories/constants';
+import { Actions as CountryActions } from '../Countries/constants';
 import { Notify } from '../../plugins/notify';
 
 const {
@@ -31,6 +32,7 @@ export async function fetch({
   commit, dispatch,
 }, sourceId) {
   dispatch(CatActions.FETCH, {}, { root: true });
+  dispatch(CountryActions.FETCH, {}, { root: true });
   try {
     const { source_id: sourceIdRoute } = this.$router.app.$route && this.$router.app.$route.params;
     if (!sourceId) { sourceId = sourceIdRoute; }
