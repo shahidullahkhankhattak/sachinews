@@ -5,7 +5,9 @@
     <sidebar />
 
     <q-page-container>
-      <router-view />
+      <transition mode="out-in" name="slide-fade">
+        <router-view :key="routeKey"/>
+      </transition>
     </q-page-container>
   </q-layout>
 </template>
@@ -28,6 +30,9 @@ export default {
   },
   computed: {
     ...getters,
+    routeKey() {
+      return this.$route.params.slug || this.$route.name;
+    },
   },
   watch: {
     $route(to, from) {

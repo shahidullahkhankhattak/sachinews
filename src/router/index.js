@@ -18,12 +18,16 @@ import bindAuth from './auth';
 
 export default function (/* { store, ssrContext } */) {
   const Router = new VueRouter({
-    scrollBehavior: (to, from, savedPosition) => {
-      const topScroll = { x: 0, y: 0 };
+    scrollBehavior: async (to, from, savedPosition) => {
+      let topScroll = { x: 0, y: 0 };
       if (from.name === 'story-details' && to.name !== from.name) {
-        return savedPosition || topScroll;
+        topScroll = savedPosition || topScroll;
       }
-      return topScroll;
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(topScroll);
+        }, 500);
+      });
     },
     routes,
 
