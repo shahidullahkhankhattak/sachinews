@@ -14,6 +14,19 @@ const crawlSource = async function (browser, source) {
   const stories = [];
   try {
     const page = await browser.newPage();
+    await page.setRequestInterception(true);
+    page.on('request', (interceptedRequest) => {
+      if (interceptedRequest.url().includes('.png')
+          || interceptedRequest.url().includes('.css')
+          || interceptedRequest.url().includes('.jpg')
+          || interceptedRequest.url().includes('.gif')
+          || interceptedRequest.url().includes('.ttf')
+          || interceptedRequest.url().includes('.woff')) {
+        interceptedRequest.abort();
+      } else {
+        interceptedRequest.continue();
+      }
+    });
     const urls = await SourceLink.find({ source });
     const selectors = (await Selector.find({ source }).exec()).map(({
       name, selector, type, filter, source,

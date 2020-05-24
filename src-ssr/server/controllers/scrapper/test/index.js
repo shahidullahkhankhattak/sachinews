@@ -29,6 +29,19 @@ module.exports.test = async function ({ form: { source, link, numItems } }, sock
     const mediaSel = selectors.find((sel) => sel.name === 'media');
     const bodySel = selectors.find((sel) => sel.name === 'body');
     const page = await browser.newPage();
+    await page.setRequestInterception(true);
+    page.on('request', (interceptedRequest) => {
+      if (interceptedRequest.url().includes('.png')
+          || interceptedRequest.url().includes('.css')
+          || interceptedRequest.url().includes('.jpg')
+          || interceptedRequest.url().includes('.gif')
+          || interceptedRequest.url().includes('.ttf')
+          || interceptedRequest.url().includes('.woff')) {
+        interceptedRequest.abort();
+      } else {
+        interceptedRequest.continue();
+      }
+    });
     await page.goto(url, options);
     const links = await page.evaluate(({ selectors, valSelector }) => Array.from(document.querySelectorAll(selectors[0])).map((item) => item[valSelector]), linkSel);
     const loopTo = ((numItems > links.length && links.length) || numItems);
@@ -80,6 +93,7 @@ module.exports.test = async function ({ form: { source, link, numItems } }, sock
       });
       socket.emit(ADMIN_SCRAP_NEWS_ITEM, crawled);
     }
+    await page.close();
     await Promise.race([browser.close(), browser.close(), browser.close()]);
   } catch (ex) {
     socket.emit(ADMIN_ERROR, ex.message);

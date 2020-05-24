@@ -34,6 +34,19 @@ module.exports = async function (source) {
     for (let urli = 0; urli < urls.length; urli += 1) {
       const { url, source: urlSource, category: urlCategory } = urls[urli];
       const page = await browser.newPage();
+      await page.setRequestInterception(true);
+      page.on('request', (interceptedRequest) => {
+        if (interceptedRequest.url().includes('.png')
+            || interceptedRequest.url().includes('.css')
+            || interceptedRequest.url().includes('.jpg')
+            || interceptedRequest.url().includes('.gif')
+            || interceptedRequest.url().includes('.ttf')
+            || interceptedRequest.url().includes('.woff')) {
+          interceptedRequest.abort();
+        } else {
+          interceptedRequest.continue();
+        }
+      });
       await page.goto(url, options);
       const links = await page.evaluate(({ selectors, valSelector }) => Array.from(document.querySelectorAll(selectors[0])).map((item) => item[valSelector]), linkSel);
       for (let i = 0; i < links.length; i += 1) {
