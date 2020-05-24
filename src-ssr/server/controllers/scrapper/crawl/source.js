@@ -106,6 +106,7 @@ module.exports = async function (source) {
           stories.push(story);
         }
       }
+      await page.close();
     }
     await Promise.race([browser.close(), browser.close(), browser.close()]);
     return stories;

@@ -106,6 +106,7 @@ const crawlSource = async function (browser, source) {
         }
       }
     }
+    await page.close();
     return stories;
   } catch (ex) {
     console.log(ex);
