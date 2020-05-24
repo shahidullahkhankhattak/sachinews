@@ -1,3 +1,8 @@
+<style scoped>
+  .share-items {
+    min-width: 125px;
+  }
+</style>
 <template>
   <span class="relative-position q-mx-sm">
     <!-- <q-badge floating>5</q-badge> -->

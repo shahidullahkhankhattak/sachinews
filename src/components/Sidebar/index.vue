@@ -17,6 +17,7 @@
           :key="link.text"
           :to="`/${locale.iso}/${link.link}`"
           :title="$t(link.text)"
+          @click="hideSidebar()"
           clickable
         >
           <q-item-section avatar>
@@ -36,6 +37,7 @@
           :key="link.name"
           :title="$t(link.name)"
           :to="`/${locale.iso}/category/${link.slug}`"
+          @click="hideSidebar()"
           clickable
         >
           <q-item-section avatar>
@@ -53,6 +55,7 @@
           :key="link.name"
           :to="`/${locale.iso}/source/${link.slug}`"
           :title="$t(link.name)"
+          @click="hideSidebar()"
           clickable
         >
           <q-item-section>
@@ -68,6 +71,7 @@
           :key="link.text"
           :title="$t(link.text)"
           clickable
+          @click="hideSidebar()"
         >
           <q-item-section>
             <q-item-label
@@ -138,6 +142,11 @@ export default {
   methods: {
     generateQueryParam(name, value) {
       return queryParams(name, value, this.$route);
+    },
+    hideSidebar() {
+      if (Screen.lt.md) {
+        this.$refs.sidebar.hide();
+      }
     },
   },
   watch: {
