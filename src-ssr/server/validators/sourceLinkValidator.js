@@ -40,7 +40,7 @@ module.exports.create = [
     }
   }),
   body().custom(async (value) => {
-    if (!value.Category && !value.country) {
+    if (!value.category && !value.country) {
       return Promise.reject(INVALID_BOTH);
     }
   }),
