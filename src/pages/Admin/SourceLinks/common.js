@@ -1,8 +1,8 @@
 export function formElems() {
   return {
     url: '',
-    category: '',
-    country: '',
+    category: null,
+    country: null,
     encoding: 'html',
   };
 }
