@@ -123,6 +123,14 @@ schema.statics.findOneWithAllInfo = async function (filter, address) {
     },
     {
       $lookup: {
+        from: 'countries',
+        localField: 'country',
+        foreignField: '_id',
+        as: 'country',
+      },
+    },
+    {
+      $lookup: {
         from: 'likes',
         localField: '_id',
         foreignField: 'story',

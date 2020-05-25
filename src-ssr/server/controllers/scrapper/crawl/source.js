@@ -35,7 +35,6 @@ module.exports = async function (source) {
       const {
         url, source: urlSource, category: urlCategory, country: urlCountry,
       } = urls[urli];
-      if (!urlCountry) continue;
       const page = await browser.newPage();
       await page.setRequestInterception(true);
       page.on('request', (interceptedRequest) => {

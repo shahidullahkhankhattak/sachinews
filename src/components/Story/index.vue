@@ -94,9 +94,9 @@ export default {
     ...getters,
     news() {
       const {
-        source: [{ name: source, color }] = [{}],
-        category: [{ name: category } = {}],
-        country: [{ name: country } = {}],
+        source: [{ name: source, color } = {}] = [],
+        category: [{ name: category } = {}] = [],
+        country: [{ name: country } = {}] = [],
       } = this.story;
       return {
         ...this.story,
