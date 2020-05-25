@@ -60,13 +60,31 @@
                           lazy-rules
                           :option-value="opt => opt._id"
                           :option-label="opt => opt.name"
-                          :rules="[rules.REQUIRED]"
-                          :options="categories"
+                          :rules="[]"
+                          :options="[{_id: null, name: 'N/A'},...categories]"
                           map-options
                           emit-value
                         >
                           <template v-slot:prepend>
                             <q-icon name="class" />
+                          </template>
+                        </q-select>
+                      </div>
+                      <div class="col-md-4">
+                        <q-select
+                          v-model="addForm.country"
+                          outlined
+                          label="Country"
+                          lazy-rules
+                          :option-value="opt => opt._id"
+                          :option-label="opt => opt.name"
+                          :rules="[]"
+                          :options="[{_id: null, name: 'N/A'},...countries]"
+                          map-options
+                          emit-value
+                        >
+                          <template v-slot:prepend>
+                            <q-icon name="room" />
                           </template>
                         </q-select>
                       </div>

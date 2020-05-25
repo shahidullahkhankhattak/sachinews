@@ -1,7 +1,18 @@
+import { Screen } from 'quasar';
+import { wait } from '../utils/asyncHelpers';
+
 export async function setLocale(currentValue) {
-  const { locale } = this.$route.params;
   const { value } = currentValue;
-  if (process.browser && value !== locale) { document.location.href = `/${value}/`; }
+  const { direction: oldDir } = this.languages.find((lang) => lang.iso === this.locale.iso) || {};
+  const newLocale = this.languages.find((lang) => lang.iso === value) || {};
+  const { direction: newDir } = newLocale;
+  const isScLg = Screen.gt.sm;
+  if (!value || oldDir === newDir) return;
+  if (isScLg) {
+    this.$root.$emit('toggleSidebar');
+    await wait(200);
+  }
+  this.$router.push(`/${newLocale.iso}/`);
 }
 
 export function setLoading(value) {

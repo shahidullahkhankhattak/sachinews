@@ -3,7 +3,7 @@
     <div class="q-mb-md" v-if="!isTest">
       <q-btn
         :icon="(siteDir === 'ltr' && 'arrow_back') || 'arrow_forward'"
-        @click="$router.go(-1); clearStory();"
+        @click="closeStory()"
       >
         {{ $t("Back") }}
       </q-btn>
@@ -12,7 +12,6 @@
       class="q-mb-sm article-media"
       :src="news.media"
       :alt="news.title"
-      height="400px"
       native-context-menu
     >
       <div
@@ -40,6 +39,9 @@
           >{{ $t("View article on") }} {{ $t(news.source) }}
         </q-badge>
       </a>
+      <div v-if="$q.screen.lt.sm">
+        <br>
+      </div>
       <div class="float-right">
         <q-btn
           flat
@@ -64,6 +66,7 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Share from '../Buttons/Share';
 import { getters, actions } from './handleStore';
+import { canGoBack } from '../../utils/dataBus';
 
 TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
@@ -78,22 +81,32 @@ export default {
     timeAgo(time) {
       return timeAgoFn.format(new Date(time));
     },
+    closeStory() {
+      if (!canGoBack()) {
+        this.$router.push(`/${this.locale.iso}/`);
+      } else {
+        this.$router.go(-1);
+      }
+      this.clearStory.bind(this)();
+    },
   },
   computed: {
     ...getters,
     news() {
       const {
-        source: [{ name: source, color }] = [{}],
-        category: [{ name: category }] = [{}],
+        source: [{ name: source, color } = {}] = [],
+        category: [{ name: category } = {}] = [],
+        country: [{ name: country } = {}] = [],
       } = this.story;
       return {
         ...this.story,
         source,
         color,
         category,
+        country,
         link:
           !this.isTest
-          && `/${this.locale.iso}/story/${this.story._id}/${this.story.slug}`,
+          && `/${this.locale.iso}/story/${this.story._id}/${(this.locale.iso === 'en' && this.story.slug) || ''}`,
       };
     },
   },

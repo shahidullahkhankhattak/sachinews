@@ -80,6 +80,9 @@ module.exports = {
   sourceLinksMsgs: {
     ...ecud('Source'),
     INVALID_SOURCE: 'Source does not exists.',
+    INVALID_CATEGORY: 'Category does not exists.',
+    INVALID_COUNTRY: 'Country does not exists.',
+    INVALID_BOTH: 'Link must atleast have cateogory or country.',
   },
   selectorsMsgs: {
     ...ecud('Selector'),

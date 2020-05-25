@@ -5,6 +5,9 @@ const authRoutes = require('./auth');
 const userRoutes = require('./user');
 const crawlerRoutes = require('./crawler');
 
+// controllers
+const tagsController = require('../../controllers/tagsController');
+
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
@@ -17,6 +20,6 @@ router.use('/admin', adminRoutes);
 router.use(userRoutes);
 // crawler / scrapper routes
 router.use('/scrapper', crawlerRoutes);
-
+router.get('/assign-tags', tagsController.assignTags);
 
 module.exports = router;

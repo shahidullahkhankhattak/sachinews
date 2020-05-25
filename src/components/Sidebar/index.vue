@@ -13,10 +13,12 @@
         <q-item
           class="GNL__drawer-item"
           v-ripple
-          v-for="link in links1"
+          v-for="link in topLinks"
           :key="link.text"
-          :to="`/${locale.iso}/${link.link}`"
+          :to="link.link"
           :title="$t(link.text)"
+          @click="hideSidebar()"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section avatar>
@@ -28,14 +30,15 @@
         </q-item>
 
         <q-separator inset class="q-my-sm" />
-
         <q-item
           class="GNL__drawer-item"
           v-ripple
-          v-for="link in categories"
+          v-for="link in categoryLinks"
           :key="link.name"
           :title="$t(link.name)"
-          :to="`/${locale.iso}/category/${link.slug}`"
+          :to="link.link"
+          @click="hideSidebar()"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section avatar>
@@ -49,16 +52,37 @@
         <q-item
           class="GNL__drawer-item"
           v-ripple
-          v-for="link in sources"
+          v-for="link in sourceLinks"
           :key="link.name"
-          :to="`/${locale.iso}/source/${link.slug}`"
+          :to="link.link"
           :title="$t(link.name)"
+          @click="hideSidebar()"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section>
             <q-item-label>{{ $t(link.name) }}</q-item-label>
           </q-item-section>
         </q-item>
+
+        <q-separator inset class="q-my-sm" />
+
+        <q-item
+          class="GNL__drawer-item"
+          v-ripple
+          v-for="link in countryLinks"
+          :key="link.name"
+          :to="link.link"
+          :title="$t(link.name)"
+          @click="hideSidebar()"
+          :class="{ active: isActive(link) }"
+          clickable
+        >
+          <q-item-section>
+            <q-item-label>{{ $t(link.name) }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <q-separator inset class="q-my-sm" />
 
         <q-item
@@ -67,6 +91,8 @@
           v-for="link in links3"
           :key="link.text"
           :title="$t(link.text)"
+          @click="hideSidebar()"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section>
@@ -83,7 +109,7 @@
               href="javascript:void(0)"
               aria-label="Privacy"
               :title="$t('Privacy')"
-              >{{ $t('Privacy') }}</a
+              >{{ $t("Privacy") }}</a
             >
             <span> · </span>
             <a
@@ -91,7 +117,7 @@
               href="javascript:void(0)"
               aria-label="Terms"
               :title="$t('Terms')"
-              >{{ $t('Terms') }}</a
+              >{{ $t("Terms") }}</a
             >
             <span> · </span>
             <a
@@ -99,7 +125,7 @@
               href="javascript:void(0)"
               aria-label="About"
               :title="$t('About Us')"
-              >{{ $t('About Us') }}</a
+              >{{ $t("About Us") }}</a
             >
           </div>
         </div>
@@ -110,14 +136,17 @@
 <script>
 import { Screen } from 'quasar';
 import { getters } from './handleStore';
-import { queryParams } from '../../utils/navigationHelpers';
+import {
+  queryParams,
+  isSidebarLinkActive as isActive,
+} from '../../utils/navigationHelpers';
 
 export default {
   data: () => ({
     sidebarKey: true,
     open: false,
-    links1: [
-      { icon: 'web', text: 'Top stories', link: '' },
+    topUrls: [
+      { icon: 'web', text: 'Latest', link: '' },
       { icon: 'trending_up', text: 'Trending', link: 'trending' },
       // { icon: 'person', text: 'For you' },
       // { icon: 'star_border', text: 'Favourites' },
@@ -134,10 +163,46 @@ export default {
   }),
   computed: {
     ...getters,
+    countryLinks() {
+      return this.countries.map((country) => ({
+        ...country,
+        link: `/${this.locale.iso}/country/${country.iso}`,
+      }));
+    },
+    topLinks() {
+      return this.topUrls.map((item) => ({
+        ...item,
+        link: `/${this.locale.iso}/${item.link}`,
+      }));
+    },
+    categoryLinks() {
+      const { country } = this;
+      const links = [];
+      if (this.countries.length && country) {
+        links.push({ name: this.$t('National'), link: `/${this.locale.iso}/country/${country.iso}/`, icon: 'flag' });
+      }
+      links.push(...this.categories.map((cat) => ({
+        ...cat,
+        link: `/${this.locale.iso}/category/${cat.slug}`,
+      })));
+      return links;
+    },
+    sourceLinks() {
+      return this.sources.map((source) => ({
+        ...source,
+        link: `/${this.locale.iso}/source/${source.slug}`,
+      }));
+    },
   },
   methods: {
+    isActive,
     generateQueryParam(name, value) {
       return queryParams(name, value, this.$route);
+    },
+    hideSidebar() {
+      if (Screen.lt.md) {
+        this.$refs.sidebar.hide();
+      }
     },
   },
   watch: {

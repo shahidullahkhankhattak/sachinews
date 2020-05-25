@@ -4,6 +4,13 @@
       animation="fade"
       type="rect"
       class="q-mb-sm article-media"
+      height="40px"
+      width="100px"
+    />
+    <q-skeleton
+      animation="fade"
+      type="rect"
+      class="q-mb-sm article-media"
       height="450px"
     />
     <q-skeleton class="q-my-sm q-mt-md" height="40px" type="rect" />

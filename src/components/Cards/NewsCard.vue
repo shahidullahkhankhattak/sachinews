@@ -3,7 +3,7 @@
     <q-card-section :horizontal="$q.screen.gt.xs" :vertical="$q.screen.lt.xs">
       <q-card-section tag="header" class="q-pt-xs col-8">
         <div class="text-overline">
-          {{ $t(news.source) }} - {{ $t(news.category) }}
+          {{ $t(news.source) }} - {{ $t(news.category || news.country) }}
         </div>
         <div>
           <q-badge v-if="isImportant(news)" color="red" class="animated infinite flash">
@@ -35,6 +35,7 @@
           class="rounded-borders"
           :src="news.media"
           :alt="news.title"
+          style="max-height: 250px"
           height="100%"
           native-context-menu
         />
@@ -76,14 +77,16 @@ export default {
     news() {
       const {
         source: [{ name: source, color }],
-        category: [{ name: category }],
+        category: [{ name: category } = {}],
+        country: [{ name: country } = {}],
       } = this.story;
       return {
         ...this.story,
         source,
         color,
         category,
-        link: `/${this.locale.iso}/story/${this.story._id}/${this.story.slug}`,
+        country,
+        link: `/${this.locale.iso}/story/${this.story._id}/${(this.locale.iso === 'en' && this.story.slug) || ''}`,
       };
     },
   },
@@ -102,7 +105,6 @@ export default {
       return false;
     },
     timeAgo(time) {
-      this.$t(time);
       return timeAgoFn.format(new Date(time));
     },
   },

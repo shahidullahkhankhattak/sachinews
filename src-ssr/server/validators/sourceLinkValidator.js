@@ -1,7 +1,13 @@
 const { body } = require('express-validator');
 const SourceLink = require('../db/models/SourceLink');
 const Source = require('../db/models/Source');
-const { sourceLinksMsgs: { EXISTS, INVALID_SOURCE } } = require('../responseMessages');
+const Country = require('../db/models/Country');
+const Category = require('../db/models/Category');
+const {
+  sourceLinksMsgs: {
+    EXISTS, INVALID_SOURCE, INVALID_COUNTRY, INVALID_CATEGORY, INVALID_BOTH,
+  },
+} = require('../responseMessages');
 
 module.exports.create = [
   body('source').exists(),
@@ -19,7 +25,25 @@ module.exports.create = [
   }),
   body('url').isURL(),
   body('encoding').isIn(['xml', 'html']),
-  body('category').exists(),
+  body('category').custom(async (value) => {
+    if (!value) return;
+    const item = await Category.findOne({ _id: value });
+    if (!item) {
+      return Promise.reject(INVALID_CATEGORY);
+    }
+  }),
+  body('country').custom(async (value) => {
+    if (!value) return;
+    const item = await Country.findOne({ _id: value });
+    if (!item) {
+      return Promise.reject(INVALID_COUNTRY);
+    }
+  }),
+  body().custom(async (value) => {
+    if (!value.Category && !value.country) {
+      return Promise.reject(INVALID_BOTH);
+    }
+  }),
 ];
 
 module.exports.update = [

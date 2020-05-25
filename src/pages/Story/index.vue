@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div class="p-pa-md news-container">
+    <div class="p-pa-md news-container story-container">
       <div class="row">
         <Story v-if="story" :story="story"/>
         <StoryLoader v-else />

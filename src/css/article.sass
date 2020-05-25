@@ -1,3 +1,7 @@
+.news-container
+  &.story-container
+    background: white
+
 .news-article
   h2
     font-size: 2rem
@@ -8,6 +12,7 @@
     font-weight: 600
 
   .article-media
+    height: 50vw
     max-height: 450px
 
   .article-body
@@ -25,3 +30,20 @@
     figure
       padding: 0
       margin: 0
+    *
+      max-width: 100%
+
+@media only screen and (max-width: 1024px)
+  .news-article .article-title
+    font-size: 2rem
+    line-height: 2.5rem
+
+@media only screen and (max-width: 600px)
+  .news-article
+    .article-title
+      font-size: 1.7rem
+      line-height: 2.2rem
+    .article-body
+      font-size: 1.1rem
+      p
+        font-size: 1.1rem

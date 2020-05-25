@@ -20,6 +20,10 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Category',
   },
+  country: {
+    type: Schema.Types.ObjectId,
+    ref: 'Country',
+  },
 });
 
 schema.statics.ObjectId = mongoose.Types.ObjectId;
@@ -40,6 +44,14 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
         localField: 'category',
         foreignField: '_id',
         as: 'category',
+      },
+    },
+    {
+      $lookup: {
+        from: 'countries',
+        localField: 'country',
+        foreignField: '_id',
+        as: 'country',
       },
     },
     {
@@ -107,6 +119,14 @@ schema.statics.findOneWithAllInfo = async function (filter, address) {
         localField: 'category',
         foreignField: '_id',
         as: 'category',
+      },
+    },
+    {
+      $lookup: {
+        from: 'countries',
+        localField: 'country',
+        foreignField: '_id',
+        as: 'country',
       },
     },
     {

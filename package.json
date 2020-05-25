@@ -1,13 +1,14 @@
 {
-  "name": "addictivebulletin",
+  "name": "sacchinews",
   "version": "0.0.1",
-  "description": "Addictive Bulletin is a news aggregater where you can explore and search within all categories and extensive collection of news.",
-  "productName": "Addictive Bulletin",
-  "cordovaId": "abulletin",
+  "description": "Sachi News is a news aggregater where you can explore and search within all categories and extensive collection of news.",
+  "productName": "Sachi News",
+  "cordovaId": "sachinews",
   "capacitorId": "",
   "author": "Shahid Ullah Khan",
   "private": true,
   "scripts": {
+    "production": "node dist/ssr/index.js",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0"
   },
@@ -19,6 +20,7 @@
     "crypto": "^1.0.1",
     "express-bearer-token": "^2.4.0",
     "express-validator": "^6.4.0",
+    "ip-locator": "0.0.1",
     "javascript-time-ago": "^2.0.7",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.5",

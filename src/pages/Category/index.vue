@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="p-pa-md news-container">
-      <q-infinite-scroll @load="onScroll" :offset="0">
+      <q-infinite-scroll @load="onScroll" :offset="400">
         <div class="row">
           <div class="col-xs-12">
             <q-card class="news-card text-center" flat bordered>
@@ -50,6 +50,7 @@ import NewsCard from '../../components/Cards/NewsCard';
 import NoNews from '../../components/Cards/NoNews';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 import { config } from '../../config';
+import { shouldReloadStories } from '../../utils/dataBus';
 
 const { app: { logo: { title } } } = config;
 
@@ -62,11 +63,11 @@ export default {
     return {
       title: pageTitle,
       meta: {
-        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the categories throughout the globe') },
         ogTitle: { name: 'og:title', content: pageTitle },
         dcTitle: { name: 'DC.title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
-        keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through') },
+        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the categories throughout the globe') },
+        keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through,sachinews,sachi,news,bulletin,addictive,addictive bulletin, sachi news, sachi, news') },
       },
     };
   },
@@ -97,6 +98,7 @@ export default {
     },
   },
   mounted() {
+    if (!shouldReloadStories(this)) return;
     handlePrefetch({ store: this.$store, currentRoute: this.$route, redirect: this.$router.push }, true);
   },
   preFetch: handlePrefetch,

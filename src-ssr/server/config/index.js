@@ -1,10 +1,10 @@
 module.exports = {
   db: {
-    connectUrl: 'mongodb://localhost:27017/addictive_bulletin',
+    connectUrl: 'mongodb://localhost:27017/sachinews',
   },
   jwt: {
     expireSessionTime: 86400, // 1 day
-    secret: 'addictive bulletin is awesome',
+    secret: 'sachi news is awesome',
   },
   bcrypt: {
     salt: 10,
@@ -26,8 +26,5 @@ module.exports = {
     resConflict: 409,
     // server was unable to complete the request completely
     resIncomplete: 417,
-  },
-  tagsKeywords: {
-    important: ['military', 'supreme court', ['corona', 'result'], 'blast', 'firing', 'death', 'dead', 'کرونا'],
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <q-page>
     <div class="p-pa-md news-container">
-      <q-infinite-scroll @load="onScroll" :offset="250">
+      <q-infinite-scroll @load="onScroll" :offset="400">
         <div class="row">
           <div class="col-12">
             <div class="row">
@@ -38,6 +38,7 @@ import NewsCard from '../../components/Cards/NewsCard';
 import NoNews from '../../components/Cards/NoNews';
 import NewsLoader from '../../components/Loaders/NewsLoader';
 import { config } from '../../config';
+import { shouldReloadStories } from '../../utils/dataBus';
 
 const { app: { logo: { title } } } = config;
 
@@ -48,9 +49,9 @@ export default {
     return {
       title: pageTitle,
       meta: {
-        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        description: { name: 'description', content: this.$t('Get, read & scroll through all the top stories from all the sources throughout the globe') },
         ogTitle: { name: 'og:title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources througout the globe') },
+        ogDescription: { name: 'og:description', content: this.$t('Get, read & scroll through all the top stories from all the sources throughout the globe') },
       },
     };
   },
@@ -75,6 +76,7 @@ export default {
     },
   },
   mounted() {
+    if (!shouldReloadStories(this)) return;
     handlePrefetch({ store: this.$store, currentRoute: this.$route }, true);
   },
   preFetch: handlePrefetch,

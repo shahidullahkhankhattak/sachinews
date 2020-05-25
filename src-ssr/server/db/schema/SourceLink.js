@@ -11,6 +11,10 @@ const schema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Category',
   },
+  country: {
+    type: Schema.Types.ObjectId,
+    ref: 'Country',
+  },
   encoding: String,
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },

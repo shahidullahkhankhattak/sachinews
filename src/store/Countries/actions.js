@@ -39,9 +39,9 @@ export async function add({ rootGetters, commit }, { form, reset }) {
   }
 }
 
-export async function fetchUserCountries({ commit }, language) {
+export async function fetchUserCountries({ commit }) {
   try {
-    const { list } = await axios.get(`${USER_COUNTRY}?lang=${(language && language._id) || ''}`, axiosConfig.noLoader);
+    const { list } = await axios.get(USER_COUNTRY, axiosConfig.noLoader);
     commit(ALL, list);
   } catch (ex) {
     se2errors(ex);
