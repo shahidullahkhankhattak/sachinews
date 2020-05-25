@@ -65,7 +65,7 @@
           </q-item-section>
         </q-item>
 
-        <q-separator inset class="q-my-sm" />
+        <q-separator inset class="q-my-sm" v-if="countryLinks.length" />
 
         <q-item
           class="GNL__drawer-item"
