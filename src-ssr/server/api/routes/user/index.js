@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const storiesRoutes = require('../stories');
 const SourceController = require('../../../controllers/sourceController');
 const CategoryController = require('../../../controllers/categoryController');
+const CountryController = require('../../../controllers/countryController');
 const LanguageController = require('../../../controllers/languageController');
 const TranslationController = require('../../../controllers/translationController');
 const LikeController = require('../../../controllers/likeController');
@@ -19,6 +20,8 @@ router.route('/source')
   .get(SourceController.index);
 router.route('/category')
   .get(CategoryController.index);
+router.route('/country')
+  .get(CountryController.index);
 router.route('/language')
   .get(LanguageController.index);
 router.route('/translation')

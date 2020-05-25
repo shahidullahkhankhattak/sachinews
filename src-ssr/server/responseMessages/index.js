@@ -80,6 +80,7 @@ module.exports = {
   sourceLinksMsgs: {
     ...ecud('Source'),
     INVALID_SOURCE: 'Source does not exists.',
+    INVALID_COUNTRY: 'Country does not exists.',
   },
   selectorsMsgs: {
     ...ecud('Selector'),

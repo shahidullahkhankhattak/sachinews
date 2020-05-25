@@ -60,6 +60,26 @@
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
               <q-select
+                v-model="item.country"
+                bg-color="white"
+                color="blue-4"
+                outlined
+                label="Country"
+                lazy-rules
+                :option-value="opt => opt._id"
+                :option-label="opt => opt.name"
+                :rules="[]"
+                :options="[{_id: null, name: 'N/A'},...countries]"
+                map-options
+                emit-value
+              >
+                <template v-slot:prepend>
+                  <q-icon name="room" />
+                </template>
+              </q-select>
+            </div>
+            <div class="col-md-12 q-pt-xs q-pr-xs">
+              <q-select
                 v-model="item.encoding"
                 bg-color="white"
                 color="blue-4"

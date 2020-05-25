@@ -14,6 +14,7 @@
 
 <script>
 import { Screen } from 'quasar';
+import axios from 'axios';
 import { preFetchMethods, getters } from './handleStore';
 
 export default {
@@ -43,12 +44,36 @@ export default {
     },
   },
   async preFetch(params) {
-    const { store, currentRoute, redirect } = params;
+    const {
+      store, currentRoute, redirect, ssrContext,
+    } = params;
     const { locale } = currentRoute.params;
-    const currentLocale = getters.locale.bind({ $store: store })();
+    const currentLocale = getters.locale.bind({ $store: store })() || {};
     // trigger only on language change
-    if (currentLocale && currentLocale.iso === locale) { return; }
-
+    if (locale && currentLocale && currentLocale.iso === locale) { return; }
+    await preFetchMethods.fetchCountries(params);
+    const countries = getters.countries.bind({ $store: store })();
+    if (params.ssrContext) {
+      const {
+        req = { connection: {}, headers: {} } || {},
+      } = ssrContext;
+      const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      try {
+        const { data: { countryCode } } = await axios.get(`http://ip-api.com/json/${ip}`);
+        const country = countries.find((_country) => _country.iso === countryCode.toLowerCase());
+        if (!locale) {
+          if (!country) {
+            return redirect('/en/');
+          }
+          return redirect(`/${country.lang.iso}/`);
+        }
+        preFetchMethods.setCountry(params, country);
+      } catch (ex) {
+        if (!locale) {
+          return redirect('/en/');
+        }
+      }
+    }
     await preFetchMethods.fetchCategories(params);
     await preFetchMethods.fetchLanguages(params);
     const languages = getters.languages.bind({ $store: store })();

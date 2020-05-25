@@ -68,6 +68,7 @@
             </q-td>
             <q-td v-for="col in props.cols" :key="col.name" :props="props">
               <span v-if="col.name === 'category'">{{ getCategoryNameById(col.value) }}</span>
+              <span v-else-if="col.name === 'country'">{{ getCountryNameById(col.value) }}</span>
               <span v-else>{{ col.value }}</span>
             </q-td>
           </q-tr>
@@ -100,6 +101,13 @@ export default {
         sortable: true,
       },
       {
+        name: 'country',
+        align: 'center',
+        label: 'Country',
+        field: 'country',
+        sortable: true,
+      },
+      {
         name: 'category',
         align: 'center',
         label: 'Category',
@@ -118,6 +126,10 @@ export default {
     },
     getCategoryNameById(id) {
       const { name = '' } = (this.categories && this.categories.find((cat) => cat._id === id)) || {};
+      return name;
+    },
+    getCountryNameById(id) {
+      const { name = '' } = (this.countries && this.countries.find((country) => country._id === id)) || {};
       return name;
     },
     onDelete(item) {

@@ -7,6 +7,7 @@ import { se2errors } from '../formatters';
 const {
   SET_LOCALE,
   SET_COUNTS,
+  SET_COUNTRY,
 } = Mutations;
 
 const {
@@ -14,8 +15,13 @@ const {
     REST: REST_API,
   },
 } = apiEndpoints;
+
 export function setLocale(context, payload) {
   context.commit(SET_LOCALE, payload);
+}
+
+export function setCountry(context, payload) {
+  context.commit(SET_COUNTRY, payload);
 }
 
 export async function fetchCounts({ commit }) {

@@ -1,10 +1,6 @@
 
 const routes = [
   {
-    path: '',
-    redirect: '/en/',
-  },
-  {
     path: '/admin',
     meta: {
       auth: true,
@@ -37,7 +33,7 @@ const routes = [
     ],
   },
   {
-    path: '/:locale/',
+    path: '/:locale?/',
     component: () => import('layouts/MainLayout'),
     children: [
       { path: '', name: 'top-stories', component: () => import('pages/TopStories') },

@@ -30,7 +30,22 @@
         </q-item>
 
         <q-separator inset class="q-my-sm" />
-
+        <!-- <q-item
+          class="GNL__drawer-item"
+          v-ripple
+          :title="$t(link.name)"
+          :to="link.link"
+          @click="hideSidebar()"
+          :class="{active: isActive(link)}"
+          clickable
+        >
+          <q-item-section avatar>
+            <q-icon name="flag" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ $t(link.name) }}</q-item-label>
+          </q-item-section>
+        </q-item> -->
         <q-item
           class="GNL__drawer-item"
           v-ripple
@@ -65,6 +80,25 @@
             <q-item-label>{{ $t(link.name) }}</q-item-label>
           </q-item-section>
         </q-item>
+
+        <q-separator inset class="q-my-sm" />
+
+        <q-item
+          class="GNL__drawer-item"
+          v-ripple
+          v-for="link in countryLinks"
+          :key="link.name"
+          :to="link.link"
+          :title="$t(link.name)"
+          @click="hideSidebar()"
+          :class="{active: isActive(link)}"
+          clickable
+        >
+          <q-item-section>
+            <q-item-label>{{ $t(link.name) }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
         <q-separator inset class="q-my-sm" />
 
         <q-item
@@ -142,6 +176,11 @@ export default {
   }),
   computed: {
     ...getters,
+    countryLinks() {
+      return this.countries.map((country) => ({
+        ...country, link: `/${this.locale.iso}/countries/${country.iso}`,
+      }));
+    },
     topLinks() {
       return this.topUrls.map((item) => ({
         ...item, link: `/${this.locale.iso}/${item.link}`,
