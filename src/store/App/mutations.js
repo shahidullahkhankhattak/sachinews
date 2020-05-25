@@ -3,7 +3,7 @@ export function setLocale({ config }, payload) {
 }
 
 export function setCountry({ config }, payload) {
-  config.locale = { ...payload };
+  config.country = { ...payload };
 }
 export function setCounts(state, payload) {
   state.counts = payload;

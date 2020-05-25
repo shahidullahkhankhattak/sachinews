@@ -67,8 +67,8 @@
               </q-btn>
             </q-td>
             <q-td v-for="col in props.cols" :key="col.name" :props="props">
-              <span v-if="col.name === 'category'">{{ getCategoryNameById(col.value) }}</span>
-              <span v-else-if="col.name === 'country'">{{ getCountryNameById(col.value) }}</span>
+              <span v-if="col.name === 'category'">{{ getCategoryNameById(col.value) || 'N/A' }}</span>
+              <span v-else-if="col.name === 'country'">{{ getCountryNameById(col.value) || 'N/A' }}</span>
               <span v-else>{{ col.value }}</span>
             </q-td>
           </q-tr>

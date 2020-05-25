@@ -48,8 +48,8 @@
                 lazy-rules
                 :option-value="opt => opt._id"
                 :option-label="opt => opt.name"
-                :rules="[rules.REQUIRED]"
-                :options="categories"
+                :rules="[]"
+                :options="[{_id: null, name: 'N/A'},...categories]"
                 map-options
                 emit-value
               >

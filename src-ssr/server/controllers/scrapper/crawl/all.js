@@ -45,7 +45,9 @@ const crawlSource = async function (browser, source) {
     const bodySel = selectors.find((sel) => sel.name === 'body');
     const tagsKeywords = JSON.parse(fs.readFileSync('keywords/tagsKeywords.json').toString('utf-8'));
     for (let urli = 0; urli < urls.length; urli += 1) {
-      const { url, source: urlSource, category: urlCategory } = urls[urli];
+      const {
+        url, source: urlSource, category: urlCategory, country: urlCountry,
+      } = urls[urli];
       await page.goto(url, options);
       const links = await page.evaluate(({ selectors, valSelector }) => Array.from(document.querySelectorAll(selectors[0])).map((item) => item[valSelector]), linkSel);
       for (let i = 0; i < links.length; i += 1) {
@@ -98,6 +100,7 @@ const crawlSource = async function (browser, source) {
           ...crawled,
           source: urlSource,
           category: urlCategory,
+          country: urlCountry,
           url: link,
           tags: '',
           author: '',

@@ -18,7 +18,7 @@
           :to="link.link"
           :title="$t(link.text)"
           @click="hideSidebar()"
-          :class="{active: isActive(link)}"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section avatar>
@@ -30,22 +30,6 @@
         </q-item>
 
         <q-separator inset class="q-my-sm" />
-        <!-- <q-item
-          class="GNL__drawer-item"
-          v-ripple
-          :title="$t(link.name)"
-          :to="link.link"
-          @click="hideSidebar()"
-          :class="{active: isActive(link)}"
-          clickable
-        >
-          <q-item-section avatar>
-            <q-icon name="flag" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ $t(link.name) }}</q-item-label>
-          </q-item-section>
-        </q-item> -->
         <q-item
           class="GNL__drawer-item"
           v-ripple
@@ -54,7 +38,7 @@
           :title="$t(link.name)"
           :to="link.link"
           @click="hideSidebar()"
-          :class="{active: isActive(link)}"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section avatar>
@@ -73,7 +57,7 @@
           :to="link.link"
           :title="$t(link.name)"
           @click="hideSidebar()"
-          :class="{active: isActive(link)}"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section>
@@ -91,7 +75,7 @@
           :to="link.link"
           :title="$t(link.name)"
           @click="hideSidebar()"
-          :class="{active: isActive(link)}"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section>
@@ -108,7 +92,7 @@
           :key="link.text"
           :title="$t(link.text)"
           @click="hideSidebar()"
-          :class="{active: isActive(link)}"
+          :class="{ active: isActive(link) }"
           clickable
         >
           <q-item-section>
@@ -125,7 +109,7 @@
               href="javascript:void(0)"
               aria-label="Privacy"
               :title="$t('Privacy')"
-              >{{ $t('Privacy') }}</a
+              >{{ $t("Privacy") }}</a
             >
             <span> · </span>
             <a
@@ -133,7 +117,7 @@
               href="javascript:void(0)"
               aria-label="Terms"
               :title="$t('Terms')"
-              >{{ $t('Terms') }}</a
+              >{{ $t("Terms") }}</a
             >
             <span> · </span>
             <a
@@ -141,7 +125,7 @@
               href="javascript:void(0)"
               aria-label="About"
               :title="$t('About Us')"
-              >{{ $t('About Us') }}</a
+              >{{ $t("About Us") }}</a
             >
           </div>
         </div>
@@ -152,7 +136,10 @@
 <script>
 import { Screen } from 'quasar';
 import { getters } from './handleStore';
-import { queryParams, isSidebarLinkActive as isActive } from '../../utils/navigationHelpers';
+import {
+  queryParams,
+  isSidebarLinkActive as isActive,
+} from '../../utils/navigationHelpers';
 
 export default {
   data: () => ({
@@ -178,22 +165,32 @@ export default {
     ...getters,
     countryLinks() {
       return this.countries.map((country) => ({
-        ...country, link: `/${this.locale.iso}/countries/${country.iso}`,
+        ...country,
+        link: `/${this.locale.iso}/country/${country.iso}`,
       }));
     },
     topLinks() {
       return this.topUrls.map((item) => ({
-        ...item, link: `/${this.locale.iso}/${item.link}`,
+        ...item,
+        link: `/${this.locale.iso}/${item.link}`,
       }));
     },
     categoryLinks() {
-      return this.categories.map((cat) => ({
-        ...cat, link: `/${this.locale.iso}/category/${cat.slug}`,
-      }));
+      const { country } = this;
+      const links = [];
+      if (this.countries.length && country) {
+        links.push({ name: this.$t('National'), link: `/${this.locale.iso}/country/${country.iso}/`, icon: 'flag' });
+      }
+      links.push(...this.categories.map((cat) => ({
+        ...cat,
+        link: `/${this.locale.iso}/category/${cat.slug}`,
+      })));
+      return links;
     },
     sourceLinks() {
       return this.sources.map((source) => ({
-        ...source, link: `/${this.locale.iso}/source/${source.slug}`,
+        ...source,
+        link: `/${this.locale.iso}/source/${source.slug}`,
       }));
     },
   },

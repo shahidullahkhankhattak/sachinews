@@ -5,12 +5,12 @@ const {
   COUNTS,
 } = Getters;
 const {
-  APP_FETCH_COUNTS,
+  FETCH_COUNTS,
 } = Actions;
 
 export const actions = {
   ...mapActions({
-    fetchCounts: APP_FETCH_COUNTS,
+    fetchCounts: FETCH_COUNTS,
   }),
 };
 

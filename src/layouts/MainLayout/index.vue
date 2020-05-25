@@ -52,7 +52,7 @@ export default {
     // trigger only on language change
     if (locale && currentLocale && currentLocale.iso === locale) { return; }
     await preFetchMethods.fetchCountries(params);
-    const countries = getters.countries.bind({ $store: store })();
+    const countries = getters.countries.bind({ $store: store })() || [];
     if (params.ssrContext) {
       const {
         req = { connection: {}, headers: {} } || {},
@@ -72,6 +72,7 @@ export default {
         if (!locale) {
           return redirect('/en/');
         }
+        preFetchMethods.setCountry(params, countries[0]);
       }
     }
     await preFetchMethods.fetchCategories(params);

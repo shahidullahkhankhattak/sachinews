@@ -12,7 +12,7 @@ const {
 module.exports.getStories = async (req, res) => {
   try {
     const {
-      offset, perPage, category, source, search, lang, trending,
+      offset, perPage, category, country, source, search, lang, trending,
     } = req.query;
     const address = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const filter = {};
@@ -22,6 +22,7 @@ module.exports.getStories = async (req, res) => {
     sort._id = -1;
     if (category) filter['category.slug'] = category;
     if (source) filter['source.slug'] = source;
+    if (country) filter['country.iso'] = country;
     if (search) {
       filter.$or = [
         { title: new RegExp(search, 'i') },

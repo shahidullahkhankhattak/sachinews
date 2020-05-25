@@ -32,7 +32,10 @@ module.exports = async function (source) {
     const bodySel = selectors.find((sel) => sel.name === 'body');
     const tagsKeywords = JSON.parse(fs.readFileSync('keywords/tagsKeywords.json').toString('utf-8'));
     for (let urli = 0; urli < urls.length; urli += 1) {
-      const { url, source: urlSource, category: urlCategory } = urls[urli];
+      const {
+        url, source: urlSource, category: urlCategory, country: urlCountry,
+      } = urls[urli];
+      if (!urlCountry) continue;
       const page = await browser.newPage();
       await page.setRequestInterception(true);
       page.on('request', (interceptedRequest) => {
@@ -99,6 +102,7 @@ module.exports = async function (source) {
           ...crawled,
           source: urlSource,
           category: urlCategory,
+          country: urlCountry,
           url: link,
           tags: '',
           author: '',

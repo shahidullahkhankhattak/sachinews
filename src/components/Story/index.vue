@@ -95,13 +95,15 @@ export default {
     news() {
       const {
         source: [{ name: source, color }] = [{}],
-        category: [{ name: category }] = [{}],
+        category: [{ name: category } = {}],
+        country: [{ name: country } = {}],
       } = this.story;
       return {
         ...this.story,
         source,
         color,
         category,
+        country,
         link:
           !this.isTest
           && `/${this.locale.iso}/story/${this.story._id}/${(this.locale.iso === 'en' && this.story.slug) || ''}`,

@@ -39,6 +39,7 @@ const routes = [
       { path: '', name: 'top-stories', component: () => import('pages/TopStories') },
       { path: '/404', component: () => import('pages/Error404.vue') },
       { path: 'category/:slug', name: 'categories-stories', component: () => import('pages/Category') },
+      { path: 'country/:slug', name: 'country-stories', component: () => import('pages/Country') },
       { path: 'source/:slug', name: 'source-stories', component: () => import('pages/Source') },
       { path: 'search/:q', name: 'search-stories', component: () => import('pages/Search') },
       { path: 'trending', name: 'trending-stories', component: () => import('pages/Trending') },
