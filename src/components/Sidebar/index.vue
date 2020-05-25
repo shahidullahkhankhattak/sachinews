@@ -13,11 +13,12 @@
         <q-item
           class="GNL__drawer-item"
           v-ripple
-          v-for="link in links1"
+          v-for="link in topLinks"
           :key="link.text"
-          :to="`/${locale.iso}/${link.link}`"
+          :to="link.link"
           :title="$t(link.text)"
           @click="hideSidebar()"
+          :class="{active: isActive(link)}"
           clickable
         >
           <q-item-section avatar>
@@ -33,11 +34,12 @@
         <q-item
           class="GNL__drawer-item"
           v-ripple
-          v-for="link in categories"
+          v-for="link in categoryLinks"
           :key="link.name"
           :title="$t(link.name)"
-          :to="`/${locale.iso}/category/${link.slug}`"
+          :to="link.link"
           @click="hideSidebar()"
+          :class="{active: isActive(link)}"
           clickable
         >
           <q-item-section avatar>
@@ -51,11 +53,12 @@
         <q-item
           class="GNL__drawer-item"
           v-ripple
-          v-for="link in sources"
+          v-for="link in sourceLinks"
           :key="link.name"
-          :to="`/${locale.iso}/source/${link.slug}`"
+          :to="link.link"
           :title="$t(link.name)"
           @click="hideSidebar()"
+          :class="{active: isActive(link)}"
           clickable
         >
           <q-item-section>
@@ -70,8 +73,9 @@
           v-for="link in links3"
           :key="link.text"
           :title="$t(link.text)"
-          clickable
           @click="hideSidebar()"
+          :class="{active: isActive(link)}"
+          clickable
         >
           <q-item-section>
             <q-item-label
@@ -114,13 +118,13 @@
 <script>
 import { Screen } from 'quasar';
 import { getters } from './handleStore';
-import { queryParams } from '../../utils/navigationHelpers';
+import { queryParams, isSidebarLinkActive as isActive } from '../../utils/navigationHelpers';
 
 export default {
   data: () => ({
     sidebarKey: true,
     open: false,
-    links1: [
+    topUrls: [
       { icon: 'web', text: 'Latest', link: '' },
       { icon: 'trending_up', text: 'Trending', link: 'trending' },
       // { icon: 'person', text: 'For you' },
@@ -138,8 +142,24 @@ export default {
   }),
   computed: {
     ...getters,
+    topLinks() {
+      return this.topUrls.map((item) => ({
+        ...item, link: `/${this.locale.iso}/${item.link}`,
+      }));
+    },
+    categoryLinks() {
+      return this.categories.map((cat) => ({
+        ...cat, link: `/${this.locale.iso}/category/${cat.slug}`,
+      }));
+    },
+    sourceLinks() {
+      return this.sources.map((source) => ({
+        ...source, link: `/${this.locale.iso}/source/${source.slug}`,
+      }));
+    },
   },
   methods: {
+    isActive,
     generateQueryParam(name, value) {
       return queryParams(name, value, this.$route);
     },

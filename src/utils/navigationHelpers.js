@@ -1,5 +1,5 @@
-export function isSidebarLinkActive(pageName) {
-  return this.$route.name === pageName;
+export function isSidebarLinkActive(item) {
+  return this.$route.fullPath === item.link;
 }
 
 export function routeQueryToString(params) {

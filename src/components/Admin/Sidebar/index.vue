@@ -16,7 +16,7 @@
           clickable
           class="GNL__drawer-item"
           :class="{
-            active: isActive(link.pageName)
+            active: isActive(link)
           }"
         >
           <q-item-section avatar>
@@ -35,6 +35,9 @@
           v-for="link in links2"
           :to="link.link"
           :key="link.text"
+          :class="{
+            active: isActive(link)
+          }"
           clickable
         >
           <q-item-section avatar>
@@ -53,6 +56,7 @@
           v-for="link in links3"
           :to="link.link"
           :key="link.text"
+          :class="{active: isActive(link)}"
           clickable
         >
           <q-item-section>
