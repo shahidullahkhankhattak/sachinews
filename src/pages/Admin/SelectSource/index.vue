@@ -36,14 +36,14 @@
                     <q-form @submit="next()">
                       <div class="row q-col-gutter-md">
                         <div class="col-md-4">
-                          <Select
+                          <SelectGroup
                             v-model="selected"
                             label="Sources"
+                            :rules="[rules.REQUIRED]"
                             option-label="name"
                             option-value="_id"
-                            :rules="[rules.REQUIRED]"
                             empty-msg="No Sources Found"
-                            :options="list"
+                            :options="options"
                             icon="home"
                           />
                         </div>
@@ -69,11 +69,11 @@
 <script>
 import { validations } from '../../../validators';
 import { actions, getters } from './handleStore';
-import Select from '../../../components/Select/Select';
+import SelectGroup from '../../../components/Select/SelectGroup';
 
 export default {
   components: {
-    Select,
+    SelectGroup,
   },
   data() {
     return {
@@ -89,6 +89,24 @@ export default {
   },
   computed: {
     ...getters,
+    options() {
+      let index = 0;
+      const groupHash = {};
+      const groups = [];
+      (this.list || []).forEach((value) => {
+        if (groupHash[value.lang.name] || groupHash[value.lang.name] === 0) {
+          groups[groupHash[value.lang.name]].children.push(value);
+        } else {
+          groupHash[value.lang.name] = index;
+          groups[index] = {
+            label: value.lang.name,
+            children: [value],
+          };
+          index += 1;
+        }
+      });
+      return groups;
+    },
   },
   methods: {
     ...actions,

@@ -36,15 +36,14 @@
                     <q-form @submit="next()">
                       <div class="row q-col-gutter-md">
                         <div class="col-md-4">
-                          <Select
+                          <SelectGroup
                             label="Source"
-                            :value="form.source"
                             @input="selectSource"
                             v-model="form.source"
                             option-value="_id"
                             option-label="name"
                             :rules="[rules.REQUIRED]"
-                            :options="list"
+                            :options="sourceOptions"
                             empty-msg="No source found"
                             emit-value
                             icon="home"
@@ -150,6 +149,7 @@ import { ProtectedData } from '../../../utils/socketIoHelpers';
 import { Notify } from '../../../plugins/notify';
 import Story from '../../../components/Story';
 import Select from '../../../components/Select/Select';
+import SelectGroup from '../../../components/Select/SelectGroup';
 
 const {
   adminEvents: {
@@ -159,6 +159,7 @@ const {
 export default {
   components: {
     Story,
+    SelectGroup,
     Select,
   },
   data() {
@@ -204,6 +205,24 @@ export default {
   },
   computed: {
     ...getters,
+    sourceOptions() {
+      let index = 0;
+      const groupHash = {};
+      const groups = [];
+      (this.list || []).forEach((value) => {
+        if (groupHash[value.lang.name] || groupHash[value.lang.name] === 0) {
+          groups[groupHash[value.lang.name]].children.push(value);
+        } else {
+          groupHash[value.lang.name] = index;
+          groups[index] = {
+            label: value.lang.name,
+            children: [value],
+          };
+          index += 1;
+        }
+      });
+      return groups;
+    },
   },
   methods: {
     ...actions,
