@@ -12,7 +12,7 @@ const { searchTags } = require('../../../utils/tags');
 const options = { waitUntil: 'load', timeout: 0 };
 module.exports = async function (source) {
   const stories = [];
-  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ headless: true });
   try {
     const urls = await SourceLink.find({ source });
     const selectors = (await Selector.find({ source }).exec()).map(({

@@ -9,7 +9,7 @@ const { adminEvents: { ADMIN_SCRAP_NEWS_ITEM, ADMIN_ERROR } } = require('../../.
 
 const options = { waitUntil: 'load', timeout: 0 };
 module.exports.test = async function ({ form: { source, link, numItems } }, socket) {
-  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ headless: true });
   try {
     const { url } = await SourceLink.findOne({ _id: link });
     const { name: sourceName } = await Source.findOne({ _id: source });

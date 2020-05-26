@@ -129,7 +129,7 @@ const crawlSource = async function (browser, source) {
   }
 };
 module.exports = async function () {
-  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ headless: true });
   try {
     const sources = await Source.find({});
     const promises = [];

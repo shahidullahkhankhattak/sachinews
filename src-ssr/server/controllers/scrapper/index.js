@@ -4,5 +4,5 @@ const { crawlAll, crawlSource } = require('./crawl');
 module.exports = {
   test,
   crawlAll,
-  crawlSource
+  crawlSource,
 };
