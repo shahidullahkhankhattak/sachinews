@@ -1,5 +1,5 @@
 <template>
-  <article class="col-xs-12 col-lg-8 news-article q-pa-md">
+  <article class="col-xs-12 col-lg-8 q-pa-md news-article">
     <div class="q-mb-md" v-if="!isTest">
       <q-btn
         :icon="(siteDir === 'ltr' && 'arrow_back') || 'arrow_forward'"
@@ -20,7 +20,11 @@
       ></div>
     </q-img>
     <header>
-      <h1 :aria-label="news.title" class="article-title q-my-md" v-html="news.title"></h1>
+      <h1
+        :aria-label="news.title"
+        class="article-title q-my-md"
+        v-html="news.title"
+      ></h1>
     </header>
     <div class="text-subtitle2 q-mb-md" v-if="!isTest">
       <q-badge class="badge-sm" color="blue">
@@ -40,7 +44,7 @@
         </q-badge>
       </a>
       <div v-if="$q.screen.lt.sm">
-        <br>
+        <br />
       </div>
       <div class="float-right">
         <q-btn
@@ -51,14 +55,24 @@
           @click="likeStory({ id: news._id, main: true })"
           icon="whatshot"
         >
-          <q-badge class="left" color="red" :aria-label="`there are ${news.likes} likes on the news`" floating>{{ news.likes }}</q-badge>
+          <q-badge
+            class="left"
+            color="red"
+            :aria-label="`there are ${news.likes} likes on the news`"
+            floating
+            >{{ news.likes }}</q-badge
+          >
         </q-btn>
         <!-- <q-btn flat round color="teal" icon="bookmark" /> -->
         <Share :details="news" />
       </div>
       <div class="clearfix"></div>
     </div>
-    <div class="article-body" :aria-label="news.description" v-html="news.body"></div>
+    <div
+      class="article-body"
+      :aria-label="news.description"
+      v-html="news.body"
+    ></div>
   </article>
 </template>
 <script>
@@ -106,7 +120,10 @@ export default {
         country,
         link:
           !this.isTest
-          && `/${this.locale.iso}/story/${this.story._id}/${(this.locale.iso === 'en' && this.story.slug) || ''}`,
+          && `/${this.locale.iso}/story/${this.story._id}/${(this.locale.iso
+            === 'en'
+            && this.story.slug)
+            || ''}`,
       };
     },
   },

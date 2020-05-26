@@ -6,11 +6,20 @@
           {{ $t(news.source) }} - {{ $t(news.category || news.country) }}
         </div>
         <div>
-          <q-badge v-if="isImportant(news)" color="red" class="animated infinite flash">
-            {{ $t('Important') }}
+          <q-badge
+            v-if="isImportant(news)"
+            color="red"
+            class="animated infinite flash"
+          >
+            {{ $t("Important") }}
           </q-badge>
-          <q-badge v-if="isLatest(news)" color="yellow" text-color="black" class="animated infinite bounceIn q-ml-sm">
-            {{ $t('Latest') }}
+          <q-badge
+            v-if="isLatest(news)"
+            color="yellow"
+            text-color="black"
+            class="animated infinite bounceIn q-ml-sm"
+          >
+            {{ $t("Latest") }}
           </q-badge>
         </div>
         <router-link
@@ -86,7 +95,10 @@ export default {
         color,
         category,
         country,
-        link: `/${this.locale.iso}/story/${this.story._id}/${(this.locale.iso === 'en' && this.story.slug) || ''}`,
+        link: `/${this.locale.iso}/story/${this.story._id}/${(this.locale
+          .iso === 'en'
+          && this.story.slug)
+          || ''}`,
       };
     },
   },
@@ -101,7 +113,9 @@ export default {
     },
     isImportant(news) {
       const { tags } = news;
-      if (tags && tags.includes('important')) { return true; }
+      if (tags && tags.includes('important')) {
+        return true;
+      }
       return false;
     },
     timeAgo(time) {
