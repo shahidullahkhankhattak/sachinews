@@ -1,27 +1,28 @@
 <template>
   <div>
-    <q-select
-      class="locale_select"
-      map-options
-      outlined
+    <Select
+      classname="locale_select"
       behavior="menu"
       :value="locale && locale.iso"
       @input="setLocale"
-      :options="languages.map(val => ({ label: val.name, value: val.iso }))"
+      option-label="name"
+      option-value="iso"
+      :options="languages"
       :dense="true"
       :options-dense="true"
-    >
-      <template v-slot:prepend>
-        <q-icon name="g_translate" />
-      </template>
-    </q-select>
+      icon="g_translate"
+    />
   </div>
 </template>
 <script>
 import { getters } from './handleStore';
 import { setLocale } from '../../config/configSetters';
+import Select from './Select';
 
 export default {
+  components: {
+    Select,
+  },
   methods: {
     setLocale,
   },

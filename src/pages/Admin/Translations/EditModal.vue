@@ -24,22 +24,19 @@
         <q-form @submit="update({ item, toggleDialog})">
           <div class="row">
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
-                :value="item.lang"
-                @input="(val) => item.lang = val.value"
+              <Select
+                v-model="item.lang"
                 bg-color="white"
                 color="blue-4"
                 label-color="blue-4"
-                outlined
                 label="Language"
-                map-options
-                :options="languages.map(lang => ({ label: lang.name, value: lang.iso}))"
+                option-label="name"
+                option-value="iso"
+                :options="languages"
                 :rules="[rules.REQUIRED]"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="language" color="blue-4" />
-                </template>
-              </q-select>
+                icon="language"
+                icon-color="blue-4"
+              />
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
               <q-input
@@ -88,8 +85,12 @@ import { extend } from 'quasar';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as editForm } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
+  components: {
+    Select,
+  },
   data: () => ({
     rules: {
       ...validations,

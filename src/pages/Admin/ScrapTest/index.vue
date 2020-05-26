@@ -36,43 +36,33 @@
                     <q-form @submit="next()">
                       <div class="row q-col-gutter-md">
                         <div class="col-md-4">
-                          <q-select
-                            outlined
+                          <Select
                             label="Source"
                             :value="form.source"
-                            v-model="form.source"
-                            lazy-rules
                             @input="selectSource"
-                            :option-value="opt => opt._id"
-                            :option-label="opt => opt.name"
+                            v-model="form.source"
+                            option-value="_id"
+                            option-label="name"
                             :rules="[rules.REQUIRED]"
-                            :options="(list.length && list) || [{value: '', name: 'No sources found'}]"
-                            map-options
+                            :options="list"
+                            empty-msg="No source found"
                             emit-value
-                          >
-                            <template v-slot:prepend>
-                              <q-icon name="home" />
-                            </template>
-                          </q-select>
+                            icon="home"
+                          />
                         </div>
                         <div class="col-md-4">
-                          <q-select
-                            :disable="!form.source"
-                            outlined
+                          <Select
+                            :disabled="!form.source"
                             label="Source Link"
                             v-model="form.link"
-                            lazy-rules
-                            :option-value="opt => opt._id"
-                            :option-label="opt => opt.url"
+                            option-value="_id"
+                            option-label="url"
                             :rules="[rules.REQUIRED]"
-                            :options="(linkList.length && linkList) || [{value: '', url: 'No Links found'}]"
-                            map-options
+                            :options="linkList"
+                            empty-msg="No Link found"
                             emit-value
-                          >
-                            <template v-slot:prepend>
-                              <q-icon name="home" />
-                            </template>
-                          </q-select>
+                            icon="home"
+                          />
                         </div>
                         <div class="col-md-4">
                           <q-input
@@ -159,6 +149,7 @@ import SocketEvents from '../../../sockets/constants';
 import { ProtectedData } from '../../../utils/socketIoHelpers';
 import { Notify } from '../../../plugins/notify';
 import Story from '../../../components/Story';
+import Select from '../../../components/Select/Select';
 
 const {
   adminEvents: {
@@ -168,6 +159,7 @@ const {
 export default {
   components: {
     Story,
+    Select,
   },
   data() {
     return {

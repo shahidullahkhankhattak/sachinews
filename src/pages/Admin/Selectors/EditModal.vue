@@ -24,83 +24,60 @@
         <q-form @submit="update({ item, toggleDialog })">
           <div class="row">
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
+              <Select
                 bg-color="white"
                 color="blue-4"
                 label-color="blue-4"
                 v-model="item.name"
-                outlined
                 label="Data Name"
-                value=""
-                lazy-rules
                 :rules="[rules.REQUIRED]"
                 :options="selectorNames"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="home" />
-                </template>
-              </q-select>
+                icon="home"
+              />
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
+              <Select
                 bg-color="white"
                 color="blue-4"
-                outlined
                 label="Selector"
+                v-model="item.selector"
                 use-input
                 hide-selected
                 fill-input
-                lazy-rules
-                input-debounce="0"
-                @input-value="(val) => item.selector = val"
-                @filter="autoCompleteFilter"
-                v-model="item.selector"
-                :options="$parent.autoCompleteOptions"
+                :input-value="(val) => item.selector = val"
+                :filter="autoCompleteFilter"
+                :options="autoCompleteOptions"
                 :rules="[rules.REQUIRED]"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="show_chart" />
-                </template>
-              </q-select>
+                icon="show_chart"
+              />
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
+              <Select
                 bg-color="white"
                 color="blue-4"
                 label-color="blue-4"
                 v-model="item.type"
-                outlined
                 label="Type"
                 value="string"
-                lazy-rules
                 :rules="[rules.REQUIRED]"
                 :options="['string', 'html', 'multi']"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="language" />
-                </template>
-              </q-select>
+                icon="language"
+              />
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
+              <Select
                 bg-color="white"
                 color="blue-4"
-                outlined
                 label="Filter"
+                v-model="item.filter"
                 use-input
                 hide-selected
                 fill-input
-                lazy-rules
-                input-debounce="0"
-                @input-value="(val) => item.filter = val"
-                @filter="autoCompleteFilterFilter"
-                v-model="item.filter"
-                :options="$parent.autoCompleteFilterOptions"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="filter" />
-                </template>
-              </q-select>
+                :input-value="(val) => item.filter = val"
+                :filter="autoCompleteFilterFilter"
+                :options="autoCompleteFilterOptions"
+                icon="filter"
+              />
             </div>
             <div class="col-md-12 q-pt-md">
               <q-btn type="submit" color="white" text-color="blue-8"
@@ -121,8 +98,12 @@ import { extend } from 'quasar';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as editForm, selectorNames } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
+  components: {
+    Select,
+  },
   data: () => ({
     rules: {
       ...validations,
@@ -130,6 +111,8 @@ export default {
     show: false,
     item: editForm(),
     selectorNames,
+    autoCompleteOptions: [],
+    autoCompleteFilterOptions: [],
   }),
   computed: {
     ...getters,
@@ -139,13 +122,13 @@ export default {
     autoCompleteFilter(val, update) {
       update(() => {
         const needle = val.toLocaleLowerCase();
-        this.$parent.autoCompleteOptions = this.autocomplete.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
+        this.autoCompleteOptions = this.autocomplete.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
       });
     },
     autoCompleteFilterFilter(val, update) {
       update(() => {
         const needle = val.toLocaleLowerCase();
-        this.$parent.autoCompleteFilterOptions = this.autocompleteFilter.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
+        this.autoCompleteFilterOptions = this.autocompleteFilter.filter((v) => v.toLocaleLowerCase().indexOf(needle) > -1);
       });
     },
     onEdit(item) {

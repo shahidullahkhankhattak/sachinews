@@ -66,20 +66,16 @@
                         </q-input>
                       </div>
                       <div class="col-md-4">
-                        <q-select
+                        <Select
                           v-model="addForm.lang"
-                          outlined
                           label="Language"
                           value="english"
-                          lazy-rules
                           :rules="[rules.REQUIRED]"
-                          map-options
-                          :options="languages.map(lang => ({ label: lang.name, value: lang._id}))"
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="language" />
-                          </template>
-                        </q-select>
+                          option-label="name"
+                          option-value="_id"
+                          :options="languages"
+                          icon="language"
+                        />
                       </div>
                       <div class="col-md-4">
                         <q-input
@@ -147,11 +143,13 @@ import ListTable from './ListTable';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as addForm } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
   components: {
     EditModal,
     ListTable,
+    Select,
   },
   data() {
     return {

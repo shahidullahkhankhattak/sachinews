@@ -36,23 +36,16 @@
                     <q-form @submit="next()">
                       <div class="row q-col-gutter-md">
                         <div class="col-md-4">
-                          <q-select
-                            outlined
-                            label="Source"
-                            :value="selected"
+                          <Select
                             v-model="selected"
-                            lazy-rules
-                            :option-value="opt => opt._id"
-                            :option-label="opt => opt.name"
+                            label="Sources"
+                            option-label="name"
+                            option-value="_id"
                             :rules="[rules.REQUIRED]"
-                            :options="(list.length && list) || [{value: '', name: 'No sources found'}]"
-                            map-options
-                            emit-value
-                          >
-                            <template v-slot:prepend>
-                              <q-icon name="home" />
-                            </template>
-                          </q-select>
+                            empty-msg="No Sources Found"
+                            :options="list"
+                            icon="home"
+                          />
                         </div>
                         <div class="col-md-12">
                           <q-btn type="submit" outline color="green" size="16px">
@@ -76,8 +69,12 @@
 <script>
 import { validations } from '../../../validators';
 import { actions, getters } from './handleStore';
+import Select from '../../../components/Select/Select';
 
 export default {
+  components: {
+    Select,
+  },
   data() {
     return {
       redirect: '',

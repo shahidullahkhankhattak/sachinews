@@ -1,8 +1,7 @@
 import { Screen } from 'quasar';
 import { wait } from '../utils/asyncHelpers';
 
-export async function setLocale(currentValue) {
-  const { value } = currentValue;
+export async function setLocale(value) {
   const { direction: oldDir } = this.languages.find((lang) => lang.iso === this.locale.iso) || {};
   const newLocale = this.languages.find((lang) => lang.iso === value) || {};
   const { direction: newDir } = newLocale;

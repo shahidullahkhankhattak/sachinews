@@ -23,8 +23,7 @@ const {
 
 export async function add({ rootGetters, commit }, { form, reset }) {
   try {
-    const newForm = { ...form, lang: form.lang.value };
-    const { item } = await axios.post(REST_API, getWithSlug(newForm));
+    const { item } = await axios.post(REST_API, getWithSlug(form));
     const languages = rootGetters[LANG_LIST];
     const lang = languages.find((_lang) => _lang._id === item.lang);
     Object.assign(item, { lang });
@@ -83,8 +82,7 @@ export async function _delete(context, item) {
 
 export async function update({ commit, rootGetters }, { item, toggleDialog }) {
   try {
-    const newItem = { ...item, lang: item.lang.value };
-    const { item: _item } = await axios.put(REST_API, getWithSlug(newItem));
+    const { item: _item } = await axios.put(REST_API, getWithSlug(item));
     const languages = rootGetters[LANG_LIST];
     const lang = languages.find((_lang) => _lang._id === _item.lang);
     Object.assign(_item, { lang });

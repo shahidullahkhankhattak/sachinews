@@ -39,61 +39,44 @@
               </q-input>
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
+              <Select
                 v-model="item.category"
                 bg-color="white"
                 color="blue-4"
-                outlined
                 label="Category"
-                lazy-rules
-                :option-value="opt => opt._id"
-                :option-label="opt => opt.name"
+                option-value="_id"
+                option-label="name"
                 :rules="[]"
-                :options="[{_id: null, name: 'N/A'},...categories]"
-                map-options
-                emit-value
-              >
-                <template v-slot:prepend>
-                  <q-icon name="class" />
-                </template>
-              </q-select>
+                :options="categories"
+                nullOption="N/A"
+                icon="class"
+              />
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
+              <Select
                 v-model="item.country"
                 bg-color="white"
                 color="blue-4"
-                outlined
                 label="Country"
-                lazy-rules
-                :option-value="opt => opt._id"
-                :option-label="opt => opt.name"
+                option-value="_id"
+                option-label="name"
                 :rules="[]"
-                :options="[{_id: null, name: 'N/A'},...countries]"
-                map-options
-                emit-value
-              >
-                <template v-slot:prepend>
-                  <q-icon name="room" />
-                </template>
-              </q-select>
+                :options="countries"
+                nullOption="N/A"
+                icon="room"
+              />
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
+              <Select
                 v-model="item.encoding"
                 bg-color="white"
                 color="blue-4"
-                outlined
                 label="Encoding"
-                lazy-rules
                 :rules="[rules.REQUIRED]"
                 :options="['xml', 'html']"
-                map-options
-              >
-                <template v-slot:prepend>
-                  <q-icon name="code" />
-                </template>
-              </q-select>
+                nullOption="N/A"
+                icon="code"
+              />
             </div>
             <div class="col-md-12 q-pt-md">
               <q-btn type="submit" color="white" text-color="blue-8">Submit</q-btn>
@@ -112,8 +95,12 @@ import { extend } from 'quasar';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as editForm } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
+  components: {
+    Select,
+  },
   data: () => ({
     rules: {
       ...validations,

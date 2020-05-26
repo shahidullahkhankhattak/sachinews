@@ -40,74 +40,50 @@
                   <q-card-section class="q-pt-xs col-xs-12">
                     <div class="row q-col-gutter-md">
                       <div class="col-md-4">
-                        <q-select
+                        <Select
                           v-model="addForm.name"
-                          outlined
                           label="Data Name"
-                          value=""
-                          lazy-rules
                           :rules="[rules.REQUIRED]"
                           @input="onDataNameChange()"
                           :options="selectorNames"
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="home" />
-                          </template>
-                        </q-select>
+                          icon="home"
+                          />
                       </div>
                       <div class="col-md-4">
-                        <q-select
-                          outlined
+                        <Select
+                          v-model="addForm.selector"
                           label="Selector"
                           use-input
                           hide-selected
                           fill-input
-                          lazy-rules
-                          input-debounce="0"
-                          @input-value="(val) => addForm.selector = val"
-                          @filter="autoCompleteFilter"
-                          v-model="addForm.selector"
+                          :input-value="(val) => addForm.selector = val"
+                          :filter="autoCompleteFilter"
                           :options="autoCompleteOptions"
                           :rules="[rules.REQUIRED]"
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="show_chart" />
-                          </template>
-                        </q-select>
+                          icon="show_chart"
+                          />
                       </div>
                       <div class="col-md-4">
-                        <q-select
+                        <Select
                           v-model="addForm.type"
-                          outlined
                           label="Type"
-                          value="string"
-                          lazy-rules
                           :rules="[rules.REQUIRED]"
                           :options="['string', 'html', 'multi']"
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="language" />
-                          </template>
-                        </q-select>
+                          icon="language"
+                          />
                       </div>
                       <div class="col-md-4">
-                        <q-select
-                          outlined
+                        <Select
+                          v-model="addForm.filter"
                           label="Filter"
                           use-input
                           hide-selected
                           fill-input
-                          lazy-rules
-                          input-debounce="0"
-                          @input-value="(val) => addForm.filter = val"
-                          @filter="autoCompleteFilterFilter"
-                          v-model="addForm.filter"
+                          :input-value="(val) => addForm.filter = val"
+                          :filter="autoCompleteFilterFilter"
                           :options="autoCompleteFilterOptions"
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="filter" />
-                          </template>
-                        </q-select>
+                          icon="show_chart"
+                          />
                       </div>
                     </div>
 
@@ -153,11 +129,13 @@ import ListTable from './ListTable';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as addForm, selectorNames } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
   components: {
     EditModal,
     ListTable,
+    Select,
   },
   data() {
     return {
