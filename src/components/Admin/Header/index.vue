@@ -11,7 +11,7 @@
         />
 
         <q-toolbar-title v-if="$q.screen.gt.xs" shrink class="row items-center no-wrap">
-          <span class="q-ml-sm" v-html="logo.html"></span>
+          <img class="logo-img" :src="logo.path" />
         </q-toolbar-title>
 
         <q-space />

@@ -15,7 +15,7 @@
         shrink
         class="row items-center no-wrap"
       >
-        <span class="q-ml-sm" v-html="logo.html"></span>
+        <img class="logo-img" :alt="$t(logo.alt.headerLogo)" :src="logo.path" />
       </q-toolbar-title>
 
       <q-space />

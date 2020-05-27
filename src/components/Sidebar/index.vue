@@ -9,7 +9,11 @@
     :width="280"
   >
     <q-scroll-area class="fit">
-      <q-list tag="nav" padding class="text-grey-8">
+      <q-list tag="nav" class="text-grey-8" :class="{'q-pt-md': $q.screen.gt.sm}">
+        <q-item style="padding:0" v-if="$q.screen.lt.md">
+          <img class="sidebar-logo" :src="logo.sidebarPath" :alt="$t(logo.alt.sidebarLogo)">
+        </q-item>
+        <q-separator inset class="q-my-sm" v-if="$q.screen.lt.md"/>
         <q-item
           class="GNL__drawer-item"
           v-ripple
@@ -140,9 +144,17 @@ import {
   queryParams,
   isSidebarLinkActive as isActive,
 } from '../../utils/navigationHelpers';
+import {
+  config,
+} from '../../config';
+
+const {
+  app: { logo },
+} = config && config;
 
 export default {
   data: () => ({
+    logo,
     sidebarKey: true,
     open: false,
     topUrls: [

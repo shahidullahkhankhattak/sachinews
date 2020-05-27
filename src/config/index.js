@@ -7,14 +7,17 @@ export const config = {
       title: 'Sachi News - Admin',
     },
     logo: {
-      path: '/statics/quasar-logo-full.svg',
+      path: '/statics/logo/logo.png',
+      sidebarPath: '/statics/icons/icon-512x512.png',
+      alt: {
+        headerLogo: 'Sachi News Logo',
+        sidebarLogo: 'Sachi News Logo Large',
+      },
       title: 'Sachi News',
-      html: '<span class="text-red">SACHI</span> News',
     },
     logoAdmin: {
-      path: '/statics/quasar-logo-full.svg',
+      path: '/statics/logo/logo.png',
       title: 'Sachi News - Admin',
-      html: '<span class="text-red">SACHI</span> Admin',
     },
   },
   socketEnv: {
