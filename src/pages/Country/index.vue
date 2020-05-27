@@ -73,7 +73,7 @@ export default {
   computed: {
     ...getters,
     currentCountry() {
-      const slug = this.$route.params;
+      const { slug } = this.$route.params;
       return this.countries.find((country) => country.iso === slug);
     },
   },
