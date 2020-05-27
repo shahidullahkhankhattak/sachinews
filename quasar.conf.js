@@ -12,6 +12,7 @@ module.exports = function (ctx) {
       'registerSocketIo',
       'vueSharer',
       'vueTranslation',
+      'googleAnalytics',
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
