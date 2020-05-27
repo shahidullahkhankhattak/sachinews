@@ -52,7 +52,7 @@ import NoNews from '../../components/Cards/NoNews';
 import { config } from '../../config';
 import { shouldReloadStories } from '../../utils/dataBus';
 
-const { app: { logo: { title } } } = config;
+const { app: { logo: { title }, meta } } = config;
 
 export default {
   name: 'SourceStories',
@@ -64,11 +64,13 @@ export default {
     return {
       title: pageTitle,
       meta: {
-        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the sources throughout the globe') },
-        ogTitle: { name: 'og:title', content: pageTitle },
+        description: { property: 'description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the sources throughout the globe') },
+        ogTitle: { property: 'og:title', content: pageTitle },
         dcTitle: { name: 'DC.title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the sources throughout the globe') },
+        ogDescription: { property: 'og:description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the sources throughout the globe') },
         keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through') },
+        ogImage: { property: 'og:image', content: `${meta.url}statics/logo/logo.png` },
+        ogUrl: { property: 'og:url', content: meta.url },
       },
     };
   },

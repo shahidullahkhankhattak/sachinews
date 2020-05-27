@@ -52,7 +52,7 @@ import NewsLoader from '../../components/Loaders/NewsLoader';
 import { config } from '../../config';
 import { shouldReloadStories } from '../../utils/dataBus';
 
-const { app: { logo: { title } } } = config;
+const { app: { logo: { title }, meta } } = config;
 
 export default {
   name: 'CategoryStories',
@@ -63,10 +63,12 @@ export default {
       title: pageTitle,
       meta: {
         description: { name: 'description', content: this.$t('search within extensive collection of news from all the sources throughout the globe') },
-        ogTitle: { name: 'og:title', content: pageTitle },
+        ogTitle: { property: 'og:title', content: pageTitle },
         dcTitle: { name: 'DC.title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('search within extensive collection of news from all the sources throughout the globe') },
+        ogDescription: { property: 'og:description', content: this.$t('search within extensive collection of news from all the sources throughout the globe') },
         keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through,search,sachi,news,sachi news,addictive bulletin,addictive,bulletin, sachi,news,sachi news') },
+        ogImage: { property: 'og:image', content: `${meta.url}statics/logo/logo.png` },
+        ogUrl: { property: 'og:url', content: meta.url },
       },
     };
   },
