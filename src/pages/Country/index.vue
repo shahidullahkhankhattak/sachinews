@@ -9,7 +9,7 @@
                 <q-card-section class="q-pt-xs col-12">
                   <div class="text-overline"> {{ $t('Showing News For Country') }}</div>
                   <div class="text-h5 q-mt-sm q-mb-xs text-uppercase">
-                    {{ $t(country.name) }}
+                    {{ $t(currentCountry.name) }}
                   </div>
                 </q-card-section>
               </q-card-section>
@@ -72,6 +72,10 @@ export default {
   components: { NewsCard, NewsLoader, NoNews },
   computed: {
     ...getters,
+    currentCountry() {
+      const slug = this.$route.params;
+      return this.countries.find((country) => country.iso === slug);
+    },
   },
   watch: {
     $route(currentRoute) {
