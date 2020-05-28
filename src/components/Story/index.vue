@@ -120,6 +120,7 @@ export default {
         category,
         country,
         link: !this.isTest && generateStoryUrl(this.locale, this.story),
+        fullLink: !this.isTest && generateStoryUrl(this.locale, this.story),
       };
     },
   },

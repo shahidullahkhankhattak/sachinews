@@ -96,7 +96,8 @@ export default {
         color,
         category,
         country,
-        link: generateStoryUrl(this.locale, this.story),
+        link: generateStoryUrl(this.locale, this.story, false),
+        fullLink: generateStoryUrl(this.locale, this.story),
       };
     },
   },

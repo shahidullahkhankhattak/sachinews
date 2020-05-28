@@ -32,7 +32,7 @@ export default {
       const { url, ...details } = this.details;
       return {
         ...details,
-        url: details.link,
+        url: details.fullLink,
         hashtags: details.title.split(' ').join(','),
         quote: details.description,
       };

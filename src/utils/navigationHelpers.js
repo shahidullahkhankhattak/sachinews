@@ -14,7 +14,7 @@ export function queryParams(name, value, $route) {
   return routeQueryToString(params);
 }
 
-export function generateStoryUrl(locale, story) {
+export function generateStoryUrl(locale, story, base = true) {
   const baseUrl = (process.env.NODE_ENV === 'development' && serverBase.local) || serverBase.production;
-  return `${baseUrl}/${locale.iso}/story/${story._id}/${(locale.iso === 'en' && story.slug) || ''}`;
+  return `${(base && baseUrl) || ''}/${locale.iso}/story/${story._id}/${(locale.iso === 'en' && story.slug) || ''}`;
 }
