@@ -81,6 +81,7 @@ import en from 'javascript-time-ago/locale/en';
 import Share from '../Buttons/Share';
 import { getters, actions } from './handleStore';
 import { canGoBack } from '../../utils/dataBus';
+import { generateStoryUrl } from '../../utils/navigationHelpers';
 
 TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
@@ -118,12 +119,7 @@ export default {
         color,
         category,
         country,
-        link:
-          !this.isTest
-          && `/${this.locale.iso}/story/${this.story._id}/${(this.locale.iso
-            === 'en'
-            && this.story.slug)
-            || ''}`,
+        link: !this.isTest && generateStoryUrl(this.locale, this.story),
       };
     },
   },

@@ -22,7 +22,6 @@
 <script>
 import SocialShare from '../Sharing/SocialShare';
 
-const doc = (process.browser && document) || null;
 export default {
   props: ['details'],
   components: {
@@ -30,11 +29,12 @@ export default {
   },
   computed: {
     socialDetails() {
+      const { url, ...details } = this.details;
       return {
-        ...this.details,
-        url: `${doc && doc.location.origin}${this.details.link}`,
-        hashtags: this.details.title.split(' ').join(','),
-        quote: this.details.description,
+        ...details,
+        url: details.link,
+        hashtags: details.title.split(' ').join(','),
+        quote: details.description,
       };
     },
   },
