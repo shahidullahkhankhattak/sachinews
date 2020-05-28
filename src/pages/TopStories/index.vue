@@ -55,7 +55,7 @@ export default {
         ogDescription: { property: 'og:description', content: this.$t('Get, read & scroll through all the top stories from all the sources throughout the globe') },
         keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through,Trending News,ALl news, Every News,News,Bulletin') },
         ogImage: { property: 'og:image', content: `${meta.url}statics/logo/logo.png` },
-        ogUrl: { property: 'og:url', content: meta.url },
+        ogUrl: { property: 'og:url', content: `${meta.url}${this.locale.iso}` },
       },
     };
   },

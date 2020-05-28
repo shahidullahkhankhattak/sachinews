@@ -67,7 +67,7 @@ export default {
         ogDescription: { property: 'og:description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the countries throughout the globe') },
         keywords: { name: 'keywords', content: this.$t('News,Country,Latest,Scroll,Through,sachinews,sachi,news,bulletin,addictive,addictive bulletin, sachi news, sachi, news') },
         ogImage: { property: 'og:image', content: `${meta.url}statics/logo/logo.png` },
-        ogUrl: { property: 'og:url', content: meta.url },
+        ogUrl: { property: 'og:url', content: `${meta.url}${this.locale.iso}/country/${this.country._id}` },
       },
     };
   },

@@ -1,5 +1,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import { Getters, Actions } from '../../store/Stories/constants';
+import { Getters as AppGetters } from '../../store/App/constants';
 import { Getters as SourceGetters } from '../../store/Sources/constants';
 
 // getters
@@ -12,6 +13,9 @@ const {
 const {
   LIST: SOURCE_LIST,
 } = SourceGetters;
+const {
+  APP_LOCALE,
+} = AppGetters;
 
 // actions
 const {
@@ -25,6 +29,7 @@ export const getters = {
     loading: LOADING,
     perPage: PER_PAGE,
     total: TOTAL,
+    locale: APP_LOCALE,
   }),
 };
 

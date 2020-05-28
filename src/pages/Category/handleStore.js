@@ -1,6 +1,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import { Getters, Actions } from '../../store/Stories/constants';
 import { Getters as CategoryGetters } from '../../store/Categories/constants';
+import { Getters as AppGetters } from '../../store/App/constants';
 
 // getters
 const {
@@ -12,6 +13,9 @@ const {
 const {
   LIST: CATEGORY_LIST,
 } = CategoryGetters;
+const {
+  APP_LOCALE,
+} = AppGetters;
 
 // actions
 const {
@@ -25,6 +29,7 @@ export const getters = {
     loading: LOADING,
     perPage: PER_PAGE,
     total: TOTAL,
+    locale: APP_LOCALE,
   }),
 };
 

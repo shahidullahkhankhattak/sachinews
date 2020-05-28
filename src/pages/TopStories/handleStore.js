@@ -1,4 +1,5 @@
 import { mapGetters, mapActions } from 'vuex';
+import { Getters as AppGetters } from '../../store/App/constants';
 import { Getters, Actions } from '../../store/Stories/constants';
 
 const {
@@ -7,6 +8,9 @@ const {
   PER_PAGE,
   TOTAL,
 } = Getters;
+const {
+  APP_LOCALE,
+} = AppGetters;
 const {
   FETCH_STORIES,
 } = Actions;
@@ -17,6 +21,7 @@ export const getters = {
     loading: LOADING,
     perPage: PER_PAGE,
     total: TOTAL,
+    locale: APP_LOCALE,
   }),
 };
 
