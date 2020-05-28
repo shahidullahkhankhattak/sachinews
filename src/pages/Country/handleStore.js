@@ -2,7 +2,6 @@ import { mapGetters, mapActions } from 'vuex';
 import { Getters as AppGetters } from '../../store/App/constants';
 import { Getters, Actions } from '../../store/Stories/constants';
 import { Getters as CountryGetters } from '../../store/Countries/constants';
-import { Getters as AppGetters } from '../../store/App/constants';
 
 // getters
 const {
@@ -16,8 +15,6 @@ const {
 } = CountryGetters;
 const {
   COUNTRY,
-} = AppGetters;
-const {
   APP_LOCALE,
 } = AppGetters;
 
