@@ -2,7 +2,7 @@ export const config = {
   app: {
     meta: {
       title: 'Sachi News',
-      url: 'http://sachinews.com/',
+      url: 'https://sachinews.com/',
     },
     metaAdmin: {
       title: 'Sachi News - Admin',
