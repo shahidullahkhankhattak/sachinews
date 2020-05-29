@@ -27,7 +27,7 @@
           :to="news.link"
           :title="news.title"
         >
-          <h2 class="text-h5 q-mt-sm q-mb-xs" v-html="news.title"></h2>
+          <h3 class="text-h5 q-mt-sm q-mb-xs" v-html="news.title"></h3>
         </router-link>
         <div class="text-subtitle2">
           <time>{{ $td(timeAgo(story.created_date)) }}</time>
