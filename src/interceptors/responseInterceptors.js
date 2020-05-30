@@ -27,7 +27,7 @@ export default function (axios) {
       if (!process.env.SERVER) {
         setTimeout(() => {
           setLoading(false);
-        }, 5000);
+        }, 500);
       }
       const { data: { statusCode, errors } = {} } = err.response;
       if (errors && errors.length && statusCode !== INCOMPLETE) {
