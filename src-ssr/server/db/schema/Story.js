@@ -80,6 +80,9 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
       },
     },
     {
+      $unset: 'body',
+    },
+    {
       $sort: sort,
     },
   ];
