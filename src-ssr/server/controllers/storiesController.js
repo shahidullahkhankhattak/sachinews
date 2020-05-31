@@ -21,7 +21,7 @@ module.exports.getStories = async (req, res) => {
     if (trending) { sort.likes = -1; }
     sort._id = -1;
     if (category) filter.category = Story.ObjectId(category);
-    if (source) filter.source = Story.ObjectId(source);
+    if (source) filter['source._id'] = Story.ObjectId(source);
     if (country) filter.country = Story.ObjectId(country);
     if (search) {
       filter.$or = [

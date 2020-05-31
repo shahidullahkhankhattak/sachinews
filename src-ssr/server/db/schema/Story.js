@@ -66,14 +66,17 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
         from: 'likes',
         localField: '_id',
         foreignField: 'story',
-        as: 'likes',
+        as: 'allLikes',
       },
     },
     {
       $addFields: {
+        likes: {
+          $size: '$likes',
+        },
         liked: {
           $cond: {
-            if: { $in: [address, '$likes.address'] },
+            if: { $in: [address, '$allLikes.address'] },
             then: true,
             else: false,
           },
@@ -85,12 +88,9 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
     },
   ];
 
-  const countLookupQuery = [lookupQuery[0], lookupQuery[1], lookupQuery[2]];
-  countLookupQuery.push({
-    $count: 'total',
-  });
+  const countLookupQuery = [lookupQuery[0], lookupQuery[1], lookupQuery[2], { $count: 'total' }];
   if (offset && perPage) {
-    lookupQuery.splice(2, 0,
+    lookupQuery.splice(3, 0,
       {
         $skip: parseInt(offset, 10),
       },
