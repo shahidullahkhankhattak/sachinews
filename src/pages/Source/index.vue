@@ -59,7 +59,7 @@ export default {
   components: { NewsCard, NewsLoader, NoNews },
   meta() {
     const { slug } = this.$route.params;
-    const source = this.sources.find((cat) => cat.slug === slug);
+    const source = this.sources.find((sourc) => sourc.slug === slug);
     const pageTitle = `${this.$t(source.name)} - ${this.$t(title)}`;
     return {
       title: pageTitle,
@@ -80,8 +80,9 @@ export default {
   watch: {
     $route(currentRoute) {
       const { slug } = currentRoute.params;
+      const source = this.sources.find((sourc) => sourc.slug === slug);
       const query = {
-        source: slug,
+        source: source && source._id,
       };
       this.fetchStories.bind(this)({ refresh: true, query });
     },
@@ -90,8 +91,9 @@ export default {
     ...actions,
     onScroll(_index, done) {
       const { slug } = this.$route.params;
+      const source = this.sources.find((sourc) => sourc.slug === slug);
       const query = {
-        source: slug,
+        source: source && source._id,
       };
       if (this.stories.length >= this.total) return done();
       if (this.stories.length) {

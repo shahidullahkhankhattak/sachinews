@@ -57,7 +57,9 @@ const { app: { logo: { title }, meta } } = config;
 export default {
   name: 'CountryStories',
   meta() {
-    const pageTitle = `${this.$t(this.country.name)} - ${this.$t(title)}`;
+    const { slug } = this.$route.params;
+    const country = this.countries.find((cont) => cont.iso === slug);
+    const pageTitle = `${this.$t(country && country.name)} - ${this.$t(title)}`;
     return {
       title: pageTitle,
       meta: {
@@ -82,8 +84,9 @@ export default {
   watch: {
     $route(currentRoute) {
       const { slug } = currentRoute.params;
+      const country = this.countries.find((cont) => cont.iso === slug);
       const query = {
-        country: slug,
+        country: country && country._id,
       };
       this.fetchStories.bind(this)({ refresh: true, query });
     },
@@ -92,8 +95,9 @@ export default {
     ...actions,
     onScroll(_index, done) {
       const { slug } = this.$route.params;
+      const country = this.countries.find((count) => count.iso === slug);
       const query = {
-        country: slug,
+        country: country && country._id,
       };
       if (this.stories.length >= this.total) return done();
       if (this.stories.length) {

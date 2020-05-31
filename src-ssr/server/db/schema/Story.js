@@ -10,6 +10,7 @@ const schema = new Schema({
   url: String,
   tags: Array,
   author: String,
+  likes: { type: Number, default: 0 },
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
   source: {
@@ -31,12 +32,18 @@ schema.statics.ObjectId = mongoose.Types.ObjectId;
 schema.statics.findWithInfo = async function (filter, sort, offset, perPage, address) {
   const lookupQuery = [
     {
+      $sort: sort,
+    },
+    {
       $lookup: {
         from: 'sources',
         localField: 'source',
         foreignField: '_id',
         as: 'source',
       },
+    },
+    {
+      $match: filter,
     },
     {
       $lookup: {
@@ -63,13 +70,7 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
       },
     },
     {
-      $match: filter,
-    },
-    {
       $addFields: {
-        likes: {
-          $size: '$likes',
-        },
         liked: {
           $cond: {
             if: { $in: [address, '$likes.address'] },
@@ -82,24 +83,20 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
     {
       $unset: 'body',
     },
-    {
-      $sort: sort,
-    },
   ];
 
-  const countLookupQuery = [...lookupQuery];
+  const countLookupQuery = [lookupQuery[0], lookupQuery[1], lookupQuery[2]];
   countLookupQuery.push({
     $count: 'total',
   });
   if (offset && perPage) {
-    lookupQuery.push(
+    lookupQuery.splice(2, 0,
       {
         $skip: parseInt(offset, 10),
       },
       {
         $limit: parseInt(perPage, 10),
-      },
-    );
+      });
   }
   const [{ total } = {}] = await this.aggregate(countLookupQuery);
   const stories = await this.aggregate(lookupQuery);

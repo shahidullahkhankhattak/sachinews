@@ -44,11 +44,11 @@ export const actions = {
 export function handlePrefetch({ store, currentRoute, redirect }, isMount) {
   if (process.browser && !isMount) return;
   const { slug, locale } = currentRoute.params;
-  const query = {
-    country: slug,
-  };
   const countries = getters.countries.bind({ $store: store })();
   const country = countries.find((_country) => _country.iso === slug);
   if (!country) redirect(`/${locale}/404`);
+  const query = {
+    country: country && country._id,
+  };
   return store.dispatch(FETCH_STORIES, { refresh: true, query });
 }

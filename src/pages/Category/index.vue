@@ -80,8 +80,9 @@ export default {
   watch: {
     $route(currentRoute) {
       const { slug } = currentRoute.params;
+      const category = this.categories.find((cat) => cat.slug === slug);
       const query = {
-        category: slug,
+        category: category && category._id,
       };
       this.fetchStories.bind(this)({ refresh: true, query });
     },
@@ -90,8 +91,9 @@ export default {
     ...actions,
     onScroll(_index, done) {
       const { slug } = this.$route.params;
+      const category = this.categories.find((cat) => cat.slug === slug);
       const query = {
-        category: slug,
+        category: category && category._id,
       };
       if (this.stories.length >= this.total) return done();
       if (this.stories.length) {
