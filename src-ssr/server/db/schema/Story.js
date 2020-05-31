@@ -72,7 +72,7 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
     {
       $addFields: {
         likes: {
-          $size: '$likes',
+          $size: '$allLikes',
         },
         liked: {
           $cond: {
