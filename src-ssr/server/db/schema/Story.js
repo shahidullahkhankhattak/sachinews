@@ -13,6 +13,10 @@ const schema = new Schema({
   likes: { type: Number, default: 0 },
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
+  lang: {
+    type: Schema.Types.ObjectId,
+    ref: 'Language',
+  },
   source: {
     type: Schema.Types.ObjectId,
     ref: 'Source',
@@ -35,15 +39,15 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
       $sort: sort,
     },
     {
+      $match: filter,
+    },
+    {
       $lookup: {
         from: 'sources',
         localField: 'source',
         foreignField: '_id',
         as: 'source',
       },
-    },
-    {
-      $match: filter,
     },
     {
       $lookup: {

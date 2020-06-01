@@ -14,7 +14,7 @@ module.exports = async function (source) {
   const stories = [];
   const browser = await puppeteer.launch({ headless: true });
   try {
-    const urls = await SourceLink.find({ source });
+    const urls = await SourceLink.find({ source }).populate('source');
     const selectors = (await Selector.find({ source }).exec()).map(({
       name, selector, type, filter, source,
     }) => {
@@ -99,7 +99,8 @@ module.exports = async function (source) {
         });
         const story = {
           ...crawled,
-          source: urlSource,
+          source: urlSource._id,
+          lang: urlSource.lang,
           category: urlCategory,
           country: urlCountry,
           url: link,
