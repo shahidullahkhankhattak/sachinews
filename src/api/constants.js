@@ -8,7 +8,7 @@ if (process.env.DEV) {
     baseUrl = serverBase.dev;
   }
 } else {
-  serverBase.production;
+  baseUrl = serverBase.production;
 }
 
 const apiV1Endpoint = `${baseUrl}/api/v1`;
