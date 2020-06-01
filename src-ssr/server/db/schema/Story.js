@@ -92,9 +92,9 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
     },
   ];
 
-  const countLookupQuery = [lookupQuery[0], lookupQuery[1], lookupQuery[2], { $count: 'total' }];
+  const countLookupQuery = [lookupQuery[0], lookupQuery[1], { $count: 'total' }];
   if (offset && perPage) {
-    lookupQuery.splice(3, 0,
+    lookupQuery.splice(2, 0,
       {
         $skip: parseInt(offset, 10),
       },
