@@ -8,6 +8,8 @@
   "author": "Shahid Ullah Khan",
   "private": true,
   "scripts": {
+    "dev:ssr": "DEV_ENV=live quasar dev -m ssr",
+    "local:ssr": "DEV_ENV=local quasar dev -m ssr",
     "production": "node dist/ssr/index.js",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0"

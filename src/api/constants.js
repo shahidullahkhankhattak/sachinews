@@ -1,6 +1,15 @@
 import { serverBase } from '../config/constants';
 
-const baseUrl = (process.env.NODE_ENV === 'development' && serverBase.local) || serverBase.production;
+let baseUrl;
+if (process.env.DEV) {
+  if (process.env.LOCAL) {
+    baseUrl = serverBase.local;
+  } else {
+    baseUrl = serverBase.dev;
+  }
+} else {
+  serverBase.production;
+}
 
 const apiV1Endpoint = `${baseUrl}/api/v1`;
 export const apiEndpoints = {
