@@ -118,7 +118,7 @@ schema.statics.findWithInfo = async function (
       },
     );
   }
-  const [{ stories, total: [{ total }] }] = await this.aggregate(lookupQuery);
+  const [{ stories, total: [{ total } = {}] }] = await this.aggregate(lookupQuery);
   return { stories, total: total || 0 };
 };
 
