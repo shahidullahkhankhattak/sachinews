@@ -1,9 +1,8 @@
+const fs = require('fs');
+
 module.exports.robotsTxt = (_req, res) => {
+  const robotsContent = fs.readFileSync('plain/robots.txt').toString('utf-8');
   res.setHeader('content-type', 'text/plain');
-  const val = `User-agent: *
-Disallow:
-Sitemap: https://www.sachinews.com/en/sitemap.xml
-Sitemap: https://www.sachinews.com/ur/sitemap.xml`;
-  res.send(val);
+  res.send(robotsContent);
   res.end();
 };
