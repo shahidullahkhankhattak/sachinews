@@ -44,13 +44,12 @@
           class="rounded-borders"
           :src="news.media"
           :alt="news.title"
-          style="max-height: 250px"
+          style="max-height: 180px"
           height="100%"
           native-context-menu
         />
       </q-card-section>
     </q-card-section>
-
     <q-card-actions>
       <q-btn
         @click="likeStory({ id: news._id })"

@@ -5,8 +5,11 @@
     :persistent="true"
     content-class="bg-white"
     v-model="open"
+    :mini="isMiniState"
+    @mouseover="miniState = false"
+    @mouseout="miniState = true"
     :side="sidebarPos"
-    :width="280"
+    :width="250"
   >
     <q-scroll-area class="fit">
       <q-list tag="nav" class="text-grey-8" :class="{'q-pt-md': $q.screen.gt.sm}">
@@ -115,7 +118,7 @@
               :title="$t('Privacy')"
               >{{ $t("Privacy") }}</a
             >
-            <span> · </span>
+            <span v-if="!isMiniState"> · </span>
             <a
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
@@ -123,13 +126,13 @@
               :title="$t('Terms')"
               >{{ $t("Terms") }}</a
             >
-            <span> · </span>
+            <span v-if="!isMiniState"> · </span>
             <a
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
               aria-label="About"
               :title="$t('About Us')"
-              >{{ $t("About Us") }}</a
+              >{{ $t("About") }}</a
             >
           </div>
         </div>
@@ -155,6 +158,7 @@ const {
 export default {
   data: () => ({
     logo,
+    miniState: true,
     sidebarKey: true,
     open: false,
     topUrls: [
@@ -175,6 +179,9 @@ export default {
   }),
   computed: {
     ...getters,
+    isMiniState() {
+      return (this.miniState && Screen.width < 1280) || false;
+    },
     countryLinks() {
       return this.countries.map((country) => ({
         ...country,
