@@ -104,7 +104,7 @@ export default {
   mounted() {
     watcherBus.on('loading', (loading) => {
       if (loading) {
-        this.$refs.bar.start();
+        this.$refs.bar.start(10);
         this.ajaxBar = true;
       } else {
         setTimeout(() => {
