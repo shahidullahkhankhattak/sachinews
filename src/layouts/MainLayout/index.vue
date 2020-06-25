@@ -57,7 +57,9 @@ export default {
       if (from.params.locale !== to.params.locale && Screen.gt.sm) {
         this.$root.$emit('toggleSidebar');
       }
-      watcherBus.loading = true;
+      if (from.name !== 'story-details') {
+        watcherBus.loading = true;
+      }
     },
   },
   async preFetch(params) {

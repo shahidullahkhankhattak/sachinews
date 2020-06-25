@@ -27,8 +27,7 @@ export const watcherBus = {
     return this.data.isLoading;
   },
   set loading(val) {
-    if (val && process.browser) {
-      // q-body--force-scrollbar q-body--prevent-scroll
+    if (process.browser) {
       if (val) {
         document.body.classList.add('q-body--force-scrollbar', 'q-body--prevent-scroll');
       } else {
