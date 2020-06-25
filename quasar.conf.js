@@ -56,6 +56,7 @@ module.exports = function (ctx) {
         'Notify',
         'LocalStorage',
         'Dialog',
+        'Loading',
       ],
     },
 

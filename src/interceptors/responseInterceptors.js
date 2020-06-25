@@ -2,11 +2,13 @@ import { LocalStorage } from 'quasar';
 import { responseTypes, localStorageKeys } from '../config/constants';
 import { Notify } from '../plugins/notify';
 import { setLoading } from '../config/configSetters';
+import { watcherBus } from '../utils/dataBus';
 
 const { SESSION_EXPIRED, statusCodes: { UNAUTHORIZED, INCOMPLETE } } = responseTypes;
 export default function (axios) {
   axios.interceptors.response.use(
     (response) => {
+      watcherBus.loading = false;
       if (!process.env.SERVER) {
         setTimeout(() => {
           setLoading(false);
@@ -24,6 +26,7 @@ export default function (axios) {
       return Promise.resolve(response.data);
     },
     (err) => {
+      watcherBus.loading = false;
       if (!process.env.SERVER) {
         setTimeout(() => {
           setLoading(false);

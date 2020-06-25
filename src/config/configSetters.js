@@ -18,10 +18,10 @@ export function setLoading(value) {
   if (value) {
     document.querySelector('.spinner').className = 'spinner';
   } else {
-    document.querySelector('.spinner').className = 'spinner no-visible';
+    document.querySelector('.spinner').classList.add('no-visible');
     setTimeout(() => {
-      if (!document.querySelector('.spinner').className.includes('hidden')) {
-        document.querySelector('.spinner').className += ' hidden';
+      if (!document.querySelector('.spinner').classList.contains('hidden')) {
+        document.querySelector('.spinner').classList.add('hidden');
       }
     }, 500);
   }
