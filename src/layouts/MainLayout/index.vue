@@ -1,5 +1,15 @@
 <template>
   <q-layout view="hHh LpR fFf">
+    <transition name="fade">
+      <div v-show="ajaxBar" class="q-loading fullscreen column flex-center z-max text-white">
+        <q-ajax-bar
+          ref="bar"
+          position="top"
+          color="red"
+          size="3px"
+        />
+      </div>
+    </transition>
     <app-header />
 
     <sidebar />
@@ -16,6 +26,7 @@
 import { Screen } from 'quasar';
 import axios from 'axios';
 import { preFetchMethods, getters } from './handleStore';
+import { watcherBus } from '../../utils/dataBus';
 
 export default {
   name: 'MainLayout',
@@ -29,6 +40,11 @@ export default {
       },
     };
   },
+  data() {
+    return {
+      ajaxBar: false,
+    };
+  },
   computed: {
     ...getters,
     routeKey() {
@@ -40,6 +56,9 @@ export default {
       // toggle sidebar on language change
       if (from.params.locale !== to.params.locale && Screen.gt.sm) {
         this.$root.$emit('toggleSidebar');
+      }
+      if (from.name !== 'story-details') {
+        watcherBus.loading = true;
       }
     },
   },
@@ -83,6 +102,19 @@ export default {
     await preFetchMethods.setLocale(params, language);
     await preFetchMethods.fetchTranslations(params, language);
     return preFetchMethods.fetchSources(params, language);
+  },
+  mounted() {
+    watcherBus.on('loading', (loading) => {
+      if (loading) {
+        this.$refs.bar.start(10);
+        this.ajaxBar = true;
+      } else {
+        setTimeout(() => {
+          this.$refs.bar.stop();
+          this.ajaxBar = false;
+        }, 500);
+      }
+    });
   },
 };
 </script>

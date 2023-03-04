@@ -5,11 +5,18 @@
     :persistent="true"
     content-class="bg-white"
     v-model="open"
+    :mini="isMiniState"
+    @mouseover="miniState = false"
+    @mouseout="miniState = true"
     :side="sidebarPos"
-    :width="280"
+    :width="250"
   >
     <q-scroll-area class="fit">
-      <q-list tag="nav" padding class="text-grey-8">
+      <q-list tag="nav" class="text-grey-8" :class="{'q-pt-md': $q.screen.gt.sm}">
+        <q-item style="padding:0" v-if="$q.screen.lt.md">
+          <img class="sidebar-logo" :src="logo.sidebarPath" :alt="$t(logo.alt.sidebarLogo)">
+        </q-item>
+        <q-separator inset class="q-my-sm" v-if="$q.screen.lt.md"/>
         <q-item
           class="GNL__drawer-item"
           v-ripple
@@ -65,7 +72,7 @@
           </q-item-section>
         </q-item>
 
-        <q-separator inset class="q-my-sm" />
+        <q-separator inset class="q-my-sm" v-if="countryLinks.length" />
 
         <q-item
           class="GNL__drawer-item"
@@ -111,7 +118,7 @@
               :title="$t('Privacy')"
               >{{ $t("Privacy") }}</a
             >
-            <span> · </span>
+            <span v-if="!isMiniState"> · </span>
             <a
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
@@ -119,13 +126,13 @@
               :title="$t('Terms')"
               >{{ $t("Terms") }}</a
             >
-            <span> · </span>
+            <span v-if="!isMiniState"> · </span>
             <a
               class="GNL__drawer-footer-link"
               href="javascript:void(0)"
               aria-label="About"
               :title="$t('About Us')"
-              >{{ $t("About Us") }}</a
+              >{{ $t("About") }}</a
             >
           </div>
         </div>
@@ -140,9 +147,18 @@ import {
   queryParams,
   isSidebarLinkActive as isActive,
 } from '../../utils/navigationHelpers';
+import {
+  config,
+} from '../../config';
+
+const {
+  app: { logo },
+} = config && config;
 
 export default {
   data: () => ({
+    logo,
+    miniState: true,
     sidebarKey: true,
     open: false,
     topUrls: [
@@ -163,6 +179,9 @@ export default {
   }),
   computed: {
     ...getters,
+    isMiniState() {
+      return (this.miniState && Screen.width < 1280) || false;
+    },
     countryLinks() {
       return this.countries.map((country) => ({
         ...country,

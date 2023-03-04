@@ -10,8 +10,13 @@ const schema = new Schema({
   url: String,
   tags: Array,
   author: String,
+  likes: { type: Number, default: 0 },
   created_date: { type: Date, default: Date.now },
   updated_date: { type: Date, default: Date.now },
+  lang: {
+    type: Schema.Types.ObjectId,
+    ref: 'Language',
+  },
   source: {
     type: Schema.Types.ObjectId,
     ref: 'Source',
@@ -28,68 +33,83 @@ const schema = new Schema({
 
 schema.statics.ObjectId = mongoose.Types.ObjectId;
 
-schema.statics.findWithInfo = async function (filter, sort, offset, perPage, address) {
+schema.statics.findWithInfo = async function (
+  filter,
+  sort,
+  offset,
+  perPage,
+  address,
+) {
   const lookupQuery = [
     {
-      $lookup: {
-        from: 'sources',
-        localField: 'source',
-        foreignField: '_id',
-        as: 'source',
-      },
-    },
-    {
-      $lookup: {
-        from: 'categories',
-        localField: 'category',
-        foreignField: '_id',
-        as: 'category',
-      },
-    },
-    {
-      $lookup: {
-        from: 'countries',
-        localField: 'country',
-        foreignField: '_id',
-        as: 'country',
-      },
-    },
-    {
-      $lookup: {
-        from: 'likes',
-        localField: '_id',
-        foreignField: 'story',
-        as: 'likes',
-      },
-    },
-    {
-      $match: filter,
-    },
-    {
-      $addFields: {
-        likes: {
-          $size: '$likes',
-        },
-        liked: {
-          $cond: {
-            if: { $in: [address, '$likes.address'] },
-            then: true,
-            else: false,
+      $facet: {
+        stories: [
+          {
+            $sort: sort,
           },
-        },
+          {
+            $match: filter,
+          },
+          {
+            $lookup: {
+              from: 'sources',
+              localField: 'source',
+              foreignField: '_id',
+              as: 'source',
+            },
+          },
+          {
+            $lookup: {
+              from: 'categories',
+              localField: 'category',
+              foreignField: '_id',
+              as: 'category',
+            },
+          },
+          {
+            $lookup: {
+              from: 'countries',
+              localField: 'country',
+              foreignField: '_id',
+              as: 'country',
+            },
+          },
+          {
+            $lookup: {
+              from: 'likes',
+              localField: '_id',
+              foreignField: 'story',
+              as: 'allLikes',
+            },
+          },
+          {
+            $addFields: {
+              liked: {
+                $cond: {
+                  if: { $in: [address, '$allLikes.address'] },
+                  then: true,
+                  else: false,
+                },
+              },
+            },
+          },
+          {
+            $unset: 'body',
+          },
+        ],
+        total: [
+          {
+            $match: filter,
+          },
+          { $count: 'total' },
+        ],
       },
-    },
-    {
-      $sort: sort,
     },
   ];
-
-  const countLookupQuery = [...lookupQuery];
-  countLookupQuery.push({
-    $count: 'total',
-  });
   if (offset && perPage) {
-    lookupQuery.push(
+    lookupQuery[0].$facet.stories.splice(
+      2,
+      0,
       {
         $skip: parseInt(offset, 10),
       },
@@ -98,8 +118,7 @@ schema.statics.findWithInfo = async function (filter, sort, offset, perPage, add
       },
     );
   }
-  const [{ total } = {}] = await this.aggregate(countLookupQuery);
-  const stories = await this.aggregate(lookupQuery);
+  const [{ stories, total: [{ total } = {}] }] = await this.aggregate(lookupQuery);
   return { stories, total: total || 0 };
 };
 

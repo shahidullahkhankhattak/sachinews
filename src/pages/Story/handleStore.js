@@ -1,9 +1,15 @@
 import { mapGetters } from 'vuex';
+import { Getters as AppGetters } from '../../store/App/constants';
 import { Actions, Getters } from '../../store/Stories/constants';
 
 const {
   FETCH_STORY,
 } = Actions;
+
+// getters
+const {
+  APP_LOCALE,
+} = AppGetters;
 const {
   STORY,
   LOADING,
@@ -11,6 +17,7 @@ const {
 
 export const getters = {
   ...mapGetters({
+    locale: APP_LOCALE,
     story: STORY,
     loading: LOADING,
   }),

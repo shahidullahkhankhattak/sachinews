@@ -1,8 +1,7 @@
 import { Screen } from 'quasar';
 import { wait } from '../utils/asyncHelpers';
 
-export async function setLocale(currentValue) {
-  const { value } = currentValue;
+export async function setLocale(value) {
   const { direction: oldDir } = this.languages.find((lang) => lang.iso === this.locale.iso) || {};
   const newLocale = this.languages.find((lang) => lang.iso === value) || {};
   const { direction: newDir } = newLocale;
@@ -19,10 +18,10 @@ export function setLoading(value) {
   if (value) {
     document.querySelector('.spinner').className = 'spinner';
   } else {
-    document.querySelector('.spinner').className = 'spinner no-visible';
+    document.querySelector('.spinner').classList.add('no-visible');
     setTimeout(() => {
-      if (!document.querySelector('.spinner').className.includes('hidden')) {
-        document.querySelector('.spinner').className += ' hidden';
+      if (!document.querySelector('.spinner').classList.contains('hidden')) {
+        document.querySelector('.spinner').classList.add('hidden');
       }
     }, 500);
   }

@@ -52,7 +52,7 @@ import NewsLoader from '../../components/Loaders/NewsLoader';
 import { config } from '../../config';
 import { shouldReloadStories } from '../../utils/dataBus';
 
-const { app: { logo: { title } } } = config;
+const { app: { logo: { title }, meta } } = config;
 
 export default {
   name: 'CategoryStories',
@@ -64,10 +64,12 @@ export default {
       title: pageTitle,
       meta: {
         description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the categories throughout the globe') },
-        ogTitle: { name: 'og:title', content: pageTitle },
+        ogTitle: { property: 'og:title', content: pageTitle },
         dcTitle: { name: 'DC.title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the categories throughout the globe') },
+        ogDescription: { property: 'og:description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the categories throughout the globe') },
         keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through,sachinews,sachi,news,bulletin,addictive,addictive bulletin, sachi news, sachi, news') },
+        ogImage: { property: 'og:image', content: `${meta.url}statics/logo/logo.png` },
+        ogUrl: { property: 'og:url', content: `${meta.url}${this.locale.iso}/category/${category._id}` },
       },
     };
   },
@@ -78,8 +80,9 @@ export default {
   watch: {
     $route(currentRoute) {
       const { slug } = currentRoute.params;
+      const category = this.categories.find((cat) => cat.slug === slug);
       const query = {
-        category: slug,
+        category: category && category._id,
       };
       this.fetchStories.bind(this)({ refresh: true, query });
     },
@@ -88,8 +91,9 @@ export default {
     ...actions,
     onScroll(_index, done) {
       const { slug } = this.$route.params;
+      const category = this.categories.find((cat) => cat.slug === slug);
       const query = {
-        category: slug,
+        category: category && category._id,
       };
       if (this.stories.length >= this.total) return done();
       if (this.stories.length) {

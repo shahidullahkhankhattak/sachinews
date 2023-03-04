@@ -54,22 +54,18 @@
               </q-input>
             </div>
             <div class="col-md-12 q-pt-xs q-pr-xs">
-              <q-select
+              <Select
                 bg-color="white"
                 color="blue-4"
                 label-color="blue-4"
                 v-model="item.direction"
-                outlined
                 label="Direction"
                 value="rtl"
-                lazy-rules
                 :rules="[rules.REQUIRED]"
                 :options="['ltr', 'rtl']"
-              >
-                <template v-slot:prepend>
-                  <q-icon name="swap_horizontal_circle" color="blue-4"  />
-                </template>
-              </q-select>
+                icon="swap_horizontal_circle"
+                icon-color="blue-4"
+              />
             </div>
             <div class="col-md-12 q-pt-md">
               <q-btn type="submit" color="white" text-color="blue-8"
@@ -90,8 +86,12 @@ import { extend } from 'quasar';
 import { actions } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as editForm } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
+  components: {
+    Select,
+  },
   data: () => ({
     rules: {
       ...validations,

@@ -66,19 +66,14 @@
                         </q-input>
                       </div>
                       <div class="col-md-4">
-                        <q-select
+                        <Select
                           v-model="addForm.direction"
-                          outlined
                           label="Direction"
                           value="rtl"
-                          lazy-rules
                           :rules="[rules.REQUIRED]"
                           :options="['ltr', 'rtl']"
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="swap_horizontal_circle" />
-                          </template>
-                        </q-select>
+                          icon="swap_horizontal_circle"
+                        />
                       </div>
                     </div>
 
@@ -124,11 +119,13 @@ import ListTable from './ListTable';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as addForm } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
   components: {
     EditModal,
     ListTable,
+    Select,
   },
   data() {
     return {

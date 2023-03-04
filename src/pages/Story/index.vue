@@ -12,6 +12,7 @@
 import Story from '../../components/Story';
 import StoryLoader from '../../components/Loaders/StoryLoader';
 import { getters, handlePrefetch } from './handleStore';
+import { generateStoryUrl } from '../../utils/navigationHelpers';
 
 export default {
   meta() {
@@ -20,11 +21,11 @@ export default {
       title: this.story.title,
       meta: {
         description: { name: 'description', content: this.story.description },
-        ogTitle: { name: 'og:title', content: `${this.story.title}` },
+        ogTitle: { property: 'og:title', content: `${this.story.title}` },
         dcTitle: { name: 'DC.title', content: this.story.title },
-        ogDescription: { name: 'og:description', content: this.story.description },
-        ogImage: { name: 'og:image', content: this.story.media },
-        ogUrl: { name: 'og:url', content: this.story.url },
+        ogDescription: { property: 'og:description', content: this.story.description },
+        ogImage: { property: 'og:image', content: this.story.media },
+        ogUrl: { property: 'og:url', content: generateStoryUrl(this.locale, this.story) },
         keywords: { name: 'keywords', content: this.story.title.split(' ').join(', ') },
       },
     };

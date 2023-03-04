@@ -6,11 +6,20 @@
           {{ $t(news.source) }} - {{ $t(news.category || news.country) }}
         </div>
         <div>
-          <q-badge v-if="isImportant(news)" color="red" class="animated infinite flash">
-            {{ $t('Important') }}
+          <q-badge
+            v-if="isImportant(news)"
+            color="red"
+            class="animated infinite flash"
+          >
+            {{ $t("Important") }}
           </q-badge>
-          <q-badge v-if="isLatest(news)" color="yellow" text-color="black" class="animated infinite bounceIn q-ml-sm">
-            {{ $t('Latest') }}
+          <q-badge
+            v-if="isLatest(news)"
+            color="yellow"
+            text-color="black"
+            class="animated infinite bounceIn q-ml-sm"
+          >
+            {{ $t("Latest") }}
           </q-badge>
         </div>
         <router-link
@@ -18,7 +27,7 @@
           :to="news.link"
           :title="news.title"
         >
-          <h2 class="text-h5 q-mt-sm q-mb-xs" v-html="news.title"></h2>
+          <h3 class="text-h5 q-mt-sm q-mb-xs" v-html="news.title"></h3>
         </router-link>
         <div class="text-subtitle2">
           <time>{{ $td(timeAgo(story.created_date)) }}</time>
@@ -35,13 +44,12 @@
           class="rounded-borders"
           :src="news.media"
           :alt="news.title"
-          style="max-height: 250px"
+          style="max-height: 180px"
           height="100%"
           native-context-menu
         />
       </q-card-section>
     </q-card-section>
-
     <q-card-actions>
       <q-btn
         @click="likeStory({ id: news._id })"
@@ -64,6 +72,7 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Share from '../../components/Buttons/Share';
 import { getters, actions } from './handleStore';
+import { generateStoryUrl } from '../../utils/navigationHelpers';
 
 TimeAgo.addLocale(en);
 const timeAgoFn = new TimeAgo('en-US');
@@ -86,7 +95,8 @@ export default {
         color,
         category,
         country,
-        link: `/${this.locale.iso}/story/${this.story._id}/${(this.locale.iso === 'en' && this.story.slug) || ''}`,
+        link: generateStoryUrl(this.locale, this.story, false),
+        fullLink: generateStoryUrl(this.locale, this.story),
       };
     },
   },
@@ -101,7 +111,9 @@ export default {
     },
     isImportant(news) {
       const { tags } = news;
-      if (tags && tags.includes('important')) { return true; }
+      if (tags && tags.includes('important')) {
+        return true;
+      }
       return false;
     },
     timeAgo(time) {

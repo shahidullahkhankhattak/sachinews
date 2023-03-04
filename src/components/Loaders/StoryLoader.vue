@@ -1,9 +1,9 @@
 <template>
-  <article class="col-xs-12 col-lg-8 q-pa-md">
+  <article class="col-xs-12 col-lg-8 q-pa-md news-article">
     <q-skeleton
       animation="fade"
       type="rect"
-      class="q-mb-sm article-media"
+      class="q-mb-sm"
       height="40px"
       width="100px"
     />
@@ -11,7 +11,6 @@
       animation="fade"
       type="rect"
       class="q-mb-sm article-media"
-      height="450px"
     />
     <q-skeleton class="q-my-sm q-mt-md" height="40px" type="rect" />
     <q-skeleton height="40px" width="70%" type="rect" />

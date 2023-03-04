@@ -1,5 +1,6 @@
 import { mapGetters, mapActions } from 'vuex';
 import { Getters, Actions } from '../../store/Stories/constants';
+import { Getters as AppGetters } from '../../store/App/constants';
 import { Getters as SourceGetters } from '../../store/Sources/constants';
 
 // getters
@@ -12,6 +13,9 @@ const {
 const {
   LIST: SOURCE_LIST,
 } = SourceGetters;
+const {
+  APP_LOCALE,
+} = AppGetters;
 
 // actions
 const {
@@ -25,6 +29,7 @@ export const getters = {
     loading: LOADING,
     perPage: PER_PAGE,
     total: TOTAL,
+    locale: APP_LOCALE,
   }),
 };
 
@@ -37,11 +42,11 @@ export const actions = {
 export function handlePrefetch({ store, currentRoute, redirect }, isMount) {
   if (process.browser && !isMount) return;
   const { slug, locale } = currentRoute.params;
-  const query = {
-    source: slug,
-  };
   const sources = getters.sources.bind({ $store: store })();
-  const source = sources.find((cat) => cat.slug === slug);
+  const source = sources.find((sourc) => sourc.slug === slug);
   if (!source) redirect(`/${locale}/404`);
+  const query = {
+    source: source && source._id,
+  };
   return store.dispatch(FETCH_STORIES, { refresh: true, query });
 }

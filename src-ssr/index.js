@@ -27,6 +27,8 @@ const server = http.createServer(app);
 const socket = socketio.listen(server);
 const port = process.env.PORT || 3000;
 
+process.setMaxListeners(0);
+
 const serve = (path, cache) => express.static(ssr.resolveWWW(path), {
   maxAge: cache ? 1000 * 60 * 60 * 24 * 30 : 0,
 });

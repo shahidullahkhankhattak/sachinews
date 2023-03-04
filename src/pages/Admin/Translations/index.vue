@@ -40,20 +40,15 @@
                   <q-card-section class="q-pt-xs col-xs-12">
                     <div class="row q-col-gutter-md">
                       <div class="col-md-4">
-                        <q-select
-                          :value="addForm.lang"
-                          @input="(val) => addForm.lang = val.value"
-                          outlined
+                        <Select
+                          v-model="addForm.lang"
                           label="Language"
-                          lazy-rules
                           :rules="[rules.REQUIRED]"
-                          map-options
-                          :options="languages.map(lang => ({ label: lang.name, value: lang.iso}))"
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="language" />
-                          </template>
-                        </q-select>
+                          option-label="name"
+                          option-value="iso"
+                          :options="languages"
+                          icon="language"
+                        />
                       </div>
                       <div class="col-md-4">
                         <q-input
@@ -125,11 +120,13 @@ import ListTable from './ListTable';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as addForm } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
   components: {
     EditModal,
     ListTable,
+    Select,
   },
   data() {
     return {

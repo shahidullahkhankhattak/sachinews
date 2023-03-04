@@ -36,23 +36,16 @@
                     <q-form @submit="next()">
                       <div class="row q-col-gutter-md">
                         <div class="col-md-4">
-                          <q-select
-                            outlined
-                            label="Source"
-                            :value="selected"
+                          <SelectGroup
                             v-model="selected"
-                            lazy-rules
-                            :option-value="opt => opt._id"
-                            :option-label="opt => opt.name"
+                            label="Sources"
                             :rules="[rules.REQUIRED]"
-                            :options="(list.length && list) || [{value: '', name: 'No sources found'}]"
-                            map-options
-                            emit-value
-                          >
-                            <template v-slot:prepend>
-                              <q-icon name="home" />
-                            </template>
-                          </q-select>
+                            option-label="name"
+                            option-value="_id"
+                            empty-msg="No Sources Found"
+                            :options="options"
+                            icon="home"
+                          />
                         </div>
                         <div class="col-md-12">
                           <q-btn type="submit" outline color="green" size="16px">
@@ -76,8 +69,12 @@
 <script>
 import { validations } from '../../../validators';
 import { actions, getters } from './handleStore';
+import SelectGroup from '../../../components/Select/SelectGroup';
 
 export default {
+  components: {
+    SelectGroup,
+  },
   data() {
     return {
       redirect: '',
@@ -92,6 +89,24 @@ export default {
   },
   computed: {
     ...getters,
+    options() {
+      let index = 0;
+      const groupHash = {};
+      const groups = [];
+      (this.list || []).forEach((value) => {
+        if (groupHash[value.lang.name] || groupHash[value.lang.name] === 0) {
+          groups[groupHash[value.lang.name]].children.push(value);
+        } else {
+          groupHash[value.lang.name] = index;
+          groups[index] = {
+            label: value.lang.name,
+            children: [value],
+          };
+          index += 1;
+        }
+      });
+      return groups;
+    },
   },
   methods: {
     ...actions,

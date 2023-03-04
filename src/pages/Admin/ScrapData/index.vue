@@ -36,24 +36,17 @@
                     <q-form @submit="next()">
                       <div class="row q-col-gutter-md">
                         <div class="col-md-4">
-                          <q-select
-                            outlined
+                          <SelectGroup
                             label="Source"
                             :value="form.source"
                             v-model="form.source"
-                            lazy-rules
-                            @input="selectSource"
-                            :option-value="opt => opt._id"
-                            :option-label="opt => opt.name"
+                            option-value="_id"
+                            option-label="name"
                             :rules="[rules.REQUIRED]"
-                            :options="(list.length && list) || [{value: '', name: 'No sources found'}]"
-                            map-options
-                            emit-value
-                          >
-                            <template v-slot:prepend>
-                              <q-icon name="home" />
-                            </template>
-                          </q-select>
+                            :options="sourceOptions"
+                            empty-msg="No Source Found"
+                            icon="home"
+                          />
                         </div>
                         <div class="col-md-12">
                           <q-btn :disable="!form.source" @click="openLink(`/api/v1/scrapper/source/${form.source}`)" outline color="green" size="16px">
@@ -86,6 +79,7 @@ import SocketEvents from '../../../sockets/constants';
 import { ProtectedData } from '../../../utils/socketIoHelpers';
 import { Notify } from '../../../plugins/notify';
 import Story from '../../../components/Story';
+import SelectGroup from '../../../components/Select/SelectGroup';
 
 const {
   adminEvents: {
@@ -95,6 +89,7 @@ const {
 export default {
   components: {
     Story,
+    SelectGroup,
   },
   data() {
     return {
@@ -137,6 +132,24 @@ export default {
   },
   computed: {
     ...getters,
+    sourceOptions() {
+      let index = 0;
+      const groupHash = {};
+      const groups = [];
+      (this.list || []).forEach((value) => {
+        if (groupHash[value.lang.name] || groupHash[value.lang.name] === 0) {
+          groups[groupHash[value.lang.name]].children.push(value);
+        } else {
+          groupHash[value.lang.name] = index;
+          groups[index] = {
+            label: value.lang.name,
+            children: [value],
+          };
+          index += 1;
+        }
+      });
+      return groups;
+    },
   },
   methods: {
     ...actions,
@@ -152,9 +165,6 @@ export default {
       this.scraped = this.form.numItems;
       this.loading = true;
       this.$socket.emit(ADMIN_SCRAP_TEST, ProtectedData(data));
-    },
-    selectSource(val) {
-      this.fetchCat.bind(this)(val);
     },
   },
   beforeMount() {

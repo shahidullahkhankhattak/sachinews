@@ -27,7 +27,7 @@ const crawlSource = async function (browser, source) {
         interceptedRequest.continue();
       }
     });
-    const urls = await SourceLink.find({ source });
+    const urls = await SourceLink.find({ source }).populate('source');
     const selectors = (await Selector.find({ source }).exec()).map(({
       name, selector, type, filter, source,
     }) => {
@@ -98,7 +98,8 @@ const crawlSource = async function (browser, source) {
         });
         const story = {
           ...crawled,
-          source: urlSource,
+          source: urlSource._id,
+          lang: urlSource.lang,
           category: urlCategory,
           country: urlCountry,
           url: link,
@@ -129,7 +130,7 @@ const crawlSource = async function (browser, source) {
   }
 };
 module.exports = async function () {
-  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+  const browser = await puppeteer.launch({ headless: true });
   try {
     const sources = await Source.find({});
     const promises = [];

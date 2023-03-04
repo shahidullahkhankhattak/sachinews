@@ -56,6 +56,7 @@ module.exports = function (ctx) {
         'Notify',
         'LocalStorage',
         'Dialog',
+        'Loading',
       ],
     },
 
@@ -65,7 +66,9 @@ module.exports = function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
-
+      env: {
+        LOCAL: process.env.DEV_ENV === 'local',
+      },
       // rtl: false, // https://quasar.dev/options/rtl-support
       // showProgress: false,
       // gzip: true,
@@ -104,7 +107,7 @@ module.exports = function (ctx) {
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
-      pwa: false,
+      pwa: true,
     },
 
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa

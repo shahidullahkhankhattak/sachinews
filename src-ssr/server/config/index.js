@@ -27,4 +27,7 @@ module.exports = {
     // server was unable to complete the request completely
     resIncomplete: 417,
   },
+  sitemap: {
+    hostname: 'http://www.sachinews.com',
+  },
 };

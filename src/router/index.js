@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueAnalytics from 'vue-analytics';
+
 
 import routes from './routes';
 import bus from '../utils/dataBus';
@@ -46,5 +48,12 @@ export default function (/* { store, ssrContext } */) {
   if (!process.env.SERVER) {
     Router.beforeEach(bindAuth);
   }
+
+  Vue.use(VueAnalytics, {
+    id: 'UA-106912900-4',
+    disableScriptLoader: true,
+    router: Router,
+  });
+
   return Router;
 }

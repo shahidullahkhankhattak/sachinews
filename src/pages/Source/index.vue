@@ -52,23 +52,25 @@ import NoNews from '../../components/Cards/NoNews';
 import { config } from '../../config';
 import { shouldReloadStories } from '../../utils/dataBus';
 
-const { app: { logo: { title } } } = config;
+const { app: { logo: { title }, meta } } = config;
 
 export default {
   name: 'SourceStories',
   components: { NewsCard, NewsLoader, NoNews },
   meta() {
     const { slug } = this.$route.params;
-    const source = this.sources.find((cat) => cat.slug === slug);
+    const source = this.sources.find((sourc) => sourc.slug === slug);
     const pageTitle = `${this.$t(source.name)} - ${this.$t(title)}`;
     return {
       title: pageTitle,
       meta: {
-        description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the sources throughout the globe') },
-        ogTitle: { name: 'og:title', content: pageTitle },
+        description: { property: 'description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the sources throughout the globe') },
+        ogTitle: { property: 'og:title', content: pageTitle },
         dcTitle: { name: 'DC.title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the sources throughout the globe') },
+        ogDescription: { property: 'og:description', content: this.$t('Get & scroll through the latest news to the current second and explore stories from all the sources throughout the globe') },
         keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through') },
+        ogImage: { property: 'og:image', content: `${meta.url}statics/logo/logo.png` },
+        ogUrl: { property: 'og:url', content: `${meta.url}${this.locale.iso}/source/${source._id}` },
       },
     };
   },
@@ -78,8 +80,9 @@ export default {
   watch: {
     $route(currentRoute) {
       const { slug } = currentRoute.params;
+      const source = this.sources.find((sourc) => sourc.slug === slug);
       const query = {
-        source: slug,
+        source: source && source._id,
       };
       this.fetchStories.bind(this)({ refresh: true, query });
     },
@@ -88,8 +91,9 @@ export default {
     ...actions,
     onScroll(_index, done) {
       const { slug } = this.$route.params;
+      const source = this.sources.find((sourc) => sourc.slug === slug);
       const query = {
-        source: slug,
+        source: source && source._id,
       };
       if (this.stories.length >= this.total) return done();
       if (this.stories.length) {

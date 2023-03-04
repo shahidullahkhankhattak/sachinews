@@ -53,56 +53,38 @@
                         </q-input>
                       </div>
                       <div class="col-md-4">
-                        <q-select
+                        <Select
                           v-model="addForm.category"
-                          outlined
                           label="Category"
-                          lazy-rules
-                          :option-value="opt => opt._id"
-                          :option-label="opt => opt.name"
+                          option-value="_id"
+                          option-label="name"
                           :rules="[]"
-                          :options="[{_id: null, name: 'N/A'},...categories]"
-                          map-options
-                          emit-value
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="class" />
-                          </template>
-                        </q-select>
+                          :options="categories"
+                          nullOption="N/A"
+                          icon="class"
+                        />
                       </div>
                       <div class="col-md-4">
-                        <q-select
+                        <Select
                           v-model="addForm.country"
-                          outlined
                           label="Country"
-                          lazy-rules
-                          :option-value="opt => opt._id"
-                          :option-label="opt => opt.name"
+                          option-value="_id"
+                          option-label="name"
                           :rules="[]"
-                          :options="[{_id: null, name: 'N/A'},...countries]"
-                          map-options
-                          emit-value
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="room" />
-                          </template>
-                        </q-select>
+                          :options="countries"
+                          nullOption="N/A"
+                          icon="room"
+                        />
                       </div>
                       <div class="col-md-4">
-                        <q-select
-                          disable
+                        <Select
                           v-model="addForm.encoding"
-                          outlined
                           label="Encoding"
-                          lazy-rules
                           :rules="[rules.REQUIRED]"
                           :options="['xml', 'html']"
-                          map-options
-                        >
-                          <template v-slot:prepend>
-                            <q-icon name="code" />
-                          </template>
-                        </q-select>
+                          icon="code"
+                          disabled
+                        />
                       </div>
                     </div>
 
@@ -148,11 +130,13 @@ import ListTable from './ListTable';
 import { actions, getters } from './handleStore';
 import { validations } from '../../../validators';
 import { formElems as addForm } from './common';
+import Select from '../../../components/Select/Select';
 
 export default {
   components: {
     EditModal,
     ListTable,
+    Select,
   },
   data() {
     return {

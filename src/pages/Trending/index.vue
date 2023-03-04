@@ -52,7 +52,7 @@ import NewsLoader from '../../components/Loaders/NewsLoader';
 import { config } from '../../config';
 import { shouldReloadStories } from '../../utils/dataBus';
 
-const { app: { logo: { title } } } = config;
+const { app: { logo: { title }, meta } } = config;
 
 
 export default {
@@ -63,10 +63,12 @@ export default {
       title: pageTitle,
       meta: {
         description: { name: 'description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources throughout the globe') },
-        ogTitle: { name: 'og:title', content: pageTitle },
+        ogTitle: { property: 'og:title', content: pageTitle },
         dcTitle: { name: 'DC.title', content: pageTitle },
-        ogDescription: { name: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources throughout the globe') },
-        keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through') },
+        ogDescription: { property: 'og:description', content: this.$t('Get & scroll through the latest news to the current second stories from all the sources throughout the globe') },
+        keywords: { name: 'keywords', content: this.$t('News,Category,Latest,Scroll,Through,Trending News,ALl news, Every News,News,Bulletin') },
+        ogImage: { property: 'og:image', content: `${meta.url}statics/logo/logo.png` },
+        ogUrl: { property: 'og:url', content: `${meta.url}${this.locale.iso}` },
       },
     };
   },
